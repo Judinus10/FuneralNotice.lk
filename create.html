@@ -1,0 +1,2760 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Funeral Notice - FuneralNotice.lk</title>
+    
+    <!-- Open Graph Tags -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://funeralnotice.lk/create">
+    <meta property="og:title" content="Create a Funeral Notice – FuneralNotice.lk">
+    <meta property="og:description" content="Create a beautiful online funeral notice to honor and remember your loved one.">
+    <meta property="og:image" content="https://ripnews.lk/uploads/posts/76/cover.png">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:site_name" content="FuneralNotice.lk">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Create a Funeral Notice – FuneralNotice.lk">
+    <meta name="twitter:description" content="Create a beautiful online funeral notice to honor and remember your loved one.">
+    <meta name="twitter:image" content="https://ripnews.lk/uploads/posts/76/cover.png">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary: #ff0000;
+            --primary-light: #ffcccc;
+            --primary-dark: #cc0000;
+            --secondary: #261921;
+            --secondary-light: #3a2935;
+            --accent: #ff6600;
+            --light-bg: #f8fafc;
+            --light-bg-2: #f1f5f9;
+            --dark-text: #261921;
+            --light-text: #666666;
+            --white: #ffffff;
+            --border: #e2e8f0;
+            --card-bg: #ffffff;
+            --sidebar-bg: #ffffff;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.12);
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1);
+            --radius: 12px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --gold: #ffd700;
+            --gold-light: #fff9db;
+            --gold-dark: #e6b800;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background-color: var(--light-bg);
+            color: var(--dark-text);
+            line-height: 1.6;
+            font-weight: 400;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 600;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* ====== HEADER STYLES ====== */
+        .header-top {
+            background: var(--secondary);
+            color: var(--white);
+            padding: 10px 0;
+            font-size: 0.9rem;
+            display: none; /* Hide on mobile, show on desktop */
+        }
+        
+        @media (min-width: 992px) {
+            .header-top {
+                display: block;
+            }
+        }
+        
+        .header-top .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .top-nav ul {
+            list-style: none;
+            display: flex;
+            gap: 28px;
+        }
+        
+        .top-nav a {
+            color: #e2d8df;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: var(--transition);
+            padding: 4px 0;
+            position: relative;
+        }
+        
+        .top-nav a:hover {
+            color: var(--white);
+        }
+        
+        .top-nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: var(--transition);
+        }
+        
+        .top-nav a:hover::after {
+            width: 100%;
+        }
+        
+        .language-selector {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            padding: 6px 12px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 6px;
+            transition: var(--transition);
+        }
+        
+        .language-selector:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+        
+        /* Main Header with Logo Animation */
+        header {
+            background: var(--white);
+            box-shadow: var(--shadow-md);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 3px solid var(--primary);
+        }
+        
+        .main-header {
+            padding: 16px 0;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .logo-img {
+            height: 48px;
+            width: auto;
+            border-radius: 8px;
+            animation: heartbeat 3s ease-in-out infinite both;
+            transform-origin: center;
+            box-shadow: 0 4px 12px rgba(255, 0, 0, 0.2);
+        }
+        
+        @keyframes heartbeat {
+            0%, 100% {
+                transform: scale(1);
+            }
+            5% {
+                transform: scale(1.1);
+            }
+            10% {
+                transform: scale(1);
+            }
+            15% {
+                transform: scale(1.15);
+            }
+            20% {
+                transform: scale(1);
+            }
+        }
+        
+        .logo-text {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--secondary);
+            letter-spacing: -0.5px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .logo-text::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
+            transform: translateX(-100%);
+            animation: slideIn 3s ease-in-out infinite;
+        }
+        
+        @keyframes slideIn {
+            0%, 100% {
+                transform: translateX(-100%);
+            }
+            50% {
+                transform: translateX(100%);
+            }
+        }
+        
+        .logo-text span {
+            color: var(--primary);
+            position: relative;
+            display: inline-block;
+            animation: pulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+                text-shadow: 0 0 0 rgba(255, 0, 0, 0);
+            }
+            50% {
+                transform: scale(1.05);
+                text-shadow: 0 0 10px rgba(255, 0, 0, 0.3);
+            }
+        }
+        
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        
+        .search-box {
+            position: relative;
+        }
+        
+        .search-box input {
+            padding: 10px 16px 10px 40px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            width: 240px;
+            font-size: 0.95rem;
+            background: var(--white);
+            transition: var(--transition);
+            color: var(--dark-text);
+        }
+        
+        .search-box input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(255, 0, 0, 0.1);
+            width: 260px;
+        }
+        
+        .search-box i {
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--light-text);
+            font-size: 0.95rem;
+        }
+        
+        .btn {
+            padding: 10px 22px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .btn-primary {
+            background: var(--primary);
+            color: var(--white);
+        }
+        
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+        }
+        
+        .btn-outline:hover {
+            background: var(--primary);
+            color: var(--white);
+        }
+        
+        /* FIXED: Contact Info - HORIZONTAL LINE ON MOBILE */
+        .contact-info {
+            background: linear-gradient(90deg, var(--secondary) 0%, var(--secondary-light) 100%);
+            color: var(--white);
+            padding: 12px 0;
+            font-size: 0.9rem;
+            display: none; /* Hidden by default, shown only on mobile */
+            border-bottom: 3px solid var(--primary);
+            width: 100%;
+        }
+        
+        @media (max-width: 991px) {
+            .contact-info {
+                display: block;
+                width: 100%;
+            }
+        }
+        
+        .contact-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            padding: 0 5px;
+        }
+        
+        /* HORIZONTAL CONTACT DISPLAY */
+        .contact-display {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: nowrap;
+            overflow-x: auto;
+            padding: 5px 0;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none; /* Firefox */
+            -ms-overflow-style: none; /* IE and Edge */
+            width: 100%;
+        }
+        
+        /* Hide scrollbar */
+        .contact-display::-webkit-scrollbar {
+            display: none;
+            height: 0;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            white-space: nowrap;
+            flex-shrink: 0;
+            padding: 6px 10px;
+            border-radius: 8px;
+            transition: var(--transition);
+            color: white;
+            text-decoration: none;
+        }
+        
+        .contact-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .phone-number {
+            font-weight: 600;
+            font-size: 0.95rem;
+            white-space: nowrap;
+        }
+        
+        .whatsapp-contact {
+            background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+            color: white !important;
+            padding: 8px 12px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        
+        .whatsapp-contact:hover {
+            background: linear-gradient(135deg, #128C7E 0%, #25D366 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
+        }
+        
+        .badge {
+            background: var(--primary);
+            color: white;
+            padding: 3px 8px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            margin-left: 6px;
+            white-space: nowrap;
+        }
+        
+        .whatsapp-btn {
+            background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 6px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-weight: 600;
+            transition: var(--transition);
+            font-size: 0.85rem;
+            white-space: nowrap;
+        }
+        
+        .whatsapp-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.3);
+        }
+        
+        .whatsapp-btn-small {
+            background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 6px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            transition: var(--transition);
+            white-space: nowrap;
+        }
+        
+        .whatsapp-btn-small:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
+        }
+        
+        /* Mobile Menu Button */
+        .mobile-menu-btn {
+            display: none;
+            background: transparent;
+            border: none;
+            color: var(--secondary);
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 8px;
+            z-index: 1001;
+        }
+        
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+        }
+        
+        /* Mobile Search Toggle */
+        .mobile-search-toggle {
+            display: none;
+            background: transparent;
+            border: none;
+            color: var(--secondary);
+            font-size: 1.2rem;
+            cursor: pointer;
+            padding: 8px;
+        }
+        
+        @media (max-width: 768px) {
+            .mobile-search-toggle {
+                display: block;
+            }
+        }
+        
+        .mobile-search-container {
+            display: none;
+            padding: 15px;
+            background: var(--white);
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .mobile-search-container.active {
+            display: block;
+        }
+        
+        .mobile-search-box {
+            position: relative;
+            width: 100%;
+        }
+        
+        .mobile-search-box input {
+            width: 100%;
+            padding: 12px 16px 12px 45px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 1rem;
+            background: var(--light-bg);
+        }
+        
+        .mobile-search-box i {
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--light-text);
+        }
+        
+        /* Mobile Menu Styles */
+        .mobile-menu-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+        
+        .mobile-menu-container {
+            display: none;
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 300px;
+            height: 100vh;
+            background: var(--white);
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            overflow-y: auto;
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+        }
+        
+        @media (max-width: 480px) {
+            .mobile-menu-container {
+                width: 100%;
+            }
+        }
+        
+        .mobile-menu-container.active {
+            transform: translateX(0);
+        }
+        
+        /* Improved Mobile Menu Styles */
+        .mobile-menu-header {
+            background: linear-gradient(90deg, var(--secondary) 0%, var(--secondary-light) 100%);
+            color: white;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 3px solid var(--primary);
+            position: sticky;
+            top: 0;
+            z-index: 2;
+        }
+
+        .mobile-menu-title h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .mobile-menu-content {
+            padding: 0;
+            overflow-y: auto;
+            height: calc(100vh - 73px);
+        }
+
+        /* User Profile */
+        .mobile-user-profile {
+            display: flex;
+            align-items: center;
+            padding: 20px;
+            background: linear-gradient(135deg, var(--secondary-light) 0%, var(--secondary) 100%);
+            gap: 15px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .user-avatar {
+            width: 50px;
+            height: 50px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: white;
+        }
+
+        .user-info {
+            flex: 1;
+            color: white;
+        }
+
+        .user-info h4 {
+            font-size: 1rem;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+
+        .user-info p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .user-login-btn {
+            background: rgba(255,255,255,0.2);
+            border: 1px solid rgba(255,255,255,0.3);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .user-login-btn:hover {
+            background: rgba(255,255,255,0.3);
+        }
+
+        /* Menu Sections */
+        .mobile-menu-section {
+            padding: 20px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .mobile-menu-section h4 {
+            color: var(--secondary);
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--border);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .mobile-menu-nav {
+            list-style: none;
+        }
+
+        .mobile-menu-nav li {
+            margin-bottom: 5px;
+        }
+
+        .mobile-menu-nav a {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 12px 15px;
+            color: var(--dark-text);
+            text-decoration: none;
+            border-radius: 10px;
+            transition: var(--transition);
+            font-size: 0.95rem;
+        }
+
+        .mobile-menu-nav a:hover {
+            background: var(--light-bg);
+            color: var(--primary);
+            transform: translateX(5px);
+        }
+
+        .mobile-menu-nav a.active {
+            background: var(--primary-light);
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .mobile-menu-nav a i {
+            width: 20px;
+            text-align: center;
+            font-size: 1.1rem;
+        }
+
+        /* Sponsored Ads */
+        .sponsored-ads-container {
+            margin-bottom: 20px;
+        }
+
+        .sponsored-ad-card {
+            background: var(--light-bg);
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 15px;
+            border: 1px solid var(--border);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ad-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
+            color: var(--secondary);
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .ad-content h5 {
+            color: var(--secondary);
+            margin-bottom: 8px;
+            font-size: 1rem;
+        }
+
+        .ad-content p {
+            color: var(--light-text);
+            font-size: 0.85rem;
+            margin-bottom: 12px;
+            line-height: 1.5;
+        }
+
+        .ad-contact {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 10px;
+        }
+
+        .ad-contact span {
+            font-size: 0.85rem;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-weight: 600;
+        }
+
+        .ad-whatsapp-btn {
+            background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 0.8rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: var(--transition);
+        }
+
+        .ad-whatsapp-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
+        }
+
+        .advertise-cta {
+            text-align: center;
+            padding: 15px;
+            background: var(--gold-light);
+            border-radius: 10px;
+            border: 1px solid var(--gold);
+            margin-top: 15px;
+        }
+
+        .advertise-cta p {
+            color: var(--secondary);
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .advertise-btn {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: var(--transition);
+            width: 100%;
+            justify-content: center;
+        }
+
+        .advertise-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(255, 0, 0, 0.3);
+        }
+
+        /* Emergency Contact */
+        .emergency-contact {
+            background: var(--light-bg-2);
+            border-radius: 12px;
+            padding: 15px;
+            border: 1px solid var(--border);
+        }
+
+        .emergency-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .emergency-item:last-child {
+            border-bottom: none;
+        }
+
+        .emergency-item i {
+            width: 40px;
+            height: 40px;
+            background: var(--primary-light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-size: 1.1rem;
+            flex-shrink: 0;
+        }
+
+        .emergency-item h5 {
+            color: var(--secondary);
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+
+        .emergency-number, .emergency-email {
+            color: var(--primary);
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 700;
+            display: block;
+        }
+
+        .emergency-number:hover, .emergency-email:hover {
+            color: var(--primary-dark);
+        }
+
+        /* App Info */
+        .app-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px;
+            background: var(--light-bg);
+            border-radius: 12px;
+            margin-bottom: 15px;
+        }
+
+        .app-logo {
+            width: 50px;
+            height: 50px;
+            border-radius: 10px;
+            border: 2px solid var(--primary);
+        }
+
+        .app-details h5 {
+            color: var(--secondary);
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+            font-weight: 700;
+        }
+
+        .app-details p {
+            color: var(--light-text);
+            font-size: 0.85rem;
+            margin-bottom: 3px;
+        }
+
+        .app-tagline {
+            color: var(--primary) !important;
+            font-weight: 600;
+            font-size: 0.9rem !important;
+        }
+
+        .copyright-info {
+            text-align: center;
+            padding: 15px;
+            color: var(--light-text);
+            font-size: 0.8rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .mobile-menu-close {
+            background: transparent;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        /* ====== MOBILE APP STYLES ====== */
+        .mobile-app-header {
+            display: none;
+            background: linear-gradient(135deg, var(--secondary) 0%, var(--secondary-light) 100%);
+            color: white;
+            padding: 15px 20px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow-md);
+            border-bottom: 3px solid var(--primary);
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .mobile-app-header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+
+        .mobile-header-left {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .mobile-logo {
+            height: 40px;
+            width: auto;
+            border-radius: 10px;
+            animation: pulseLogo 2s ease-in-out infinite;
+            box-shadow: 0 4px 12px rgba(255, 0, 0, 0.3);
+            border: 2px solid var(--primary);
+        }
+
+        @keyframes pulseLogo {
+            0%, 100% {
+                transform: scale(1);
+                box-shadow: 0 4px 12px rgba(255, 0, 0, 0.3);
+            }
+            50% {
+                transform: scale(1.05);
+                box-shadow: 0 6px 20px rgba(255, 0, 0, 0.5);
+            }
+        }
+
+        .mobile-header-title {
+            font-weight: 700;
+            font-size: 1.3rem;
+            background: linear-gradient(45deg, white 0%, #ffcccc 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -0.5px;
+        }
+
+        .mobile-header-right {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .mobile-header-icon {
+            color: white;
+            font-size: 1.3rem;
+            padding: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+        }
+
+        .mobile-header-icon.search-icon {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .mobile-header-icon:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.1);
+        }
+
+        .mobile-language-selector {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+            padding: 8px 12px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 6px;
+            transition: var(--transition);
+            color: white;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .mobile-language-selector:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .mobile-language-selector i {
+            font-size: 1rem;
+        }
+
+        .mobile-bottom-nav {
+            display: none;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: var(--secondary-light);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 10px 0 5px;
+            z-index: 1000;
+            box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.25);
+            border-top: 3px solid var(--primary);
+        }
+
+        .mobile-bottom-nav .nav-container {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            width: 100%;
+        }
+
+        .mobile-nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.7rem;
+            padding: 8px 5px;
+            border-radius: 12px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            flex: 1;
+            max-width: 80px;
+            cursor: pointer;
+        }
+
+        .mobile-nav-item i {
+            font-size: 1.4rem;
+            margin-bottom: 5px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .mobile-nav-item .nav-label {
+            font-weight: 600;
+            font-size: 0.7rem;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-nav-item:hover {
+            transform: translateY(-3px);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .mobile-nav-item:hover i {
+            transform: scale(1.1);
+            color: white;
+        }
+
+        .mobile-nav-item:hover .nav-label {
+            color: white;
+        }
+
+        /* Bottom Navigation Active State */
+        .mobile-nav-item.active {
+            color: white !important;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 15px;
+            padding: 10px 8px;
+            transform: translateY(-5px);
+        }
+
+        .mobile-nav-item.active i {
+            color: white !important;
+            transform: scale(1.2);
+        }
+
+        .mobile-nav-item.active .nav-label {
+            color: white !important;
+            font-weight: 700;
+        }
+
+        .mobile-create-notice-float {
+            display: none;
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.8rem;
+            box-shadow: 0 6px 25px rgba(255, 0, 0, 0.4);
+            z-index: 999;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: none;
+            text-decoration: none;
+            animation: floatCreate 3s ease-in-out infinite;
+        }
+
+        @keyframes floatCreate {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+                box-shadow: 0 6px 25px rgba(255, 0, 0, 0.4);
+            }
+            50% {
+                transform: translateY(-10px) rotate(5deg);
+                box-shadow: 0 12px 30px rgba(255, 0, 0, 0.6);
+            }
+        }
+
+        .mobile-create-notice-float:hover {
+            transform: scale(1.1) rotate(90deg);
+            box-shadow: 0 10px 35px rgba(255, 0, 0, 0.6);
+            animation: none;
+        }
+
+        /* Hide desktop header parts on mobile */
+        @media (max-width: 992px) {
+            header, .header-top, .contact-info {
+                display: none !important;
+            }
+            
+            .mobile-app-header {
+                display: flex;
+            }
+            
+            .mobile-bottom-nav {
+                display: flex;
+            }
+            
+            .mobile-create-notice-float {
+                display: flex;
+            }
+            
+            footer {
+                display: none !important;
+            }
+            
+            .main-body {
+                padding-bottom: 80px !important;
+            }
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 480px) {
+            .mobile-app-header {
+                padding: 12px 15px;
+            }
+            
+            .mobile-logo {
+                height: 36px;
+            }
+            
+            .mobile-header-title {
+                font-size: 1.1rem;
+            }
+            
+            .mobile-header-icon {
+                font-size: 1.2rem;
+                padding: 6px;
+                width: 40px;
+                height: 40px;
+            }
+            
+            .mobile-language-selector {
+                padding: 6px 10px;
+                font-size: 0.8rem;
+            }
+            
+            .mobile-create-notice-float {
+                width: 55px;
+                height: 55px;
+                font-size: 1.6rem;
+                bottom: 70px;
+                right: 15px;
+            }
+            
+            .mobile-nav-item {
+                padding: 8px 3px;
+            }
+            
+            .mobile-nav-item i {
+                font-size: 1.3rem;
+            }
+            
+            .mobile-nav-item .nav-label {
+                font-size: 0.65rem;
+            }
+        }
+
+        /* Main Body */
+        .main-body {
+            padding: 20px 0 40px;
+            min-height: 100vh;
+        }
+
+        /* ====== CREATE NOTICE PAGE CONTENT ====== */
+        .create-memorial-section {
+            padding: 25px 0;
+            animation: fadeIn 0.8s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @media (max-width: 768px) {
+            .create-memorial-section {
+                padding: 18px 0;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .create-memorial-section {
+                padding: 14px 0;
+            }
+        }
+        
+        .create-memorial-header {
+            text-align: center;
+            margin-bottom: 25px;
+            position: relative;
+        }
+        
+        @media (max-width: 768px) {
+            .create-memorial-header {
+                margin-bottom: 18px;
+            }
+        }
+        
+        .create-memorial-header h1 {
+            color: var(--secondary);
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+            position: relative;
+            display: inline-block;
+        }
+        
+        @media (max-width: 768px) {
+            .create-memorial-header h1 {
+                font-size: 1.5rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .create-memorial-header h1 {
+                font-size: 1.3rem;
+                margin-bottom: 8px;
+            }
+        }
+        
+        .create-memorial-header h1::after {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 2px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            border-radius: 2px;
+        }
+        
+        .create-memorial-header p {
+            color: var(--light-text);
+            font-size: 0.95rem;
+            max-width: 700px;
+            margin: 16px auto 0;
+            line-height: 1.5;
+        }
+        
+        @media (max-width: 768px) {
+            .create-memorial-header p {
+                font-size: 0.85rem;
+                padding: 0 10px;
+                margin-top: 10px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .create-memorial-header p {
+                font-size: 0.8rem;
+                line-height: 1.4;
+            }
+        }
+        
+        .create-memorial-card {
+            background-color: var(--white);
+            border-radius: 8px;
+            box-shadow: var(--shadow-md);
+            padding: 20px;
+            margin-bottom: 16px;
+            transition: var(--transition);
+            border: 1px solid rgba(0, 0, 0, 0.03);
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        @media (max-width: 768px) {
+            .create-memorial-card {
+                padding: 16px;
+                margin-bottom: 12px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .create-memorial-card {
+                padding: 14px;
+                margin-bottom: 10px;
+                border-radius: 6px;
+            }
+        }
+        
+        .create-memorial-card:hover {
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-3px);
+        }
+        
+        .card-title {
+            color: var(--secondary);
+            font-size: 1.3rem;
+            margin-bottom: 16px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            position: relative;
+            font-weight: 600;
+        }
+        
+        @media (max-width: 768px) {
+            .card-title {
+                font-size: 1.1rem;
+                margin-bottom: 12px;
+                padding-bottom: 8px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .card-title {
+                font-size: 1rem;
+                margin-bottom: 10px;
+                padding-bottom: 6px;
+            }
+        }
+        
+        .card-title::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            border-radius: 2px;
+        }
+        
+        /* Enhanced Desktop Form Layout */
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+        
+        @media (max-width: 768px) {
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 12px;
+                margin-bottom: 12px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .form-row {
+                gap: 10px;
+                margin-bottom: 10px;
+            }
+        }
+        
+        .form-group {
+            position: relative;
+        }
+        
+        /* Full-width form groups */
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 600;
+            color: var(--secondary);
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 480px) {
+            .form-group label {
+                font-size: 0.85rem;
+                margin-bottom: 4px;
+            }
+        }
+        
+        .form-group label .required {
+            color: var(--primary);
+            font-weight: 800;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 10px 14px;
+            border: 1px solid #eee;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            transition: var(--transition);
+            background: #f8f9fa;
+            box-sizing: border-box;
+        }
+        
+        @media (max-width: 480px) {
+            .form-control {
+                padding: 8px 12px;
+                font-size: 0.85rem;
+                border-radius: 5px;
+            }
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(255, 0, 0, 0.1);
+            background: var(--white);
+        }
+        
+        .form-control::placeholder {
+            color: #aaa;
+        }
+        
+        .form-hint {
+            font-size: 0.8rem;
+            color: var(--light-text);
+            margin-top: 4px;
+            padding-left: 5px;
+        }
+        
+        @media (max-width: 480px) {
+            .form-hint {
+                font-size: 0.75rem;
+                margin-top: 3px;
+            }
+        }
+        
+        /* Modern Photo Upload Section */
+        .photo-upload-container {
+            border: 2px dashed #e0e0e0;
+            border-radius: 8px;
+            padding: 30px 16px;
+            text-align: center;
+            margin-bottom: 16px;
+            transition: var(--transition);
+            background: #f8f9fa;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        @media (max-width: 768px) {
+            .photo-upload-container {
+                padding: 24px 12px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .photo-upload-container {
+                padding: 20px 10px;
+                margin-bottom: 12px;
+                border-radius: 6px;
+            }
+        }
+        
+        .photo-upload-container:hover {
+            border-color: var(--primary);
+            background: rgba(255, 0, 0, 0.02);
+            transform: translateY(-3px);
+        }
+        
+        .photo-upload-container i {
+            font-size: 2rem;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 12px;
+        }
+        
+        @media (max-width: 480px) {
+            .photo-upload-container i {
+                font-size: 1.8rem;
+                margin-bottom: 10px;
+            }
+        }
+        
+        .photo-upload-container h3 {
+            color: var(--secondary);
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+        
+        @media (max-width: 480px) {
+            .photo-upload-container h3 {
+                font-size: 1rem;
+                margin-bottom: 8px;
+            }
+        }
+        
+        .photo-upload-container p {
+            color: var(--light-text);
+            margin-bottom: 16px;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+            font-size: 0.85rem;
+        }
+        
+        @media (max-width: 480px) {
+            .photo-upload-container p {
+                font-size: 0.8rem;
+                margin-bottom: 12px;
+                padding: 0 8px;
+            }
+        }
+        
+        /* Choose Photo Button */
+        .upload-btn {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 600;
+            box-shadow: 0 2px 8px rgba(255, 0, 0, 0.2);
+            font-size: 0.85rem;
+            border: none;
+            min-height: 36px;
+            box-sizing: border-box;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            text-align: center;
+            line-height: 1.2;
+            margin: 0 auto;
+        }
+        
+        @media (max-width: 768px) {
+            .upload-btn {
+                padding: 6px 16px;
+                font-size: 0.8rem;
+                min-height: 34px;
+                border-radius: 5px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .upload-btn {
+                padding: 5px 14px;
+                font-size: 0.75rem;
+                min-height: 32px;
+                width: auto;
+                max-width: 200px;
+                display: flex;
+            }
+        }
+        
+        @media (max-width: 360px) {
+            .upload-btn {
+                padding: 4px 12px;
+                font-size: 0.7rem;
+                min-height: 30px;
+                max-width: 180px;
+            }
+        }
+        
+        .upload-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255, 0, 0, 0.3);
+        }
+        
+        .uploaded-photo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 8px;
+            margin-bottom: 12px;
+            border: 1px solid #e0e0e0;
+            transition: var(--transition);
+        }
+        
+        @media (max-width: 480px) {
+            .uploaded-photo {
+                flex-direction: column;
+                text-align: center;
+                gap: 8px;
+                padding: 10px;
+            }
+        }
+        
+        .uploaded-photo:hover {
+            border-color: var(--primary);
+            transform: translateY(-2px);
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
+        }
+        
+        .uploaded-photo img {
+            width: 60px;
+            height: 60px;
+            border-radius: 6px;
+            object-fit: cover;
+            border: 2px solid var(--white);
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        @media (max-width: 480px) {
+            .uploaded-photo img {
+                width: 50px;
+                height: 50px;
+            }
+        }
+        
+        .uploaded-photo-info {
+            flex: 1;
+        }
+        
+        @media (max-width: 480px) {
+            .uploaded-photo-info {
+                width: 100%;
+            }
+        }
+        
+        .uploaded-photo-name {
+            font-weight: 600;
+            margin-bottom: 3px;
+            color: var(--secondary);
+            font-size: 0.9rem;
+        }
+        
+        .uploaded-photo-size {
+            color: var(--light-text);
+            font-size: 0.8rem;
+        }
+        
+        .remove-photo {
+            color: var(--primary);
+            cursor: pointer;
+            font-size: 1rem;
+            padding: 6px;
+            border-radius: 50%;
+            transition: var(--transition);
+        }
+        
+        .remove-photo:hover {
+            background: rgba(255, 0, 0, 0.1);
+            transform: rotate(90deg);
+        }
+        
+        /* Modern Tribute Settings */
+        .tribute-settings {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 12px;
+            margin-top: 16px;
+        }
+        
+        @media (max-width: 768px) {
+            .tribute-settings {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+        }
+        
+        .setting-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px;
+            background: #f8f9fa;
+            border-radius: 6px;
+            transition: var(--transition);
+            border: 1px solid transparent;
+        }
+        
+        @media (max-width: 480px) {
+            .setting-item {
+                padding: 10px;
+                gap: 8px;
+            }
+        }
+        
+        .setting-item:hover {
+            background: #e9ecef;
+            transform: translateX(3px);
+            border-color: var(--primary-light);
+        }
+        
+        .setting-item input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            accent-color: var(--primary);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .setting-item label {
+            cursor: pointer;
+            font-weight: 500;
+            flex: 1;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 480px) {
+            .setting-item label {
+                font-size: 0.85rem;
+            }
+        }
+        
+        /* Action Buttons */
+        .create-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        
+        @media (max-width: 768px) {
+            .create-actions {
+                flex-direction: column;
+                gap: 12px;
+                margin-top: 24px;
+                padding-top: 16px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .create-actions {
+                margin-top: 20px;
+                padding-top: 14px;
+                gap: 10px;
+            }
+        }
+        
+        .back-btn {
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-weight: 600;
+            padding: 8px 16px;
+            border-radius: 20px;
+            transition: var(--transition);
+            background: rgba(255, 0, 0, 0.05);
+            font-size: 0.85rem;
+            min-height: 36px;
+            box-sizing: border-box;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
+        @media (max-width: 768px) {
+            .back-btn {
+                width: 100%;
+                justify-content: center;
+                order: 2;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .back-btn {
+                padding: 6px 14px;
+                font-size: 0.8rem;
+                border-radius: 18px;
+                min-height: 34px;
+            }
+        }
+        
+        @media (max-width: 360px) {
+            .back-btn {
+                padding: 5px 12px;
+                font-size: 0.75rem;
+                min-height: 32px;
+            }
+        }
+        
+        .back-btn:hover {
+            background: rgba(255, 0, 0, 0.1);
+            transform: translateX(-3px);
+            text-decoration: none;
+        }
+        
+        @media (max-width: 768px) {
+            .back-btn:hover {
+                transform: translateX(0) translateY(-2px);
+            }
+        }
+        
+        /* Submit Button */
+        .submit-btn {
+            background: linear-gradient(135deg, #28a745 0%, #218838 100%);
+            color: white;
+            padding: 10px 30px;
+            font-size: 0.95rem;
+            border-radius: 20px;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 700;
+            box-shadow: 0 3px 10px rgba(40, 167, 69, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            min-height: 38px;
+            box-sizing: border-box;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+        }
+        
+        @media (max-width: 768px) {
+            .submit-btn {
+                width: 100%;
+                justify-content: center;
+                order: 1;
+                padding: 10px 24px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .submit-btn {
+                padding: 8px 20px;
+                font-size: 0.9rem;
+                border-radius: 18px;
+                min-height: 36px;
+            }
+        }
+        
+        @media (max-width: 360px) {
+            .submit-btn {
+                padding: 7px 18px;
+                font-size: 0.85rem;
+                min-height: 34px;
+            }
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-3px) scale(1.03);
+            box-shadow: 0 6px 20px rgba(40, 167, 69, 0.4);
+        }
+        
+        @media (max-width: 768px) {
+            .submit-btn:hover {
+                transform: translateY(-2px) scale(1.01);
+            }
+        }
+        
+        /* Footer */
+        footer {
+            background: linear-gradient(90deg, var(--secondary) 0%, var(--secondary-light) 100%);
+            color: var(--white);
+            padding: 60px 0 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--primary), transparent);
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .footer-logo {
+            margin-bottom: 25px;
+        }
+
+        .footer-logo img {
+            height: 50px;
+            animation: pulse-glow 3s ease-in-out infinite;
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% {
+                box-shadow: 0 0 20px rgba(255, 0, 0, 0.1);
+            }
+            50% {
+                box-shadow: 0 0 40px rgba(255, 0, 0, 0.3);
+            }
+        }
+
+        .footer-tagline {
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 1.1rem;
+            margin-bottom: 40px;
+            text-align: center;
+            max-width: 600px;
+            line-height: 1.7;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 35px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1rem;
+            transition: var(--transition);
+            padding: 8px 0;
+            position: relative;
+        }
+
+        .footer-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--white);
+        }
+
+        .footer-links a:hover::after {
+            width: 100%;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.95rem;
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Top Navigation - Hidden on Mobile -->
+    <div class="header-top">
+        <div class="container">
+            <nav class="top-nav">
+                <ul>
+                    <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+                    <li><a href="about.html"><i class="fas fa-info-circle"></i> About Us</a></li>
+                    <li><a href="contact.html"><i class="fas fa-envelope"></i> Contact Us</a></li>
+                </ul>
+            </nav>
+            <div class="language-selector">
+                <i class="fas fa-globe"></i>
+                <span>English</span>
+                <i class="fas fa-chevron-down"></i>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile App Header (Shows only on mobile) -->
+    <div class="mobile-app-header">
+        <div class="container">
+            <div class="mobile-header-left">
+                <img src="funeral notice logo.png" alt="FuneralNotice.lk" class="mobile-logo">
+            </div>
+            <div class="mobile-header-right">
+                <!-- Language selector in mobile header -->
+                <div class="mobile-language-selector" id="mobileLanguageSelector">
+                    <i class="fas fa-globe"></i>
+                    <span>EN</span>
+                </div>
+                <!-- Search button in mobile header -->
+                <div class="mobile-header-icon search-icon" id="mobileSearchIcon">
+                    <i class="fas fa-search"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Header -->
+    <header>
+        <div class="container">
+            <div class="main-header">
+                <div class="header-container">
+                    <!-- Mobile Menu Button -->
+                    <button class="mobile-menu-btn" id="mobileMenuBtn">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    
+                    <!-- Mobile Search Toggle -->
+                    <button class="mobile-search-toggle" id="mobileSearchToggle">
+                        <i class="fas fa-search"></i>
+                    </button>
+                    
+                    <div class="logo-container">
+                        <img src="funeral notice logo.png" alt="FuneralNotice.lk" class="logo-img">
+                    </div>
+                    
+                    <div class="header-actions">
+                        <div class="search-box hide-on-mobile">
+                            <i class="fas fa-search"></i>
+                            <input type="text" placeholder="Search a person..." id="desktopSearchInput">
+                        </div>
+                        <button class="btn btn-primary" id="createFuneralNoticeBtn">
+                            <i class="fas fa-plus"></i> <span class="hide-on-mobile">Create Memorial</span>
+                        </button>
+                        <button class="btn btn-outline hide-on-mobile" onclick="window.location.href='index.html'">Browse</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile Search Container -->
+        <div class="mobile-search-container" id="mobileSearchContainer">
+            <div class="container">
+                <div class="mobile-search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search a person..." id="mobileSearchInput">
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- FIXED: Contact Info - HORIZONTAL LINE ON MOBILE -->
+    <div class="contact-info">
+        <div class="container">
+            <div class="contact-display">
+                <!-- Phone -->
+                <div class="contact-item">
+                    <i class="fas fa-phone-alt"></i>
+                    <span class="phone-number">+94 11 234 5678</span>
+                </div>
+                
+                <!-- Email -->
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <span>support@funeralnotice.lk</span>
+                </div>
+                
+                <!-- WhatsApp -->
+                <a href="https://wa.me/94711234567" class="contact-item whatsapp-contact">
+                    <i class="fab fa-whatsapp"></i>
+                    <span>WhatsApp</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Improved Mobile Menu -->
+<div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
+<div class="mobile-menu-container" id="mobileMenuContainer">
+    <div class="mobile-menu-header">
+        <div class="mobile-menu-title">
+            <h3><i class="fas fa-compass"></i> Menu</h3>
+        </div>
+        <button class="mobile-menu-close" id="mobileMenuClose">
+            <i class="fas fa-times"></i>
+        </button>
+    </div>
+    
+    <div class="mobile-menu-content">
+        <!-- User Profile Section -->
+      
+        
+        <!-- Main Navigation -->
+        <div class="mobile-menu-section">
+            <h4><i class="fas fa-compass"></i> Navigation</h4>
+            <ul class="mobile-menu-nav">
+                <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="about.html"><i class="fas fa-info-circle"></i> About Us</a></li>
+                <li><a href="create.html"><i class="fas fa-plus-circle"></i> Create Memorial</a></li>
+                <li><a href="gallery.html"><i class="fas fa-images"></i> Memorial Gallery</a></li>
+                <li><a href="contact.html" class="active"><i class="fas fa-envelope"></i> Contact Us</a></li>
+            </ul>
+        </div>
+        
+     
+            <div class="advertise-cta">
+                <p>Want to advertise here?</p>
+                <a href="https://wa.me/94754727075" target="_blank" class="advertise-btn">
+                    <i class="fab fa-whatsapp"></i> Contact for Ads
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+            <!-- Emergency Contact -->
+            <div class="mobile-menu-section">
+                <h4><i class="fas fa-phone-alt"></i> Emergency Contact</h4>
+                <div class="emergency-contact">
+                    <div class="emergency-item">
+                        <i class="fas fa-phone"></i>
+                        <div>
+                            <h5>24/7 Support Line</h5>
+                            <a href="tel:+94112345678" class="emergency-number">+94 11 234 5678</a>
+                        </div>
+                    </div>
+                    <div class="emergency-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <h5>Email Support</h5>
+                            <a href="mailto:support@funeralnotice.lk" class="emergency-email">support@funeralnotice.lk</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- App Info -->
+            <div class="app-info">
+                <img src="funeral notice logo.png" alt="App Logo" class="app-logo">
+                <div class="app-details">
+                    <h5>FuneralNotice.lk</h5>
+                    <p>Version 2.1.0</p>
+                    <p class="app-tagline">Keeping Memories Alive</p>
+                </div>
+            </div>
+            
+            <!-- Copyright -->
+            <div class="copyright-info">
+                © 2023 FuneralNotice.lk<br>
+                All rights reserved.
+            </div>
+        </div>
+    </div>
+
+    <!-- Create Funeral Notice Section -->
+    <div class="main-body">
+        <div class="create-memorial-section">
+            <div class="container">
+                <div class="create-memorial-header">
+                    <h1>Create a Funeral Notice</h1>
+                    <p>Honor your loved one with a beautiful online funeral notice. Share their life story, photos, and accept tributes from friends and family.</p>
+                </div>
+                
+                <div class="create-memorial-card">
+                    <h2 class="card-title">Basic Information</h2>
+                    
+                    <form id="memorialForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>First Name <span class="required">*</span></label>
+                                <input type="text" class="form-control" placeholder="Enter first name" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>Last Name <span class="required">*</span></label>
+                                <input type="text" class="form-control" placeholder="Enter last name" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Date of Birth <span class="required">*</span></label>
+                                <input type="date" class="form-control" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>Date of Passing <span class="required">*</span></label>
+                                <input type="date" class="form-control" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Place of Birth</label>
+                                <input type="text" class="form-control" placeholder="City, Country">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>Place of Passing</label>
+                                <input type="text" class="form-control" placeholder="City, Country">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group full-width">
+                            <label>Biography / Life Story</label>
+                            <textarea class="form-control" rows="5" placeholder="Share the life story, achievements, and memories of your loved one..."></textarea>
+                            <div class="form-hint">You can write about their life, career, family, hobbies, and special memories.</div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Religion</label>
+                                <select class="form-control">
+                                    <option value="">Select Religion</option>
+                                    <option value="buddhist">Buddhist</option>
+                                    <option value="hindu">Hindu</option>
+                                    <option value="islam">Islam</option>
+                                    <option value="catholic">Catholic</option>
+                                    <option value="christian">Christian</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>Marital Status</label>
+                                <select class="form-control">
+                                    <option value="">Select Status</option>
+                                    <option value="single">Single</option>
+                                    <option value="married">Married</option>
+                                    <option value="divorced">Divorced</option>
+                                    <option value="widowed">Widowed</option>
+                                </select>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                
+                <div class="create-memorial-card">
+                    <h2 class="card-title">Funeral Notice Photo</h2>
+                    
+                    <div class="photo-upload-container" id="uploadContainer">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                        <h3>Upload a Funeral Notice Photo</h3>
+                        <p>Choose a clear, respectful photo of your loved one. Max file size: 5MB</p>
+                        <div class="upload-btn" onclick="document.getElementById('photoUpload').click()">
+                            <i class="fas fa-upload"></i> Choose Photo
+                        </div>
+                        <input type="file" id="photoUpload" accept="image/*" style="display: none;" onchange="handlePhotoUpload(event)">
+                    </div>
+                    
+                    <div id="uploadedPhotoContainer" style="display: none;">
+                        <div class="uploaded-photo">
+                            <img id="uploadedImage" src="" alt="Uploaded Photo">
+                            <div class="uploaded-photo-info">
+                                <div class="uploaded-photo-name" id="photoName">Photo.jpg</div>
+                                <div class="uploaded-photo-size" id="photoSize">2.4 MB</div>
+                            </div>
+                            <div class="remove-photo" onclick="removePhoto()">
+                                <i class="fas fa-times"></i>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-hint">Recommended photo size: 500x500 pixels or larger. Square photos work best.</div>
+                </div>
+                
+                <div class="create-memorial-card">
+                    <h2 class="card-title">Tribute Settings</h2>
+                    
+                    <div class="tribute-settings">
+                        <div class="setting-item">
+                            <input type="checkbox" id="allowTributes" checked>
+                            <label for="allowTributes">Allow friends and family to post tributes</label>
+                        </div>
+                        
+                        <div class="setting-item">
+                            <input type="checkbox" id="allowCandles" checked>
+                            <label for="allowCandles">Allow virtual candle lighting</label>
+                        </div>
+                        
+                        <div class="setting-item">
+                            <input type="checkbox" id="allowPhotos" checked>
+                            <label for="allowPhotos">Allow photo uploads by visitors</label>
+                        </div>
+                        
+                        <div class="setting-item">
+                            <input type="checkbox" id="moderatePosts" checked>
+                            <label for="moderatePosts">Moderate all posts before publishing</label>
+                        </div>
+                        
+                        <div class="setting-item">
+                            <input type="checkbox" id="allowDonations">
+                            <label for="allowDonations">Allow donations to charity in memory</label>
+                        </div>
+                        
+                        <div class="setting-item">
+                            <input type="checkbox" id="showInDirectory" checked>
+                            <label for="showInDirectory">Show in public memorial directory</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="create-actions">
+                    <a href="index.html" class="back-btn">
+                        <i class="fas fa-arrow-left"></i> Back to Home
+                    </a>
+                    <button type="submit" form="memorialForm" class="submit-btn" onclick="createMemorial(event)">
+                        <i class="fas fa-plus-circle"></i> Create Funeral Notice
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="hide-on-mobile">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="funeral notice logo.png" alt="FuneralNotice.lk" class="logo-img">
+                </div>
+                <div class="footer-tagline">
+                    Keeping Memories Alive - A dignified platform to honor and remember loved ones across Sri Lanka
+                </div>
+                
+                <div class="footer-links">
+                    <a href="about.html">About Us</a>
+                    <a href="terms.html">Terms</a>
+                    <a href="#">Report Us</a>
+                    <a href="privacy.html">Privacy Policy</a>
+                    <a href="cookies.html">Cookie Policy</a>
+                </div>
+                
+                <div class="copyright">
+                    © 2023. FuneralNotice.lk. All rights reserved.
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Mobile Bottom Navigation -->
+    <div class="mobile-bottom-nav">
+        <div class="nav-container">
+            <div class="mobile-nav-item" data-page="home" onclick="window.location.href='index.html'">
+                <i class="fas fa-home"></i>
+                <span class="nav-label">Home</span>
+            </div>
+            <div class="mobile-nav-item" data-page="about" onclick="window.location.href='about.html'">
+                <i class="fas fa-info-circle"></i>
+                <span class="nav-label">About</span>
+            </div>
+            <div class="mobile-nav-item active" data-page="create" onclick="window.location.href='create.html'">
+                <i class="fas fa-plus-circle"></i>
+                <span class="nav-label">Create</span>
+            </div>
+            <div class="mobile-nav-item" data-page="whatsapp" onclick="window.open('https://wa.me/94711234567', '_blank')">
+                <i class="fab fa-whatsapp"></i>
+                <span class="nav-label">Support</span>
+            </div>
+            <div class="mobile-nav-item" data-page="menu" id="mobileBottomMenuBtn">
+                <i class="fas fa-bars"></i>
+                <span class="nav-label">Menu</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile Create Notice Button -->
+    <div class="mobile-create-notice-float" id="mobileCreateNoticeBtn">
+        <i class="fas fa-plus"></i>
+    </div>
+
+    <script>
+        let uploadedPhoto = null;
+        
+        // Photo upload functionality
+        function handlePhotoUpload(event) {
+            const file = event.target.files[0];
+            if (file) {
+                // Check file size (max 5MB)
+                if (file.size > 5 * 1024 * 1024) {
+                    alert('File size exceeds 5MB limit. Please choose a smaller image.');
+                    return;
+                }
+                
+                // Check file type
+                if (!file.type.match('image.*')) {
+                    alert('Please select an image file (JPEG, PNG, etc.)');
+                    return;
+                }
+                
+                uploadedPhoto = file;
+                
+                // Display uploaded photo
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('uploadedImage').src = e.target.result;
+                    document.getElementById('photoName').textContent = file.name;
+                    document.getElementById('photoSize').textContent = formatFileSize(file.size);
+                    
+                    document.getElementById('uploadContainer').style.display = 'none';
+                    document.getElementById('uploadedPhotoContainer').style.display = 'block';
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+        
+        function removePhoto() {
+            uploadedPhoto = null;
+            document.getElementById('uploadContainer').style.display = 'block';
+            document.getElementById('uploadedPhotoContainer').style.display = 'none';
+            document.getElementById('photoUpload').value = '';
+        }
+        
+        function formatFileSize(bytes) {
+            if (bytes < 1024) return bytes + ' bytes';
+            else if (bytes < 1048576) return (bytes / 1024).toFixed(1) + ' KB';
+            else return (bytes / 1048576).toFixed(1) + ' MB';
+        }
+        
+        function createMemorial(event) {
+            event.preventDefault();
+            
+            // Basic form validation
+            const form = document.getElementById('memorialForm');
+            if (!form.checkValidity()) {
+                alert('Please fill in all required fields (marked with *)');
+                return;
+            }
+            
+            if (!uploadedPhoto) {
+                if (!confirm('You haven\'t uploaded a funeral notice photo. Continue without a photo?')) {
+                    return;
+                }
+            }
+            
+            // Show loading state
+            const submitBtn = event.target;
+            const originalText = submitBtn.innerHTML;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Creating...';
+            submitBtn.disabled = true;
+            
+            // Simulate API call
+            setTimeout(() => {
+                // Success message
+                alert('Funeral notice created successfully! Redirecting to home page...');
+                
+                // Reset button
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+                
+                // Redirect to index page
+                window.location.href = 'index.html';
+            }, 2000);
+        }
+
+        // Mobile Menu Functionality
+        function initMobileMenu() {
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const mobileMenuClose = document.getElementById('mobileMenuClose');
+            const mobileMenuContainer = document.getElementById('mobileMenuContainer');
+            const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
+            
+            if (!mobileMenuBtn || !mobileMenuContainer) return;
+            
+            // Open mobile menu
+            mobileMenuBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                mobileMenuContainer.style.display = 'block';
+                mobileMenuOverlay.style.display = 'block';
+                setTimeout(() => {
+                    mobileMenuContainer.classList.add('active');
+                }, 10);
+                document.body.style.overflow = 'hidden';
+            });
+            
+            // Open mobile menu from bottom nav
+            const mobileBottomMenuBtn = document.getElementById('mobileBottomMenuBtn');
+            if (mobileBottomMenuBtn) {
+                mobileBottomMenuBtn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    mobileMenuContainer.style.display = 'block';
+                    mobileMenuOverlay.style.display = 'block';
+                    setTimeout(() => {
+                        mobileMenuContainer.classList.add('active');
+                    }, 10);
+                    document.body.style.overflow = 'hidden';
+                });
+            }
+            
+            // Close mobile menu
+            function closeMobileMenu() {
+                mobileMenuContainer.classList.remove('active');
+                setTimeout(() => {
+                    mobileMenuContainer.style.display = 'none';
+                    mobileMenuOverlay.style.display = 'none';
+                    document.body.style.overflow = '';
+                }, 300);
+            }
+            
+            mobileMenuClose.addEventListener('click', closeMobileMenu);
+            mobileMenuOverlay.addEventListener('click', closeMobileMenu);
+            
+            // Close menu when clicking on a link
+            const mobileLinks = document.querySelectorAll('.mobile-menu-nav a, .ad-whatsapp-btn, .advertise-btn, .user-login-btn');
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    if (!this.href || this.href.includes('#')) {
+                        e.preventDefault();
+                    }
+                    closeMobileMenu();
+                });
+            });
+        }
+
+        // Mobile Search Toggle
+        function initMobileSearch() {
+            const searchToggle = document.getElementById('mobileSearchToggle');
+            const searchContainer = document.getElementById('mobileSearchContainer');
+            
+            if (!searchToggle || !searchContainer) return;
+            
+            searchToggle.addEventListener('click', function() {
+                searchContainer.classList.toggle('active');
+                if (searchContainer.classList.contains('active')) {
+                    const searchInput = document.getElementById('mobileSearchInput');
+                    if (searchInput) {
+                        setTimeout(() => {
+                            searchInput.focus();
+                        }, 100);
+                    }
+                }
+            });
+            
+            // Close search when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!searchToggle.contains(e.target) && !searchContainer.contains(e.target)) {
+                    searchContainer.classList.remove('active');
+                }
+            });
+        }
+
+        // Initialize mobile app functionality
+        function initMobileApp() {
+            // Mobile language selector
+            const mobileLanguageSelector = document.getElementById('mobileLanguageSelector');
+            if (mobileLanguageSelector) {
+                mobileLanguageSelector.addEventListener('click', function() {
+                    const currentLang = this.querySelector('span').textContent;
+                    const newLang = currentLang === 'EN' ? 'த' : 'EN';
+                    this.querySelector('span').textContent = newLang;
+                });
+            }
+            
+            // Mobile search icon
+            const mobileSearchIcon = document.getElementById('mobileSearchIcon');
+            const mobileSearchContainer = document.getElementById('mobileSearchContainer');
+            if (mobileSearchIcon && mobileSearchContainer) {
+                mobileSearchIcon.addEventListener('click', function() {
+                    mobileSearchContainer.classList.toggle('active');
+                    if (mobileSearchContainer.classList.contains('active')) {
+                        const mobileSearchInput = document.getElementById('mobileSearchInput');
+                        if (mobileSearchInput) {
+                            setTimeout(() => {
+                                mobileSearchInput.focus();
+                            }, 100);
+                        }
+                    }
+                });
+            }
+            
+            // Mobile bottom navigation - set active state
+            const currentPage = window.location.pathname.split('/').pop();
+            document.querySelectorAll('.mobile-nav-item').forEach(item => {
+                const page = item.getAttribute('data-page');
+                
+                // Remove active class from all
+                item.classList.remove('active');
+                
+                // Set active based on current page
+                if ((currentPage === 'create.html' && page === 'create') ||
+                    (currentPage === 'index.html' && page === 'home') ||
+                    (currentPage === 'contact.html' && page === 'contact') ||
+                    (currentPage === 'about.html' && page === 'about')) {
+                    item.classList.add('active');
+                }
+            });
+            
+            // Mobile Create Notice Button
+            const mobileCreateNoticeBtn = document.getElementById('mobileCreateNoticeBtn');
+            if (mobileCreateNoticeBtn) {
+                mobileCreateNoticeBtn.addEventListener('click', function() {
+                    // Already on create page, do nothing or scroll to top
+                    if (currentPage === 'create.html') {
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                    } else {
+                        window.location.href = 'create.html';
+                    }
+                });
+            }
+            
+            // Desktop Create Notice Button
+            const desktopCreateBtn = document.getElementById('createFuneralNoticeBtn');
+            if (desktopCreateBtn) {
+                desktopCreateBtn.addEventListener('click', function() {
+                    if (currentPage !== 'create.html') {
+                        window.location.href = 'create.html';
+                    }
+                });
+            }
+        }
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize components
+            initMobileMenu();
+            initMobileSearch();
+            
+            // Create Funeral Notice Button - Redirect to create.html
+            document.getElementById('createFuneralNoticeBtn')?.addEventListener('click', function() {
+                this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Creating...';
+                this.disabled = true;
+                
+                setTimeout(() => {
+                    window.location.href = 'create.html';
+                }, 500);
+            });
+            
+            // Language selector
+            document.querySelector('.language-selector')?.addEventListener('click', function() {
+                const currentLang = this.querySelector('span').textContent;
+                const newLang = currentLang === 'English' ? 'தமிழ்' : 'English';
+                this.querySelector('span').textContent = newLang;
+            });
+
+            // Search functionality
+            const searchInputs = document.querySelectorAll('input[type="text"]');
+            searchInputs.forEach(input => {
+                input.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter' && this.value.trim()) {
+                        alert(`Searching for: ${this.value}`);
+                    }
+                });
+            });
+
+            // Initialize mobile app on mobile devices
+            if (window.innerWidth <= 992) {
+                initMobileApp();
+            }
+
+            // Re-initialize on resize
+            window.addEventListener('resize', function() {
+                if (window.innerWidth <= 992) {
+                    initMobileApp();
+                }
+            });
+
+            // Phone number click handlers
+            document.querySelectorAll('.contact-detail').forEach(detail => {
+                if (detail.href && detail.href.includes('tel:')) {
+                    detail.addEventListener('click', function(e) {
+                        if (window.innerWidth > 768) { // Desktop
+                            e.preventDefault();
+                            const phoneNumber = this.textContent;
+                            if (confirm(`Call: ${phoneNumber}?`)) {
+                                window.location.href = this.href;
+                            }
+                        }
+                    });
+                }
+            });
+
+            // Highlight active menu item in mobile menu
+            const currentPath = window.location.pathname;
+            const menuLinks = document.querySelectorAll('.mobile-menu-nav a');
+            menuLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === 'create.html' && currentPath.includes('create')) {
+                    link.classList.add('active');
+                }
+            });
+            
+            // Set default dates for the form
+            const today = new Date().toISOString().split('T')[0];
+            document.querySelectorAll('input[type="date"]').forEach(input => {
+                input.value = today;
+            });
+            
+            // Add subtle animation to cards on load
+            const cards = document.querySelectorAll('.create-memorial-card');
+            cards.forEach((card, index) => {
+                card.style.animationDelay = `${index * 0.1}s`;
+                card.style.animation = 'fadeIn 0.6s ease-out forwards';
+            });
+        });
+    </script>
+</body>
+</html>

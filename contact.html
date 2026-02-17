@@ -1,15 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact Us - FuneralNotice.lk</title>
-    
+
     <!-- Open Graph Tags -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://funeralnotice.lk/contact">
     <meta property="og:title" content="Contact Us – FuneralNotice.lk">
-    <meta property="og:description" content="Contact our compassionate team for assistance with funeral notices and memorials.">
+    <meta property="og:description"
+        content="Contact our compassionate team for assistance with funeral notices and memorials.">
     <meta property="og:image" content="https://ripnews.lk/uploads/posts/76/cover.png">
     <meta property="og:image:type" content="image/png">
     <meta property="og:image:width" content="1200">
@@ -18,11 +20,12 @@
 
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Contact Us – FuneralNotice.lk">
-    <meta name="twitter:description" content="Contact our compassionate team for assistance with funeral notices and memorials.">
+    <meta name="twitter:description"
+        content="Contact our compassionate team for assistance with funeral notices and memorials.">
     <meta name="twitter:image" content="https://ripnews.lk/uploads/posts/76/cover.png">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+
     <style>
         :root {
             --primary: #ff0000;
@@ -39,9 +42,9 @@
             --border: #e2e8f0;
             --card-bg: #ffffff;
             --sidebar-bg: #ffffff;
-            --shadow-sm: 0 1px 3px rgba(0,0,0,0.12);
-            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1);
-            --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1);
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.12);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
             --radius: 12px;
             --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             --gold: #ffd700;
@@ -63,7 +66,12 @@
             font-weight: 400;
         }
 
-        h1, h2, h3, h4, h5, h6 {
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
             font-weight: 600;
         }
 
@@ -80,27 +88,28 @@
             color: var(--white);
             padding: 10px 0;
             font-size: 0.9rem;
-            display: none; /* Hide on mobile, show on desktop */
+            display: none;
+            /* Hide on mobile, show on desktop */
         }
-        
+
         @media (min-width: 992px) {
             .header-top {
                 display: block;
             }
         }
-        
+
         .header-top .container {
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
-        
+
         .top-nav ul {
             list-style: none;
             display: flex;
             gap: 28px;
         }
-        
+
         .top-nav a {
             color: #e2d8df;
             text-decoration: none;
@@ -110,11 +119,11 @@
             padding: 4px 0;
             position: relative;
         }
-        
+
         .top-nav a:hover {
             color: var(--white);
         }
-        
+
         .top-nav a::after {
             content: '';
             position: absolute;
@@ -125,11 +134,11 @@
             background: var(--accent);
             transition: var(--transition);
         }
-        
+
         .top-nav a:hover::after {
             width: 100%;
         }
-        
+
         .language-selector {
             display: flex;
             align-items: center;
@@ -140,11 +149,11 @@
             border-radius: 6px;
             transition: var(--transition);
         }
-        
+
         .language-selector:hover {
             background: rgba(255, 255, 255, 0.15);
         }
-        
+
         /* Main Header with Logo Animation */
         header {
             background: var(--white);
@@ -154,24 +163,24 @@
             z-index: 1000;
             border-bottom: 3px solid var(--primary);
         }
-        
+
         .main-header {
             padding: 16px 0;
         }
-        
+
         .header-container {
             display: flex;
             justify-content: space-between;
             align-items: center;
             gap: 20px;
         }
-        
+
         .logo-container {
             display: flex;
             align-items: center;
             gap: 12px;
         }
-        
+
         .logo-img {
             height: 48px;
             width: auto;
@@ -180,25 +189,31 @@
             transform-origin: center;
             box-shadow: 0 4px 12px rgba(255, 0, 0, 0.2);
         }
-        
+
         @keyframes heartbeat {
-            0%, 100% {
+
+            0%,
+            100% {
                 transform: scale(1);
             }
+
             5% {
                 transform: scale(1.1);
             }
+
             10% {
                 transform: scale(1);
             }
+
             15% {
                 transform: scale(1.15);
             }
+
             20% {
                 transform: scale(1);
             }
         }
-        
+
         .logo-text {
             font-size: 1.6rem;
             font-weight: 700;
@@ -207,7 +222,7 @@
             position: relative;
             overflow: hidden;
         }
-        
+
         .logo-text::after {
             content: '';
             position: absolute;
@@ -219,44 +234,50 @@
             transform: translateX(-100%);
             animation: slideIn 3s ease-in-out infinite;
         }
-        
+
         @keyframes slideIn {
-            0%, 100% {
+
+            0%,
+            100% {
                 transform: translateX(-100%);
             }
+
             50% {
                 transform: translateX(100%);
             }
         }
-        
+
         .logo-text span {
             color: var(--primary);
             position: relative;
             display: inline-block;
             animation: pulse 2s ease-in-out infinite;
         }
-        
+
         @keyframes pulse {
-            0%, 100% {
+
+            0%,
+            100% {
                 transform: scale(1);
                 text-shadow: 0 0 0 rgba(255, 0, 0, 0);
             }
+
             50% {
                 transform: scale(1.05);
                 text-shadow: 0 0 10px rgba(255, 0, 0, 0.3);
             }
         }
-        
+
         .header-actions {
             display: flex;
             align-items: center;
             gap: 16px;
         }
-        
+
         .search-box {
             position: relative;
         }
-        
+
         .search-box input {
             padding: 10px 16px 10px 40px;
             border: 1px solid var(--border);
@@ -267,14 +288,14 @@
             transition: var(--transition);
             color: var(--dark-text);
         }
-        
+
         .search-box input:focus {
             outline: none;
             border-color: var(--primary);
             box-shadow: 0 0 0 3px rgba(255, 0, 0, 0.1);
             width: 260px;
         }
-        
+
         .search-box i {
             position: absolute;
             left: 14px;
@@ -283,7 +304,7 @@
             color: var(--light-text);
             font-size: 0.95rem;
         }
-        
+
         .btn {
             padding: 10px 22px;
             border-radius: 8px;
@@ -296,47 +317,48 @@
             align-items: center;
             gap: 8px;
         }
-        
+
         .btn-primary {
             background: var(--primary);
             color: var(--white);
         }
-        
+
         .btn-primary:hover {
             background: var(--primary-dark);
             transform: translateY(-2px);
             box-shadow: var(--shadow-lg);
         }
-        
+
         .btn-outline {
             background: transparent;
             border: 1px solid var(--primary);
             color: var(--primary);
         }
-        
+
         .btn-outline:hover {
             background: var(--primary);
             color: var(--white);
         }
-        
+
         /* FIXED: Contact Info - HORIZONTAL LINE ON MOBILE */
         .contact-info {
             background: linear-gradient(90deg, var(--secondary) 0%, var(--secondary-light) 100%);
             color: var(--white);
             padding: 12px 0;
             font-size: 0.9rem;
-            display: none; /* Hidden by default, shown only on mobile */
+            display: none;
+            /* Hidden by default, shown only on mobile */
             border-bottom: 3px solid var(--primary);
             width: 100%;
         }
-        
+
         @media (max-width: 991px) {
             .contact-info {
                 display: block;
                 width: 100%;
             }
         }
-        
+
         .contact-container {
             display: flex;
             justify-content: center;
@@ -344,7 +366,7 @@
             width: 100%;
             padding: 0 5px;
         }
-        
+
         /* HORIZONTAL CONTACT DISPLAY */
         .contact-display {
             display: flex;
@@ -356,17 +378,19 @@
             overflow-x: auto;
             padding: 5px 0;
             -webkit-overflow-scrolling: touch;
-            scrollbar-width: none; /* Firefox */
-            -ms-overflow-style: none; /* IE and Edge */
+            scrollbar-width: none;
+            /* Firefox */
+            -ms-overflow-style: none;
+            /* IE and Edge */
             width: 100%;
         }
-        
+
         /* Hide scrollbar */
         .contact-display::-webkit-scrollbar {
             display: none;
             height: 0;
         }
-        
+
         .contact-item {
             display: flex;
             align-items: center;
@@ -379,17 +403,17 @@
             color: white;
             text-decoration: none;
         }
-        
+
         .contact-item:hover {
             background: rgba(255, 255, 255, 0.1);
         }
-        
+
         .phone-number {
             font-weight: 600;
             font-size: 0.95rem;
             white-space: nowrap;
         }
-        
+
         .whatsapp-contact {
             background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
             color: white !important;
@@ -398,13 +422,13 @@
             text-decoration: none;
             font-weight: 600;
         }
-        
+
         .whatsapp-contact:hover {
             background: linear-gradient(135deg, #128C7E 0%, #25D366 100%);
             transform: translateY(-2px);
             box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
         }
-        
+
         .badge {
             background: var(--primary);
             color: white;
@@ -415,7 +439,7 @@
             margin-left: 6px;
             white-space: nowrap;
         }
-        
+
         .whatsapp-btn {
             background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
             color: white;
@@ -430,12 +454,12 @@
             font-size: 0.85rem;
             white-space: nowrap;
         }
-        
+
         .whatsapp-btn:hover {
             transform: translateY(-2px);
             box-shadow: 0 6px 20px rgba(37, 211, 102, 0.3);
         }
-        
+
         .whatsapp-btn-small {
             background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
             color: white;
@@ -450,12 +474,12 @@
             transition: var(--transition);
             white-space: nowrap;
         }
-        
+
         .whatsapp-btn-small:hover {
             transform: translateY(-2px);
             box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
         }
-        
+
         /* Mobile Menu Button */
         .mobile-menu-btn {
             display: none;
@@ -467,13 +491,13 @@
             padding: 8px;
             z-index: 1001;
         }
-        
+
         @media (max-width: 768px) {
             .mobile-menu-btn {
                 display: block;
             }
         }
-        
+
         /* Mobile Search Toggle */
         .mobile-search-toggle {
             display: none;
@@ -484,29 +508,29 @@
             cursor: pointer;
             padding: 8px;
         }
-        
+
         @media (max-width: 768px) {
             .mobile-search-toggle {
                 display: block;
             }
         }
-        
+
         .mobile-search-container {
             display: none;
             padding: 15px;
             background: var(--white);
             border-bottom: 1px solid var(--border);
         }
-        
+
         .mobile-search-container.active {
             display: block;
         }
-        
+
         .mobile-search-box {
             position: relative;
             width: 100%;
         }
-        
+
         .mobile-search-box input {
             width: 100%;
             padding: 12px 16px 12px 45px;
@@ -515,7 +539,7 @@
             font-size: 1rem;
             background: var(--light-bg);
         }
-        
+
         .mobile-search-box i {
             position: absolute;
             left: 16px;
@@ -523,7 +547,7 @@
             transform: translateY(-50%);
             color: var(--light-text);
         }
-        
+
         /* Mobile Menu Styles */
         .mobile-menu-overlay {
             display: none;
@@ -535,7 +559,7 @@
             background: rgba(0, 0, 0, 0.5);
             z-index: 999;
         }
-        
+
         .mobile-menu-container {
             display: none;
             position: fixed;
@@ -550,17 +574,17 @@
             transform: translateX(100%);
             transition: transform 0.3s ease;
         }
-        
+
         @media (max-width: 480px) {
             .mobile-menu-container {
                 width: 100%;
             }
         }
-        
+
         .mobile-menu-container.active {
             transform: translateX(0);
         }
-        
+
         /* Improved Mobile Menu Styles */
         .mobile-menu-header {
             background: linear-gradient(90deg, var(--secondary) 0%, var(--secondary-light) 100%);
@@ -596,13 +620,13 @@
             padding: 20px;
             background: linear-gradient(135deg, var(--secondary-light) 0%, var(--secondary) 100%);
             gap: 15px;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .user-avatar {
             width: 50px;
             height: 50px;
-            background: rgba(255,255,255,0.2);
+            background: rgba(255, 255, 255, 0.2);
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -628,8 +652,8 @@
         }
 
         .user-login-btn {
-            background: rgba(255,255,255,0.2);
-            border: 1px solid rgba(255,255,255,0.3);
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
             color: white;
             padding: 8px 15px;
             border-radius: 20px;
@@ -642,7 +666,7 @@
         }
 
         .user-login-btn:hover {
-            background: rgba(255,255,255,0.3);
+            background: rgba(255, 255, 255, 0.3);
         }
 
         /* Menu Sections */
@@ -858,7 +882,8 @@
             font-weight: 600;
         }
 
-        .emergency-number, .emergency-email {
+        .emergency-number,
+        .emergency-email {
             color: var(--primary);
             text-decoration: none;
             font-size: 1rem;
@@ -866,7 +891,8 @@
             display: block;
         }
 
-        .emergency-number:hover, .emergency-email:hover {
+        .emergency-number:hover,
+        .emergency-email:hover {
             color: var(--primary-dark);
         }
 
@@ -922,7 +948,7 @@
             font-size: 1.5rem;
             cursor: pointer;
         }
-        
+
         /* ====== MOBILE APP STYLES ====== */
         .mobile-app-header {
             display: none;
@@ -941,6 +967,7 @@
                 transform: translateY(-100%);
                 opacity: 0;
             }
+
             to {
                 transform: translateY(0);
                 opacity: 1;
@@ -970,10 +997,13 @@
         }
 
         @keyframes pulseLogo {
-            0%, 100% {
+
+            0%,
+            100% {
                 transform: scale(1);
                 box-shadow: 0 4px 12px rgba(255, 0, 0, 0.3);
             }
+
             50% {
                 transform: scale(1.05);
                 box-shadow: 0 6px 20px rgba(255, 0, 0, 0.5);
@@ -1148,10 +1178,13 @@
         }
 
         @keyframes floatCreate {
-            0%, 100% {
+
+            0%,
+            100% {
                 transform: translateY(0) rotate(0deg);
                 box-shadow: 0 6px 25px rgba(255, 0, 0, 0.4);
             }
+
             50% {
                 transform: translateY(-10px) rotate(5deg);
                 box-shadow: 0 12px 30px rgba(255, 0, 0, 0.6);
@@ -1166,26 +1199,29 @@
 
         /* Hide desktop header parts on mobile */
         @media (max-width: 992px) {
-            header, .header-top, .contact-info {
+
+            header,
+            .header-top,
+            .contact-info {
                 display: none !important;
             }
-            
+
             .mobile-app-header {
                 display: flex;
             }
-            
+
             .mobile-bottom-nav {
                 display: flex;
             }
-            
+
             .mobile-create-notice-float {
                 display: flex;
             }
-            
+
             footer {
                 display: none !important;
             }
-            
+
             .main-body {
                 padding-bottom: 80px !important;
             }
@@ -1196,27 +1232,27 @@
             .mobile-app-header {
                 padding: 12px 15px;
             }
-            
+
             .mobile-logo {
                 height: 36px;
             }
-            
+
             .mobile-header-title {
                 font-size: 1.1rem;
             }
-            
+
             .mobile-header-icon {
                 font-size: 1.2rem;
                 padding: 6px;
                 width: 40px;
                 height: 40px;
             }
-            
+
             .mobile-language-selector {
                 padding: 6px 10px;
                 font-size: 0.8rem;
             }
-            
+
             .mobile-create-notice-float {
                 width: 55px;
                 height: 55px;
@@ -1224,15 +1260,15 @@
                 bottom: 70px;
                 right: 15px;
             }
-            
+
             .mobile-nav-item {
                 padding: 8px 3px;
             }
-            
+
             .mobile-nav-item i {
                 font-size: 1.3rem;
             }
-            
+
             .mobile-nav-item .nav-label {
                 font-size: 0.65rem;
             }
@@ -1697,9 +1733,12 @@
         }
 
         @keyframes pulse-glow {
-            0%, 100% {
+
+            0%,
+            100% {
                 box-shadow: 0 0 20px rgba(255, 0, 0, 0.1);
             }
+
             50% {
                 box-shadow: 0 0 40px rgba(255, 0, 0, 0.3);
             }
@@ -1763,151 +1802,8 @@
 </head>
 
 <body>
-    <!-- Top Navigation - Hidden on Mobile -->
-    <div class="header-top">
-        <div class="container">
-            <nav class="top-nav">
-                <ul>
-                    <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
-                    <li><a href="about.html"><i class="fas fa-info-circle"></i> About Us</a></li>
-                    <li><a href="contact.html"><i class="fas fa-envelope"></i> Contact Us</a></li>
-                </ul>
-            </nav>
-            <div class="language-selector">
-                <i class="fas fa-globe"></i>
-                <span>English</span>
-                <i class="fas fa-chevron-down"></i>
-            </div>
-        </div>
-    </div>
-
-    <!-- Mobile App Header (Shows only on mobile) -->
-    <div class="mobile-app-header">
-        <div class="container">
-            <div class="mobile-header-left">
-                <img src="funeral notice logo.png" alt="FuneralNotice.lk" class="mobile-logo">
-            </div>
-            <div class="mobile-header-right">
-                <!-- Language selector in mobile header -->
-                <div class="mobile-language-selector" id="mobileLanguageSelector">
-                    <i class="fas fa-globe"></i>
-                    <span>EN</span>
-                </div>
-                <!-- Search button in mobile header -->
-                <div class="mobile-header-icon search-icon" id="mobileSearchIcon">
-                    <i class="fas fa-search"></i>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Main Header -->
-    <header>
-        <div class="container">
-            <div class="main-header">
-                <div class="header-container">
-                    <!-- Mobile Menu Button -->
-                    <button class="mobile-menu-btn" id="mobileMenuBtn">
-                        <i class="fas fa-bars"></i>
-                    </button>
-                    
-                    <!-- Mobile Search Toggle -->
-                    <button class="mobile-search-toggle" id="mobileSearchToggle">
-                        <i class="fas fa-search"></i>
-                    </button>
-                    
-                    <div class="logo-container">
-                        <img src="funeral notice logo.png" alt="FuneralNotice.lk" class="logo-img">
-                    </div>
-                    
-                    <div class="header-actions">
-                        <div class="search-box hide-on-mobile">
-                            <i class="fas fa-search"></i>
-                            <input type="text" placeholder="Search a person..." id="desktopSearchInput">
-                        </div>
-                        <button class="btn btn-primary" id="createFuneralNoticeBtn">
-                            <i class="fas fa-plus"></i> <span class="hide-on-mobile">Create Memorial</span>
-                        </button>
-                        <button class="btn btn-outline hide-on-mobile" onclick="window.location.href='index.html'">Browse</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Mobile Search Container -->
-        <div class="mobile-search-container" id="mobileSearchContainer">
-            <div class="container">
-                <div class="mobile-search-box">
-                    <i class="fas fa-search"></i>
-                    <input type="text" placeholder="Search a person..." id="mobileSearchInput">
-                </div>
-            </div>
-        </div>
-    </header>
-
-    <!-- FIXED: Contact Info - HORIZONTAL LINE ON MOBILE -->
-    <div class="contact-info">
-        <div class="container">
-            <div class="contact-display">
-                <!-- Phone -->
-                <div class="contact-item">
-                    <i class="fas fa-phone-alt"></i>
-                    <span class="phone-number">+94 11 234 5678</span>
-                </div>
-                
-                <!-- Email -->
-                <div class="contact-item">
-                    <i class="fas fa-envelope"></i>
-                    <span>support@funeralnotice.lk</span>
-                </div>
-                
-                <!-- WhatsApp -->
-                <a href="https://wa.me/94711234567" class="contact-item whatsapp-contact">
-                    <i class="fab fa-whatsapp"></i>
-                    <span>WhatsApp</span>
-                </a>
-            </div>
-        </div>
-    </div>
-
-  <!-- Improved Mobile Menu -->
-<div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
-<div class="mobile-menu-container" id="mobileMenuContainer">
-    <div class="mobile-menu-header">
-        <div class="mobile-menu-title">
-            <h3><i class="fas fa-compass"></i> Menu</h3>
-        </div>
-        <button class="mobile-menu-close" id="mobileMenuClose">
-            <i class="fas fa-times"></i>
-        </button>
-    </div>
-    
-    <div class="mobile-menu-content">
-        <!-- User Profile Section -->
-      
-        
-        <!-- Main Navigation -->
-        <div class="mobile-menu-section">
-            <h4><i class="fas fa-compass"></i> Navigation</h4>
-            <ul class="mobile-menu-nav">
-                <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
-                <li><a href="about.html"><i class="fas fa-info-circle"></i> About Us</a></li>
-                <li><a href="create.html"><i class="fas fa-plus-circle"></i> Create Memorial</a></li>
-                <li><a href="gallery.html"><i class="fas fa-images"></i> Memorial Gallery</a></li>
-                <li><a href="contact.html" class="active"><i class="fas fa-envelope"></i> Contact Us</a></li>
-            </ul>
-        </div>
-        
-     
-            <div class="advertise-cta">
-                <p>Want to advertise here?</p>
-                <a href="https://wa.me/94754727075" target="_blank" class="advertise-btn">
-                    <i class="fab fa-whatsapp"></i> Contact for Ads
-                </a>
-            </div>
-        </div>
-    </div>
-</div>
+    <!-- Navbar Component -->
+    <div id="navbar-placeholder"></div>
 
     <!-- About Page Content -->
     <div class="main-body">
@@ -1915,21 +1811,23 @@
         <section class="contact-hero">
             <div class="hero-content">
                 <h1 class="hero-title">Contact Our Compassionate Team</h1>
-                <p class="hero-subtitle">We're here to support you during this difficult time. Reach out to us through any channel below.</p>
+                <p class="hero-subtitle">We're here to support you during this difficult time. Reach out to us through
+                    any channel below.</p>
             </div>
         </section>
 
         <div class="container">
             <!-- Contact Grid -->
-          
+
 
             <!-- Contact Form Section -->
             <div class="contact-form-section">
                 <div class="section-header">
                     <h2 class="section-title">Send Us a Message</h2>
-                    <p class="section-subtitle">Fill out the form below and our team will get back to you as soon as possible.</p>
+                    <p class="section-subtitle">Fill out the form below and our team will get back to you as soon as
+                        possible.</p>
                 </div>
-                
+
                 <form id="contactForm">
                     <div class="form-grid">
                         <div class="form-group">
@@ -1938,10 +1836,11 @@
                         </div>
                         <div class="form-group">
                             <label class="form-label" for="email">Email Address *</label>
-                            <input type="email" id="email" class="form-control" placeholder="Your email address" required>
+                            <input type="email" id="email" class="form-control" placeholder="Your email address"
+                                required>
                         </div>
                     </div>
-                    
+
                     <div class="form-grid">
                         <div class="form-group">
                             <label class="form-label" for="phone">Phone Number *</label>
@@ -1960,12 +1859,13 @@
                             </select>
                         </div>
                     </div>
-                    
+
                     <div class="form-group">
                         <label class="form-label" for="message">Your Message *</label>
-                        <textarea id="message" class="form-control" placeholder="Please provide details about your inquiry..." rows="5" required></textarea>
+                        <textarea id="message" class="form-control"
+                            placeholder="Please provide details about your inquiry..." rows="5" required></textarea>
                     </div>
-                    
+
                     <div class="form-submit">
                         <button type="submit" class="submit-btn">
                             <i class="fas fa-paper-plane"></i> Send Message
@@ -1980,11 +1880,11 @@
                     <h2 class="section-title">Our Location</h2>
                     <p class="section-subtitle">Visit our office or contact us at the details below</p>
                 </div>
-                
+
                 <div class="map-content">
                     <div class="location-info">
                         <h3>FuneralNotice.lk Headquarters</h3>
-                        
+
                         <div class="location-details">
                             <div class="location-item">
                                 <div class="location-icon">
@@ -1995,7 +1895,7 @@
                                     <p>123 Galle Road, Colombo 03,<br>Sri Lanka</p>
                                 </div>
                             </div>
-                            
+
                             <div class="location-item">
                                 <div class="location-icon">
                                     <i class="fas fa-phone"></i>
@@ -2005,7 +1905,7 @@
                                     <p>+94 11 234 5678</p>
                                 </div>
                             </div>
-                            
+
                             <div class="location-item">
                                 <div class="location-icon">
                                     <i class="fas fa-envelope"></i>
@@ -2015,7 +1915,7 @@
                                     <p>office@funeralnotice.lk</p>
                                 </div>
                             </div>
-                            
+
                             <div class="location-item">
                                 <div class="location-icon">
                                     <i class="fas fa-clock"></i>
@@ -2023,13 +1923,13 @@
                                 <div class="location-text">
                                     <h4>Business Hours</h4>
                                     <p>Monday - Friday: 8:00 AM - 8:00 PM<br>
-                                       Saturday: 9:00 AM - 6:00 PM<br>
-                                       Sunday: 10:00 AM - 4:00 PM</p>
+                                        Saturday: 9:00 AM - 6:00 PM<br>
+                                        Sunday: 10:00 AM - 4:00 PM</p>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="map-container">
                         <div class="map-placeholder">
                             <i class="fas fa-map-marked-alt"></i>
@@ -2042,63 +1942,31 @@
         </div>
     </div>
 
-    <!-- Footer -->
-    <footer class="hide-on-mobile">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-logo">
-                    <img src="funeral notice logo.png" alt="FuneralNotice.lk" class="logo-img">
-                </div>
-                <div class="footer-tagline">
-                    Keeping Memories Alive - A dignified platform to honor and remember loved ones across Sri Lanka
-                </div>
-                
-                <div class="footer-links">
-                    <a href="about.html">About Us</a>
-                    <a href="terms.html">Terms</a>
-                    <a href="#">Report Us</a>
-                    <a href="privacy.html">Privacy Policy</a>
-                    <a href="cookies.html">Cookie Policy</a>
-                </div>
-                
-                <div class="copyright">
-                    © 2023. FuneralNotice.lk. All rights reserved.
-                </div>
-            </div>
-        </div>
-    </footer>
+    <!-- Footer Component -->
+    <div id="footer-placeholder"></div>
 
-    <!-- Mobile Bottom Navigation -->
-    <div class="mobile-bottom-nav">
-        <div class="nav-container">
-            <div class="mobile-nav-item" data-page="home" onclick="window.location.href='index.html'">
-                <i class="fas fa-home"></i>
-                <span class="nav-label">Home</span>
-            </div>
-  <div class="mobile-nav-item" data-page="about" onclick="window.location.href='about.html'">
-                <i class="fas fa-info-circle"></i>
-                <span class="nav-label">About</span>
-            </div>
-            <div class="mobile-nav-item active" data-page="contact" onclick="window.location.href='contact.html'">
-                <i class="fas fa-envelope"></i>
-                <span class="nav-label">Contact</span>
-            </div>
-            <div class="mobile-nav-item" data-page="whatsapp" onclick="window.open('https://wa.me/94711234567', '_blank')">
-                <i class="fab fa-whatsapp"></i>
-                <span class="nav-label">Support</span>
-            </div>
-            <div class="mobile-nav-item" data-page="menu" id="mobileBottomMenuBtn">
-                <i class="fas fa-bars"></i>
-                <span class="nav-label">Menu</span>
-            </div>
-        </div>
-    </div>
+    <script>
+        // Load navbar and footer components
+        function loadComponent(url, elementId) {
+            fetch(url)
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById(elementId).innerHTML = data;
 
-    <!-- Mobile Create Notice Button -->
-    <div class="mobile-create-notice-float" id="mobileCreateNoticeBtn">
-        <i class="fas fa-plus"></i>
-    </div>
+                    // Re-initialize event listeners after navbar loads
+                    if (elementId === 'navbar-placeholder') {
+                        if (typeof initMobileMenu === 'function') initMobileMenu();
+                        if (typeof initMobileSearch === 'function') initMobileSearch();
+                        if (typeof initMobileApp === 'function') initMobileApp();
+                    }
+                })
+                .catch(error => console.error('Error loading component:', error));
+        }
 
+        // Load components when DOM is ready
+        loadComponent('navbar.html', 'navbar-placeholder');
+        loadComponent('footer.html', 'footer-placeholder');
+    </script>
     <script>
         // Mobile Menu Functionality
         function initMobileMenu() {
@@ -2106,11 +1974,11 @@
             const mobileMenuClose = document.getElementById('mobileMenuClose');
             const mobileMenuContainer = document.getElementById('mobileMenuContainer');
             const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
-            
+
             if (!mobileMenuBtn || !mobileMenuContainer) return;
-            
+
             // Open mobile menu
-            mobileMenuBtn.addEventListener('click', function(e) {
+            mobileMenuBtn.addEventListener('click', function (e) {
                 e.stopPropagation();
                 mobileMenuContainer.style.display = 'block';
                 mobileMenuOverlay.style.display = 'block';
@@ -2119,11 +1987,11 @@
                 }, 10);
                 document.body.style.overflow = 'hidden';
             });
-            
+
             // Open mobile menu from bottom nav
             const mobileBottomMenuBtn = document.getElementById('mobileBottomMenuBtn');
             if (mobileBottomMenuBtn) {
-                mobileBottomMenuBtn.addEventListener('click', function(e) {
+                mobileBottomMenuBtn.addEventListener('click', function (e) {
                     e.stopPropagation();
                     mobileMenuContainer.style.display = 'block';
                     mobileMenuOverlay.style.display = 'block';
@@ -2133,7 +2001,7 @@
                     document.body.style.overflow = 'hidden';
                 });
             }
-            
+
             // Close mobile menu
             function closeMobileMenu() {
                 mobileMenuContainer.classList.remove('active');
@@ -2143,14 +2011,14 @@
                     document.body.style.overflow = '';
                 }, 300);
             }
-            
+
             mobileMenuClose.addEventListener('click', closeMobileMenu);
             mobileMenuOverlay.addEventListener('click', closeMobileMenu);
-            
+
             // Close menu when clicking on a link
             const mobileLinks = document.querySelectorAll('.mobile-menu-nav a, .ad-whatsapp-btn, .advertise-btn, .user-login-btn');
             mobileLinks.forEach(link => {
-                link.addEventListener('click', function(e) {
+                link.addEventListener('click', function (e) {
                     if (!this.href || this.href.includes('#')) {
                         e.preventDefault();
                     }
@@ -2163,10 +2031,10 @@
         function initMobileSearch() {
             const searchToggle = document.getElementById('mobileSearchToggle');
             const searchContainer = document.getElementById('mobileSearchContainer');
-            
+
             if (!searchToggle || !searchContainer) return;
-            
-            searchToggle.addEventListener('click', function() {
+
+            searchToggle.addEventListener('click', function () {
                 searchContainer.classList.toggle('active');
                 if (searchContainer.classList.contains('active')) {
                     const searchInput = document.getElementById('mobileSearchInput');
@@ -2177,9 +2045,9 @@
                     }
                 }
             });
-            
+
             // Close search when clicking outside
-            document.addEventListener('click', function(e) {
+            document.addEventListener('click', function (e) {
                 if (!searchToggle.contains(e.target) && !searchContainer.contains(e.target)) {
                     searchContainer.classList.remove('active');
                 }
@@ -2191,18 +2059,18 @@
             // Mobile language selector
             const mobileLanguageSelector = document.getElementById('mobileLanguageSelector');
             if (mobileLanguageSelector) {
-                mobileLanguageSelector.addEventListener('click', function() {
+                mobileLanguageSelector.addEventListener('click', function () {
                     const currentLang = this.querySelector('span').textContent;
                     const newLang = currentLang === 'EN' ? 'த' : 'EN';
                     this.querySelector('span').textContent = newLang;
                 });
             }
-            
+
             // Mobile search icon
             const mobileSearchIcon = document.getElementById('mobileSearchIcon');
             const mobileSearchContainer = document.getElementById('mobileSearchContainer');
             if (mobileSearchIcon && mobileSearchContainer) {
-                mobileSearchIcon.addEventListener('click', function() {
+                mobileSearchIcon.addEventListener('click', function () {
                     mobileSearchContainer.classList.toggle('active');
                     if (mobileSearchContainer.classList.contains('active')) {
                         const mobileSearchInput = document.getElementById('mobileSearchInput');
@@ -2214,15 +2082,15 @@
                     }
                 });
             }
-            
+
             // Mobile bottom navigation - set active state
             const currentPage = window.location.pathname.split('/').pop();
             document.querySelectorAll('.mobile-nav-item').forEach(item => {
                 const page = item.getAttribute('data-page');
-                
+
                 // Remove active class from all
                 item.classList.remove('active');
-                
+
                 // Set active based on current page
                 if ((currentPage === 'contact.html' && page === 'contact') ||
                     (currentPage === 'index.html' && page === 'home') ||
@@ -2230,17 +2098,17 @@
                     item.classList.add('active');
                 }
             });
-            
+
             // Mobile Create Notice Button
             const mobileCreateNoticeBtn = document.getElementById('mobileCreateNoticeBtn');
             if (mobileCreateNoticeBtn) {
-                mobileCreateNoticeBtn.addEventListener('click', function() {
+                mobileCreateNoticeBtn.addEventListener('click', function () {
                     const desktopCreateBtn = document.getElementById('createFuneralNoticeBtn');
                     if (desktopCreateBtn) {
                         const originalHTML = desktopCreateBtn.innerHTML;
                         desktopCreateBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Creating...';
                         desktopCreateBtn.disabled = true;
-                        
+
                         setTimeout(() => {
                             desktopCreateBtn.innerHTML = originalHTML;
                             desktopCreateBtn.disabled = false;
@@ -2257,53 +2125,53 @@
         function initContactForm() {
             const contactForm = document.getElementById('contactForm');
             if (!contactForm) return;
-            
-            contactForm.addEventListener('submit', function(e) {
+
+            contactForm.addEventListener('submit', function (e) {
                 e.preventDefault();
-                
+
                 // Get form values
                 const name = document.getElementById('name').value;
                 const email = document.getElementById('email').value;
                 const phone = document.getElementById('phone').value;
                 const subject = document.getElementById('subject').value;
                 const message = document.getElementById('message').value;
-                
+
                 // Simple validation
                 if (!name || !email || !phone || !subject || !message) {
                     alert('Please fill in all required fields.');
                     return;
                 }
-                
+
                 // Show success message
                 alert(`Thank you, ${name}! Your message has been sent successfully. We will contact you at ${email} or ${phone} within 2 hours.`);
-                
+
                 // Reset form
                 this.reset();
-                
+
                 // In a real application, you would send the data to a server here
                 console.log('Form submitted:', { name, email, phone, subject, message });
             });
         }
 
         // Initialize the page
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             // Initialize components
             initMobileMenu();
             initMobileSearch();
             initContactForm();
-            
+
             // Create Funeral Notice Button - Redirect to create.html
-            document.getElementById('createFuneralNoticeBtn')?.addEventListener('click', function() {
+            document.getElementById('createFuneralNoticeBtn')?.addEventListener('click', function () {
                 this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Creating...';
                 this.disabled = true;
-                
+
                 setTimeout(() => {
                     window.location.href = 'create.html';
                 }, 500);
             });
-            
+
             // Language selector
-            document.querySelector('.language-selector')?.addEventListener('click', function() {
+            document.querySelector('.language-selector')?.addEventListener('click', function () {
                 const currentLang = this.querySelector('span').textContent;
                 const newLang = currentLang === 'English' ? 'தமிழ்' : 'English';
                 this.querySelector('span').textContent = newLang;
@@ -2312,7 +2180,7 @@
             // Search functionality
             const searchInputs = document.querySelectorAll('input[type="text"]');
             searchInputs.forEach(input => {
-                input.addEventListener('keypress', function(e) {
+                input.addEventListener('keypress', function (e) {
                     if (e.key === 'Enter' && this.value.trim()) {
                         alert(`Searching for: ${this.value}`);
                     }
@@ -2325,7 +2193,7 @@
             }
 
             // Re-initialize on resize
-            window.addEventListener('resize', function() {
+            window.addEventListener('resize', function () {
                 if (window.innerWidth <= 992) {
                     initMobileApp();
                 }
@@ -2334,7 +2202,7 @@
             // Phone number click handlers
             document.querySelectorAll('.contact-detail').forEach(detail => {
                 if (detail.href.includes('tel:')) {
-                    detail.addEventListener('click', function(e) {
+                    detail.addEventListener('click', function (e) {
                         if (window.innerWidth > 768) { // Desktop
                             e.preventDefault();
                             const phoneNumber = this.textContent;
@@ -2351,7 +2219,7 @@
             const menuLinks = document.querySelectorAll('.mobile-menu-nav a');
             menuLinks.forEach(link => {
                 link.classList.remove('active');
-                if (link.getAttribute('href') === currentPage || 
+                if (link.getAttribute('href') === currentPage ||
                     (currentPath.includes('contact') && link.getAttribute('href') === 'contact.html')) {
                     link.classList.add('active');
                 }
@@ -2359,4 +2227,5 @@
         });
     </script>
 </body>
+
 </html>

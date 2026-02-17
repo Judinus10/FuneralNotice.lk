@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -21,17 +22,17 @@
             --border: #e2e8f0;
             --card-bg: #ffffff;
             --sidebar-bg: #ffffff;
-            --shadow-sm: 0 1px 3px rgba(0,0,0,0.12);
-            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1);
-            --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1);
-            --shadow-xl: 0 20px 25px -5px rgba(0,0,0,0.1);
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.12);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
             --radius: 12px;
             --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             --facebook-blue: #1877F2;
             --facebook-gray: #65676B;
             --facebook-light-gray: #F0F2F5;
             --ring-gradient: linear-gradient(135deg, #ff0000 0%, #261921 100%);
-            
+
             /* Mobile bottom nav colors - All set to #3a2935 */
             --nav-home: #3a2935;
             --nav-obituaries: #3a2935;
@@ -39,13 +40,13 @@
             --nav-create: #3a2935;
             --nav-menu: #3a2935;
         }
-        
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        
+
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
             background-color: var(--light-bg);
@@ -54,18 +55,23 @@
             font-weight: 400;
             overflow-x: hidden;
         }
-        
-        h1, h2, h3, h4, h5, h6 {
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
             font-weight: 600;
         }
-        
+
         .container {
             width: 100%;
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 15px;
         }
-        
+
         /* Header Styles */
         .header-top {
             background: var(--secondary);
@@ -74,25 +80,25 @@
             font-size: 0.9rem;
             display: none;
         }
-        
+
         @media (min-width: 992px) {
             .header-top {
                 display: block;
             }
         }
-        
+
         .header-top .container {
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
-        
+
         .top-nav ul {
             list-style: none;
             display: flex;
             gap: 28px;
         }
-        
+
         .top-nav a {
             color: #e2d8df;
             text-decoration: none;
@@ -105,11 +111,11 @@
             align-items: center;
             gap: 6px;
         }
-        
+
         .top-nav a:hover {
             color: var(--white);
         }
-        
+
         .top-nav a::after {
             content: '';
             position: absolute;
@@ -120,11 +126,11 @@
             background: var(--accent);
             transition: var(--transition);
         }
-        
+
         .top-nav a:hover::after {
             width: 100%;
         }
-        
+
         .language-selector {
             display: flex;
             align-items: center;
@@ -135,11 +141,11 @@
             border-radius: 6px;
             transition: var(--transition);
         }
-        
+
         .language-selector:hover {
             background: rgba(255, 255, 255, 0.15);
         }
-        
+
         .logo-text {
             font-size: 1.6rem;
             font-weight: 700;
@@ -148,7 +154,7 @@
             position: relative;
             overflow: hidden;
         }
-        
+
         .logo-text::after {
             content: '';
             position: absolute;
@@ -160,44 +166,50 @@
             transform: translateX(-100%);
             animation: slideIn 3s ease-in-out infinite;
         }
-        
+
         @keyframes slideIn {
-            0%, 100% {
+
+            0%,
+            100% {
                 transform: translateX(-100%);
             }
+
             50% {
                 transform: translateX(100%);
             }
         }
-        
+
         .logo-text span {
             color: var(--primary);
             position: relative;
             display: inline-block;
             animation: pulse 2s ease-in-out infinite;
         }
-        
+
         @keyframes pulse {
-            0%, 100% {
+
+            0%,
+            100% {
                 transform: scale(1);
                 text-shadow: 0 0 0 rgba(255, 0, 0, 0);
             }
+
             50% {
                 transform: scale(1.05);
                 text-shadow: 0 0 10px rgba(255, 0, 0, 0.3);
             }
         }
-        
+
         .header-actions {
             display: flex;
             align-items: center;
             gap: 16px;
         }
-        
+
         .search-box {
             position: relative;
         }
-        
+
         .search-box input {
             padding: 10px 16px 10px 40px;
             border: 1px solid var(--border);
@@ -208,14 +220,14 @@
             transition: var(--transition);
             color: var(--dark-text);
         }
-        
+
         .search-box input:focus {
             outline: none;
             border-color: var(--primary);
             box-shadow: 0 0 0 3px rgba(255, 0, 0, 0.1);
             width: 260px;
         }
-        
+
         .search-box i {
             position: absolute;
             left: 14px;
@@ -224,7 +236,7 @@
             color: var(--light-text);
             font-size: 0.95rem;
         }
-        
+
         .btn {
             padding: 10px 22px;
             border-radius: 8px;
@@ -237,29 +249,29 @@
             align-items: center;
             gap: 8px;
         }
-        
+
         .btn-primary {
             background: var(--primary);
             color: var(--white);
         }
-        
+
         .btn-primary:hover {
             background: var(--primary-dark);
             transform: translateY(-2px);
             box-shadow: var(--shadow-lg);
         }
-        
+
         .btn-outline {
             background: transparent;
             border: 1px solid var(--primary);
             color: var(--primary);
         }
-        
+
         .btn-outline:hover {
             background: var(--primary);
             color: var(--white);
         }
-        
+
         .contact-info {
             background: linear-gradient(90deg, var(--secondary) 0%, var(--secondary-light) 100%);
             color: var(--white);
@@ -267,20 +279,20 @@
             font-size: 0.9rem;
             display: none;
         }
-        
+
         @media (max-width: 991px) {
             .contact-info {
                 display: block;
             }
         }
-        
+
         .contact-container {
             display: flex;
             justify-content: space-between;
             align-items: center;
             gap: 10px;
         }
-        
+
         @media (max-width: 768px) {
             .contact-container {
                 flex-direction: row;
@@ -289,27 +301,27 @@
                 gap: 10px;
             }
         }
-        
+
         @media (max-width: 480px) {
             .contact-container {
                 gap: 8px;
                 flex-wrap: nowrap;
             }
         }
-        
+
         .contact-display {
             display: flex;
             align-items: center;
             gap: 8px;
             flex-wrap: nowrap;
         }
-        
+
         @media (max-width: 480px) {
             .contact-display {
                 gap: 6px;
             }
         }
-        
+
         .phone-number {
             font-weight: 600;
             font-size: 1rem;
@@ -318,14 +330,14 @@
             gap: 6px;
             white-space: nowrap;
         }
-        
+
         @media (max-width: 480px) {
             .phone-number {
                 font-size: 0.9rem;
                 gap: 4px;
             }
         }
-        
+
         .badge {
             background: var(--primary);
             color: white;
@@ -336,7 +348,7 @@
             margin-left: 6px;
             white-space: nowrap;
         }
-        
+
         @media (max-width: 480px) {
             .badge {
                 padding: 2px 6px;
@@ -344,7 +356,7 @@
                 margin-left: 4px;
             }
         }
-        
+
         .whatsapp-btn {
             background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
             color: white;
@@ -359,7 +371,7 @@
             font-size: 0.85rem;
             white-space: nowrap;
         }
-        
+
         @media (max-width: 480px) {
             .whatsapp-btn {
                 padding: 5px 10px;
@@ -367,12 +379,12 @@
                 gap: 4px;
             }
         }
-        
+
         .whatsapp-btn:hover {
             transform: translateY(-2px);
             box-shadow: 0 6px 20px rgba(37, 211, 102, 0.3);
         }
-        
+
         .whatsapp-btn-small {
             background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
             color: white;
@@ -387,12 +399,12 @@
             transition: var(--transition);
             white-space: nowrap;
         }
-        
+
         .whatsapp-btn-small:hover {
             transform: translateY(-2px);
             box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
         }
-        
+
         .mobile-menu-btn {
             display: block;
             background: transparent;
@@ -403,13 +415,13 @@
             padding: 8px;
             z-index: 1001;
         }
-        
+
         @media (min-width: 992px) {
             .mobile-menu-btn {
                 display: none;
             }
         }
-        
+
         .mobile-menu-overlay {
             display: none;
             position: fixed;
@@ -422,12 +434,17 @@
             z-index: 9999;
             animation: fadeIn 0.3s ease;
         }
-        
+
         @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
         }
-        
+
         .mobile-menu-container {
             display: none;
             position: fixed;
@@ -442,17 +459,17 @@
             transform: translateX(100%);
             transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
-        
+
         @media (max-width: 480px) {
             .mobile-menu-container {
                 width: 100%;
             }
         }
-        
+
         .mobile-menu-container.active {
             transform: translateX(0);
         }
-        
+
         .mobile-menu-header {
             background: linear-gradient(135deg, var(--secondary) 0%, var(--secondary-light) 100%);
             color: white;
@@ -464,12 +481,12 @@
             top: 0;
             z-index: 1;
         }
-        
+
         .mobile-menu-header h3 {
             font-size: 1.3rem;
             font-weight: 600;
         }
-        
+
         .mobile-menu-close {
             background: transparent;
             border: none;
@@ -484,20 +501,20 @@
             border-radius: 50%;
             transition: var(--transition);
         }
-        
+
         .mobile-menu-close:hover {
             background: rgba(255, 255, 255, 0.1);
         }
-        
+
         .mobile-menu-content {
             padding: 20px;
             padding-bottom: 100px;
         }
-        
+
         .mobile-menu-section {
             margin-bottom: 30px;
         }
-        
+
         .mobile-menu-section h4 {
             color: var(--secondary);
             font-size: 1.1rem;
@@ -506,15 +523,15 @@
             border-bottom: 2px solid var(--border);
             font-weight: 600;
         }
-        
+
         .mobile-menu-nav {
             list-style: none;
         }
-        
+
         .mobile-menu-nav li {
             margin-bottom: 10px;
         }
-        
+
         .mobile-menu-nav a {
             display: flex;
             align-items: center;
@@ -526,26 +543,26 @@
             transition: var(--transition);
             font-size: 0.95rem;
         }
-        
+
         .mobile-menu-nav a:hover {
             background: var(--light-bg);
             color: var(--primary);
             transform: translateX(5px);
         }
-        
+
         .mobile-menu-nav a.active {
             background: var(--primary-light);
             color: var(--primary);
             font-weight: 600;
             border-left: 4px solid var(--primary);
         }
-        
+
         .mobile-menu-nav a i {
             width: 24px;
             text-align: center;
             font-size: 1.1rem;
         }
-        
+
         .mobile-contact-info {
             background: linear-gradient(135deg, var(--light-bg) 0%, var(--light-bg-2) 100%);
             padding: 20px;
@@ -553,7 +570,7 @@
             margin-top: 30px;
             border: 1px solid var(--border);
         }
-        
+
         .mobile-contact-info .phone-number {
             font-size: 1.2rem;
             font-weight: 600;
@@ -563,7 +580,7 @@
             align-items: center;
             gap: 12px;
         }
-        
+
         .mobile-whatsapp-btn {
             display: block;
             width: 100%;
@@ -578,12 +595,12 @@
             transition: var(--transition);
             font-size: 1rem;
         }
-        
+
         .mobile-whatsapp-btn:hover {
             transform: translateY(-3px);
             box-shadow: 0 8px 20px rgba(37, 211, 102, 0.4);
         }
-        
+
         header {
             background: var(--white);
             box-shadow: var(--shadow-md);
@@ -592,36 +609,36 @@
             z-index: 1000;
             border-bottom: 1px solid var(--border);
         }
-        
+
         .main-header {
             padding: 16px 0;
         }
-        
+
         @media (max-width: 768px) {
             .main-header {
                 padding: 12px 0;
             }
         }
-        
+
         .header-container {
             display: flex;
             justify-content: space-between;
             align-items: center;
             gap: 20px;
         }
-        
+
         @media (max-width: 768px) {
             .header-container {
                 gap: 12px;
             }
         }
-        
+
         .logo-container {
             display: flex;
             align-items: center;
             gap: 12px;
         }
-        
+
         .logo-img {
             height: 48px;
             width: auto;
@@ -630,86 +647,96 @@
             transform-origin: center;
             box-shadow: 0 4px 12px rgba(255, 0, 0, 0.2);
         }
-        
+
         @media (max-width: 768px) {
             .logo-img {
                 height: 40px;
             }
         }
-        
+
         @media (max-width: 480px) {
             .logo-img {
                 height: 36px;
             }
         }
-        
+
         @keyframes heartbeat {
-            0%, 100% {
+
+            0%,
+            100% {
                 transform: scale(1);
             }
+
             5% {
                 transform: scale(1.1);
             }
+
             10% {
                 transform: scale(1);
             }
+
             15% {
                 transform: scale(1.15);
             }
+
             20% {
                 transform: scale(1);
             }
         }
-        
+
         .main-body {
             padding: 20px 0 30px;
         }
-        
+
         @media (max-width: 768px) {
             .main-body {
                 padding: 15px 0 20px;
             }
         }
-        
+
         .feeds {
             display: flex;
             gap: 24px;
         }
-        
+
         .sidebar {
             width: 25%;
         }
-        
+
         .sidebar-right {
             width: 25%;
         }
-        
+
         .sidebar-left {
             width: 20%;
         }
-        
+
         .main-content {
             width: 55%;
         }
-        
+
         @media (max-width: 992px) {
             .feeds {
                 flex-direction: column;
             }
-            
-            .sidebar-left, .sidebar-right, .main-content {
+
+            .sidebar-left,
+            .sidebar-right,
+            .main-content {
                 width: 100%;
             }
-            
-            .sidebar-left, .sidebar-right {
+
+            .sidebar-left,
+            .sidebar-right {
                 display: none;
             }
-            
-            .sidebar-left.active, .sidebar-right.active {
+
+            .sidebar-left.active,
+            .sidebar-right.active {
                 display: block;
             }
         }
-        
+
         .mobile-sidebar-toggle {
             display: none;
             background: var(--primary);
@@ -724,13 +751,13 @@
             max-width: 300px;
             text-align: center;
         }
-        
+
         @media (max-width: 992px) {
             .mobile-sidebar-toggle {
                 display: block;
             }
         }
-        
+
         .list-multiple-item {
             background: var(--sidebar-bg);
             border-radius: var(--radius);
@@ -740,11 +767,11 @@
             border: 1px solid var(--border);
             transition: var(--transition);
         }
-        
+
         .list-multiple-item:hover {
             box-shadow: var(--shadow-lg);
         }
-        
+
         .list-multiple-item .header {
             display: flex;
             justify-content: space-between;
@@ -753,7 +780,7 @@
             color: var(--white);
             padding: 16px 20px;
         }
-        
+
         .list-multiple-item .header h2 {
             font-size: 1.2rem;
             font-weight: 600;
@@ -762,59 +789,59 @@
             gap: 8px;
             margin: 0;
         }
-        
+
         .list-multiple-item .list ul {
             list-style: none;
         }
-        
+
         .list-multiple-item .list li {
             border-bottom: 1px solid var(--border);
             transition: var(--transition);
         }
-        
+
         .list-multiple-item .list li:hover {
             background: var(--light-bg);
         }
-        
+
         .list-multiple-item .list li:last-child {
             border-bottom: none;
         }
-        
+
         .list-multiple-item .list a {
             display: block;
             padding: 14px 20px;
             text-decoration: none;
             color: var(--dark-text);
         }
-        
+
         .list-multiple-item .info {
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
-        
+
         .label-main {
             font-weight: 500;
             color: var(--dark-text);
         }
-        
+
         .label-secondary {
             color: var(--primary);
             font-size: 0.9rem;
             font-weight: 500;
         }
-        
+
         .cover-tribute {
             background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
         }
-        
+
         .square .list li a {
             display: flex;
             align-items: center;
             gap: 12px;
             padding: 14px;
         }
-        
+
         .square .list img {
             width: 56px;
             height: 56px;
@@ -822,12 +849,12 @@
             object-fit: cover;
             border: 2px solid var(--border);
         }
-        
+
         .tribute-info {
             flex: 1;
             min-width: 0;
         }
-        
+
         .tribute-info .label-main {
             font-size: 0.95rem;
             margin-bottom: 4px;
@@ -836,12 +863,12 @@
             text-overflow: ellipsis;
             white-space: nowrap;
         }
-        
+
         .tribute-info .label-secondary {
             font-size: 0.85rem;
             color: var(--light-text);
         }
-        
+
         .tributes-footer {
             display: flex;
             justify-content: space-between;
@@ -849,13 +876,13 @@
             font-size: 0.8rem;
             color: var(--light-text);
         }
-        
+
         .lnk-see-more {
             color: var(--primary);
             font-weight: 600;
             font-size: 0.8rem;
         }
-        
+
         .section-tabs {
             background: var(--card-bg);
             border-radius: var(--radius);
@@ -864,7 +891,7 @@
             margin-bottom: 24px;
             border: 1px solid var(--border);
         }
-        
+
         .tabs-header {
             background: linear-gradient(90deg, var(--secondary) 0%, var(--secondary-light) 100%);
             color: var(--white);
@@ -876,13 +903,13 @@
             gap: 15px;
             min-height: 60px;
         }
-        
+
         @media (max-width: 991px) {
             .tabs-header {
                 display: none;
             }
         }
-        
+
         .tabs-nav {
             display: flex;
             border-bottom: 1px solid var(--border);
@@ -893,11 +920,11 @@
             justify-content: center;
             width: 100%;
         }
-        
+
         .tabs-nav::-webkit-scrollbar {
             display: none;
         }
-        
+
         .tabs-nav a {
             flex: 1;
             min-width: 120px;
@@ -916,71 +943,71 @@
             font-size: 0.95rem;
             text-align: center;
         }
-        
+
         @media (max-width: 768px) {
             .tabs-nav a {
                 min-width: 100px;
                 padding: 14px 8px;
                 font-size: 0.85rem;
             }
-            
+
             .tabs-nav a i {
                 font-size: 0.9rem;
                 margin-right: 4px;
             }
         }
-        
+
         @media (max-width: 480px) {
             .tabs-nav a {
                 min-width: 90px;
                 padding: 12px 5px;
                 font-size: 0.8rem;
             }
-            
+
             .tabs-nav a i {
                 font-size: 0.85rem;
                 margin-right: 3px;
             }
-            
+
             .tabs-nav a span:last-child {
                 font-size: 0.8rem;
             }
         }
-        
+
         @media (max-width: 360px) {
             .tabs-nav a {
                 min-width: 85px;
                 padding: 12px 3px;
                 font-size: 0.75rem;
             }
-            
+
             .tabs-nav a i {
                 font-size: 0.8rem;
                 margin-right: 2px;
             }
         }
-        
+
         .tabs-nav a.active {
             color: var(--primary);
             border-bottom: 3px solid var(--primary);
             background: rgba(255, 0, 0, 0.05);
         }
-        
+
         .tabs-nav a:hover {
             color: var(--primary);
             background: rgba(255, 0, 0, 0.05);
         }
-        
+
         /* FIX FOR REMEMBRANCE ICON IN TABS */
         .tabs-nav a i.fa-calendar-heart {
             font-family: "Font Awesome 6 Free";
             font-weight: 400;
         }
-        
+
         .tabs-nav a i.fa-calendar-heart:before {
             content: "\f688";
         }
-        
+
         .feed-card {
             background: var(--card-bg);
             border-radius: var(--radius);
@@ -1005,7 +1032,7 @@
                 min-height: 300px;
             }
         }
-        
+
         @media (max-width: 480px) {
             .feed-card {
                 min-height: 280px;
@@ -1092,8 +1119,9 @@
             margin-top: -15px;
             transition: var(--transition);
         }
-        
+
         @media (max-width: 768px) {
+
             .card-body .avatar .yearfrom,
             .card-body .avatar .yearto {
                 font-size: 1.1rem;
@@ -1101,8 +1129,9 @@
                 margin-top: -10px;
             }
         }
-        
+
         @media (max-width: 480px) {
+
             .card-body .avatar .yearfrom,
             .card-body .avatar .yearto {
                 font-size: 1rem;
@@ -1110,8 +1139,9 @@
                 margin-top: -8px;
             }
         }
-        
+
         @media (max-width: 360px) {
+
             .card-body .avatar .yearfrom,
             .card-body .avatar .yearto {
                 font-size: 0.9rem;
@@ -1148,21 +1178,21 @@
             flex-direction: column;
             transition: var(--transition);
         }
-        
+
         @media (max-width: 768px) {
             .card-body .avatar .image-container {
                 width: 130px;
                 height: 130px;
             }
         }
-        
+
         @media (max-width: 480px) {
             .card-body .avatar .image-container {
                 width: 110px;
                 height: 110px;
             }
         }
-        
+
         @media (max-width: 360px) {
             .card-body .avatar .image-container {
                 width: 90px;
@@ -1188,7 +1218,7 @@
             background-clip: padding-box;
             background-origin: border-box;
         }
-        
+
         .card-body .avatar .photo-wrapper::before {
             content: '';
             position: absolute;
@@ -1201,14 +1231,14 @@
             z-index: -1;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        
+
         @media (max-width: 768px) {
             .card-body .avatar .photo-wrapper {
                 width: 120px;
                 height: 120px;
                 padding: 4px;
             }
-            
+
             .card-body .avatar .photo-wrapper::before {
                 top: -4px;
                 left: -4px;
@@ -1216,14 +1246,14 @@
                 bottom: -4px;
             }
         }
-        
+
         @media (max-width: 480px) {
             .card-body .avatar .photo-wrapper {
                 width: 100px;
                 height: 100px;
                 padding: 4px;
             }
-            
+
             .card-body .avatar .photo-wrapper::before {
                 top: -4px;
                 left: -4px;
@@ -1231,14 +1261,14 @@
                 bottom: -4px;
             }
         }
-        
+
         @media (max-width: 360px) {
             .card-body .avatar .photo-wrapper {
                 width: 80px;
                 height: 80px;
                 padding: 3px;
             }
-            
+
             .card-body .avatar .photo-wrapper::before {
                 top: -4px;
                 left: -4px;
@@ -1251,7 +1281,7 @@
             box-shadow: 0 10px 30px rgba(255, 0, 0, 0.4);
             background: linear-gradient(135deg, white 0%, #fff0f0 100%);
         }
-        
+
         .card-body .avatar:hover .photo-wrapper::before {
             background: linear-gradient(135deg, #ff3333 0%, #3a2935 100%);
             transform: scale(1.02);
@@ -1290,14 +1320,14 @@
             overflow: visible;
             transition: var(--transition);
         }
-        
+
         @media (max-width: 768px) {
             .floral-decoration {
                 width: 160px;
                 height: 70px;
             }
         }
-        
+
         @media (max-width: 480px) {
             .floral-decoration {
                 width: 140px;
@@ -1305,7 +1335,7 @@
                 bottom: -15px;
             }
         }
-        
+
         @media (max-width: 360px) {
             .floral-decoration {
                 width: 120px;
@@ -1346,7 +1376,7 @@
             display: block;
             transition: var(--transition);
         }
-        
+
         @media (max-width: 480px) {
             .card-body .info .head {
                 font-size: 0.85rem;
@@ -1367,7 +1397,7 @@
             line-height: 1.2;
             transition: var(--transition);
         }
-        
+
         @media (max-width: 480px) {
             .card-body .info .subhead {
                 font-size: 0.75rem;
@@ -1570,7 +1600,7 @@
             background: white;
             border-radius: 24px;
             padding: 8px 12px;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
             display: flex;
             gap: 8px;
             z-index: 10001;
@@ -1613,25 +1643,25 @@
                 padding: 10px 15px;
                 gap: 12px;
                 border-radius: 28px;
-                box-shadow: 0 12px 35px rgba(0,0,0,0.25);
+                box-shadow: 0 12px 35px rgba(0, 0, 0, 0.25);
                 bottom: 120%;
             }
-            
+
             .fb-reaction-option {
                 font-size: 1.8rem;
                 width: 42px;
                 height: 42px;
             }
-            
+
             .fb-reaction-option:hover {
                 transform: scale(1.6) translateY(-10px);
             }
-            
+
             .fb-reaction-btn {
                 padding: 10px 6px !important;
                 min-height: 36px;
             }
-            
+
             .fb-reaction-option::after {
                 content: attr(data-label);
                 position: absolute;
@@ -1649,42 +1679,42 @@
                 transition: opacity 0.2s ease;
                 pointer-events: none;
             }
-            
+
             .fb-reaction-option:hover::after {
                 opacity: 1;
             }
-            
+
             .action-row {
                 gap: 4px;
             }
-            
+
             .reaction-summary {
                 min-width: 50px;
                 flex: 0 0 auto;
             }
-            
+
             .tribute-summary {
                 min-width: 70px;
                 max-width: 90px;
                 flex: 0 0 auto;
             }
-            
+
             .facebook-buttons {
                 flex: 2;
                 min-width: 140px;
             }
-            
+
             .fb-action-btn {
                 padding: 8px 2px;
                 font-size: 0.75rem;
                 min-width: 45px;
             }
-            
+
             .tribute-link {
                 font-size: 0.7rem;
                 padding: 4px 6px;
             }
-            
+
             .tribute-link.orange {
                 padding: 4px 6px;
                 font-size: 0.7rem;
@@ -1697,56 +1727,56 @@
                 padding: 8px 12px;
                 gap: 10px;
             }
-            
+
             .fb-reaction-option {
                 font-size: 1.6rem;
                 width: 38px;
                 height: 38px;
             }
-            
+
             .fb-reaction-option:hover {
                 transform: scale(1.5) translateY(-8px);
             }
-            
+
             .action-row {
                 gap: 2px;
             }
-            
+
             .reaction-summary {
                 min-width: 45px;
             }
-            
+
             .reaction-count-small {
                 font-size: 0.7rem;
             }
-            
+
             .tribute-summary {
                 min-width: 65px;
                 max-width: 80px;
             }
-            
+
             .tribute-link {
                 font-size: 0.65rem;
                 padding: 3px 5px;
                 gap: 3px;
             }
-            
+
             .tribute-link.orange {
                 padding: 3px 5px;
                 font-size: 0.65rem;
             }
-            
+
             .facebook-buttons {
                 min-width: 120px;
             }
-            
+
             .fb-action-btn {
                 padding: 8px 1px;
                 font-size: 0.7rem;
                 min-width: 40px;
                 gap: 3px;
             }
-            
+
             .fb-action-btn .fb-icon {
                 font-size: 0.9rem;
             }
@@ -1757,7 +1787,7 @@
                 flex-wrap: wrap;
                 justify-content: space-around;
             }
-            
+
             .reaction-summary,
             .tribute-summary,
             .facebook-buttons {
@@ -1766,7 +1796,7 @@
                 text-align: center;
                 justify-content: center;
             }
-            
+
             .facebook-buttons {
                 order: 3;
                 margin-top: 4px;
@@ -1791,13 +1821,13 @@
             min-height: 280px;
             height: auto;
         }
-        
+
         @media (max-width: 768px) {
             .sponsored-carousel {
                 min-height: 250px;
             }
         }
-        
+
         @media (max-width: 480px) {
             .sponsored-carousel {
                 min-height: 220px;
@@ -1828,7 +1858,7 @@
             object-fit: cover;
             border-bottom: 1px solid var(--border);
         }
-        
+
         @media (max-width: 480px) {
             .ad-image {
                 height: 140px;
@@ -1842,7 +1872,7 @@
             flex-direction: column;
             min-height: 120px;
         }
-        
+
         @media (max-width: 480px) {
             .ad-content {
                 padding: 10px;
@@ -1858,7 +1888,7 @@
             line-height: 1.3;
             min-height: 1.3em;
         }
-        
+
         @media (max-width: 480px) {
             .ad-title {
                 font-size: 0.85rem;
@@ -1873,7 +1903,7 @@
             flex: 1;
             min-height: 2.8em;
         }
-        
+
         @media (max-width: 480px) {
             .ad-description {
                 font-size: 0.75rem;
@@ -1898,7 +1928,7 @@
             margin-top: auto;
             padding-top: 8px;
         }
-        
+
         @media (max-width: 480px) {
             .ad-actions {
                 gap: 6px;
@@ -1922,7 +1952,7 @@
             justify-content: center;
             gap: 4px;
         }
-        
+
         @media (max-width: 480px) {
             .ad-btn {
                 padding: 8px 10px;
@@ -1943,7 +1973,7 @@
 
         .ad-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
 
         .ad-btn-whatsapp:hover {
@@ -1993,7 +2023,7 @@
                 padding: 0 10px;
                 pointer-events: none;
             }
-            
+
             .ad-arrow {
                 background: rgba(255, 255, 255, 0.9);
                 width: 28px;
@@ -2004,13 +2034,13 @@
                 justify-content: center;
                 cursor: pointer;
                 pointer-events: all;
-                box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
                 transition: all 0.3s ease;
                 border: none;
                 color: var(--primary);
                 font-size: 0.9rem;
             }
-            
+
             .ad-arrow:hover {
                 background: white;
                 transform: scale(1.1);
@@ -2035,12 +2065,12 @@
             justify-content: center;
             text-decoration: none;
             font-size: 0.9rem;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
             transition: all 0.3s ease;
             opacity: 0;
             transform: translateY(10px);
         }
-        
+
         @media (max-width: 480px) {
             .float-wa-btn {
                 width: 28px;
@@ -2070,7 +2100,7 @@
             top: 160px;
             z-index: 10;
         }
-        
+
         @media (max-width: 992px) {
             .sticky-sponsor {
                 position: static;
@@ -2083,7 +2113,7 @@
             scrollbar-width: thin;
             scrollbar-color: var(--primary-light) var(--light-bg);
         }
-        
+
         @media (max-width: 768px) {
             .recent-tributes-container {
                 max-height: 300px;
@@ -2117,29 +2147,29 @@
             cursor: pointer;
             padding: 8px;
         }
-        
+
         @media (max-width: 768px) {
             .mobile-search-toggle {
                 display: block;
             }
         }
-        
+
         .mobile-search-container {
             display: none;
             padding: 15px;
             background: var(--white);
             border-bottom: 1px solid var(--border);
         }
-        
+
         .mobile-search-container.active {
             display: block;
         }
-        
+
         .mobile-search-box {
             position: relative;
             width: 100%;
         }
-        
+
         .mobile-search-box input {
             width: 100%;
             padding: 12px 16px 12px 45px;
@@ -2148,7 +2178,7 @@
             font-size: 1rem;
             background: var(--light-bg);
         }
-        
+
         .mobile-search-box i {
             position: absolute;
             left: 16px;
@@ -2161,54 +2191,54 @@
             .header-actions .search-box {
                 display: none;
             }
-            
+
             .header-actions .btn {
                 padding: 8px 16px;
                 font-size: 0.85rem;
             }
-            
+
             .header-container {
                 gap: 15px;
             }
         }
-        
+
         @media (max-width: 768px) {
             .header-actions {
                 gap: 8px;
             }
-            
+
             .header-actions .btn {
                 padding: 8px 12px;
             }
-            
+
             .header-actions .btn span {
                 display: none;
             }
-            
+
             .header-actions .btn i {
                 margin: 0;
             }
-            
+
             .logo-img {
                 height: 40px;
             }
         }
-        
+
         @media (max-width: 480px) {
             .header-actions {
                 gap: 5px;
             }
-            
+
             .header-actions .btn {
                 padding: 6px 10px;
                 font-size: 0.8rem;
             }
-            
+
             .mobile-menu-btn {
                 font-size: 1.3rem;
                 padding: 6px;
             }
-            
+
             .logo-img {
                 height: 36px;
             }
@@ -2220,41 +2250,41 @@
             padding: 40px 0 30px;
             margin-top: 60px;
         }
-        
+
         @media (max-width: 768px) {
             footer {
                 padding: 30px 0 20px;
                 margin-top: 40px;
             }
         }
-        
+
         .footer-content {
             display: flex;
             flex-direction: column;
             align-items: center;
         }
-        
+
         .footer-logo {
             margin-bottom: 20px;
         }
-        
+
         @media (max-width: 768px) {
             .footer-logo {
                 margin-bottom: 15px;
             }
         }
-        
+
         .footer-logo .logo-text {
             color: white;
             font-size: 1.8rem;
         }
-        
+
         @media (max-width: 768px) {
             .footer-logo .logo-text {
                 font-size: 1.5rem;
             }
         }
-        
+
         .footer-tagline {
             color: rgba(255, 255, 255, 0.8);
             font-size: 1rem;
@@ -2263,7 +2293,7 @@
             max-width: 500px;
             line-height: 1.6;
         }
-        
+
         @media (max-width: 768px) {
             .footer-tagline {
                 font-size: 0.9rem;
@@ -2271,7 +2301,7 @@
                 padding: 0 10px;
             }
         }
-        
+
         .footer-links {
             display: flex;
             justify-content: center;
@@ -2279,7 +2309,7 @@
             margin-bottom: 30px;
             flex-wrap: wrap;
         }
-        
+
         @media (max-width: 768px) {
             .footer-links {
                 gap: 20px;
@@ -2287,7 +2317,7 @@
                 padding: 0 10px;
             }
         }
-        
+
         @media (max-width: 480px) {
             .footer-links {
                 flex-direction: column;
@@ -2295,7 +2325,7 @@
                 align-items: center;
             }
         }
-        
+
         .footer-links a {
             color: #e2d8df;
             text-decoration: none;
@@ -2304,11 +2334,11 @@
             padding: 4px 0;
             position: relative;
         }
-        
+
         .footer-links a:hover {
             color: var(--white);
         }
-        
+
         .footer-links a::after {
             content: '';
             position: absolute;
@@ -2319,11 +2349,11 @@
             background: var(--accent);
             transition: var(--transition);
         }
-        
+
         .footer-links a:hover::after {
             width: 100%;
         }
-        
+
         .copyright {
             text-align: center;
             padding-top: 25px;
@@ -2332,7 +2362,7 @@
             font-size: 0.9rem;
             width: 100%;
         }
-        
+
         @media (max-width: 768px) {
             .copyright {
                 padding-top: 20px;
@@ -2340,13 +2370,13 @@
                 padding: 0 10px;
             }
         }
-        
+
         .load-more-container {
             text-align: center;
             padding: 20px 0;
             margin-top: 10px;
         }
-        
+
         .load-more-btn {
             background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
             color: white;
@@ -2362,7 +2392,7 @@
             gap: 8px;
             box-shadow: 0 4px 12px rgba(255, 0, 0, 0.2);
         }
-        
+
         @media (max-width: 480px) {
             .load-more-btn {
                 padding: 10px 25px;
@@ -2372,45 +2402,45 @@
                 justify-content: center;
             }
         }
-        
+
         .load-more-btn:hover {
             transform: translateY(-2px);
             box-shadow: 0 6px 20px rgba(255, 0, 0, 0.3);
         }
-        
+
         .load-more-btn:active {
             transform: translateY(0);
         }
-        
+
         .hide-on-mobile {
             display: block;
         }
-        
+
         .show-on-mobile {
             display: none;
         }
-        
+
         @media (max-width: 768px) {
             .hide-on-mobile {
                 display: none !important;
             }
-            
+
             .show-on-mobile {
                 display: block !important;
             }
         }
-        
+
         .sidebar-toggle-container {
             display: none;
             margin-bottom: 15px;
         }
-        
+
         @media (max-width: 992px) {
             .sidebar-toggle-container {
                 display: flex;
                 gap: 10px;
             }
-            
+
             .sidebar-toggle-btn {
                 flex: 1;
                 padding: 12px;
@@ -2426,18 +2456,18 @@
                 justify-content: center;
                 gap: 8px;
             }
-            
+
             .sidebar-toggle-btn:hover {
                 transform: translateY(-2px);
                 box-shadow: 0 4px 12px rgba(255, 0, 0, 0.3);
             }
-            
+
             .sidebar-toggle-btn.active {
                 background: linear-gradient(135deg, var(--primary-dark) 0%, #990000 100%);
                 box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.2);
             }
         }
-        
+
         /* ====== UPDATED MOBILE APP STYLES ====== */
         /* Mobile App Header - Enhanced with animation */
         .mobile-app-header {
@@ -2457,6 +2487,7 @@
                 transform: translateY(-100%);
                 opacity: 0;
             }
+
             to {
                 transform: translateY(0);
                 opacity: 1;
@@ -2486,10 +2517,13 @@
         }
 
         @keyframes pulseLogo {
-            0%, 100% {
+
+            0%,
+            100% {
                 transform: scale(1);
                 box-shadow: 0 4px 12px rgba(255, 0, 0, 0.3);
             }
+
             50% {
                 transform: scale(1.05);
                 box-shadow: 0 6px 20px rgba(255, 0, 0, 0.5);
@@ -2565,7 +2599,8 @@
             bottom: 0;
             left: 0;
             right: 0;
-            background: var(--secondary-light); /* #3a2935 */
+            background: var(--secondary-light);
+            /* #3a2935 */
             border-top: 1px solid rgba(255, 255, 255, 0.1);
             padding: 10px 0 5px;
             z-index: 1000;
@@ -2586,7 +2621,8 @@
             align-items: center;
             justify-content: center;
             text-decoration: none;
-            color: rgba(255, 255, 255, 0.7); /* Light text for dark background */
+            color: rgba(255, 255, 255, 0.7);
+            /* Light text for dark background */
             font-size: 0.7rem;
             padding: 8px 5px;
             border-radius: 12px;
@@ -2606,7 +2642,8 @@
             transform: translateX(-50%) scaleX(0);
             width: 100%;
             height: 3px;
-            background: var(--primary-dark); /* #cc0000 for active bar */
+            background: var(--primary-dark);
+            /* #cc0000 for active bar */
             transition: transform 0.3s ease;
             border-radius: 0 0 3px 3px;
         }
@@ -2619,7 +2656,8 @@
         /* Active state - primary-dark background */
         .mobile-nav-item.active {
             color: white;
-            background: rgba(204, 0, 0, 0.2); /* primary-dark with transparency */
+            background: rgba(204, 0, 0, 0.2);
+            /* primary-dark with transparency */
         }
 
         .mobile-nav-item i {
@@ -2679,10 +2717,13 @@
         }
 
         @keyframes floatCreate {
-            0%, 100% {
+
+            0%,
+            100% {
                 transform: translateY(0) rotate(0deg);
                 box-shadow: 0 6px 25px rgba(255, 0, 0, 0.4);
             }
+
             50% {
                 transform: translateY(-10px) rotate(5deg);
                 box-shadow: 0 12px 30px rgba(255, 0, 0, 0.6);
@@ -2697,27 +2738,30 @@
 
         /* Hide desktop header parts on mobile */
         @media (max-width: 992px) {
-            header, .header-top, .contact-info {
+
+            header,
+            .header-top,
+            .contact-info {
                 display: none !important;
             }
-            
+
             .mobile-app-header {
                 display: flex;
             }
-            
+
             .mobile-bottom-nav {
                 display: flex;
             }
-            
+
             .mobile-create-notice-float {
                 display: flex;
             }
-            
+
             /* Hide footer on mobile */
             footer {
                 display: none !important;
             }
-            
+
             /* Adjust main body padding for bottom nav */
             .main-body {
                 padding-bottom: 80px !important;
@@ -2729,7 +2773,7 @@
             .mobile-menu-section:nth-child(1) {
                 display: none !important;
             }
-            
+
             .mobile-menu-section:nth-child(2) {
                 display: none !important;
             }
@@ -2746,6 +2790,7 @@
                 opacity: 0;
                 transform: translateY(20px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
@@ -2754,22 +2799,25 @@
 
         /* Hide desktop header parts on mobile */
         @media (max-width: 992px) {
-            header, .header-top, .contact-info {
+
+            header,
+            .header-top,
+            .contact-info {
                 display: none !important;
             }
-            
+
             .mobile-app-header {
                 display: flex;
             }
-            
+
             .mobile-bottom-nav {
                 display: flex;
             }
-            
+
             .mobile-create-notice-float {
                 display: flex;
             }
-            
+
             .main-body {
                 padding-top: 0 !important;
             }
@@ -2785,27 +2833,27 @@
             .mobile-app-header {
                 padding: 12px 15px;
             }
-            
+
             .mobile-logo {
                 height: 36px;
             }
-            
+
             .mobile-header-title {
                 font-size: 1.1rem;
             }
-            
+
             .mobile-header-icon {
                 font-size: 1.2rem;
                 padding: 6px;
                 width: 40px;
                 height: 40px;
             }
-            
+
             .mobile-language-selector {
                 padding: 6px 10px;
                 font-size: 0.8rem;
             }
-            
+
             .mobile-create-notice-float {
                 width: 55px;
                 height: 55px;
@@ -2813,41 +2861,41 @@
                 bottom: 70px;
                 right: 15px;
             }
-            
+
             .mobile-nav-item {
                 padding: 8px 3px;
             }
-            
+
             .mobile-nav-item i {
                 font-size: 1.3rem;
             }
-            
+
             .mobile-nav-item .nav-label {
                 font-size: 0.65rem;
             }
         }
-        
+
         .mobile-sponsored-section {
             display: none;
             margin-bottom: 20px;
         }
-        
+
         @media (max-width: 992px) {
             .mobile-sponsored-section {
                 display: block;
                 width: 100%;
                 order: -1;
             }
-            
+
             .sidebar-right .sticky-sponsor {
                 display: none;
             }
-            
+
             .feeds {
                 flex-direction: column;
             }
         }
-        
+
         .mobile-sponsored-carousel {
             position: relative;
             overflow: hidden;
@@ -2859,57 +2907,57 @@
             box-shadow: var(--shadow-md);
             border: 1px solid var(--border);
         }
-        
+
         @media (max-width: 480px) {
             .mobile-sponsored-carousel {
                 min-height: 220px;
             }
         }
-        
+
         /* REMOVED the Recent tab button from tabs */
         .tabs-nav a:has(i.fa-bell) {
             display: none !important;
         }
-        
+
         /* Hide Recent Tributes section on mobile */
         @media (max-width: 992px) {
             .sidebar-right .square:first-child {
                 display: none !important;
             }
-            
+
             #toggleRightSidebar {
                 display: none !important;
             }
-            
+
             .sidebar-toggle-container {
                 justify-content: center;
             }
-            
+
             #toggleLeftSidebar {
                 flex: none;
                 width: 200px;
             }
         }
-        
+
         .mobile-search-btn {
             display: none;
         }
-        
+
         @media (max-width: 992px) {
             .mobile-search-btn {
                 display: none !important;
             }
         }
-        
+
         /* Hide name in memorial cards */
         .card-body .info .head {
             display: none !important;
         }
-        
+
         .card-body .info {
             padding-top: 20px !important;
         }
-        
+
         .card-body .info .subhead {
             font-size: 0.75rem;
             color: var(--light-text);
@@ -2917,153 +2965,10 @@
         }
     </style>
 </head>
+
 <body>
-    <!-- Mobile App Header (Shows only on mobile) -->
-    <div class="mobile-app-header">
-        <div class="container">
-            <div class="mobile-header-left">
-                <img src="funeral notice logo.png" alt="FuneralNotice.lk" class="mobile-logo">
-            </div>
-            <div class="mobile-header-right">
-                <!-- Language selector in mobile header -->
-                <div class="mobile-language-selector" id="mobileLanguageSelector">
-                    <i class="fas fa-globe"></i>
-                    <span>EN</span>
-                </div>
-                <!-- Search button in mobile header -->
-                <div class="mobile-header-icon search-icon" id="mobileSearchIcon">
-                    <i class="fas fa-search"></i>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Original Desktop Header (Hidden on mobile) -->
-    <div class="header-top">
-        <div class="container">
-            <nav class="top-nav">
-                <ul>
-                    <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
-                    <li><a href="about.html"><i class="fas fa-info-circle"></i> About Us</a></li>
-                    <li><a href="contact.html"><i class="fas fa-envelope"></i> Contact Us</a></li>
-                </ul>
-            </nav>
-            <div class="language-selector">
-                <i class="fas fa-globe"></i>
-                <span>English</span>
-                <i class="fas fa-chevron-down"></i>
-            </div>
-        </div>
-    </div>
-    
-    <header>
-        <div class="container">
-            <div class="main-header">
-                <div class="header-container">
-                    <button class="mobile-menu-btn" id="mobileMenuBtn">
-                        <i class="fas fa-bars"></i>
-                    </button>
-                    
-                    <button class="mobile-search-toggle" id="mobileSearchToggle">
-                        <i class="fas fa-search"></i>
-                    </button>
-                    
-                    <div class="logo-container">
-                        <img src="funeral notice logo.png" alt="FuneralNotice.lk" class="logo-img">
-                    </div>
-                    
-                    <div class="header-actions">
-                        <div class="search-box hide-on-mobile">
-                            <i class="fas fa-search"></i>
-                            <input type="text" placeholder="Search a person..." id="desktopSearchInput">
-                        </div>
-                        <button class="btn btn-primary" id="createFuneralNoticeBtn">
-                            <i class="fas fa-plus"></i> <span class="hide-on-mobile">Create Funeral Notice</span>
-                        </button>
-                        <button class="btn btn-outline hide-on-mobile">Browse</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="mobile-search-container" id="mobileSearchContainer">
-            <div class="container">
-                <div class="mobile-search-box">
-                    <i class="fas fa-search"></i>
-                    <input type="text" placeholder="Search a person..." id="mobileSearchInput">
-                </div>
-            </div>
-        </div>
-    </header>
-
-    <div class="contact-info">
-        <div class="container contact-container">
-            <div class="contact-display">
-                <i class="fas fa-phone"></i>
-                <span class="phone-number">+94 11 234 5678</span>
-                <span class="badge">24/7</span>
-            </div>
-            <div>
-                <a href="https://api.whatsapp.com/send?phone=94769988123&text=Hello%20WEBbuilders.lk%20%F0%9F%91%8B%2C" class="whatsapp-btn">
-                    <i class="fab fa-whatsapp"></i> Chat with us
-                </a>
-            </div>
-        </div>
-    </div>
-
-    <!-- Improved Mobile Menu - Exactly as requested -->
-    <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
-    <div class="mobile-menu-container" id="mobileMenuContainer">
-        <div class="mobile-menu-header">
-            <div class="mobile-menu-title">
-                <h3><i class="fas fa-compass"></i> Menu</h3>
-            </div>
-            <button class="mobile-menu-close" id="mobileMenuClose">
-                <i class="fas fa-times"></i>
-            </button>
-        </div>
-        
-        <div class="mobile-menu-content">
-            <!-- Main Navigation -->
-            <div class="mobile-menu-section">
-                <h4><i class="fas fa-compass"></i> Navigation</h4>
-                <ul class="mobile-menu-nav">
-                    <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
-                    <li><a href="about.html"><i class="fas fa-info-circle"></i> About Us</a></li>
-                    <li><a href="create.html"><i class="fas fa-plus-circle"></i> Create Memorial</a></li>
-                    <li><a href="gallery.html"><i class="fas fa-images"></i> Memorial Gallery</a></li>
-                    <li><a href="contact.html"><i class="fas fa-envelope"></i> Contact Us</a></li>
-                </ul>
-            </div>
-            
-            <!-- Sponsored Ads Section -->
-            <div class="mobile-menu-section">
-                <h4><i class="fas fa-ad"></i> Sponsored Ads</h4>
-                <div style="background: var(--light-bg-2); border-radius: 10px; overflow: hidden;">
-                    <div style="padding: 15px; border-bottom: 1px solid var(--border);">
-                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
-                            <span style="font-weight: 600; color: var(--secondary);">Funeral Services</span>
-                            <span style="font-size: 0.8rem; background: var(--primary); color: white; padding: 3px 8px; border-radius: 10px;">Sponsored</span>
-                        </div>
-                        <p style="font-size: 0.85rem; color: var(--light-text); margin-bottom: 10px;">Professional funeral arrangements and memorial services</p>
-                        <a href="https://wa.me/94754727075" target="_blank" class="mobile-whatsapp-btn" style="font-size: 0.9rem; padding: 10px;">
-                            <i class="fab fa-whatsapp"></i> Contact for Ads
-                        </a>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Advertise CTA -->
-            <div class="mobile-menu-section">
-                <div class="advertise-cta">
-                    <p>Want to advertise here?</p>
-                    <a href="https://wa.me/94754727075" target="_blank" class="advertise-btn">
-                        <i class="fab fa-whatsapp"></i> Contact for Ads
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
+    <!-- Navbar Component -->
+    <div id="navbar-placeholder"></div>
 
     <div class="main-body">
         <div class="container">
@@ -3071,11 +2976,11 @@
             <div class="mobile-sponsored-section" id="mobileSponsoredSection">
                 <!-- Mobile sponsored ads will be inserted here by JavaScript -->
             </div>
-            
+
             <div class="sidebar-toggle-container">
-               
+
             </div>
-            
+
             <div class="feeds">
                 <div class="sidebar sidebar-left" id="leftSidebar">
                     <div class="list-multiple-item">
@@ -3088,7 +2993,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="main-content">
                     <div class="section-tabs">
                         <div class="tabs-header">
@@ -3101,17 +3006,17 @@
                                 <i class="fab fa-whatsapp"></i> Chat with us
                             </a>
                         </div>
-                        
+
                         <div class="tabs-nav">
                             <a href="index.html" class="active"><i class="fas fa-home"></i> Home</a>
                             <a href="index.html.Obituaries"><i class="fas fa-book"></i> Obituaries</a>
                             <a href="index.html.Remembrance"><i class="fas fa-calendar-heart"></i> Remembrance</a>
                             <!-- REMOVED the Recent button from tabs -->
                         </div>
-                        
+
                         <div class="feeds-container" id="feedsContainer">
                         </div>
-                        
+
                         <div class="load-more-container">
                             <button class="load-more-btn" id="loadMoreBtn">
                                 <i class="fas fa-spinner"></i> Load More Memorials
@@ -3122,7 +3027,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="sidebar sidebar-right" id="rightSidebar">
                     <!-- Recent Tributes section (hidden on mobile) -->
                     <div class="list-multiple-item square hide-on-mobile">
@@ -3134,16 +3039,15 @@
                             </ul>
                         </div>
                     </div>
-                    
+
                     <!-- Desktop sponsored ads (hidden on mobile) -->
                     <div class="list-multiple-item sticky-sponsor hide-on-mobile">
-                        <div class="header" style="background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);">
+                        <div class="header"
+                            style="background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);">
                             <h2><i class="fas fa-ad"></i> Sponsored Ads</h2>
-                            <a href="https://api.whatsapp.com/send?phone=94769988123&text=Hello%20WEBbuilders.lk%20%F0%9F%91%8B%2C" 
-                               target="_blank" 
-                               rel="noopener"
-                               class="whatsapp-btn-small" 
-                               style="background: linear-gradient(135deg, #25D366 0%, #128C7E 100%); color: white; padding: 6px 12px; border-radius: 6px; text-decoration: none; display: inline-flex; align-items: center; gap: 5px; font-size: 0.8rem; font-weight: 600; transition: var(--transition); white-space: nowrap;">
+                            <a href="https://api.whatsapp.com/send?phone=94769988123&text=Hello%20WEBbuilders.lk%20%F0%9F%91%8B%2C"
+                                target="_blank" rel="noopener" class="whatsapp-btn-small"
+                                style="background: linear-gradient(135deg, #25D366 0%, #128C7E 100%); color: white; padding: 6px 12px; border-radius: 6px; text-decoration: none; display: inline-flex; align-items: center; gap: 5px; font-size: 0.8rem; font-weight: 600; transition: var(--transition); white-space: nowrap;">
                                 <i class="fab fa-whatsapp"></i>
                                 Place Ad
                             </a>
@@ -3159,62 +3063,31 @@
         </div>
     </div>
 
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-logo">
-                    <img src="funeral notice logo.png" alt="FuneralNotice.lk" class="logo-img">
-                </div>
-                <div class="footer-tagline">
-                    Keeping Memories Alive - A dignified platform to honor and remember loved ones
-                </div>
-                
-                <div class="footer-links">
-                    <a href="about.html">About Us</a>
-                    <a href="terms.html">Terms</a>
-                    <a href="#">Report Us</a>
-                    <a href="privacy.html">Privacy Policy</a>
-                    <a href="cookies.html">Cookie Policy</a>
-                </div>
-                
-                <div class="copyright">
-                    © 2023. FuneralNotice.lk. All rights reserved.
-                </div>
-            </div>
-        </div>
-    </footer>
+    <!-- Footer Component -->
+    <div id="footer-placeholder"></div>
 
-    <!-- UPDATED: Mobile Bottom Navigation - Removed obituaries and remembrance, added about and contact -->
-    <div class="mobile-bottom-nav">
-        <div class="nav-container">
-            <div class="mobile-nav-item active" data-page="home">
-                <i class="fas fa-home"></i>
-                <span class="nav-label">Home</span>
-            </div>
-            <div class="mobile-nav-item" data-page="about">
-                <i class="fas fa-info-circle"></i>
-                <span class="nav-label">About</span>
-            </div>
-            <div class="mobile-nav-item" data-page="contact">
-                <i class="fas fa-envelope"></i>
-                <span class="nav-label">Contact</span>
-            </div>
-            <div class="mobile-nav-item" data-page="whatsapp">
-                <i class="fab fa-whatsapp"></i>
-                <span class="nav-label">WhatsApp</span>
-            </div>
-            <div class="mobile-nav-item" data-page="menu">
-                <i class="fas fa-bars"></i>
-                <span class="nav-label">Menu</span>
-            </div>
-        </div>
-    </div>
+    <script>
+        // Load navbar and footer components
+        function loadComponent(url, elementId) {
+            fetch(url)
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById(elementId).innerHTML = data;
 
-    <!-- UPDATED: Mobile Create Notice Button (replaces floating WhatsApp) -->
-    <div class="mobile-create-notice-float" id="mobileCreateNoticeBtn">
-        <i class="fas fa-plus"></i>
-    </div>
+                    // Re-initialize event listeners after navbar loads
+                    if (elementId === 'navbar-placeholder') {
+                        if (typeof initMobileMenu === 'function') initMobileMenu();
+                        if (typeof initMobileSearch === 'function') initMobileSearch();
+                        if (typeof initMobileApp === 'function') initMobileApp();
+                    }
+                })
+                .catch(error => console.error('Error loading component:', error));
+        }
 
+        // Load components when DOM is ready
+        loadComponent('navbar.html', 'navbar-placeholder');
+        loadComponent('footer.html', 'footer-placeholder');
+    </script>
     <script>
         // ALL YOUR ORIGINAL DATA ARRAYS
         const memorials = [
@@ -3362,52 +3235,52 @@
             { country: "Singapore", count: "1 Posts" },
             { country: "United States", count: "1 Posts" }
         ];
-        
+
         const recentTributes = [
-            { 
-                name: "Mrs Vijayalatha Vijayaratnam", 
+            {
+                name: "Mrs Vijayalatha Vijayaratnam",
                 tributeBy: "Vipulanandan Vallipuram",
                 time: "14 Hours Ago",
                 more: "+10 MORE",
                 image: "https://cdn.lankasririp.com/memorial/profile/232972/57e76f92-4aa8-4ead-afe4-a8ed04f58a79/26-6971c1cbd09de-md.webp"
             },
-            { 
-                name: "Mr Sutharsan Sivapalan", 
+            {
+                name: "Mr Sutharsan Sivapalan",
                 tributeBy: "Thanapalasingam Sangeerthanan",
                 time: "19 Hours Ago",
                 more: "+4 MORE",
                 image: "https://cdn.lankasririp.com/memorial/profile/232976/9c6c9214-ac08-4cc9-ba6f-1cbf733c2b18/26-6971cc9112825-md.webp"
             },
-            { 
-                name: "Mrs Kanesammah Ponnusamy", 
+            {
+                name: "Mrs Kanesammah Ponnusamy",
                 tributeBy: "A.r.thayaparan",
                 time: "1 Day Ago",
                 more: "+4 MORE",
                 image: "https://cdn.lankasririp.com/memorial/profile/232974/de27a9db-2d1c-4b69-a936-d9c3fccafca9/26-69712d227480d-md.webp"
             },
-            { 
-                name: "Mr Karthigesan Rasiah", 
+            {
+                name: "Mr Karthigesan Rasiah",
                 tributeBy: "Pithamagan",
                 time: "1 Day Ago",
                 more: "+11 MORE",
                 image: "https://cdn.lankasririp.com/memorial/profile/232973/d242f985-4bca-4626-b4fa-8a386c2fb045/26-6971279d7dba3-md.webp"
             },
-            { 
-                name: "Mr Subramaniam Ramasamy", 
+            {
+                name: "Mr Subramaniam Ramasamy",
                 tributeBy: "P M Muthiah",
                 time: "1 Day Ago",
                 more: "+2 MORE",
                 image: "https://cdn.lankasririp.com/memorial/profile/232968/e05ce790-582f-4872-a7bb-b2b959ca8dc3/26-696fb7ce940c0-md.webp"
             },
-            { 
-                name: "Mr Alexander Dunstan Rajkumar", 
+            {
+                name: "Mr Alexander Dunstan Rajkumar",
                 tributeBy: "Llewellyn Selvanayagam",
                 time: "1 Day Ago",
                 more: "+2 MORE",
                 image: "https://cdn.lankasririp.com/memorial/profile/232957/c7753958-e50f-4b29-b877-707cc2a7702d/26-696fc338be8b4-md.webp"
             }
         ];
-        
+
         const sponsoredAds = [
             {
                 id: "ad-1",
@@ -3440,7 +3313,7 @@
                 whatsappText: "Hi, I need catering services for a funeral gathering."
             }
         ];
-        
+
         const reactionTypes = {
             sad: { emoji: "😔", label: "Sad" },
             tearful: { emoji: "😢", label: "Tearful" },
@@ -3448,19 +3321,19 @@
             heartbroken: { emoji: "💔", label: "Heartbroken" },
             praying: { emoji: "🙏", label: "Praying" }
         };
-        
+
         // ALL YOUR ORIGINAL FUNCTIONS
         let currentAdIndex = 0;
         let adInterval;
         let displayedMemorials = 6;
         const memorialsPerLoad = 3;
-        
+
         function renderRecentPosts() {
             const container = document.getElementById('recentPosts');
             if (!container) return;
-            
+
             container.innerHTML = '';
-            
+
             recentPosts.forEach(post => {
                 const listItem = document.createElement('li');
                 listItem.innerHTML = `
@@ -3474,13 +3347,13 @@
                 container.appendChild(listItem);
             });
         }
-        
+
         function renderRecentTributes() {
             const container = document.getElementById('recentTributes');
             if (!container) return;
-            
+
             container.innerHTML = '';
-            
+
             recentTributes.forEach(tribute => {
                 const listItem = document.createElement('li');
                 listItem.innerHTML = `
@@ -3499,12 +3372,12 @@
                 container.appendChild(listItem);
             });
         }
-        
+
         // NEW FUNCTION: Render mobile sponsored ads
         function renderMobileSponsoredAds() {
             const mobileSponsoredSection = document.getElementById('mobileSponsoredSection');
             if (!mobileSponsoredSection) return;
-            
+
             // Only show on mobile
             if (window.innerWidth <= 992) {
                 mobileSponsoredSection.innerHTML = `
@@ -3572,49 +3445,49 @@
                         </div>
                     </div>
                 `;
-                
+
                 // Initialize mobile carousel functionality
                 initMobileCarousel();
             } else {
                 mobileSponsoredSection.innerHTML = '';
             }
         }
-        
+
         function initMobileCarousel() {
             let mobileAdIndex = 0;
             const mobileSlides = document.querySelectorAll('#mobileSponsoredCarousel .ad-slide');
             const mobileDots = document.querySelectorAll('#mobileAdDots .ad-dot');
-            
+
             function showMobileAd(index) {
                 if (index >= mobileSlides.length || index < 0) return;
-                
+
                 mobileSlides.forEach(slide => slide.classList.remove('active'));
                 mobileDots.forEach(dot => dot.classList.remove('active'));
-                
+
                 mobileSlides[index].classList.add('active');
                 mobileDots[index].classList.add('active');
-                
+
                 mobileAdIndex = index;
             }
-            
+
             // Add click handlers to dots
             mobileDots.forEach((dot, index) => {
                 dot.addEventListener('click', () => showMobileAd(index));
             });
-            
+
             // Auto rotate for mobile
             let mobileAdInterval = setInterval(() => {
                 const nextIndex = (mobileAdIndex + 1) % sponsoredAds.length;
                 showMobileAd(nextIndex);
             }, 5000);
-            
+
             // Pause on hover
             const mobileCarousel = document.getElementById('mobileSponsoredCarousel');
             if (mobileCarousel) {
                 mobileCarousel.addEventListener('mouseenter', () => {
                     clearInterval(mobileAdInterval);
                 });
-                
+
                 mobileCarousel.addEventListener('mouseleave', () => {
                     mobileAdInterval = setInterval(() => {
                         const nextIndex = (mobileAdIndex + 1) % sponsoredAds.length;
@@ -3623,21 +3496,21 @@
                 });
             }
         }
-        
+
         function renderSponsoredAds() {
             const carousel = document.getElementById('sponsoredCarousel');
             const dotsContainer = document.getElementById('adDots');
-            
+
             if (!carousel || !dotsContainer) return;
-            
+
             carousel.innerHTML = '';
             dotsContainer.innerHTML = '';
-            
+
             sponsoredAds.forEach((ad, index) => {
                 const slide = document.createElement('div');
                 slide.className = `ad-slide ${index === 0 ? 'active' : ''}`;
                 slide.setAttribute('data-index', index);
-                
+
                 slide.innerHTML = `
                     <div style="position: relative;">
                         <img src="${ad.image}" alt="${ad.title}" class="ad-image" loading="lazy">
@@ -3667,16 +3540,16 @@
                         </div>
                     </div>
                 `;
-                
+
                 carousel.appendChild(slide);
-                
+
                 const dot = document.createElement('div');
                 dot.className = `ad-dot ${index === 0 ? 'active' : ''}`;
                 dot.setAttribute('data-index', index);
                 dot.addEventListener('click', () => showAd(index));
                 dotsContainer.appendChild(dot);
             });
-            
+
             const arrows = document.createElement('div');
             arrows.className = 'ad-arrows';
             arrows.innerHTML = `
@@ -3688,63 +3561,63 @@
                 </button>
             `;
             carousel.appendChild(arrows);
-            
+
             startAdRotation();
             addTouchSupport(carousel);
         }
-        
+
         function showAd(index) {
             const slides = document.querySelectorAll('.ad-slide');
             const dots = document.querySelectorAll('.ad-dot');
-            
+
             if (index >= slides.length || index < 0) return;
-            
+
             slides.forEach(slide => slide.classList.remove('active'));
             dots.forEach(dot => dot.classList.remove('active'));
-            
+
             slides[index].classList.add('active');
             dots[index].classList.add('active');
-            
+
             currentAdIndex = index;
             resetAdRotation();
         }
-        
+
         function nextAd() {
             const nextIndex = (currentAdIndex + 1) % sponsoredAds.length;
             showAd(nextIndex);
         }
-        
+
         function prevAd() {
             const prevIndex = (currentAdIndex - 1 + sponsoredAds.length) % sponsoredAds.length;
             showAd(prevIndex);
         }
-        
+
         function startAdRotation() {
             adInterval = setInterval(nextAd, 5000);
         }
-        
+
         function resetAdRotation() {
             clearInterval(adInterval);
             startAdRotation();
         }
-        
+
         function addTouchSupport(carousel) {
             let touchStartX = 0;
             let touchEndX = 0;
-            
+
             carousel.addEventListener('touchstart', e => {
                 touchStartX = e.changedTouches[0].screenX;
             }, { passive: true });
-            
+
             carousel.addEventListener('touchend', e => {
                 touchEndX = e.changedTouches[0].screenX;
                 handleSwipe();
             }, { passive: true });
-            
+
             function handleSwipe() {
                 const swipeThreshold = 50;
                 const diff = touchStartX - touchEndX;
-                
+
                 if (Math.abs(diff) > swipeThreshold) {
                     if (diff > 0) {
                         nextAd();
@@ -3754,35 +3627,35 @@
                 }
             }
         }
-        
+
         function getTotalReactions(reactions) {
             return Object.values(reactions).reduce((sum, count) => sum + count, 0);
         }
-        
+
         function getTopReactions(reactions) {
             const sorted = Object.entries(reactions)
                 .sort(([, a], [, b]) => b - a)
                 .slice(0, 3)
                 .filter(([, count]) => count > 0);
-            
+
             return sorted.map(([emotion]) => reactionTypes[emotion].emoji);
         }
-        
+
         function renderFeeds(limit = displayedMemorials) {
             const container = document.getElementById('feedsContainer');
             if (!container) return;
-            
+
             container.innerHTML = '';
-            
+
             const memorialsToShow = memorials.slice(0, limit);
-            
+
             memorialsToShow.forEach(memorial => {
                 const totalReactions = getTotalReactions(memorial.reactions);
                 const topReactions = getTopReactions(memorial.reactions);
                 const feedCard = document.createElement('div');
                 feedCard.className = `feed-card ${memorial.type === 'vip' ? 'premium' : ''}`;
                 feedCard.setAttribute('data-id', memorial.id);
-                
+
                 feedCard.innerHTML = `
                     <div class="feed-header">
                         <span class="head">
@@ -3801,10 +3674,10 @@
                                     <img src="${memorial.image}" alt="${memorial.name}" class="photo" />
                                 </div>
                                 <div class="floral-decoration">
-                                    ${memorial.hasCustomBorder ? 
-                                        `<img src="floral.png" alt="Floral Border" />` :
-                                        `<i class="sprite floral"></i>`
-                                    }
+                                    ${memorial.hasCustomBorder ?
+                        `<img src="floral.png" alt="Floral Border" />` :
+                        `<i class="sprite floral"></i>`
+                    }
                                 </div>
                             </div>
                             <span class="yearto">${memorial.deathYear}</span>
@@ -3869,69 +3742,69 @@
                         </div>
                     </div>
                 `;
-                
+
                 container.appendChild(feedCard);
             });
-            
+
             updateMemorialCount();
         }
-        
+
         function showFacebookReactionPopup(memorialId, event) {
             event.preventDefault();
             event.stopPropagation();
-            
+
             document.querySelectorAll('.fb-reaction-popup').forEach(popup => {
                 popup.classList.remove('show');
             });
-            
+
             const popup = document.getElementById(`fbReactionPopup-${memorialId}`);
             if (popup) {
                 popup.classList.toggle('show');
-                
+
                 const closePopupHandler = (e) => {
                     if (!popup.contains(e.target) && !e.target.closest('.fb-reaction-btn')) {
                         popup.classList.remove('show');
                         document.removeEventListener('click', closePopupHandler);
                     }
                 };
-                
+
                 setTimeout(() => {
                     document.addEventListener('click', closePopupHandler);
                 }, 10);
             }
         }
-        
+
         function handleReaction(memorialId, reactionType, event) {
             event.preventDefault();
             event.stopPropagation();
-            
+
             const memorial = memorials.find(m => m.id === memorialId);
             if (!memorial) return;
-            
+
             if (memorial.userReaction) {
                 memorial.reactions[memorial.userReaction]--;
             }
-            
+
             memorial.userReaction = reactionType;
             memorial.reactions[reactionType]++;
-            
+
             const popup = document.getElementById(`fbReactionPopup-${memorialId}`);
             if (popup) {
                 popup.classList.remove('show');
             }
-            
+
             updateFacebookReactionUI(memorialId);
         }
-        
+
         function updateFacebookReactionUI(memorialId) {
             const memorial = memorials.find(m => m.id === memorialId);
             if (!memorial) return;
-            
+
             const totalReactions = getTotalReactions(memorial.reactions);
             const topReactions = getTopReactions(memorial.reactions);
             const reactionBtn = document.querySelector(`[data-id="${memorialId}"] .fb-reaction-btn`);
             const reactionStats = document.querySelector(`[data-id="${memorialId}"] .reaction-summary`);
-            
+
             if (reactionBtn) {
                 if (memorial.userReaction) {
                     reactionBtn.classList.add('active');
@@ -3969,7 +3842,7 @@
                     `;
                 }
             }
-            
+
             if (reactionStats) {
                 if (totalReactions > 0) {
                     reactionStats.innerHTML = `
@@ -3987,12 +3860,12 @@
                 }
             }
         }
-        
+
         function handleCardClick(memorialId, event) {
             event.preventDefault();
-            
+
             const memorial = memorials.find(m => m.id === memorialId);
-            
+
             if (memorial) {
                 const enhancedMemorial = {
                     ...memorial,
@@ -4005,33 +3878,33 @@
                     funeralDate: getFuneralDate(memorial.deathYear),
                     lifeStory: generateLifeStory(memorial)
                 };
-                
+
                 localStorage.setItem('currentMemorial', JSON.stringify(enhancedMemorial));
                 window.location.href = `memorial-detail.html?id=${memorialId}`;
             }
-            
+
             return false;
         }
-        
+
         function formatDateString(year) {
-            const month = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", 
-                           "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"][Math.floor(Math.random() * 12)];
+            const month = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+                "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"][Math.floor(Math.random() * 12)];
             const day = Math.floor(Math.random() * 28) + 1;
             return `${day}<br>${month}<br>${year}`;
         }
-        
+
         function calculateAge(birthYear, deathYear) {
             const age = parseInt(deathYear) - parseInt(birthYear);
             return `Age ${age}`;
         }
-        
+
         function getFuneralDate(deathYear) {
-            const month = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", 
-                           "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"][Math.floor(Math.random() * 12)];
+            const month = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+                "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"][Math.floor(Math.random() * 12)];
             const day = Math.floor(Math.random() * 28) + 1;
             return `${day} ${month} ${parseInt(deathYear) + 1}, 10:00 AM`;
         }
-        
+
         function generateLifeStory(memorial) {
             return `
                 <p><strong>In loving memory of ${memorial.name}.</strong></p>
@@ -4043,59 +3916,59 @@
                 <p>Our deepest condolences to the grieving family.</p>
             `;
         }
-        
+
         function handleShareButton(memorialId, event) {
             event.preventDefault();
             event.stopPropagation();
             const memorial = memorials.find(m => m.id === memorialId);
-            
+
             if (memorial) {
                 alert(`Sharing memorial: ${memorial.name}`);
             }
         }
-        
+
         function loadMoreMemorials() {
             const button = document.getElementById('loadMoreBtn');
             if (!button) return;
-            
+
             const originalText = button.innerHTML;
             button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Loading...';
             button.disabled = true;
-            
+
             setTimeout(() => {
                 displayedMemorials = Math.min(displayedMemorials + memorialsPerLoad, memorials.length);
                 renderFeeds(displayedMemorials);
-                
+
                 button.innerHTML = originalText;
                 button.disabled = false;
-                
+
                 if (displayedMemorials >= memorials.length) {
                     button.style.display = 'none';
                     document.querySelector('.load-more-container p').textContent = `Showing all ${memorials.length} memorials`;
                 }
             }, 800);
         }
-        
+
         function updateMemorialCount() {
             const countElement = document.getElementById('currentCount');
             if (countElement) {
                 countElement.textContent = displayedMemorials;
             }
         }
-        
+
         function filterMemorials(type) {
             const filtered = type === 'all' ? memorials : memorials.filter(m => m.type === type);
             displayedMemorials = Math.min(6, filtered.length);
             renderFeeds(displayedMemorials);
         }
-        
+
         function closeMobileMenu() {
             const mobileMenuContainer = document.getElementById('mobileMenuContainer');
             const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
-            
+
             mobileMenuContainer.classList.remove('active');
             mobileMenuOverlay.style.opacity = '0';
-            
+
             setTimeout(() => {
                 mobileMenuContainer.style.display = 'none';
                 mobileMenuOverlay.style.display = 'none';
@@ -4103,40 +3976,40 @@
                 document.body.style.paddingRight = '';
             }, 300);
         }
-        
+
         function preventBodyScroll() {
             const scrollBarWidth = window.innerWidth - document.documentElement.clientWidth;
             document.body.style.overflow = 'hidden';
             document.body.style.paddingRight = scrollBarWidth + 'px';
         }
-        
+
         function initMobileMenu() {
             const mobileMenuBtn = document.getElementById('mobileMenuBtn');
             const mobileMenuClose = document.getElementById('mobileMenuClose');
             const mobileMenuContainer = document.getElementById('mobileMenuContainer');
             const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
-            
+
             if (!mobileMenuBtn || !mobileMenuContainer) return;
-            
-            mobileMenuBtn.addEventListener('click', function(e) {
+
+            mobileMenuBtn.addEventListener('click', function (e) {
                 e.stopPropagation();
                 mobileMenuContainer.style.display = 'block';
                 mobileMenuOverlay.style.display = 'block';
                 preventBodyScroll();
-                
+
                 mobileMenuContainer.offsetHeight;
-                
+
                 setTimeout(() => {
                     mobileMenuOverlay.style.opacity = '1';
                     mobileMenuContainer.classList.add('active');
                 }, 10);
             });
-            
+
             mobileMenuClose.addEventListener('click', closeMobileMenu);
             mobileMenuOverlay.addEventListener('click', closeMobileMenu);
-            
+
             document.querySelectorAll('.mobile-menu-nav a').forEach(link => {
-                link.addEventListener('click', function(e) {
+                link.addEventListener('click', function (e) {
                     const href = this.getAttribute('href');
                     if (href && href !== '#') {
                         closeMobileMenu();
@@ -4148,14 +4021,14 @@
                     }
                 });
             });
-            
-            document.addEventListener('keydown', function(e) {
+
+            document.addEventListener('keydown', function (e) {
                 if (e.key === 'Escape' && mobileMenuContainer.classList.contains('active')) {
                     closeMobileMenu();
                 }
             });
         }
-        
+
         // FIXED: Search functionality - now works properly
         function initMobileSearch() {
             const searchToggle = document.getElementById('mobileSearchToggle');
@@ -4163,10 +4036,10 @@
             const mobileSearchIcon = document.getElementById('mobileSearchIcon');
             const desktopSearchInput = document.getElementById('desktopSearchInput');
             const mobileSearchInput = document.getElementById('mobileSearchInput');
-            
+
             // Mobile search icon in header
             if (mobileSearchIcon) {
-                mobileSearchIcon.addEventListener('click', function() {
+                mobileSearchIcon.addEventListener('click', function () {
                     searchContainer.classList.toggle('active');
                     if (searchContainer.classList.contains('active') && mobileSearchInput) {
                         setTimeout(() => {
@@ -4175,79 +4048,79 @@
                     }
                 });
             }
-            
+
             // Desktop search functionality
             if (desktopSearchInput) {
-                desktopSearchInput.addEventListener('keypress', function(e) {
+                desktopSearchInput.addEventListener('keypress', function (e) {
                     if (e.key === 'Enter' && this.value.trim()) {
                         performSearch(this.value);
                     }
                 });
             }
-            
+
             // Mobile search functionality
             if (mobileSearchInput) {
-                mobileSearchInput.addEventListener('keypress', function(e) {
+                mobileSearchInput.addEventListener('keypress', function (e) {
                     if (e.key === 'Enter' && this.value.trim()) {
                         performSearch(this.value);
                         searchContainer.classList.remove('active');
                     }
                 });
             }
-            
+
             // Close search when clicking outside
-            document.addEventListener('click', function(e) {
-                if (mobileSearchIcon && !mobileSearchIcon.contains(e.target) && 
+            document.addEventListener('click', function (e) {
+                if (mobileSearchIcon && !mobileSearchIcon.contains(e.target) &&
                     searchContainer && !searchContainer.contains(e.target) &&
                     searchToggle && !searchToggle.contains(e.target)) {
                     searchContainer.classList.remove('active');
                 }
             });
-            
+
             function performSearch(query) {
                 alert(`Searching for: ${query}`);
                 // You can implement actual search logic here
                 // For now, just show an alert
             }
         }
-        
+
         function initSidebarToggle() {
             const toggleLeftBtn = document.getElementById('toggleLeftSidebar');
             const toggleRightBtn = document.getElementById('toggleRightSidebar');
             const leftSidebar = document.getElementById('leftSidebar');
             const rightSidebar = document.getElementById('rightSidebar');
-            
+
             if (!toggleLeftBtn || !toggleRightBtn) return;
-            
+
             // Only show left sidebar toggle on mobile
             if (window.innerWidth <= 992) {
                 toggleRightBtn.style.display = 'none';
             }
-            
-            toggleLeftBtn.addEventListener('click', function() {
+
+            toggleLeftBtn.addEventListener('click', function () {
                 leftSidebar.classList.toggle('active');
                 rightSidebar.classList.remove('active');
                 toggleLeftBtn.classList.toggle('active');
                 toggleRightBtn.classList.remove('active');
             });
-            
-            toggleRightBtn.addEventListener('click', function() {
+
+            toggleRightBtn.addEventListener('click', function () {
                 rightSidebar.classList.toggle('active');
                 leftSidebar.classList.remove('active');
                 toggleRightBtn.classList.toggle('active');
                 toggleLeftBtn.classList.remove('active');
             });
-            
-            document.addEventListener('click', function(e) {
+
+            document.addEventListener('click', function (e) {
                 const isMobile = window.innerWidth <= 992;
-                
+
                 if (isMobile && leftSidebar.classList.contains('active')) {
                     if (!leftSidebar.contains(e.target) && !toggleLeftBtn.contains(e.target)) {
                         leftSidebar.classList.remove('active');
                         toggleLeftBtn.classList.remove('active');
                     }
                 }
-                
+
                 if (isMobile && rightSidebar.classList.contains('active')) {
                     if (!rightSidebar.contains(e.target) && !toggleRightBtn.contains(e.target)) {
                         rightSidebar.classList.remove('active');
@@ -4256,47 +4129,47 @@
                 }
             });
         }
-        
+
         // UPDATED MOBILE APP FUNCTIONALITY
         function initMobileApp() {
             // Setup mobile bottom navigation
             document.querySelectorAll('.mobile-nav-item').forEach(item => {
-                item.addEventListener('click', function(e) {
+                item.addEventListener('click', function (e) {
                     e.preventDefault();
                     const page = this.getAttribute('data-page');
-                    
+
                     // Update active state
                     document.querySelectorAll('.mobile-nav-item').forEach(nav => {
                         nav.classList.remove('active');
                     });
-                    
+
                     // Keep menu button always clickable without active state
                     if (page !== 'menu') {
                         this.classList.add('active');
                     }
-                    
+
                     // Handle page navigation
                     handleMobilePageNavigation(page);
                 });
             });
-            
+
             // Mobile language selector
-            document.getElementById('mobileLanguageSelector')?.addEventListener('click', function() {
+            document.getElementById('mobileLanguageSelector')?.addEventListener('click', function () {
                 const currentLang = this.querySelector('span').textContent;
                 const newLang = currentLang === 'EN' ? 'த' : 'EN';
                 this.querySelector('span').textContent = newLang;
             });
-            
+
             // Mobile Create Notice Button
             const mobileCreateNoticeBtn = document.getElementById('mobileCreateNoticeBtn');
             if (mobileCreateNoticeBtn) {
-                mobileCreateNoticeBtn.addEventListener('click', function() {
+                mobileCreateNoticeBtn.addEventListener('click', function () {
                     const desktopCreateBtn = document.getElementById('createFuneralNoticeBtn');
                     if (desktopCreateBtn) {
                         const originalHTML = desktopCreateBtn.innerHTML;
                         desktopCreateBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Creating...';
                         desktopCreateBtn.disabled = true;
-                        
+
                         setTimeout(() => {
                             desktopCreateBtn.innerHTML = originalHTML;
                             desktopCreateBtn.disabled = false;
@@ -4308,41 +4181,41 @@
                 });
             }
         }
-        
+
         function handleMobilePageNavigation(page) {
             // Handle page-specific actions
-            switch(page) {
+            switch (page) {
                 case 'home':
                     window.scrollTo({ top: 0, behavior: 'smooth' });
                     filterMemorials('all');
                     updateTabs('home');
                     break;
-                    
+
                 case 'about':
                     window.location.href = 'about.html';
                     break;
-                    
+
                 case 'contact':
                     window.location.href = 'contact.html';
                     break;
-                    
+
                 case 'whatsapp':
                     // Open WhatsApp
                     window.open('https://wa.me/94711234567', '_blank');
                     break;
-                    
+
                 case 'menu':
                     // Open mobile menu
                     document.getElementById('mobileMenuBtn').click();
                     break;
             }
         }
-        
+
         function updateTabs(activeTab) {
             document.querySelectorAll('.tabs-nav a').forEach(tab => {
                 tab.classList.remove('active');
                 const tabText = tab.textContent.toLowerCase();
-                
+
                 if ((activeTab === 'obituaries' && tabText.includes('obituaries')) ||
                     (activeTab === 'remembrance' && tabText.includes('remembrance')) ||
                     (activeTab === 'home' && tabText.includes('home'))) {
@@ -4350,34 +4223,34 @@
                 }
             });
         }
-        
+
         // Initialize everything
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             // Initialize original functionality
             renderRecentPosts();
             renderRecentTributes();
             renderFeeds();
             renderSponsoredAds();
             renderMobileSponsoredAds(); // NEW: Render mobile sponsored ads
-            
+
             initMobileMenu();
             initMobileSearch(); // FIXED: Search initialization
             initSidebarToggle();
-            
+
             // Initialize mobile app functionality if on mobile
             if (window.innerWidth <= 992) {
                 initMobileApp();
             }
-            
+
             // Tab switching functionality
             document.querySelectorAll('.tabs-nav a').forEach(tab => {
-                tab.addEventListener('click', function(e) {
+                tab.addEventListener('click', function (e) {
                     e.preventDefault();
                     document.querySelectorAll('.tabs-nav a').forEach(t => t.classList.remove('active'));
                     this.classList.add('active');
-                    
+
                     const tabText = this.textContent.toLowerCase();
-                    
+
                     if (tabText.includes('obituaries')) {
                         filterMemorials('obituary');
                     } else if (tabText.includes('remembrance')) {
@@ -4387,43 +4260,43 @@
                     }
                 });
             });
-            
+
             // Create Funeral Notice button
-            document.getElementById('createFuneralNoticeBtn').addEventListener('click', function() {
+            document.getElementById('createFuneralNoticeBtn').addEventListener('click', function () {
                 this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Creating...';
                 this.disabled = true;
-                
+
                 setTimeout(() => {
                     window.location.href = 'create.html';
                 }, 500);
             });
-            
+
             // Handle Create Funeral Notice link in mobile menu
             document.querySelectorAll('.mobile-menu-nav a[href="create.html"]').forEach(link => {
-                link.addEventListener('click', function(e) {
+                link.addEventListener('click', function (e) {
                     e.preventDefault();
                     const mobileMenuContainer = document.getElementById('mobileMenuContainer');
                     const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
-                    
+
                     if (mobileMenuContainer && mobileMenuContainer.classList.contains('active')) {
                         mobileMenuContainer.classList.remove('active');
                         setTimeout(() => {
                             mobileMenuContainer.style.display = 'none';
                             if (mobileMenuOverlay) mobileMenuOverlay.style.display = 'none';
                             document.body.style.overflow = '';
-                            
+
                             const btn = document.getElementById('createFuneralNoticeBtn');
                             if (btn) {
                                 const originalHTML = btn.innerHTML;
                                 btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Creating...';
                                 btn.disabled = true;
-                                
+
                                 setTimeout(() => {
                                     btn.innerHTML = originalHTML;
                                     btn.disabled = false;
                                 }, 500);
                             }
-                            
+
                             setTimeout(() => {
                                 window.location.href = 'create.html';
                             }, 300);
@@ -4433,55 +4306,55 @@
                     }
                 });
             });
-            
+
             // Browse button
-            document.querySelector('.btn-outline')?.addEventListener('click', function() {
+            document.querySelector('.btn-outline')?.addEventListener('click', function () {
                 alert('Browse all memorials');
             });
-            
+
             // Desktop language selector
-            document.querySelector('.language-selector')?.addEventListener('click', function() {
+            document.querySelector('.language-selector')?.addEventListener('click', function () {
                 const currentLang = this.querySelector('span').textContent;
                 const newLang = currentLang === 'English' ? 'தமிழ்' : 'English';
                 this.querySelector('span').textContent = newLang;
             });
-            
+
             // Close reaction popups when clicking elsewhere
-            document.addEventListener('click', function(e) {
+            document.addEventListener('click', function (e) {
                 if (!e.target.closest('.fb-reaction-btn') && !e.target.closest('.fb-reaction-popup')) {
                     document.querySelectorAll('.fb-reaction-popup').forEach(popup => {
                         popup.classList.remove('show');
                     });
                 }
             });
-            
+
             // Pause ad rotation when user interacts with carousel
             const carousel = document.getElementById('sponsoredCarousel');
             if (carousel) {
                 carousel.addEventListener('mouseenter', () => {
                     clearInterval(adInterval);
                 });
-                
+
                 carousel.addEventListener('mouseleave', () => {
                     startAdRotation();
                 });
             }
-            
+
             // Load more button
             const loadMoreBtn = document.getElementById('loadMoreBtn');
             if (loadMoreBtn) {
                 loadMoreBtn.addEventListener('click', loadMoreMemorials);
             }
-            
+
             // Handle window resize
-            window.addEventListener('resize', function() {
+            window.addEventListener('resize', function () {
                 // Reset sidebars on desktop
                 if (window.innerWidth > 992) {
                     document.getElementById('leftSidebar')?.classList.remove('active');
                     document.getElementById('rightSidebar')?.classList.remove('active');
                     document.getElementById('toggleLeftSidebar')?.classList.remove('active');
                     document.getElementById('toggleRightSidebar')?.classList.remove('active');
-                    
+
                     // Show right sidebar toggle button on desktop
                     const toggleRightBtn = document.getElementById('toggleRightSidebar');
                     if (toggleRightBtn) {
@@ -4494,11 +4367,12 @@
                         toggleRightBtn.style.display = 'none';
                     }
                 }
-                
+
                 // Re-render mobile sponsored ads on resize
                 renderMobileSponsoredAds();
             });
         });
     </script>
 </body>
+
 </html>

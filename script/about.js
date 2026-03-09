@@ -1,5 +1,5 @@
 /**
- * about.js - Logic for about.html
+ * about.js - Logic for about.php
  */
 
 // Scroll Animations
@@ -68,13 +68,13 @@ document.addEventListener('DOMContentLoaded', function () {
     initScrollAnimations();
     initCounters();
 
-    // Create Funeral Notice Button - Redirect to create.html
+    // Create Funeral Notice Button - Redirect to create.php
     document.getElementById('createFuneralNoticeBtn')?.addEventListener('click', function () {
         this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Creating...';
         this.disabled = true;
 
         setTimeout(() => {
-            window.location.href = 'create.html';
+            window.location.href = 'create.php';
         }, 500);
     });
 

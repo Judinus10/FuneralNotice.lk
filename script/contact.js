@@ -1,5 +1,5 @@
 /**
- * contact.js - Logic for contact.html
+ * contact.js - Logic for contact.php
  */
 
 // Contact Form Submission
@@ -41,13 +41,13 @@ document.addEventListener('DOMContentLoaded', function () {
     // Initialize contact-specific features
     initContactForm();
 
-    // Create Funeral Notice Button - Redirect to create.html
+    // Create Funeral Notice Button - Redirect to create.php
     document.getElementById('createFuneralNoticeBtn')?.addEventListener('click', function () {
         this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Creating...';
         this.disabled = true;
 
         setTimeout(() => {
-            window.location.href = 'create.html';
+            window.location.href = 'create.php';
         }, 500);
     });
 
@@ -91,7 +91,7 @@ document.addEventListener('DOMContentLoaded', function () {
     menuLinks.forEach(link => {
         link.classList.remove('active');
         if (link.getAttribute('href') === currentPage ||
-            (currentPage === '' && link.getAttribute('href') === 'index.html')) {
+            (currentPage === '' && link.getAttribute('href') === 'index.php')) {
             link.classList.add('active');
         }
     });

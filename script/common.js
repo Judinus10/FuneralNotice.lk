@@ -153,9 +153,9 @@ function initMobileApp() {
             } else {
                 // Default navigation
                 switch (page) {
-                    case 'home': window.location.href = 'index.html'; break;
-                    case 'about': window.location.href = 'about.html'; break;
-                    case 'contact': window.location.href = 'contact.html'; break;
+                    case 'home': window.location.href = 'index.php'; break;
+                    case 'about': window.location.href = 'about.php'; break;
+                    case 'contact': window.location.href = 'contact.php'; break;
                     case 'whatsapp': window.open('https://wa.me/94711234567', '_blank'); break;
                     case 'menu': document.getElementById('mobileMenuBtn')?.click(); break;
                 }
@@ -167,7 +167,7 @@ function initMobileApp() {
     const mobileCreateNoticeBtn = document.getElementById('mobileCreateNoticeBtn');
     if (mobileCreateNoticeBtn) {
         mobileCreateNoticeBtn.addEventListener('click', function () {
-            window.location.href = 'create.html';
+            window.location.href = 'create.php';
         });
     }
 }

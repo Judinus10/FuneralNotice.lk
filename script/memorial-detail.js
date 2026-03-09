@@ -717,7 +717,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // Render sponsored ads
     renderSponsoredAds();
 
-    // UPDATED: Create Funeral Notice Button - Redirect to create.html
+    // UPDATED: Create Funeral Notice Button - Redirect to create.php
     document.getElementById('createFuneralNoticeBtn')?.addEventListener('click', function () {
         // Show loading state
         this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Creating...';
@@ -725,7 +725,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // Redirect after short delay to show loading animation
         setTimeout(() => {
-            window.location.href = 'create.html';
+            window.location.href = 'create.php';
         }, 500);
     });
 

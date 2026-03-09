@@ -3,6 +3,6 @@ document.addEventListener("DOMContentLoaded", () => {
   if (!btn) return;
 
   btn.addEventListener("click", () => {
-    window.location.href = "create.html";
+    window.location.href = "create.php";
   });
 });

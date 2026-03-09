@@ -1,503 +1,513 @@
 /**
- * index.js - Logic for the homepage (index.html)
+ * index.js - Real homepage logic using API
  */
 
-// --- DATA ---
-
-const memorials = [
-    {
-        id: "memorial-1",
-        type: "remembrance",
-        title: "13th Year Remembrance",
-        time: "4 Hours Ago",
-        name: "Late Peethamparam Sellammah",
-        birthYear: "1936",
-        deathYear: "2013",
-        locations: ["Mareesanakoodal, Sri Lanka", "Chavakachcheri, Sri Lanka", "Switzerland"],
-        tributeCount: "8 Tributes",
-        image: "https://cdn.lankasririp.com/memorial/profile/205767/6c67a177-e9cb-40cf-b8b6-e356616af3de/26-6971100cac46f-md.webp",
-        hasCustomBorder: true,
-        reactions: {
-            sad: 5,
-            tearful: 3,
-            crying: 2,
-            heartbroken: 4,
-            praying: 6
-        },
-        userReaction: null
-    },
-    {
-        id: "memorial-2",
-        type: "obituary",
-        title: "Obituary",
-        time: "5 Hours Ago",
-        name: "Mrs Kaneswary Sivaloganathan",
-        birthYear: "1952",
-        deathYear: "2026",
-        locations: ["Oddisuddan, Sri Lanka"],
-        tributeCount: "Be First To Tribute",
-        image: "https://cdn.lankasririp.com/memorial/profile/232978/8d0680df-d3af-487a-b0bb-61bc829858b4/26-69728f54d131a-md.webp",
-        hasCustomBorder: true,
-        reactions: {
-            sad: 3,
-            tearful: 1,
-            crying: 0,
-            heartbroken: 2,
-            praying: 4
-        },
-        userReaction: null
-    },
-    {
-        id: "memorial-3",
-        type: "obituary",
-        title: "Obituary",
-        time: "1 Day Ago",
-        name: "Mrs Kanesammah Ponnusamy",
-        birthYear: "1939",
-        deathYear: "2026",
-        locations: ["Madduvil East, Sri Lanka", "Rorschach, Switzerland"],
-        tributeCount: "5 Tributes",
-        image: "https://cdn.lankasririp.com/memorial/profile/232974/de27a9db-2d1c-4b69-a936-d9c3fccafca9/26-69712d227480d-md.webp",
-        hasCustomBorder: true,
-        reactions: {
-            sad: 7,
-            tearful: 4,
-            crying: 3,
-            heartbroken: 5,
-            praying: 8
-        },
-        userReaction: null
-    },
-    {
-        id: "memorial-4",
-        type: "vip",
-        title: "Overseas Memorial",
-        time: "1 Day Ago",
-        name: "Mr Subramaniam Ramasamy",
-        birthYear: "1930",
-        deathYear: "2026",
-        locations: ["Navali, Sri Lanka", "Madduvil South, Sri Lanka", "Toronto, Canada", "Ajax, Canada"],
-        tributeCount: "3 Tributes",
-        image: "https://cdn.lankasririp.com/memorial/profile/232968/e05ce790-582f-4872-a7bb-b2b959ca8dc3/26-696fb7ce940c0-md.webp",
-        hasCustomBorder: true,
-        reactions: {
-            sad: 4,
-            tearful: 2,
-            crying: 1,
-            heartbroken: 3,
-            praying: 5
-        },
-        userReaction: null
-    },
-    {
-        id: "memorial-5",
-        type: "obituary",
-        title: "Obituary",
-        time: "4 Days Ago",
-        name: "Mrs Umathevi Sabapathy",
-        birthYear: "1929",
-        deathYear: "2026",
-        locations: ["Analaitivu, Sri Lanka", "Toronto, Canada"],
-        tributeCount: "6 Tributes",
-        image: "https://cdn.lankasririp.com/memorial/profile/232915/836be137-e2e6-4f47-a5a6-78f222c69901/26-696aaeda29a13-md.webp",
-        hasCustomBorder: true,
-        reactions: {
-            sad: 6,
-            tearful: 3,
-            crying: 2,
-            heartbroken: 4,
-            praying: 7
-        },
-        userReaction: null
-    },
-    {
-        id: "memorial-6",
-        type: "obituary",
-        title: "Obituary",
-        time: "Recently",
-        name: "Mr Kandasamy Sivagnanam",
-        birthYear: "1947",
-        deathYear: "2026",
-        locations: ["Navakkiri, Sri Lanka", "Yogapuram, Sri Lanka"],
-        tributeCount: "5 Tributes",
-        image: "https://cdn.lankasririp.com/memorial/profile/233005/0818a3cf-8126-457a-9fc4-ece1e194ac2a/26-6975dfeff31dd-md.webp",
-        hasCustomBorder: true,
-        reactions: {
-            sad: 2,
-            tearful: 1,
-            crying: 0,
-            heartbroken: 1,
-            praying: 3
-        },
-        userReaction: null
-    }
-];
-
-const recentPosts = [
-    { country: "Australia", count: "1 Posts" },
-    { country: "Canada", count: "28 Posts" },
-    { country: "Switzerland", count: "6 Posts" },
-    { country: "China", count: "1 Posts" },
-    { country: "Germany", count: "6 Posts" },
-    { country: "France", count: "8 Posts" },
-    { country: "United Kingdom", count: "16 Posts" },
-    { country: "India", count: "5 Posts" },
-    { country: "Italy", count: "1 Posts" },
-    { country: "Sri Lanka", count: "107 Posts" },
-    { country: "Malaysia", count: "2 Posts" },
-    { country: "Netherlands", count: "2 Posts" },
-    { country: "Singapore", count: "1 Posts" },
-    { country: "United States", count: "1 Posts" }
-];
-
-const recentTributes = [
-    {
-        name: "Mrs Vijayalatha Vijayaratnam",
-        tributeBy: "Vipulanandan Vallipuram",
-        time: "14 Hours Ago",
-        more: "+10 MORE",
-        image: "https://cdn.lankasririp.com/memorial/profile/232972/57e76f92-4aa8-4ead-afe4-a8ed04f58a79/26-6971c1cbd09de-md.webp"
-    },
-    {
-        name: "Mr Sutharsan Sivapalan",
-        tributeBy: "Thanapalasingam Sangeerthanan",
-        time: "19 Hours Ago",
-        more: "+4 MORE",
-        image: "https://cdn.lankasririp.com/memorial/profile/232976/9c6c9214-ac08-4cc9-ba6f-1cbf733c2b18/26-6971cc9112825-md.webp"
-    },
-    {
-        name: "Mrs Kanesammah Ponnusamy",
-        tributeBy: "A.r.thayaparan",
-        time: "1 Day Ago",
-        more: "+4 MORE",
-        image: "https://cdn.lankasririp.com/memorial/profile/232974/de27a9db-2d1c-4b69-a936-d9c3fccafca9/26-69712d227480d-md.webp"
-    },
-    {
-        name: "Mr Karthigesan Rasiah",
-        tributeBy: "Pithamagan",
-        time: "1 Day Ago",
-        more: "+11 MORE",
-        image: "https://cdn.lankasririp.com/memorial/profile/232973/d242f985-4bca-4626-b4fa-8a386c2fb045/26-6971279d7dba3-md.webp"
-    },
-    {
-        name: "Mr Subramaniam Ramasamy",
-        tributeBy: "P M Muthiah",
-        time: "1 Day Ago",
-        more: "+2 MORE",
-        image: "https://cdn.lankasririp.com/memorial/profile/232968/e05ce790-582f-4872-a7bb-b2b959ca8dc3/26-696fb7ce940c0-md.webp"
-    },
-    {
-        name: "Mr Alexander Dunstan Rajkumar",
-        tributeBy: "Llewellyn Selvanayagam",
-        time: "1 Day Ago",
-        more: "+2 MORE",
-        image: "https://cdn.lankasririp.com/memorial/profile/232957/c7753958-e50f-4b29-b877-707cc2a7702d/26-696fc338be8b4-md.webp"
-    }
-];
-
-const sponsoredAds = [
-    {
-        id: "ad-1",
-        title: "Funeral Flower Arrangements",
-        description: "Beautiful floral arrangements for funeral services. Same-day delivery available.",
-        image: "https://images.unsplash.com/photo-1519681393784-d120267933ba?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=200&q=80",
-        badge: "Sponsored",
-        whatsapp: "https://wa.me/94711234567",
-        viewLink: "#",
-        whatsappText: "Hi, I'm interested in your funeral flower arrangements."
-    },
-    {
-        id: "ad-2",
-        title: "Memorial Video Services",
-        description: "Professional memorial video creation to honor your loved ones.",
-        image: "https://images.unsplash.com/photo-1542037104857-ffbb0b9155fb?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=200&q=80",
-        badge: "Featured",
-        whatsapp: "https://wa.me/94711234568",
-        viewLink: "#",
-        whatsappText: "Hi, I need information about memorial video services."
-    },
-    {
-        id: "ad-3",
-        title: "Funeral Catering Services",
-        description: "Traditional funeral catering for gatherings. Customizable menus available.",
-        image: "https://images.unsplash.com/photo-1565958011703-44f9829ba187?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=200&q=80",
-        badge: "Partner",
-        whatsapp: "https://wa.me/94711234569",
-        viewLink: "#",
-        whatsappText: "Hi, I need catering services for a funeral gathering."
-    }
-];
-
-const reactionTypes = {
-    sad: { emoji: "😔", label: "Sad" },
-    tearful: { emoji: "😢", label: "Tearful" },
-    crying: { emoji: "😭", label: "Crying" },
-    heartbroken: { emoji: "💔", label: "Heartbroken" },
-    praying: { emoji: "🙏", label: "Praying" }
+// --------------------
+// STATE
+// --------------------
+const state = {
+    page: 1,
+    limit: 6,
+    displayedCount: 0,
+    hasMore: true,
+    type: 'all',
+    district: '',
+    ads: [],
+    currentAdIndex: 0,
+    adInterval: null,
+    feedItems: []
 };
 
-// --- STATE ---
+// Match your UI reactions
+const reactionTypes = {
+    pray: { emoji: "🙏", label: "Praying" },
+    wow: { emoji: "🥺", label: "Emotional" },
+    sad: { emoji: "😢", label: "Sad" },
+    heart: { emoji: "❤️", label: "Heart" },
+    flower: { emoji: "🌸", label: "Flower" },
+    candle: { emoji: "🕯️", label: "Candle" }
+};
 
-let currentAdIndex = 0;
-let adInterval;
-let displayedMemorialsCount = 6;
-const memorialsPerLoad = 3;
+// --------------------
+// HELPERS
+// --------------------
+function esc(str = '') {
+    return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+}
 
-// --- FUNCTIONS ---
+async function getJSON(url, options = {}) {
+    const res = await fetch(url, {
+        credentials: 'same-origin',
+        ...options
+    });
 
-function renderRecentPosts() {
+    if (!res.ok) {
+        throw new Error(`Request failed: ${res.status}`);
+    }
+
+    return await res.json();
+}
+
+function getTypeLabel(item) {
+    if (item.type === 'remembrance') {
+        return item.type_label || 'Remembrance';
+    }
+    return 'Obituary';
+}
+
+function getReactionEmoji(myReaction) {
+    return reactionTypes[myReaction]?.emoji || '🙏';
+}
+
+function getReactionLabel(myReaction) {
+    return reactionTypes[myReaction]?.label || 'React';
+}
+
+function getCommentLabel(count) {
+    if (!count || count < 1) return 'Be First To Comment';
+    if (count === 1) return '1 Comment';
+    return `${count} Comments`;
+}
+
+function imageOrFallback(src) {
+    return src && src.trim() !== '' ? src : 'assets/defaultavt.png';
+}
+
+function buildFeedParams() {
+    const params = new URLSearchParams({
+        page: state.page,
+        limit: state.limit,
+        type: state.type
+    });
+
+    if (state.district) {
+        params.set('district', state.district);
+    }
+
+    return params.toString();
+}
+
+function updateCount() {
+    const countEl = document.getElementById('currentCount');
+    if (countEl) {
+        countEl.textContent = String(state.displayedCount);
+    }
+}
+
+function setLoadMoreVisibility() {
+    const btn = document.getElementById('loadMoreBtn');
+    if (!btn) return;
+
+    btn.style.display = state.hasMore ? 'inline-flex' : 'none';
+}
+
+function closeAllReactionPopups() {
+    document.querySelectorAll('.fb-reaction-popup').forEach(popup => {
+        popup.classList.remove('show');
+        popup.classList.remove('active');
+    });
+}
+
+// --------------------
+// DISTRICTS
+// --------------------
+async function loadDistricts() {
     const container = document.getElementById('recentPosts');
     if (!container) return;
 
-    container.innerHTML = '';
+    try {
+        const data = await getJSON('api/districts_get.php');
+        const districts = data.districts || [];
 
-    recentPosts.forEach(post => {
-        const listItem = document.createElement('li');
-        listItem.innerHTML = `
-            <a href="#">
-                <span class="info">
-                    <span class="label-main">${post.country}</span>
-                    <span class="label-secondary">${post.count}</span>
-                </span>
-            </a>
+        if (!districts.length) {
+            container.innerHTML = `
+                <li>
+                    <a href="#">
+                        <span class="info">
+                            <span class="label-main">No districts found</span>
+                            <span class="label-secondary">0 Posts</span>
+                        </span>
+                    </a>
+                </li>
+            `;
+            return;
+        }
+
+        container.innerHTML = districts.map(d => `
+            <li>
+                <a href="#" class="district-link" data-district="${esc(d.district)}">
+                    <span class="info">
+                        <span class="label-main">${esc(d.district)}</span>
+                        <span class="label-secondary">${Number(d.total)} Posts</span>
+                    </span>
+                </a>
+            </li>
+        `).join('');
+
+        document.querySelectorAll('.district-link').forEach(link => {
+            link.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                const clickedDistrict = this.dataset.district || '';
+                if (state.district === clickedDistrict) {
+                    state.district = '';
+                } else {
+                    state.district = clickedDistrict;
+                }
+
+                state.page = 1;
+                state.displayedCount = 0;
+                loadFeed(false);
+
+                document.querySelectorAll('.district-link').forEach(x => x.classList.remove('active'));
+                if (state.district) {
+                    this.classList.add('active');
+                }
+            });
+        });
+
+    } catch (err) {
+        console.error('District load failed:', err);
+        container.innerHTML = `
+            <li>
+                <a href="#">
+                    <span class="info">
+                        <span class="label-main">Failed to load districts</span>
+                        <span class="label-secondary">Try again</span>
+                    </span>
+                </a>
+            </li>
         `;
-        container.appendChild(listItem);
-    });
+    }
 }
 
-function renderRecentTributes() {
+// --------------------
+// RECENT COMMENTS
+// --------------------
+async function loadRecentComments() {
     const container = document.getElementById('recentTributes');
     if (!container) return;
 
-    container.innerHTML = '';
+    try {
+        const data = await getJSON('api/recent_comments_get.php');
+        const items = data.recent_comments || [];
 
-    recentTributes.forEach(tribute => {
-        const listItem = document.createElement('li');
-        listItem.innerHTML = `
-            <a href="#">
-                <img src="${tribute.image}" alt="${tribute.name}" loading="lazy">
-                <div class="tribute-info">
-                    <span class="label-main">${tribute.name}</span>
-                    <span class="label-secondary">${tribute.tributeBy}</span>
-                    <div class="tributes-footer">
-                        <span class="upd-at">${tribute.time}</span>
-                        <span class="lnk-see-more">${tribute.more}</span>
-                    </div>
-                </div>
-            </a>
-        `;
-        container.appendChild(listItem);
-    });
-}
-
-function renderMobileSponsoredAds() {
-    const mobileSponsoredSection = document.getElementById('mobileSponsoredSection');
-    if (!mobileSponsoredSection) return;
-
-    if (window.innerWidth <= 992) {
-        mobileSponsoredSection.innerHTML = `
-            <div class="list-multiple-item">
-                <div class="header" style="background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);">
-                    <h2><i class="fas fa-ad"></i> Sponsored Ads</h2>
-                    <a href="https://api.whatsapp.com/send?phone=94769988123&text=Hello%20WEBbuilders.lk%20%F0%9F%91%8B%2C" 
-                       target="_blank" 
-                       rel="noopener"
-                       class="whatsapp-btn-small" 
-                       style="background: linear-gradient(135deg, #25D366 0%, #128C7E 100%); color: white; padding: 6px 12px; border-radius: 6px; text-decoration: none; display: inline-flex; align-items: center; gap: 5px; font-size: 0.8rem; font-weight: 600; transition: var(--transition); white-space: nowrap;">
-                        <i class="fab fa-whatsapp"></i>
-                        Place Ad
+        if (!items.length) {
+            container.innerHTML = `
+                <li>
+                    <a href="#">
+                        <div class="tribute-info">
+                            <span class="label-main">No recent comments</span>
+                            <span class="label-secondary">Nothing yet</span>
+                        </div>
                     </a>
-                </div>
-                <div class="list">
-                    <div id="mobileSponsoredCarousel" class="mobile-sponsored-carousel">
-                        ${sponsoredAds.map((ad, index) => `
-                            <div class="ad-slide ${index === 0 ? 'active' : ''}" data-index="${index}">
-                                <div style="position: relative;">
-                                    <img src="${ad.image}" alt="${ad.title}" class="ad-image" loading="lazy">
-                                    <a href="${ad.whatsapp}?text=${encodeURIComponent(ad.whatsappText)}" 
-                                       target="_blank" 
-                                       rel="noopener"
-                                       class="float-wa-btn" 
-                                       aria-label="Contact on WhatsApp">
-                                        <i class="fab fa-whatsapp"></i>
-                                    </a>
-                                </div>
-                                <div class="ad-content">
-                                    <span class="ad-badge">${ad.badge}</span>
-                                    <h3 class="ad-title">${ad.title}</h3>
-                                    <p class="ad-description">${ad.description}</p>
-                                    <div class="ad-actions">
-                                        <a href="${ad.whatsapp}?text=${encodeURIComponent(ad.whatsappText)}" 
-                                           target="_blank" 
-                                           rel="noopener"
-                                           class="ad-btn ad-btn-whatsapp">
-                                            <i class="fab fa-whatsapp"></i> WhatsApp
-                                        </a>
-                                        <a href="${ad.viewLink}" 
-                                           class="ad-btn ad-btn-view">
-                                            <i class="fas fa-eye"></i> View More
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        `).join('')}
+                </li>
+            `;
+            return;
+        }
+
+        container.innerHTML = items.map(item => `
+            <li>
+                <a href="details.php?id=${Number(item.id)}">
+                    <img src="${esc(imageOrFallback(item.cover_image))}" 
+                         alt="${esc(item.full_name)}" 
+                         loading="lazy"
+                         onerror="this.onerror=null;this.src='assets/defaultavt.png';">
+                    <div class="tribute-info">
+                        <span class="label-main">${esc(item.full_name)}</span>
+                        <span class="label-secondary">${Number(item.tribute_count)} Comments</span>
+                        <div class="tributes-footer">
+                            <span class="upd-at">${esc(item.last_tribute_ago || '')}</span>
+                            <span class="lnk-see-more">View</span>
+                        </div>
                     </div>
-                    <div class="ad-dots" id="mobileAdDots">
-                        ${sponsoredAds.map((ad, index) => `
-                            <div class="ad-dot ${index === 0 ? 'active' : ''}" data-index="${index}"></div>
-                        `).join('')}
+                </a>
+            </li>
+        `).join('');
+
+    } catch (err) {
+        console.error('Recent comments load failed:', err);
+        container.innerHTML = `
+            <li>
+                <a href="#">
+                    <div class="tribute-info">
+                        <span class="label-main">Failed to load comments</span>
+                        <span class="label-secondary">Try again</span>
                     </div>
-                </div>
-            </div>
+                </a>
+            </li>
         `;
-        initMobileCarousel();
-    } else {
-        mobileSponsoredSection.innerHTML = '';
     }
 }
 
-function initMobileCarousel() {
-    let mobileAdIndex = 0;
-    const mobileCarousel = document.getElementById('mobileSponsoredCarousel');
-    if (!mobileCarousel) return;
+// --------------------
+// ORG WHATSAPP
+// --------------------
+async function loadOrgWhatsapp() {
+    try {
+        const data = await getJSON('api/org_whatsapp_get.php');
 
-    const mobileSlides = mobileCarousel.querySelectorAll('.ad-slide');
-    const mobileDots = document.querySelectorAll('#mobileAdDots .ad-dot');
+        const phoneText = document.getElementById('orgPhoneText');
+        const whatsappBtn = document.getElementById('orgWhatsappBtn');
+        const placeAdBtn = document.getElementById('placeAdBtn');
 
-    function showMobileAd(index) {
-        if (index >= mobileSlides.length || index < 0) return;
+        if (phoneText) {
+            phoneText.textContent = data.phone_raw || '+94';
+        }
 
-        mobileSlides.forEach(slide => slide.classList.remove('active'));
-        mobileDots.forEach(dot => dot.classList.remove('active'));
+        if (whatsappBtn) {
+            whatsappBtn.href = data.whatsapp_link || '#';
+        }
 
-        mobileSlides[index].classList.add('active');
-        mobileDots[index].classList.add('active');
-
-        mobileAdIndex = index;
+        if (placeAdBtn) {
+            placeAdBtn.href = data.whatsapp_link || '#';
+        }
+    } catch (err) {
+        console.error('WhatsApp info load failed:', err);
     }
-
-    mobileDots.forEach((dot, index) => {
-        dot.addEventListener('click', () => showMobileAd(index));
-    });
-
-    let mobileAdInterval = setInterval(() => {
-        const nextIndex = (mobileAdIndex + 1) % sponsoredAds.length;
-        showMobileAd(nextIndex);
-    }, 5000);
-
-    mobileCarousel.addEventListener('mouseenter', () => clearInterval(mobileAdInterval));
-    mobileCarousel.addEventListener('mouseleave', () => {
-        mobileAdInterval = setInterval(() => {
-            const nextIndex = (mobileAdIndex + 1) % sponsoredAds.length;
-            showMobileAd(nextIndex);
-        }, 5000);
-    });
 }
 
-function renderSponsoredAds() {
+// --------------------
+// ADS
+// --------------------
+function renderDesktopAds() {
     const carousel = document.getElementById('sponsoredCarousel');
     const dotsContainer = document.getElementById('adDots');
 
     if (!carousel || !dotsContainer) return;
 
-    carousel.innerHTML = '';
-    dotsContainer.innerHTML = '';
+    const ads = state.ads || [];
 
-    sponsoredAds.forEach((ad, index) => {
-        const slide = document.createElement('div');
-        slide.className = `ad-slide ${index === 0 ? 'active' : ''}`;
-        slide.setAttribute('data-index', index);
+    if (!ads.length) {
+        carousel.innerHTML = `
+            <div class="ad-slide active">
+                <div class="ad-content">
+                    <span class="ad-badge">Sponsored</span>
+                    <h3 class="ad-title">No active ads right now</h3>
+                    <p class="ad-description">Nothing to show at the moment.</p>
+                </div>
+            </div>
+        `;
+        dotsContainer.innerHTML = '';
+        return;
+    }
 
-        slide.innerHTML = `
+    carousel.innerHTML = ads.map((ad, index) => `
+        <div class="ad-slide ${index === 0 ? 'active' : ''}" data-index="${index}">
             <div style="position: relative;">
-                <img src="${ad.image}" alt="${ad.title}" class="ad-image" loading="lazy">
-                <a href="${ad.whatsapp}?text=${encodeURIComponent(ad.whatsappText)}" 
-                   target="_blank" 
-                   rel="noopener"
-                   class="float-wa-btn" 
-                   aria-label="Contact on WhatsApp">
-                    <i class="fab fa-whatsapp"></i>
-                </a>
+                <img src="${esc(ad.image)}" alt="${esc(ad.title)}" class="ad-image" loading="lazy">
+                ${ad.whatsapp_link ? `
+                    <a href="${esc(ad.whatsapp_link)}"
+                       target="_blank"
+                       rel="noopener"
+                       class="float-wa-btn"
+                       aria-label="Contact on WhatsApp">
+                        <i class="fab fa-whatsapp"></i>
+                    </a>
+                ` : ''}
             </div>
             <div class="ad-content">
-                <span class="ad-badge">${ad.badge}</span>
-                <h3 class="ad-title">${ad.title}</h3>
-                <p class="ad-description">${ad.description}</p>
+                <span class="ad-badge">Sponsored</span>
+                <h3 class="ad-title">${esc(ad.title || 'Sponsored')}</h3>
+                <p class="ad-description">Click to contact advertiser on WhatsApp.</p>
                 <div class="ad-actions">
-                    <a href="${ad.whatsapp}?text=${encodeURIComponent(ad.whatsappText)}" 
-                       target="_blank" 
+                    ${ad.whatsapp_link ? `
+                        <a href="${esc(ad.whatsapp_link)}"
+                           target="_blank"
+                           rel="noopener"
+                           class="ad-btn ad-btn-whatsapp">
+                            <i class="fab fa-whatsapp"></i> WhatsApp
+                        </a>
+                    ` : ''}
+                    <a href="${esc(ad.image)}"
+                       target="_blank"
                        rel="noopener"
-                       class="ad-btn ad-btn-whatsapp">
-                        <i class="fab fa-whatsapp"></i> WhatsApp
-                    </a>
-                    <a href="${ad.viewLink}" 
                        class="ad-btn ad-btn-view">
                         <i class="fas fa-eye"></i> View More
                     </a>
                 </div>
             </div>
-        `;
+        </div>
+    `).join('');
 
-        carousel.appendChild(slide);
+    dotsContainer.innerHTML = ads.map((_, index) => `
+        <div class="ad-dot ${index === 0 ? 'active' : ''}" data-index="${index}"></div>
+    `).join('');
 
-        const dot = document.createElement('div');
-        dot.className = `ad-dot ${index === 0 ? 'active' : ''}`;
-        dot.setAttribute('data-index', index);
-        dot.addEventListener('click', () => showAd(index));
-        dotsContainer.appendChild(dot);
+    dotsContainer.querySelectorAll('.ad-dot').forEach(dot => {
+        dot.addEventListener('click', function () {
+            showAd(Number(this.dataset.index));
+        });
     });
 
     const arrows = document.createElement('div');
     arrows.className = 'ad-arrows';
     arrows.innerHTML = `
-        <button class="ad-arrow ad-prev" onclick="prevAd()" aria-label="Previous ad">
+        <button class="ad-arrow ad-prev" id="adPrevBtn" aria-label="Previous ad">
             <i class="fas fa-chevron-left"></i>
         </button>
-        <button class="ad-arrow ad-next" onclick="nextAd()" aria-label="Next ad">
+        <button class="ad-arrow ad-next" id="adNextBtn" aria-label="Next ad">
             <i class="fas fa-chevron-right"></i>
         </button>
     `;
     carousel.appendChild(arrows);
 
-    startAdRotation();
+    document.getElementById('adPrevBtn')?.addEventListener('click', prevAd);
+    document.getElementById('adNextBtn')?.addEventListener('click', nextAd);
+
     addTouchSupport(carousel);
+    startAdRotation();
+}
+
+function renderMobileAds() {
+    const mobileContainer = document.getElementById('mobileSponsoredSection');
+    if (!mobileContainer) return;
+
+    const ads = state.ads || [];
+
+    if (window.innerWidth > 992) {
+        mobileContainer.innerHTML = '';
+        return;
+    }
+
+    if (!ads.length) {
+        mobileContainer.innerHTML = `
+            <div class="list-multiple-item">
+                <div class="header" style="background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);">
+                    <h2><i class="fas fa-ad"></i> Sponsored Ads</h2>
+                </div>
+                <div class="list">
+                    <div class="ad-content">
+                        <span class="ad-badge">Sponsored</span>
+                        <h3 class="ad-title">No active ads right now</h3>
+                    </div>
+                </div>
+            </div>
+        `;
+        return;
+    }
+
+    mobileContainer.innerHTML = `
+        <div class="list-multiple-item">
+            <div class="header" style="background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);">
+                <h2><i class="fas fa-ad"></i> Sponsored Ads</h2>
+                <a href="${document.getElementById('placeAdBtn')?.href || '#'}"
+                   target="_blank"
+                   rel="noopener"
+                   class="whatsapp-btn-small">
+                    <i class="fab fa-whatsapp"></i>
+                    Place Ad
+                </a>
+            </div>
+            <div class="list">
+                <div id="mobileSponsoredCarousel" class="mobile-sponsored-carousel">
+                    ${ads.map((ad, index) => `
+                        <div class="ad-slide ${index === 0 ? 'active' : ''}" data-index="${index}">
+                            <div style="position: relative;">
+                                <img src="${esc(ad.image)}" alt="${esc(ad.title)}" class="ad-image" loading="lazy">
+                                ${ad.whatsapp_link ? `
+                                    <a href="${esc(ad.whatsapp_link)}"
+                                       target="_blank"
+                                       rel="noopener"
+                                       class="float-wa-btn"
+                                       aria-label="Contact on WhatsApp">
+                                        <i class="fab fa-whatsapp"></i>
+                                    </a>
+                                ` : ''}
+                            </div>
+                            <div class="ad-content">
+                                <span class="ad-badge">Sponsored</span>
+                                <h3 class="ad-title">${esc(ad.title || 'Sponsored')}</h3>
+                                <p class="ad-description">Click to contact advertiser on WhatsApp.</p>
+                                <div class="ad-actions">
+                                    ${ad.whatsapp_link ? `
+                                        <a href="${esc(ad.whatsapp_link)}"
+                                           target="_blank"
+                                           rel="noopener"
+                                           class="ad-btn ad-btn-whatsapp">
+                                            <i class="fab fa-whatsapp"></i> WhatsApp
+                                        </a>
+                                    ` : ''}
+                                    <a href="${esc(ad.image)}"
+                                       target="_blank"
+                                       rel="noopener"
+                                       class="ad-btn ad-btn-view">
+                                        <i class="fas fa-eye"></i> View More
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+                <div class="ad-dots" id="mobileAdDots">
+                    ${ads.map((_, index) => `
+                        <div class="ad-dot ${index === 0 ? 'active' : ''}" data-index="${index}"></div>
+                    `).join('')}
+                </div>
+            </div>
+        </div>
+    `;
+
+    initMobileCarousel();
+}
+
+async function loadAds() {
+    try {
+        const data = await getJSON('api/ads_get.php');
+        state.ads = data.ads || [];
+        state.currentAdIndex = 0;
+
+        renderDesktopAds();
+        renderMobileAds();
+    } catch (err) {
+        console.error('Ads load failed:', err);
+    }
 }
 
 function showAd(index) {
     const slides = document.querySelectorAll('#sponsoredCarousel .ad-slide');
     const dots = document.querySelectorAll('#adDots .ad-dot');
 
-    if (index >= slides.length || index < 0) return;
+    if (!slides.length) return;
+    if (index < 0 || index >= slides.length) return;
 
     slides.forEach(slide => slide.classList.remove('active'));
     dots.forEach(dot => dot.classList.remove('active'));
 
     slides[index].classList.add('active');
-    dots[index].classList.add('active');
+    if (dots[index]) dots[index].classList.add('active');
 
-    currentAdIndex = index;
+    state.currentAdIndex = index;
     resetAdRotation();
 }
 
 function nextAd() {
-    const nextIndex = (currentAdIndex + 1) % sponsoredAds.length;
+    if (!state.ads.length) return;
+    const nextIndex = (state.currentAdIndex + 1) % state.ads.length;
     showAd(nextIndex);
 }
 
 function prevAd() {
-    const prevIndex = (currentAdIndex - 1 + sponsoredAds.length) % sponsoredAds.length;
+    if (!state.ads.length) return;
+    const prevIndex = (state.currentAdIndex - 1 + state.ads.length) % state.ads.length;
     showAd(prevIndex);
 }
 
-window.nextAd = nextAd;
-window.prevAd = prevAd;
-
 function startAdRotation() {
-    adInterval = setInterval(nextAd, 5000);
+    clearInterval(state.adInterval);
+    if (state.ads.length <= 1) return;
+
+    state.adInterval = setInterval(() => {
+        nextAd();
+    }, 5000);
 }
 
 function resetAdRotation() {
-    clearInterval(adInterval);
     startAdRotation();
 }
 
@@ -511,238 +521,457 @@ function addTouchSupport(carousel) {
 
     carousel.addEventListener('touchend', e => {
         touchEndX = e.changedTouches[0].screenX;
-        handleSwipe();
-    }, { passive: true });
-
-    function handleSwipe() {
-        const swipeThreshold = 50;
         const diff = touchStartX - touchEndX;
+        const threshold = 50;
 
-        if (Math.abs(diff) > swipeThreshold) {
+        if (Math.abs(diff) > threshold) {
             if (diff > 0) nextAd();
             else prevAd();
         }
+    }, { passive: true });
+}
+
+function initMobileCarousel() {
+    const dots = document.querySelectorAll('#mobileAdDots .ad-dot');
+    const slides = document.querySelectorAll('#mobileSponsoredCarousel .ad-slide');
+
+    if (!dots.length || !slides.length) return;
+
+    let mobileIndex = 0;
+    let mobileInterval = null;
+
+    function showMobileAd(index) {
+        if (index < 0 || index >= slides.length) return;
+
+        slides.forEach(slide => slide.classList.remove('active'));
+        dots.forEach(dot => dot.classList.remove('active'));
+
+        slides[index].classList.add('active');
+        dots[index].classList.add('active');
+        mobileIndex = index;
+    }
+
+    dots.forEach((dot, index) => {
+        dot.addEventListener('click', () => {
+            showMobileAd(index);
+        });
+    });
+
+    mobileInterval = setInterval(() => {
+        showMobileAd((mobileIndex + 1) % slides.length);
+    }, 5000);
+
+    const mobileCarousel = document.getElementById('mobileSponsoredCarousel');
+    if (mobileCarousel) {
+        mobileCarousel.addEventListener('mouseenter', () => clearInterval(mobileInterval));
+        mobileCarousel.addEventListener('mouseleave', () => {
+            mobileInterval = setInterval(() => {
+                showMobileAd((mobileIndex + 1) % slides.length);
+            }, 5000);
+        });
     }
 }
 
-function getTotalReactions(reactions) {
-    return Object.values(reactions).reduce((sum, count) => sum + count, 0);
-}
+// --------------------
+// FEED
+// --------------------
+function renderFeedItem(item) {
+    const years = (item.years_range || '— - —').split(' - ');
+    const birthYear = years[0] || '—';
+    const deathYear = years[1] || '—';
+    const coverImage = imageOrFallback(item.cover_image);
+    const reactEmoji = getReactionEmoji(item.my_reaction);
+    const reactLabel = getReactionLabel(item.my_reaction);
+    const commentText = getCommentLabel(Number(item.tribute_count || 0));
 
-function getTopReactions(reactions) {
-    const sorted = Object.entries(reactions)
-        .sort(([, a], [, b]) => b - a)
-        .slice(0, 3)
-        .filter(([, count]) => count > 0);
+    const title = getTypeLabel(item);
 
-    return sorted.map(([emotion]) => reactionTypes[emotion].emoji);
-}
-
-function renderFeeds(limit = displayedMemorialsCount) {
-    const container = document.getElementById('feedsContainer');
-    if (!container) return;
-
-    container.innerHTML = '';
-    const memorialsToShow = memorials.slice(0, limit);
-
-    memorialsToShow.forEach(memorial => {
-        const totalReactions = getTotalReactions(memorial.reactions);
-        const topReactions = getTopReactions(memorial.reactions);
-        const feedCard = document.createElement('div');
-        feedCard.className = `feed-card ${memorial.type === 'vip' ? 'premium' : ''}`;
-        feedCard.setAttribute('data-id', memorial.id);
-
-        feedCard.innerHTML = `
+    return `
+        <div class="feed-card ${item.type === 'remembrance' ? 'premium' : ''}" data-id="${Number(item.id)}">
             <div class="feed-header">
-                <span class="head"><span>${memorial.title}</span></span>
-                <span class="actions"><span class="minago">${memorial.time}</span></span>
+                <span class="head"><span>${esc(title)}</span></span>
+                <span class="actions"><span class="minago">${esc(item.time_ago || '')}</span></span>
             </div>
-            
-            <a href="memorial-detail.html?id=${memorial.id}" class="card-body" onclick="handleCardClick('${memorial.id}', event)">
+
+            <a href="${esc(item.details_url)}" class="card-body">
                 <div class="avatar">
-                    <span class="yearfrom">${memorial.birthYear}</span>
+                    <span class="yearfrom">${esc(birthYear)}</span>
                     <div class="image-container">
                         <div class="photo-wrapper">
-                            <img src="${memorial.image}" alt="${memorial.name}" class="photo" />
+                            <img src="${esc(coverImage)}"
+                                 alt="${esc(item.full_name)}"
+                                 class="photo"
+                                 loading="lazy"
+                                 onerror="this.onerror=null;this.src='assets/defaultavt.png';">
                         </div>
                         <div class="floral-decoration">
-                            ${memorial.hasCustomBorder ? `<img src="floral.png" alt="Floral" />` : `<i class="sprite floral"></i>`}
+                            <img src="assets/floral.png" alt="Floral" onerror="this.style.display='none';">
                         </div>
                     </div>
-                    <span class="yearto">${memorial.deathYear}</span>
+                    <span class="yearto">${esc(deathYear)}</span>
                 </div>
+
                 <div class="info">
-                    ${memorial.locations.map(loc => `<span class="subhead">${loc}</span>`).join('')}
+                    <span class="head">${esc(item.full_name)}</span>
+                    ${item.birth_place ? `<span class="subhead">${esc(item.birth_place)}</span>` : ''}
+                    ${item.lived_place ? `<span class="subhead">${esc(item.lived_place)}</span>` : ''}
+                    ${item.country ? `<span class="subhead">${esc(item.country)}</span>` : ''}
                 </div>
             </a>
-            
+
             <div class="facebook-actions">
                 <div class="action-row">
-                    ${totalReactions > 0 ? `
-                        <div class="reaction-summary">
-                            <div class="reaction-icons-small">${topReactions.map(emoji => `<span>${emoji}</span>`).join('')}</div>
-                            <div class="reaction-count-small"><span class="count">${totalReactions}</span></div>
+                    <div class="reaction-summary">
+                        <div class="reaction-icons-small">
+                            <span>${reactEmoji}</span>
                         </div>
-                    ` : ''}
-                    
+                        <div class="reaction-count-small">
+                            <span class="count">${Number(item.react_total || 0)}</span>
+                        </div>
+                    </div>
+
                     <div class="tribute-summary">
-                        <a href="memorial-detail.html?id=${memorial.id}#tributes" 
-                           class="tribute-link ${memorial.tributeCount.includes('First') ? 'orange' : ''}"
-                           onclick="handleCardClick('${memorial.id}', event)">
-                            <i class="fas fa-heart"></i> ${memorial.tributeCount}
+                        <a href="${esc(item.details_url)}#comments"
+                           class="tribute-link ${Number(item.tribute_count || 0) < 1 ? 'orange' : ''}">
+                            <i class="fas fa-heart"></i> ${esc(commentText)}
                         </a>
                     </div>
-                    
+
                     <div class="facebook-buttons">
-                        <button class="fb-action-btn fb-reaction-btn ${memorial.userReaction ? 'active' : ''}" 
-                                onclick="showFacebookReactionPopup('${memorial.id}', event)">
-                            <span class="fb-icon">${memorial.userReaction ? reactionTypes[memorial.userReaction].emoji : '😔'}</span>
-                            <span>${memorial.userReaction ? reactionTypes[memorial.userReaction].label : 'React'}</span>
-                            
-                            <div class="fb-reaction-popup" id="fbReactionPopup-${memorial.id}">
+                        <button class="fb-action-btn fb-reaction-btn ${item.my_reaction ? 'active' : ''}"
+                                onclick="showFacebookReactionPopup(${Number(item.id)}, event)">
+                            <span class="fb-icon">${reactEmoji}</span>
+                            <span>${esc(reactLabel)}</span>
+
+                            <div class="fb-reaction-popup" id="fbReactionPopup-${Number(item.id)}">
                                 ${Object.entries(reactionTypes).map(([key, val]) => `
-                                    <div class="fb-reaction-option" 
-                                         data-reaction="${key}"
-                                         onclick="handleReaction('${memorial.id}', '${key}', event)">
+                                    <div class="fb-reaction-option"
+                                         data-label="${esc(val.label)}"
+                                         data-reaction="${esc(key)}"
+                                         onclick="handleReaction(${Number(item.id)}, '${esc(key)}', event)">
                                         ${val.emoji}
                                     </div>
                                 `).join('')}
                             </div>
                         </button>
-                        
-                        <a href="javascript:;" class="fb-action-btn fb-share-btn" onclick="handleShareButton('${memorial.id}', event)">
+
+                        <a href="javascript:void(0)" class="fb-action-btn fb-share-btn"
+                           onclick="handleShareButton(${Number(item.id)}, event)">
                             <i class="fas fa-share fb-icon"></i> <span>Share</span>
                         </a>
+
+                        ${item.rip_video_link ? `
+                            <a href="${esc(item.rip_video_link)}"
+                               class="fb-action-btn"
+                               target="_blank"
+                               rel="noopener">
+                                <i class="fas fa-play fb-icon"></i> <span>Video</span>
+                            </a>
+                        ` : ''}
                     </div>
                 </div>
             </div>
-        `;
-        container.appendChild(feedCard);
-    });
-
-    updateMemorialCount();
+        </div>
+    `;
 }
 
-function handleCardClick(id, event) {
-    // Analytics or tracking could go here
-    console.log(`Memorial clicked: ${id}`);
+async function loadFeed(append = false) {
+    const container = document.getElementById('feedsContainer');
+    const btn = document.getElementById('loadMoreBtn');
+
+    if (!container) return;
+
+    try {
+        if (!append) {
+            container.innerHTML = `
+                <div class="feed-card">
+                    <div class="feed-header">
+                        <span class="head">Loading memorials...</span>
+                        <span class="actions">Please wait</span>
+                    </div>
+                </div>
+            `;
+        }
+
+        if (btn && append) {
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Loading...';
+        }
+
+        const query = buildFeedParams();
+        const data = await getJSON(`api/home_feed_get.php?${query}`);
+        const items = data.items || [];
+
+        if (!append) {
+            state.feedItems = items;
+            state.displayedCount = items.length;
+
+            if (!items.length) {
+                container.innerHTML = `
+                    <div class="feed-card">
+                        <div class="feed-header">
+                            <span class="head">No memorials found</span>
+                            <span class="actions">Empty</span>
+                        </div>
+                    </div>
+                `;
+            } else {
+                container.innerHTML = items.map(renderFeedItem).join('');
+            }
+        } else {
+            state.feedItems = state.feedItems.concat(items);
+            state.displayedCount += items.length;
+            container.insertAdjacentHTML('beforeend', items.map(renderFeedItem).join(''));
+        }
+
+        state.hasMore = !!data.has_more;
+        updateCount();
+        setLoadMoreVisibility();
+
+    } catch (err) {
+        console.error('Feed load failed:', err);
+
+        if (!append) {
+            container.innerHTML = `
+                <div class="feed-card">
+                    <div class="feed-header">
+                        <span class="head">Failed to load memorials</span>
+                        <span class="actions">Error</span>
+                    </div>
+                </div>
+            `;
+        }
+    } finally {
+        if (btn) {
+            btn.disabled = false;
+            btn.innerHTML = '<i class="fas fa-spinner"></i> Load More Memorials';
+        }
+    }
 }
 
-window.handleCardClick = handleCardClick;
-
+// --------------------
+// REACTIONS
+// --------------------
 function showFacebookReactionPopup(id, event) {
     event.preventDefault();
     event.stopPropagation();
 
-    // Close all other popups
+    const popup = document.getElementById(`fbReactionPopup-${id}`);
+    if (!popup) return;
+
     document.querySelectorAll('.fb-reaction-popup').forEach(p => {
-        if (p.id !== `fbReactionPopup-${id}`) p.classList.remove('active');
+        if (p !== popup) {
+            p.classList.remove('show');
+            p.classList.remove('active');
+        }
     });
 
-    const popup = document.getElementById(`fbReactionPopup-${id}`);
-    if (popup) popup.classList.toggle('active');
+    popup.classList.toggle('show');
+    popup.classList.toggle('active');
 }
 
-window.showFacebookReactionPopup = showFacebookReactionPopup;
-
-function handleReaction(memorialId, reactionKey, event) {
+async function handleReaction(postId, reaction, event) {
     event.preventDefault();
     event.stopPropagation();
 
-    const memorial = memorials.find(m => m.id === memorialId);
-    if (!memorial) return;
+    try {
+        const formData = new FormData();
+        formData.append('post_id', postId);
+        formData.append('reaction', reaction);
 
-    if (memorial.userReaction === reactionKey) {
-        memorial.reactions[reactionKey]--;
-        memorial.userReaction = null;
-    } else {
-        if (memorial.userReaction) memorial.reactions[memorial.userReaction]--;
-        memorial.reactions[reactionKey]++;
-        memorial.userReaction = reactionKey;
+        // This assumes you already have a reaction API.
+        // If you don't, stop pretending reactions are done.
+        const res = await fetch('api/post_reaction_toggle.php', {
+            method: 'POST',
+            body: formData,
+            credentials: 'same-origin'
+        });
+
+        if (!res.ok) {
+            throw new Error('Reaction request failed');
+        }
+
+        const data = await res.json();
+
+        if (data.ok) {
+            const item = state.feedItems.find(x => Number(x.id) === Number(postId));
+            if (item) {
+                item.my_reaction = data.my_reaction || '';
+                item.react_total = Number(data.react_total || 0);
+
+                const card = document.querySelector(`.feed-card[data-id="${postId}"]`);
+                if (card && item) {
+                    const replacement = document.createElement('div');
+                    replacement.innerHTML = renderFeedItem(item);
+                    card.replaceWith(replacement.firstElementChild);
+                }
+            }
+        }
+    } catch (err) {
+        console.error('Reaction failed:', err);
+    } finally {
+        closeAllReactionPopups();
     }
-
-    renderFeeds();
 }
-
-window.handleReaction = handleReaction;
 
 function handleShareButton(id, event) {
     event.preventDefault();
     event.stopPropagation();
 
-    const memorial = memorials.find(m => m.id === id);
-    if (!memorial) return;
+    const item = state.feedItems.find(x => Number(x.id) === Number(id));
+    if (!item) return;
+
+    const shareUrl = `${window.location.origin}/${item.details_url}`;
+    const shareTitle = `In Memory of ${item.full_name}`;
 
     if (navigator.share) {
         navigator.share({
-            title: `In Memory of ${memorial.name}`,
-            text: `View the memorial of ${memorial.name} on FuneralNotice.lk`,
-            url: window.location.href
-        }).catch(err => console.log('Error sharing:', err));
+            title: shareTitle,
+            text: shareTitle,
+            url: shareUrl
+        }).catch(err => console.log('Share cancelled:', err));
     } else {
-        alert(`Sharing memorial: ${memorial.name}\nLink: ${window.location.origin}/memorial-detail.html?id=${id}`);
+        navigator.clipboard.writeText(shareUrl)
+            .then(() => alert('Link copied to clipboard'))
+            .catch(() => alert(shareUrl));
     }
 }
 
-window.handleShareButton = handleShareButton;
+// --------------------
+// MAINTENANCE
+// --------------------
+async function loadMaintenance() {
+    try {
+        const data = await getJSON('api/maintenance_get.php');
 
-function loadMoreMemorials() {
+        if (!data.maintenance) return;
+
+        const m = data.maintenance;
+        const wrapper = document.createElement('div');
+        wrapper.id = 'maintenancePopup';
+        wrapper.innerHTML = `
+            <div style="
+                position: fixed;
+                inset: 0;
+                background: rgba(0,0,0,0.7);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                z-index: 99999;
+                padding: 20px;">
+                <div style="
+                    background: white;
+                    border-radius: 16px;
+                    max-width: 420px;
+                    width: 100%;
+                    position: relative;
+                    padding: 16px;
+                    box-shadow: 0 20px 40px rgba(0,0,0,0.25);">
+                    <button id="closeMaintenancePopup" style="
+                        position:absolute;
+                        top:10px;
+                        right:10px;
+                        width:36px;
+                        height:36px;
+                        border:none;
+                        border-radius:50%;
+                        cursor:pointer;
+                        font-size:18px;">×</button>
+                    <img src="notification.php?id=${Number(m.id)}"
+                         alt="Maintenance"
+                         style="width:100%;border-radius:12px;">
+                    ${m.label ? `<div style="margin-top:12px;font-weight:700;text-align:center;">${esc(m.label)}</div>` : ''}
+                </div>
+            </div>
+        `;
+
+        document.body.appendChild(wrapper);
+        document.getElementById('closeMaintenancePopup')?.addEventListener('click', () => {
+            wrapper.remove();
+        });
+
+    } catch (err) {
+        console.error('Maintenance load failed:', err);
+    }
+}
+
+// --------------------
+// TABS
+// --------------------
+function bindTabs() {
+    document.querySelectorAll('.tab-link').forEach(link => {
+        link.addEventListener('click', function (e) {
+            e.preventDefault();
+
+            document.querySelectorAll('.tab-link').forEach(x => x.classList.remove('active'));
+            this.classList.add('active');
+
+            state.type = this.dataset.type || 'all';
+            state.page = 1;
+            state.displayedCount = 0;
+
+            loadFeed(false);
+        });
+    });
+}
+
+// --------------------
+// LOAD MORE
+// --------------------
+function bindLoadMore() {
     const btn = document.getElementById('loadMoreBtn');
     if (!btn) return;
 
-    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Loading...';
-    btn.disabled = true;
-
-    setTimeout(() => {
-        displayedMemorialsCount += memorialsPerLoad;
-        renderFeeds(displayedMemorialsCount);
-
-        btn.innerHTML = '<i class="fas fa-spinner"></i> Load More Memorials';
-        btn.disabled = false;
-
-        if (displayedMemorialsCount >= memorials.length) {
-            btn.style.display = 'none';
-        }
-    }, 800);
+    btn.addEventListener('click', function () {
+        if (!state.hasMore) return;
+        state.page += 1;
+        loadFeed(true);
+    });
 }
 
-function updateMemorialCount() {
-    const countEl = document.getElementById('currentCount');
-    if (countEl) countEl.textContent = Math.min(displayedMemorialsCount, memorials.length);
+// --------------------
+// INIT SESSION
+// --------------------
+async function initSession() {
+    try {
+        await getJSON('api/session_sid.php');
+    } catch (err) {
+        console.error('Session init failed:', err);
+    }
 }
 
-function filterMemorials(type) {
-    console.log(`Filtering by type: ${type}`);
-    // In a real app, this would filter the array and re-render
-}
+// --------------------
+// GLOBALS
+// --------------------
+window.showFacebookReactionPopup = showFacebookReactionPopup;
+window.handleReaction = handleReaction;
+window.handleShareButton = handleShareButton;
+window.nextAd = nextAd;
+window.prevAd = prevAd;
 
-// Sidebars initialization 
-function initSidebarToggle() {
-    // This logic is mostly handled by CSS and simple event listeners
-    // but we can add more robust handling here if needed.
-}
-
-// Global click handler to close popups
+// --------------------
+// INIT
+// --------------------
 document.addEventListener('click', function () {
-    document.querySelectorAll('.fb-reaction-popup').forEach(p => p.classList.remove('active'));
+    closeAllReactionPopups();
 });
 
-// Initialize the homepage
-document.addEventListener('DOMContentLoaded', function () {
-    renderRecentPosts();
-    renderRecentTributes();
-    renderFeeds();
-    renderSponsoredAds();
-    renderMobileSponsoredAds();
+document.addEventListener('DOMContentLoaded', async function () {
+    bindTabs();
+    bindLoadMore();
 
-    const loadMoreBtn = document.getElementById('loadMoreBtn');
-    if (loadMoreBtn) loadMoreBtn.addEventListener('click', loadMoreMemorials);
+    await initSession();
+
+    await Promise.all([
+        loadOrgWhatsapp(),
+        loadDistricts(),
+        loadRecentComments(),
+        loadAds(),
+        loadFeed(false),
+        loadMaintenance()
+    ]);
 
     window.addEventListener('resize', function () {
-        if (window.innerWidth > 992) {
-            document.getElementById('leftSidebar')?.classList.remove('active');
-            document.getElementById('rightSidebar')?.classList.remove('active');
-        }
-        renderMobileSponsoredAds();
+        renderMobileAds();
     });
 });

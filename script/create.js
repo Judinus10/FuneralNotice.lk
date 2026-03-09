@@ -1,5 +1,5 @@
 /**
- * create.js - Logic for create.html
+ * create.js - Logic for create.php
  */
 
 let uploadedPhoto = null;
@@ -91,7 +91,7 @@ function createMemorial(event) {
         submitBtn.disabled = false;
 
         // Redirect to index page
-        window.location.href = 'index.html';
+        window.location.href = 'index.php';
     }, 2000);
 }
 
@@ -141,7 +141,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const menuLinks = document.querySelectorAll('.mobile-menu-nav a');
     menuLinks.forEach(link => {
         link.classList.remove('active');
-        if (link.getAttribute('href') === 'create.html' || currentPath.includes('create')) {
+        if (link.getAttribute('href') === 'create.php' || currentPath.includes('create')) {
             if (link.getAttribute('href').includes('create')) {
                 link.classList.add('active');
             }

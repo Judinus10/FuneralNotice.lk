@@ -1,5 +1,5 @@
 
-file_path = r'd:\DOWNLOAD_APPS\Xampp\htdocs\FuneralNotice.lk\index.html'
+file_path = r'd:\DOWNLOAD_APPS\Xampp\htdocs\FuneralNotice.lk\index.php'
 try:
     with open(file_path, 'r', encoding='utf-8') as f:
         lines = f.readlines()

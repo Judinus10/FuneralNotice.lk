@@ -10,11 +10,11 @@
             </div>
 
             <div class="footer-links">
-                <a href="about.html">About Us</a>
-                <a href="terms.html">Terms</a>
+                <a href="about.php">About Us</a>
+                <a href="terms.php">Terms</a>
                 <a href="#">Report Us</a>
-                <a href="privacy.html">Privacy Policy</a>
-                <a href="cookies.html">Cookie Policy</a>
+                <a href="privacy.php">Privacy Policy</a>
+                <a href="cookies.php">Cookie Policy</a>
             </div>
 
             <div class="copyright">
@@ -27,15 +27,15 @@
 <!-- UPDATED Mobile Bottom Navigation - Removed obituaries and remembrance, added about and contact -->
 <div class="mobile-bottom-nav">
     <div class="nav-container">
-        <div class="mobile-nav-item" data-page="home" onclick="window.location.href='index.html'">
+        <div class="mobile-nav-item" data-page="home" onclick="window.location.href='index.php'">
             <i class="fas fa-home"></i>
             <span class="nav-label">Home</span>
         </div>
-        <div class="mobile-nav-item" data-page="about" onclick="window.location.href='about.html'">
+        <div class="mobile-nav-item" data-page="about" onclick="window.location.href='about.php'">
             <i class="fas fa-info-circle"></i>
             <span class="nav-label">About</span>
         </div>
-        <div class="mobile-nav-item" data-page="contact" onclick="window.location.href='contact.html'">
+        <div class="mobile-nav-item" data-page="contact" onclick="window.location.href='contact.php'">
             <i class="fas fa-envelope"></i>
             <span class="nav-label">Contact</span>
         </div>
@@ -51,6 +51,6 @@
 </div>
 
 <!-- UPDATED: Mobile Create Notice Button (replaces floating WhatsApp) -->
-<a href="create.html" class="mobile-create-notice-float" id="mobileCreateNoticeBtn">
+<a href="create.php" class="mobile-create-notice-float" id="mobileCreateNoticeBtn">
     <i class="fas fa-plus"></i>
 </a>

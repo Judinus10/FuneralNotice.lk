@@ -10,7 +10,7 @@
 
     <!-- Open Graph Tags -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://funeralnotice.lk/about.html">
+    <meta property="og:url" content="https://funeralnotice.lk/about.php">
     <meta property="og:title" content="About Us - FuneralNotice.lk">
     <meta property="og:description" content="A dignified platform to honor and remember loved ones in Sri Lanka.">
     <meta property="og:image" content="https://ripnews.lk/uploads/posts/76/cover.png">
@@ -310,11 +310,11 @@
                         their memory and brings comfort to family and friends.</p>
 
                     <div class="cta-buttons">
-                        <button class="cta-btn cta-btn-primary" onclick="window.location.href='create.html'">
+                        <button class="cta-btn cta-btn-primary" onclick="window.location.href='create.php'">
                             <i class="fas fa-plus-circle"></i>
                             Create a Memorial
                         </button>
-                        <button class="cta-btn cta-btn-secondary" onclick="window.location.href='contact.html'">
+                        <button class="cta-btn cta-btn-secondary" onclick="window.location.href='contact.php'">
                             <i class="fas fa-comments"></i>
                             Contact Our Team
                         </button>
@@ -330,8 +330,8 @@
     <script src="script/common.js"></script>
     <script>
         // Load components when DOM is ready
-        loadComponent('navbar.html', 'navbar-placeholder');
-        loadComponent('footer.html', 'footer-placeholder');
+        loadComponent('navbar.php', 'navbar-placeholder');
+        loadComponent('footer.php', 'footer-placeholder');
     </script>
     <script src="script/about.js"></script>
 </body>

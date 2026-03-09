@@ -3,9 +3,9 @@
     <div class="container">
         <nav class="top-nav">
             <ul>
-                <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
-                <li><a href="about.html"><i class="fas fa-info-circle"></i> About Us</a></li>
-                <li><a href="contact.html"><i class="fas fa-envelope"></i> Contact Us</a></li>
+                <li><a href="index.php"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="about.php"><i class="fas fa-info-circle"></i> About Us</a></li>
+                <li><a href="contact.php"><i class="fas fa-envelope"></i> Contact Us</a></li>
             </ul>
         </nav>
         <div class="language-selector">
@@ -63,11 +63,11 @@
                     <!-- <button class="btn btn-primary" id="createFuneralNoticeBtn">
                         <i class="fas fa-plus"></i> <span class="hide-on-mobile">Create Memorial</span>
                     </button> -->
-                    <a class="btn btn-primary" href="create.html" id="createFuneralNoticeBtn">
+                    <a class="btn btn-primary" href="create.php" id="createFuneralNoticeBtn">
                         <i class="fas fa-plus"></i> <span class="hide-on-mobile">Create Memorial</span>
                     </a>
                     <button class="btn btn-outline hide-on-mobile"
-                        onclick="window.location.href='index.html'">Browse</button>
+                        onclick="window.location.href='index.php'">Browse</button>
                 </div>
             </div>
         </div>
@@ -119,11 +119,11 @@
         <div class="mobile-menu-section">
             <h4><i class="fas fa-compass"></i> Navigation</h4>
             <ul class="mobile-menu-nav">
-                <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
-                <li><a href="about.html"><i class="fas fa-info-circle"></i> About Us</a></li>
-                <li><a href="create.html"><i class="fas fa-plus-circle"></i> Create Memorial</a></li>
-                <li><a href="gallery.html"><i class="fas fa-images"></i> Memorial Gallery</a></li>
-                <li><a href="contact.html" class="active"><i class="fas fa-envelope"></i> Contact Us</a></li>
+                <li><a href="index.php"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="about.php"><i class="fas fa-info-circle"></i> About Us</a></li>
+                <li><a href="create.php"><i class="fas fa-plus-circle"></i> Create Memorial</a></li>
+                <li><a href="gallery.php"><i class="fas fa-images"></i> Memorial Gallery</a></li>
+                <li><a href="contact.php" class="active"><i class="fas fa-envelope"></i> Contact Us</a></li>
             </ul>
         </div>
 

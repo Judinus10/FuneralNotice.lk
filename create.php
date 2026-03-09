@@ -190,7 +190,7 @@
                 </div>
 
                 <div class="create-actions">
-                    <a href="index.html" class="back-btn">
+                    <a href="index.php" class="back-btn">
                         <i class="fas fa-arrow-left"></i> Back to Home
                     </a>
                     <button type="submit" form="memorialForm" class="submit-btn" onclick="createMemorial(event)">
@@ -207,8 +207,8 @@
     <script src="script/common.js"></script>
     <script>
         // Load components when DOM is ready
-        loadComponent('navbar.html', 'navbar-placeholder');
-        loadComponent('footer.html', 'footer-placeholder');
+        loadComponent('navbar.php', 'navbar-placeholder');
+        loadComponent('footer.php', 'footer-placeholder');
     </script>
     <script src="script/create.js"></script>
 </body>

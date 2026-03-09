@@ -287,8 +287,8 @@
     <script src="script/common.js"></script>
     <script>
         // Load components when DOM is ready
-        loadComponent('navbar.html', 'navbar-placeholder');
-        loadComponent('footer.html', 'footer-placeholder');
+        loadComponent('navbar.php', 'navbar-placeholder');
+        loadComponent('footer.php', 'footer-placeholder');
     </script>
     <script src="script/memorial-detail.js"></script>
 

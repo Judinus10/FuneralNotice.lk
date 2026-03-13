@@ -4,7 +4,11 @@ declare(strict_types=1);
 date_default_timezone_set('Asia/Colombo');
 session_start();
 
+require_once __DIR__ . '/../db.php';
+
 header('Content-Type: application/json; charset=utf-8');
+header('Cache-Control: no-store, no-cache, must-revalidate, max-age=0');
+header('Pragma: no-cache');
 
 function out(array $data, int $status = 200): void
 {
@@ -30,25 +34,87 @@ function buildCaptcha(): array
 
     $_SESSION['captcha_answer'] = (string)$answer;
     $_SESSION['captcha_question'] = $question;
+    unset($_SESSION['captcha_passed']);
 
-    return ['question' => $question];
+    return [
+        'question' => $question,
+        'answer' => (string)$answer,
+    ];
 }
 
-$raw = file_get_contents('php://input');
-$data = json_decode($raw, true) ?: [];
+try {
+    $pdo = db();
 
-$user = preg_replace('/\s+/', '', (string)($data['answer'] ?? ''));
-$expected = preg_replace('/\s+/', '', (string)($_SESSION['captcha_answer'] ?? ''));
+    $countryStmt = $pdo->query("
+        SELECT name
+        FROM phone_countries
+        WHERE name IS NOT NULL AND TRIM(name) <> ''
+        ORDER BY sort_order, name
+    ");
+    $countryNames = $countryStmt->fetchAll(PDO::FETCH_COLUMN) ?: [];
 
-if ($user !== '' && $expected !== '' && hash_equals($expected, $user)) {
-    $_SESSION['captcha_passed'] = 1;
-    out(['ok' => true]);
+    $phoneStmt = $pdo->query("
+        SELECT id, name, code
+        FROM phone_countries
+        WHERE code IS NOT NULL AND TRIM(code) <> ''
+        ORDER BY sort_order, name
+    ");
+    $phoneRows = $phoneStmt->fetchAll(PDO::FETCH_ASSOC) ?: [];
+
+    $captcha = buildCaptcha();
+
+    $countries = array_map(
+        static fn($name): array => [
+            'value' => (string)$name,
+            'label' => (string)$name,
+        ],
+        $countryNames
+    );
+
+    $phoneCodes = array_map(
+        static fn(array $row): array => [
+            'id'    => isset($row['id']) ? (int)$row['id'] : 0,
+            'name'  => (string)($row['name'] ?? ''),
+            'code'  => trim((string)($row['code'] ?? '')),
+            'value' => trim((string)($row['code'] ?? '')),
+            'label' => trim((string)($row['name'] ?? '')) . ' (' . trim((string)($row['code'] ?? '')) . ')',
+        ],
+        $phoneRows
+    );
+
+    out([
+        'ok' => true,
+        'message' => '',
+        'question' => $captcha['question'],
+        'default_country' => 'Sri Lanka',
+
+        'post_types' => [
+            ['value' => 'obituary', 'label' => 'Obituary'],
+            ['value' => 'remembrance', 'label' => 'Remembrance'],
+        ],
+
+        'religions' => [
+            'Buddhism',
+            'Hinduism',
+            'Christianity',
+            'Islam',
+            'Roman Catholic',
+            'Other',
+        ],
+
+        'id_types' => [
+            'NIC',
+            'Passport',
+        ],
+
+        'countries' => $countries,
+        'phone_codes' => $phoneCodes,
+    ]);
+} catch (Throwable $e) {
+    error_log('create_bootstrap_get.php failed: ' . $e->getMessage());
+
+    out([
+        'ok' => false,
+        'message' => 'Failed to load create form.',
+    ], 500);
 }
-
-$newCaptcha = buildCaptcha();
-
-out([
-    'ok' => false,
-    'message' => 'Captcha incorrect. Try the new one.',
-    'question' => $newCaptcha['question']
-], 422);

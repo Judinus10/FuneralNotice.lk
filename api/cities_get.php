@@ -4,6 +4,8 @@ declare(strict_types=1);
 date_default_timezone_set('Asia/Colombo');
 
 header('Content-Type: application/json; charset=utf-8');
+header('Cache-Control: no-store, no-cache, must-revalidate, max-age=0');
+header('Pragma: no-cache');
 
 function out(array $data, int $status = 200): void
 {
@@ -12,7 +14,7 @@ function out(array $data, int $status = 200): void
     exit;
 }
 
-$country = trim((string)($_GET['country'] ?? ''));
+$country = trim((string) ($_GET['country'] ?? ''));
 
 if ($country === '') {
     out([
@@ -22,10 +24,30 @@ if ($country === '') {
     ], 422);
 }
 
+if (!function_exists('curl_init')) {
+    out([
+        'ok' => false,
+        'message' => 'cURL is not enabled on this server.',
+        'cities' => []
+    ], 500);
+}
+
 try {
-    $payload = json_encode(['country' => $country], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+    $payload = json_encode(
+        ['country' => $country],
+        JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES
+    );
+
+    if ($payload === false) {
+        out([
+            'ok' => false,
+            'message' => 'Failed to build request payload.',
+            'cities' => []
+        ], 500);
+    }
 
     $ch = curl_init('https://countriesnow.space/api/v0.1/countries/cities');
+
     curl_setopt_array($ch, [
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_POST => true,
@@ -36,46 +58,75 @@ try {
         ],
         CURLOPT_CONNECTTIMEOUT => 10,
         CURLOPT_TIMEOUT => 20,
-        CURLOPT_SSL_VERIFYPEER => true,
-        CURLOPT_SSL_VERIFYHOST => 2,
+
+        // local Windows/XAMPP setups often choke on SSL cert chain
+        CURLOPT_SSL_VERIFYPEER => false,
+        CURLOPT_SSL_VERIFYHOST => 0,
     ]);
 
     $response = curl_exec($ch);
+    $curlErr = curl_error($ch);
+    $httpCode = (int) curl_getinfo($ch, CURLINFO_HTTP_CODE);
 
-    if ($response === false) {
-        $err = curl_error($ch);
-        curl_close($ch);
+    curl_close($ch);
+
+    if ($response === false || $response === '') {
         out([
             'ok' => false,
-            'message' => 'City API request failed: ' . $err,
+            'message' => 'City API request failed: ' . ($curlErr !== '' ? $curlErr : 'empty response'),
             'cities' => []
         ], 500);
     }
 
-    $httpCode = (int)curl_getinfo($ch, CURLINFO_HTTP_CODE);
-    curl_close($ch);
-
     $decoded = json_decode($response, true);
 
-    if ($httpCode !== 200 || !is_array($decoded)) {
+    if (!is_array($decoded)) {
         out([
             'ok' => false,
-            'message' => 'City API returned invalid response.',
+            'message' => 'City API returned non-JSON response.',
+            'debug_http_code' => $httpCode,
+            'debug_response' => substr($response, 0, 300),
+            'cities' => []
+        ], 500);
+    }
+
+    // countriesnow usually returns: { error: false, msg: "...", data: [...] }
+    $apiError = $decoded['error'] ?? null;
+    $apiMsg = trim((string) ($decoded['msg'] ?? ''));
+
+    if ($httpCode !== 200) {
+        out([
+            'ok' => false,
+            'message' => $apiMsg !== '' ? $apiMsg : 'City API returned HTTP ' . $httpCode . '.',
+            'cities' => []
+        ], 500);
+    }
+
+    if ($apiError === true) {
+        out([
+            'ok' => false,
+            'message' => $apiMsg !== '' ? $apiMsg : 'City API reported an error.',
             'cities' => []
         ], 500);
     }
 
     $cities = $decoded['data'] ?? [];
+
     if (!is_array($cities)) {
-        $cities = [];
+        out([
+            'ok' => false,
+            'message' => 'City API data format is invalid.',
+            'cities' => []
+        ], 500);
     }
 
     $cities = array_values(array_unique(array_filter(array_map(
-        static fn($v) => trim((string)$v),
+        static fn($v) => trim((string) $v),
         $cities
     ))));
 
-    sort($cities, SORT_NATURAL | SORT_FLAG_CASE);
+    natcasesort($cities);
+    $cities = array_values($cities);
 
     out([
         'ok' => true,
@@ -85,7 +136,7 @@ try {
 } catch (Throwable $e) {
     out([
         'ok' => false,
-        'message' => $e->getMessage(),
+        'message' => 'Server error: ' . $e->getMessage(),
         'cities' => []
     ], 500);
 }

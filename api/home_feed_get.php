@@ -260,7 +260,7 @@ try {
             'react_total' => (int) ($m['react_total'] ?? 0),
             'my_reaction' => $m['my_reaction'] ?? '',
             'rip_video_link' => $m['rip_video_link'] ?? '',
-            'details_url' => 'details.php?id=' . (int) $m['id'],
+            'details_url' => 'memorial-detail.php?id=' . (int) $m['id'],
         ];
     }, $rows);
 

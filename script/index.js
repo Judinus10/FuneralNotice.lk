@@ -213,7 +213,7 @@ async function loadRecentComments() {
 
         container.innerHTML = items.map(item => `
             <li>
-                <a href="details.php?id=${Number(item.id)}">
+                <a href="memorial-detail.php?id=${Number(item.id)}">
                     <img src="${esc(imageOrFallback(item.cover_image))}" 
                          alt="${esc(item.full_name)}" 
                          loading="lazy"

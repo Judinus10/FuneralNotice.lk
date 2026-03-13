@@ -1,150 +1,614 @@
-/**
- * create.js - Logic for create.php
- */
-
 let uploadedPhoto = null;
+let captchaQuestion = '';
+let currentPostId = 0;
+let otpTimerId = null;
+let otpRemaining = 60;
+let bootstrapData = null;
 
-// Photo upload functionality
-function handlePhotoUpload(event) {
-    const file = event.target.files[0];
-    if (file) {
-        // Check file size (max 5MB)
-        if (file.size > 5 * 1024 * 1024) {
-            alert('File size exceeds 5MB limit. Please choose a smaller image.');
-            return;
-        }
+function showToast(message, type = "info", timeout = 3500) {
+    const wrap = document.getElementById('toastWrap');
+    if (!wrap) return;
 
-        // Check file type
-        if (!file.type.match('image.*')) {
-            alert('Please select an image file (JPEG, PNG, etc.)');
-            return;
-        }
+    const item = document.createElement('div');
+    item.className = `toast-item toast-${type}`;
+    item.innerHTML = `<span class="toast-close">×</span>${message}`;
 
-        uploadedPhoto = file;
+    wrap.appendChild(item);
+    requestAnimationFrame(() => item.classList.add('show'));
 
-        // Display uploaded photo
-        const reader = new FileReader();
-        reader.onload = function (e) {
-            const uploadedImage = document.getElementById('uploadedImage');
-            const photoName = document.getElementById('photoName');
-            const photoSize = document.getElementById('photoSize');
-            const uploadContainer = document.getElementById('uploadContainer');
-            const uploadedPhotoContainer = document.getElementById('uploadedPhotoContainer');
+    const close = () => {
+        item.classList.remove('show');
+        setTimeout(() => item.remove(), 250);
+    };
 
-            if (uploadedImage) uploadedImage.src = e.target.result;
-            if (photoName) photoName.textContent = file.name;
-            if (photoSize) photoSize.textContent = formatFileSize(file.size);
-
-            if (uploadContainer) uploadContainer.style.display = 'none';
-            if (uploadedPhotoContainer) uploadedPhotoContainer.style.display = 'block';
-        };
-        reader.readAsDataURL(file);
-    }
-}
-
-function removePhoto() {
-    uploadedPhoto = null;
-    const uploadContainer = document.getElementById('uploadContainer');
-    const uploadedPhotoContainer = document.getElementById('uploadedPhotoContainer');
-    const photoUpload = document.getElementById('photoUpload');
-
-    if (uploadContainer) uploadContainer.style.display = 'block';
-    if (uploadedPhotoContainer) uploadedPhotoContainer.style.display = 'none';
-    if (photoUpload) photoUpload.value = '';
+    item.querySelector('.toast-close')?.addEventListener('click', close);
+    setTimeout(close, timeout);
 }
 
 function formatFileSize(bytes) {
     if (bytes < 1024) return bytes + ' bytes';
-    else if (bytes < 1048576) return (bytes / 1024).toFixed(1) + ' KB';
-    else return (bytes / 1048576).toFixed(1) + ' MB';
+    if (bytes < 1048576) return (bytes / 1024).toFixed(1) + ' KB';
+    return (bytes / 1048576).toFixed(1) + ' MB';
 }
 
-function createMemorial(event) {
-    event.preventDefault();
+function handlePhotoUpload(event) {
+    const file = event.target.files[0];
+    if (!file) return;
 
-    // Basic form validation
-    const form = document.getElementById('memorialForm');
-    if (form && !form.checkValidity()) {
-        alert('Please fill in all required fields (marked with *)');
+    if (file.size > 6 * 1024 * 1024) {
+        showToast('File size exceeds 6MB limit.', 'error');
+        event.target.value = '';
         return;
     }
 
-    if (!uploadedPhoto) {
-        if (!confirm('You haven\'t uploaded a funeral notice photo. Continue without a photo?')) {
-            return;
+    if (!file.type.match('image.*')) {
+        showToast('Please select a valid image file.', 'error');
+        event.target.value = '';
+        return;
+    }
+
+    uploadedPhoto = file;
+
+    const reader = new FileReader();
+    reader.onload = function (e) {
+        document.getElementById('uploadedImage').src = e.target.result;
+        document.getElementById('photoName').textContent = file.name;
+        document.getElementById('photoSize').textContent = formatFileSize(file.size);
+        document.getElementById('uploadContainer').style.display = 'none';
+        document.getElementById('uploadedPhotoContainer').style.display = 'block';
+    };
+    reader.readAsDataURL(file);
+}
+
+function removePhoto() {
+    uploadedPhoto = null;
+    document.getElementById('uploadContainer').style.display = 'block';
+    document.getElementById('uploadedPhotoContainer').style.display = 'none';
+    document.getElementById('photoUpload').value = '';
+}
+
+function showStep(stepNo) {
+    document.querySelectorAll('.step-panel').forEach((panel, index) => {
+        panel.classList.toggle('active', (index + 1) === stepNo);
+    });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function validateStep1() {
+    const requiredIds = [
+        'type', 'religion', 'first_name', 'last_name',
+        'birth_date', 'birth_place', 'death_date', 'death_place',
+        'country', 'address'
+    ];
+
+    for (const id of requiredIds) {
+        const el = document.getElementById(id);
+        if (!el || !String(el.value || '').trim()) {
+            showToast('Please fill all required fields in Step 1.', 'error');
+            el?.focus();
+            return false;
         }
     }
 
-    // Show loading state
-    const submitBtn = event.target.closest('button') || event.target;
-    const originalText = submitBtn.innerHTML;
-    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Creating...';
-    submitBtn.disabled = true;
+    const livedPlace = document.getElementById('lived_place').value.trim();
+    if (!livedPlace) {
+        showToast('Please select a lived place.', 'error');
+        document.getElementById('lived_place_search')?.focus();
+        return false;
+    }
 
-    // Simulate API call
-    setTimeout(() => {
-        // Success message
-        alert('Funeral notice created successfully! Redirecting to home page...');
+    if (!document.getElementById('photoUpload').files.length) {
+        showToast('Please upload a cover image.', 'error');
+        return false;
+    }
 
-        // Reset button
-        submitBtn.innerHTML = originalText;
-        submitBtn.disabled = false;
-
-        // Redirect to index page
-        window.location.href = 'index.php';
-    }, 2000);
+    return true;
 }
 
-// Initialize the create page
-document.addEventListener('DOMContentLoaded', function () {
-    // Shared components are loaded by common.js via loadComponent in the HTML
+function validateStep2() {
+    const requiredIds = ['contact_name', 'phone_code', 'phone', 'id_type', 'id_number'];
 
-    // Set default dates for the form
+    for (const id of requiredIds) {
+        const el = document.getElementById(id);
+        if (!el || !String(el.value || '').trim()) {
+            showToast('Please fill all required fields in Step 2.', 'error');
+            el?.focus();
+            return false;
+        }
+    }
+
+    const idType = document.getElementById('id_type').value;
+    if (idType === 'NIC') {
+        if (!document.getElementById('nic_front').files.length) {
+            showToast('NIC front image is required.', 'error');
+            return false;
+        }
+        if (!document.getElementById('nic_back').files.length) {
+            showToast('NIC back image is required.', 'error');
+            return false;
+        }
+    }
+
+    if (idType === 'Passport') {
+        if (!document.getElementById('passport_image').files.length) {
+            showToast('Passport image is required.', 'error');
+            return false;
+        }
+    }
+
+    return true;
+}
+
+async function loadBootstrap() {
+    const res = await fetch('api/create_bootstrap_get.php', {
+        credentials: 'include'
+    });
+    const data = await res.json();
+
+    if (!data.ok) {
+        showToast(data.message || 'Failed to load form data.', 'error');
+        return;
+    }
+
+    bootstrapData = data;
+    captchaQuestion = data.captcha_question || 'Loading...';
+    document.getElementById('captchaQ').textContent = captchaQuestion;
+
+    fillSelect('type', data.post_types, 'value', 'label', 'Select post type…');
+    fillSimpleSelect('religion', data.religions, 'Select religion…');
+    fillSimpleSelect('id_type', data.id_types, 'Select ID type…');
+    fillCountrySelect('country', data.countries, data.default_country || 'Sri Lanka');
+    fillPhoneCodes('phone_code', data.phone_countries);
+    fillPhoneCodes('phone_alt_code', data.phone_countries);
+
     const today = new Date().toISOString().split('T')[0];
-    document.querySelectorAll('input[type="date"]').forEach(input => {
-        input.value = today;
+    document.getElementById('birth_date').max = today;
+    document.getElementById('death_date').max = today;
+}
+
+function fillSelect(id, items, valueKey, labelKey, placeholder) {
+    const select = document.getElementById(id);
+    if (!select) return;
+
+    select.innerHTML = `<option value="">${placeholder}</option>`;
+    items.forEach(item => {
+        const opt = document.createElement('option');
+        opt.value = item[valueKey];
+        opt.textContent = item[labelKey];
+        select.appendChild(opt);
+    });
+}
+
+function fillSimpleSelect(id, items, placeholder) {
+    const select = document.getElementById(id);
+    if (!select) return;
+
+    select.innerHTML = `<option value="">${placeholder}</option>`;
+    items.forEach(item => {
+        const opt = document.createElement('option');
+        opt.value = item;
+        opt.textContent = item;
+        select.appendChild(opt);
+    });
+}
+
+function fillCountrySelect(id, countries, selectedCountry) {
+    const select = document.getElementById(id);
+    if (!select) return;
+
+    select.innerHTML = `<option value="">Select country…</option>`;
+    countries.forEach(country => {
+        const opt = document.createElement('option');
+        opt.value = country;
+        opt.textContent = country;
+        if (country === selectedCountry) opt.selected = true;
+        select.appendChild(opt);
+    });
+}
+
+function fillPhoneCodes(id, items) {
+    const select = document.getElementById(id);
+    if (!select) return;
+
+    select.innerHTML = `<option value="">Code</option>`;
+    items.forEach(item => {
+        const opt = document.createElement('option');
+        opt.value = item.code;
+        opt.textContent = `${item.name} (${item.code})`;
+        select.appendChild(opt);
     });
 
-    // Add subtle animation to cards on load
-    const cards = document.querySelectorAll('.create-memorial-card');
-    cards.forEach((card, index) => {
-        card.style.animationDelay = `${index * 0.1}s`;
-        card.style.animation = 'fadeIn 0.6s ease-out forwards';
+    const sri = items.find(x => x.code === '+94');
+    if (sri) select.value = '+94';
+}
+
+async function loadCities(countryName) {
+    const searchEl = document.getElementById('lived_place_search');
+    const listEl = document.getElementById('lived_place_list');
+    const hiddenEl = document.getElementById('lived_place');
+
+    if (!countryName) {
+        listEl.innerHTML = '<option value="">Select country first</option>';
+        listEl.disabled = true;
+        searchEl.value = '';
+        hiddenEl.value = '';
+        return;
+    }
+
+    listEl.disabled = true;
+    searchEl.disabled = true;
+    hiddenEl.value = '';
+    searchEl.value = '';
+    listEl.innerHTML = '<option value="">Loading cities…</option>';
+
+    try {
+        const res = await fetch(`api/cities_get.php?country=${encodeURIComponent(countryName)}`, {
+            credentials: 'include'
+        });
+        const data = await res.json();
+
+        if (!data.ok) {
+            listEl.innerHTML = `<option value="">${data.message || 'Failed to load cities'}</option>`;
+            listEl.disabled = false;
+            searchEl.disabled = false;
+            return;
+        }
+
+        const cities = Array.isArray(data.cities) ? data.cities : [];
+        renderCityOptions(cities);
+        listEl.disabled = false;
+        searchEl.disabled = false;
+    } catch (err) {
+        listEl.innerHTML = '<option value="">Failed to load cities</option>';
+        listEl.disabled = false;
+        searchEl.disabled = false;
+    }
+}
+
+function renderCityOptions(cities, query = '') {
+    const listEl = document.getElementById('lived_place_list');
+    const q = query.trim().toLowerCase();
+
+    listEl.innerHTML = '';
+
+    const filtered = q
+        ? cities.filter(city => city.toLowerCase().includes(q))
+        : cities;
+
+    if (!filtered.length) {
+        listEl.innerHTML = '<option value="">No cities found</option>';
+        return;
+    }
+
+    filtered.forEach(city => {
+        const opt = document.createElement('option');
+        opt.value = city;
+        opt.textContent = city;
+        listEl.appendChild(opt);
+    });
+}
+
+async function verifyCaptcha() {
+    const input = document.getElementById('captchaInput');
+    const err = document.getElementById('captchaErr');
+    const btn = document.getElementById('captchaOkBtn');
+
+    const val = (input.value || '').trim();
+    if (!val) {
+        err.style.display = 'block';
+        err.textContent = 'Please enter the answer.';
+        return false;
+    }
+
+    btn.disabled = true;
+    btn.textContent = 'Checking...';
+
+    try {
+        const res = await fetch('api/captcha_check.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            credentials: 'include',
+            body: JSON.stringify({ answer: val })
+        });
+
+        const data = await res.json();
+
+        if (!data.ok) {
+            err.style.display = 'block';
+            err.textContent = data.message || 'Captcha incorrect.';
+            document.getElementById('captchaQ').textContent = data.question || 'Try again';
+            input.value = '';
+            btn.disabled = false;
+            btn.textContent = 'Continue';
+            return false;
+        }
+
+        err.style.display = 'none';
+        btn.disabled = false;
+        btn.textContent = 'Continue';
+        return true;
+    } catch (e) {
+        err.style.display = 'block';
+        err.textContent = 'Captcha check failed.';
+        btn.disabled = false;
+        btn.textContent = 'Continue';
+        return false;
+    }
+}
+
+async function submitMemorialForm() {
+    const form = document.getElementById('memorialForm');
+    const submitBtn = document.getElementById('finalSubmitBtn');
+    const originalText = submitBtn.innerHTML;
+
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting...';
+
+    try {
+        const formData = new FormData(form);
+
+        const res = await fetch('api/memorial_create_submit.php', {
+            method: 'POST',
+            credentials: 'include',
+            body: formData
+        });
+
+        const data = await res.json();
+
+        if (!data.ok) {
+            showToast(data.message || 'Submit failed.', 'error');
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = originalText;
+            return;
+        }
+
+        currentPostId = Number(data.post_id || 0);
+        showToast(data.message || 'Submitted successfully.', 'success');
+
+        document.getElementById('captchaPopup').style.display = 'none';
+        openOtpPopup();
+    } catch (err) {
+        showToast('Something went wrong while submitting.', 'error');
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = originalText;
+    }
+}
+
+function openOtpPopup() {
+    const popup = document.getElementById('otpPopup');
+    const timerEl = document.getElementById('otpTimer');
+    const verifyBtn = document.getElementById('otpVerifyBtn');
+    const errorEl = document.getElementById('otpError');
+    const input = document.getElementById('otpCodeInput');
+
+    popup.style.display = 'flex';
+    errorEl.style.display = 'none';
+    input.value = '';
+    verifyBtn.disabled = false;
+    verifyBtn.textContent = 'Verify';
+    verifyBtn.dataset.mode = 'verify';
+
+    otpRemaining = 60;
+    timerEl.textContent = String(otpRemaining);
+
+    if (otpTimerId) clearInterval(otpTimerId);
+    otpTimerId = setInterval(() => {
+        otpRemaining--;
+        timerEl.textContent = String(otpRemaining);
+
+        if (otpRemaining <= 0) {
+            clearInterval(otpTimerId);
+            verifyBtn.textContent = 'Resend OTP';
+            verifyBtn.dataset.mode = 'resend';
+            errorEl.style.display = 'block';
+            errorEl.textContent = 'Code expired. Tap "Resend OTP" to get a new OTP.';
+        }
+    }, 1000);
+}
+
+async function verifyOtp() {
+    const code = (document.getElementById('otpCodeInput').value || '').trim();
+    const errorEl = document.getElementById('otpError');
+    const btn = document.getElementById('otpVerifyBtn');
+
+    if (code.length !== 6) {
+        errorEl.style.display = 'block';
+        errorEl.textContent = 'Please enter the 6-digit code.';
+        return;
+    }
+
+    btn.disabled = true;
+    btn.textContent = 'Verifying...';
+
+    try {
+        const res = await fetch('verify_otp.php', {
+            method: 'POST',
+            credentials: 'same-origin',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'X-Requested-With': 'XMLHttpRequest'
+            },
+            body: JSON.stringify({
+                post_id: currentPostId,
+                code: code.replace(/\D/g, '')
+            })
+        });
+
+        const data = await res.json();
+
+        if (!data.ok) {
+            errorEl.style.display = 'block';
+            errorEl.textContent = data.message || 'Invalid or expired code.';
+            btn.disabled = false;
+            btn.textContent = 'Verify';
+            return;
+        }
+
+        showToast('OTP verified. Redirecting...', 'success');
+        setTimeout(() => {
+            window.location.href = data.redirect || ('pricing.php?post_id=' + currentPostId);
+        }, 600);
+    } catch (err) {
+        errorEl.style.display = 'block';
+        errorEl.textContent = 'Something went wrong. Please try again.';
+        btn.disabled = false;
+        btn.textContent = 'Verify';
+    }
+}
+
+async function resendOtp() {
+    const btn = document.getElementById('otpVerifyBtn');
+    const errorEl = document.getElementById('otpError');
+
+    btn.disabled = true;
+    btn.textContent = 'Sending...';
+
+    try {
+        const res = await fetch('resend_otp.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ post_id: currentPostId })
+        });
+
+        const data = await res.json();
+
+        if (!data.ok) {
+            errorEl.style.display = 'block';
+            errorEl.textContent = data.message || 'Could not resend OTP.';
+            btn.disabled = false;
+            btn.textContent = 'Resend OTP';
+            btn.dataset.mode = 'resend';
+            return;
+        }
+
+        showToast('New OTP sent. Please check your phone.', 'success');
+        openOtpPopup();
+    } catch (err) {
+        errorEl.style.display = 'block';
+        errorEl.textContent = 'Resend failed. Please try again.';
+        btn.disabled = false;
+        btn.textContent = 'Resend OTP';
+        btn.dataset.mode = 'resend';
+    }
+}
+
+document.addEventListener('DOMContentLoaded', async function () {
+    await loadBootstrap();
+
+    document.getElementById('choosePhotoBtn')?.addEventListener('click', () => {
+        document.getElementById('photoUpload')?.click();
     });
 
-    // Handle Create Funeral Notice Button in navbar (link to self or logic)
-    document.getElementById('createFuneralNoticeBtn')?.addEventListener('click', function () {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+    document.getElementById('photoUpload')?.addEventListener('change', handlePhotoUpload);
+    document.getElementById('removePhotoBtn')?.addEventListener('click', removePhoto);
+
+    document.getElementById('btnNext1')?.addEventListener('click', () => {
+        if (!validateStep1()) return;
+        showStep(2);
     });
 
-    // Language selector
-    document.querySelector('.language-selector')?.addEventListener('click', function () {
-        const span = this.querySelector('span');
-        if (span) {
-            const currentLang = span.textContent;
-            span.textContent = currentLang === 'English' ? 'தமிழ்' : 'English';
+    document.getElementById('btnBack1')?.addEventListener('click', () => {
+        showStep(1);
+    });
+
+    document.getElementById('id_type')?.addEventListener('change', function () {
+        const v = this.value;
+        document.getElementById('nicFields').style.display = v === 'NIC' ? 'block' : 'none';
+        document.getElementById('passportFields').style.display = v === 'Passport' ? 'block' : 'none';
+    });
+
+    document.getElementById('country')?.addEventListener('change', async function () {
+        await loadCities(this.value);
+    });
+
+    const countryEl = document.getElementById('country');
+    const searchEl = document.getElementById('lived_place_search');
+    const listEl = document.getElementById('lived_place_list');
+    const hiddenEl = document.getElementById('lived_place');
+
+    let loadedCities = [];
+
+    async function refreshCitiesForSelectedCountry() {
+        const selectedCountry = countryEl.value;
+        if (!selectedCountry) return;
+
+        const res = await fetch(`api/cities_get.php?country=${encodeURIComponent(selectedCountry)}`, {
+            credentials: 'include'
+        });
+        const data = await res.json();
+        loadedCities = Array.isArray(data.cities) ? data.cities : [];
+        renderCityOptions(loadedCities);
+    }
+
+    if (countryEl.value) {
+        await refreshCitiesForSelectedCountry();
+        listEl.disabled = false;
+    }
+
+    searchEl?.addEventListener('focus', () => {
+        listEl.style.display = 'block';
+    });
+
+    searchEl?.addEventListener('input', () => {
+        renderCityOptions(loadedCities, searchEl.value);
+        listEl.style.display = 'block';
+    });
+
+    listEl?.addEventListener('change', () => {
+        const v = listEl.value || '';
+        hiddenEl.value = v;
+        searchEl.value = v;
+        listEl.style.display = 'none';
+    });
+
+    document.addEventListener('click', (e) => {
+        if (!searchEl.contains(e.target) && !listEl.contains(e.target)) {
+            listEl.style.display = 'none';
         }
     });
 
-    // Search functionality
-    const searchInputs = document.querySelectorAll('.search-box input[type="text"]');
-    searchInputs.forEach(input => {
-        input.addEventListener('keypress', function (e) {
-            if (e.key === 'Enter' && this.value.trim()) {
-                alert(`Searching for: ${this.value}`);
-            }
-        });
+    document.getElementById('btnCallTeam')?.addEventListener('click', () => {
+        window.location.href = 'contact.php';
     });
 
-    // Highlight active menu item in mobile menu
-    const currentPath = window.location.pathname;
-    const menuLinks = document.querySelectorAll('.mobile-menu-nav a');
-    menuLinks.forEach(link => {
-        link.classList.remove('active');
-        if (link.getAttribute('href') === 'create.php' || currentPath.includes('create')) {
-            if (link.getAttribute('href').includes('create')) {
-                link.classList.add('active');
-            }
+    document.getElementById('btnFillManual')?.addEventListener('click', () => {
+        document.getElementById('startPopup').style.display = 'none';
+    });
+
+    document.getElementById('captchaCancelBtn')?.addEventListener('click', () => {
+        document.getElementById('captchaPopup').style.display = 'none';
+    });
+
+    document.getElementById('captchaOkBtn')?.addEventListener('click', async () => {
+        const ok = await verifyCaptcha();
+        if (!ok) return;
+        await submitMemorialForm();
+    });
+
+    document.getElementById('memorialForm')?.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        if (!validateStep2()) return;
+
+        document.getElementById('captchaInput').value = '';
+        document.getElementById('captchaErr').style.display = 'none';
+        document.getElementById('captchaPopup').style.display = 'flex';
+    });
+
+    document.getElementById('otpCancelBtn')?.addEventListener('click', () => {
+        document.getElementById('otpPopup').style.display = 'none';
+    });
+
+    document.getElementById('otpVerifyBtn')?.addEventListener('click', async function () {
+        const mode = this.dataset.mode || 'verify';
+        if (mode === 'resend') {
+            await resendOtp();
+        } else {
+            await verifyOtp();
         }
     });
 });

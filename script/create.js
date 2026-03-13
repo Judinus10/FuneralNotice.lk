@@ -25,6 +25,34 @@ function showToast(message, type = "info", timeout = 3500) {
     setTimeout(close, timeout);
 }
 
+function setStepperState(activeStep) {
+    const steps = document.querySelectorAll('.stepper-step[data-step]');
+    const fill = document.getElementById('stepperFill');
+
+    if (!steps.length) return;
+
+    steps.forEach(step => {
+        const n = parseInt(step.dataset.step || '0', 10);
+
+        step.classList.remove('is-active', 'is-done', 'is-disabled');
+
+        if (n < activeStep) {
+            step.classList.add('is-done');
+        } else if (n === activeStep) {
+            step.classList.add('is-active');
+        } else {
+            step.classList.add('is-disabled');
+        }
+    });
+
+    const total = steps.length;
+    const pct = activeStep <= 1 ? 0 : ((activeStep - 1) / (total - 1)) * 100;
+
+    if (fill) {
+        fill.style.width = pct + '%';
+    }
+}
+
 function formatFileSize(bytes) {
     if (bytes < 1024) return bytes + ' bytes';
     if (bytes < 1048576) return (bytes / 1024).toFixed(1) + ' KB';
@@ -51,26 +79,39 @@ function handlePhotoUpload(event) {
 
     const reader = new FileReader();
     reader.onload = function (e) {
-        document.getElementById('uploadedImage').src = e.target.result;
-        document.getElementById('photoName').textContent = file.name;
-        document.getElementById('photoSize').textContent = formatFileSize(file.size);
-        document.getElementById('uploadContainer').style.display = 'none';
-        document.getElementById('uploadedPhotoContainer').style.display = 'block';
+        const uploadedImage = document.getElementById('uploadedImage');
+        const photoName = document.getElementById('photoName');
+        const photoSize = document.getElementById('photoSize');
+        const uploadContainer = document.getElementById('uploadContainer');
+        const uploadedPhotoContainer = document.getElementById('uploadedPhotoContainer');
+
+        if (uploadedImage) uploadedImage.src = e.target.result;
+        if (photoName) photoName.textContent = file.name;
+        if (photoSize) photoSize.textContent = formatFileSize(file.size);
+        if (uploadContainer) uploadContainer.style.display = 'none';
+        if (uploadedPhotoContainer) uploadedPhotoContainer.style.display = 'block';
     };
     reader.readAsDataURL(file);
 }
 
 function removePhoto() {
     uploadedPhoto = null;
-    document.getElementById('uploadContainer').style.display = 'block';
-    document.getElementById('uploadedPhotoContainer').style.display = 'none';
-    document.getElementById('photoUpload').value = '';
+
+    const uploadContainer = document.getElementById('uploadContainer');
+    const uploadedPhotoContainer = document.getElementById('uploadedPhotoContainer');
+    const photoUpload = document.getElementById('photoUpload');
+
+    if (uploadContainer) uploadContainer.style.display = 'block';
+    if (uploadedPhotoContainer) uploadedPhotoContainer.style.display = 'none';
+    if (photoUpload) photoUpload.value = '';
 }
 
 function showStep(stepNo) {
     document.querySelectorAll('.step-panel').forEach((panel, index) => {
         panel.classList.toggle('active', (index + 1) === stepNo);
     });
+
+    setStepperState(stepNo);
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
@@ -323,6 +364,7 @@ async function loadCities(countryName) {
         return [];
     }
 }
+
 function renderCityOptions(cities, query = '') {
     const listEl = document.getElementById('lived_place_list');
     if (!listEl) return;
@@ -455,6 +497,8 @@ function openOtpPopup() {
 
     if (!popup || !timerEl || !verifyBtn || !errorEl || !input) return;
 
+    setStepperState(3);
+
     popup.style.display = 'flex';
     errorEl.style.display = 'none';
     input.value = '';
@@ -523,6 +567,8 @@ async function verifyOtp() {
         }
 
         showToast('OTP verified. Redirecting...', 'success');
+        setStepperState(4);
+
         setTimeout(() => {
             window.location.href = data.redirect || ('pricing.php?post_id=' + currentPostId);
         }, 600);
@@ -576,6 +622,8 @@ async function resendOtp() {
 }
 
 document.addEventListener('DOMContentLoaded', async function () {
+    setStepperState(1);
+
     document.getElementById('btnCallTeam')?.addEventListener('click', () => {
         window.location.href = 'contact.php';
     });

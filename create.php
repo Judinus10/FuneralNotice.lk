@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,7 +9,8 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://funeralnotice.lk/create">
     <meta property="og:title" content="Create a Funeral Notice – FuneralNotice.lk">
-    <meta property="og:description" content="Create a beautiful online funeral notice to honor and remember your loved one.">
+    <meta property="og:description"
+        content="Create a beautiful online funeral notice to honor and remember your loved one.">
     <meta property="og:image" content="https://ripnews.lk/uploads/posts/76/cover.png">
     <meta property="og:image:type" content="image/png">
     <meta property="og:image:width" content="1200">
@@ -17,7 +19,8 @@
 
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Create a Funeral Notice – FuneralNotice.lk">
-    <meta name="twitter:description" content="Create a beautiful online funeral notice to honor and remember your loved one.">
+    <meta name="twitter:description"
+        content="Create a beautiful online funeral notice to honor and remember your loved one.">
     <meta name="twitter:image" content="https://ripnews.lk/uploads/posts/76/cover.png">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -26,6 +29,7 @@
     <link rel="stylesheet" href="style/footer.css">
     <link rel="stylesheet" href="style/create.css">
 </head>
+
 <body>
     <div id="navbar-placeholder"></div>
 
@@ -36,11 +40,42 @@
                     <div class="create-head-top">
                         <div>
                             <h1 id="pageTitle">Create a Funeral Notice</h1>
-                            <p id="pageSubtitle">Honor your loved one with a beautiful online funeral notice. Share their life story, photos, and accept tributes from friends and family.</p>
+                            <p id="pageSubtitle">Honor your loved one with a beautiful online funeral notice. Share
+                                their life story, photos, and accept tributes from friends and family.</p>
                         </div>
                     </div>
                 </div>
 
+                <div class="stepper-wrap">
+                    <div class="stepper-track">
+                        <div class="stepper-fill" id="stepperFill"></div>
+
+                        <div class="stepper-step is-active" data-step="1">
+                            <span class="dot"></span>
+                            <span class="label">Post Details</span>
+                        </div>
+
+                        <div class="stepper-step is-disabled" data-step="2">
+                            <span class="dot"></span>
+                            <span class="label">Post Owner</span>
+                        </div>
+
+                        <div class="stepper-step is-disabled" data-step="3">
+                            <span class="dot"></span>
+                            <span class="label">SMS Verify</span>
+                        </div>
+
+                        <div class="stepper-step is-disabled" data-step="4">
+                            <span class="dot"></span>
+                            <span class="label">Duration</span>
+                        </div>
+
+                        <div class="stepper-step is-disabled" data-step="5">
+                            <span class="dot"></span>
+                            <span class="label">Submit</span>
+                        </div>
+                    </div>
+                </div>
                 <div class="create-memorial-card">
                     <form id="memorialForm" enctype="multipart/form-data" novalidate>
                         <input type="hidden" name="final_submit" value="1">
@@ -85,7 +120,8 @@
 
                                 <div class="form-group">
                                     <label for="birth_place">Birth Place <span class="required">*</span></label>
-                                    <input type="text" class="form-control" id="birth_place" name="birth_place" required>
+                                    <input type="text" class="form-control" id="birth_place" name="birth_place"
+                                        required>
                                 </div>
                             </div>
 
@@ -97,7 +133,8 @@
 
                                 <div class="form-group">
                                     <label for="death_place">Death Place <span class="required">*</span></label>
-                                    <input type="text" class="form-control" id="death_place" name="death_place" required>
+                                    <input type="text" class="form-control" id="death_place" name="death_place"
+                                        required>
                                 </div>
                             </div>
 
@@ -111,8 +148,10 @@
 
                                 <div class="form-group">
                                     <label for="lived_place_search">Lived Place <span class="required">*</span></label>
-                                    <input type="text" class="form-control" id="lived_place_search" placeholder="Type to search city" autocomplete="off">
-                                    <select class="form-control city-list" id="lived_place_list" size="6" disabled></select>
+                                    <input type="text" class="form-control" id="lived_place_search"
+                                        placeholder="Type to search city" autocomplete="off">
+                                    <select class="form-control city-list" id="lived_place_list" size="6"
+                                        disabled></select>
                                     <div class="form-hint">Type to search, then click a city from the list.</div>
                                 </div>
                             </div>
@@ -120,19 +159,23 @@
                             <div class="form-row">
                                 <div class="form-group">
                                     <label for="address">Address <span class="required">*</span></label>
-                                    <input type="text" class="form-control" id="address" name="address" required placeholder="Street, city / town">
+                                    <input type="text" class="form-control" id="address" name="address" required
+                                        placeholder="Street, city / town">
                                 </div>
 
                                 <div class="form-group">
                                     <label for="other_countries">Other Countries Lived (optional)</label>
-                                    <input type="text" class="form-control" id="other_countries" name="other_countries" placeholder="e.g., UK, Canada">
+                                    <input type="text" class="form-control" id="other_countries" name="other_countries"
+                                        placeholder="e.g., UK, Canada">
                                 </div>
                             </div>
 
                             <div class="form-group full-width">
                                 <label for="bio">Biography / Life Story</label>
-                                <textarea class="form-control" id="bio" name="bio" rows="5" placeholder="Share the life story, achievements, and memories of your loved one..."></textarea>
-                                <div class="form-hint">You can write about their life, career, family, hobbies, and special memories.</div>
+                                <textarea class="form-control" id="bio" name="bio" rows="5"
+                                    placeholder="Share the life story, achievements, and memories of your loved one..."></textarea>
+                                <div class="form-hint">You can write about their life, career, family, hobbies, and
+                                    special memories.</div>
                             </div>
 
                             <div class="create-memorial-card inner-card">
@@ -145,7 +188,9 @@
                                     <div class="upload-btn" id="choosePhotoBtn">
                                         <i class="fas fa-upload"></i> Choose Photo
                                     </div>
-                                    <input type="file" id="photoUpload" name="cover_image" accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp" style="display:none;">
+                                    <input type="file" id="photoUpload" name="cover_image"
+                                        accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp"
+                                        style="display:none;">
                                 </div>
 
                                 <div id="uploadedPhotoContainer" style="display:none;">
@@ -161,7 +206,8 @@
                                     </div>
                                 </div>
 
-                                <div class="form-hint">Recommended photo size: 500x500 pixels or larger. Square photos work best.</div>
+                                <div class="form-hint">Recommended photo size: 500x500 pixels or larger. Square photos
+                                    work best.</div>
                             </div>
 
                             <div class="create-actions next-only">
@@ -177,7 +223,8 @@
                             <div class="form-row">
                                 <div class="form-group">
                                     <label for="contact_name">Your Full Name <span class="required">*</span></label>
-                                    <input type="text" class="form-control" id="contact_name" name="contact_name" required>
+                                    <input type="text" class="form-control" id="contact_name" name="contact_name"
+                                        required>
                                 </div>
 
                                 <div class="form-group">
@@ -186,7 +233,8 @@
                                         <select class="form-control" id="phone_code" name="phone_code" required>
                                             <option value="">Code</option>
                                         </select>
-                                        <input type="text" class="form-control" id="phone" name="phone" required placeholder="Enter phone number">
+                                        <input type="text" class="form-control" id="phone" name="phone" required
+                                            placeholder="Enter phone number">
                                     </div>
                                 </div>
                             </div>
@@ -198,7 +246,8 @@
                                         <select class="form-control" id="phone_alt_code" name="phone_alt_code">
                                             <option value="">Code</option>
                                         </select>
-                                        <input type="text" class="form-control" id="phone_alt" name="phone_alt" placeholder="Enter alternative number">
+                                        <input type="text" class="form-control" id="phone_alt" name="phone_alt"
+                                            placeholder="Enter alternative number">
                                     </div>
                                 </div>
 
@@ -221,12 +270,14 @@
                                 <div class="form-row">
                                     <div class="form-group">
                                         <label for="nic_front">NIC Front Image <span class="required">*</span></label>
-                                        <input type="file" class="form-control" id="nic_front" name="nic_front" accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp">
+                                        <input type="file" class="form-control" id="nic_front" name="nic_front"
+                                            accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp">
                                     </div>
 
                                     <div class="form-group">
                                         <label for="nic_back">NIC Back Image <span class="required">*</span></label>
-                                        <input type="file" class="form-control" id="nic_back" name="nic_back" accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp">
+                                        <input type="file" class="form-control" id="nic_back" name="nic_back"
+                                            accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp">
                                     </div>
                                 </div>
                             </div>
@@ -234,8 +285,11 @@
                             <div id="passportFields" style="display:none;">
                                 <div class="form-row">
                                     <div class="form-group full-width">
-                                        <label for="passport_image">Passport Image <span class="required">*</span></label>
-                                        <input type="file" class="form-control" id="passport_image" name="passport_image" accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp">
+                                        <label for="passport_image">Passport Image <span
+                                                class="required">*</span></label>
+                                        <input type="file" class="form-control" id="passport_image"
+                                            name="passport_image"
+                                            accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp">
                                     </div>
                                 </div>
                             </div>
@@ -276,7 +330,8 @@
             <p>Please answer this simple question to continue.</p>
             <div class="captcha-block">
                 <div class="captcha-question" id="captchaQ">Loading...</div>
-                <input id="captchaInput" type="text" inputmode="numeric" maxlength="4" class="form-control otp-input" placeholder="Answer">
+                <input id="captchaInput" type="text" inputmode="numeric" maxlength="4" class="form-control otp-input"
+                    placeholder="Answer">
                 <div class="form-hint error-text" id="captchaErr" style="display:none;"></div>
             </div>
             <div class="popup-buttons">
@@ -295,7 +350,8 @@
             </p>
 
             <div class="captcha-block">
-                <input id="otpCodeInput" type="text" maxlength="6" inputmode="numeric" class="form-control otp-input" placeholder="------">
+                <input id="otpCodeInput" type="text" maxlength="6" inputmode="numeric" class="form-control otp-input"
+                    placeholder="------">
                 <div class="form-hint" id="otpTimerLabel">Time remaining: <span id="otpTimer">60</span> seconds</div>
                 <div class="form-hint error-text" id="otpError" style="display:none;"></div>
             </div>
@@ -316,4 +372,5 @@
     </script>
     <script src="script/create.js"></script>
 </body>
+
 </html>

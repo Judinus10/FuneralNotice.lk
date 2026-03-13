@@ -332,6 +332,11 @@ if (empty($_SESSION['csrf'])) {
         </div>
     </div>
 
+        <?php
+    $id = isset($_GET['id']) ? (int) $_GET['id'] : 0;
+    include __DIR__ . '/tributes.php';
+    ?>
+
     <div id="toastStack" class="toast-stack" aria-live="polite" aria-atomic="true"></div>
 
     <div id="footer-placeholder"></div>

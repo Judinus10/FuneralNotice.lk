@@ -473,10 +473,10 @@ function openModal(id) {
 }
 
 function bindActions(data) {
-    document.getElementById('btnTributeNow')?.addEventListener('click', (e) => {
-        e.preventDefault();
-        document.getElementById('tributes')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    });
+    // document.getElementById('btnTributeNow')?.addEventListener('click', (e) => {
+    //     e.preventDefault();
+    //     document.getElementById('tributes')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    // });
 
     document.getElementById('btnWriteTribute')?.addEventListener('click', (e) => {
         e.preventDefault();

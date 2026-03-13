@@ -1,0 +1,286 @@
+/* =========================
+   Tribute chooser popup
+   ========================= */
+
+.tribute-modal-backdrop,
+.tribute-frame-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(2, 6, 23, 0.70);
+    backdrop-filter: blur(3px);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 12000;
+}
+
+.tribute-modal {
+    width: min(980px, 95vw);
+    max-height: 90vh;
+    background: #ffffff;
+    border-radius: 24px;
+    padding: 18px 18px 16px;
+    box-shadow: 0 30px 120px rgba(2, 6, 23, 0.28);
+    overflow-y: auto;
+}
+
+.tribute-modal-head {
+    padding: 6px 4px 12px;
+}
+
+.tribute-modal-head h3 {
+    margin: 0;
+    font-size: 1.15rem;
+    font-weight: 800;
+    color: #1f2937;
+}
+
+.tribute-chooser-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.tribute-chooser-card {
+    border: 1px solid #dbe3ee;
+    border-radius: 18px;
+    background: #fff;
+    padding: 18px 16px 14px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 10px;
+    cursor: pointer;
+    transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+    min-height: 228px;
+}
+
+.tribute-chooser-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 14px 28px rgba(15, 23, 42, 0.10);
+    border-color: #c8d5e6;
+}
+
+.tribute-chooser-card:focus-visible {
+    outline: 3px solid rgba(85, 31, 189, 0.18);
+    outline-offset: 2px;
+}
+
+.tribute-chooser-media {
+    width: 132px;
+    height: 132px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.tribute-chooser-media img {
+    width: 132px;
+    height: 132px;
+    object-fit: contain;
+    display: block;
+    border-radius: 14px;
+    background: #faf8f2;
+}
+
+.tribute-chooser-fallback {
+    width: 132px;
+    height: 132px;
+    border-radius: 14px;
+    border: 1px dashed #cbd5e1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f8fafc;
+    font-size: 2rem;
+    color: #94a3b8;
+}
+
+.tribute-chooser-content h5 {
+    margin: 2px 0 0;
+    font-size: 1rem;
+    font-weight: 800;
+    color: #1f2937;
+    line-height: 1.25;
+}
+
+.tribute-chooser-content p {
+    margin: 4px 0 0;
+    font-size: 0.9rem;
+    color: #475569;
+    line-height: 1.35;
+}
+
+.tribute-empty {
+    margin-top: 10px;
+    padding: 14px;
+    border: 1px solid #e5e7eb;
+    background: #f8fafc;
+    border-radius: 14px;
+    color: #64748b;
+}
+
+.tribute-modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 14px;
+    padding-top: 14px;
+    border-top: 1px solid #e5e7eb;
+}
+
+.tribute-btn {
+    border: 1px solid #d1d5db;
+    background: #fff;
+    color: #111827;
+    padding: 10px 16px;
+    border-radius: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background .18s ease, border-color .18s ease;
+}
+
+.tribute-btn:hover {
+    background: #f8fafc;
+}
+
+/* =========================
+   Tribute iframe popup
+   ========================= */
+
+.tribute-frame-shell {
+    width: min(1100px, 96vw);
+    height: min(760px, 94vh);
+    background: #ffffff;
+    border-radius: 20px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 30px 120px rgba(2, 6, 23, 0.35);
+}
+
+#tributeFrame {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    background: #fff;
+}
+
+.tribute-frame-close {
+    position: absolute;
+    top: 10px;
+    right: 12px;
+    z-index: 5;
+    width: 40px;
+    height: 40px;
+    border-radius: 999px;
+    border: 1px solid rgba(15, 23, 42, 0.12);
+    background: rgba(255,255,255,0.92);
+    color: #111827;
+    font-size: 24px;
+    line-height: 1;
+    cursor: pointer;
+    box-shadow: 0 6px 20px rgba(15, 23, 42, 0.12);
+}
+
+.tribute-frame-close:hover {
+    background: #fff;
+}
+
+/* =========================
+   Responsive
+   ========================= */
+
+@media (max-width: 768px) {
+    .tribute-modal {
+        width: 94vw;
+        max-height: 92vh;
+        padding: 14px 12px 12px;
+        border-radius: 18px;
+    }
+
+    .tribute-chooser-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+    }
+
+    .tribute-chooser-card {
+        min-height: 196px;
+        padding: 14px 10px 12px;
+        border-radius: 16px;
+    }
+
+    .tribute-chooser-media,
+    .tribute-chooser-media img,
+    .tribute-chooser-fallback {
+        width: 96px;
+        height: 96px;
+    }
+
+    .tribute-chooser-content h5 {
+        font-size: 0.95rem;
+    }
+
+    .tribute-chooser-content p {
+        font-size: 0.82rem;
+    }
+
+    .tribute-frame-shell {
+        width: 98vw;
+        height: 94vh;
+        border-radius: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .tribute-modal {
+        width: 96vw;
+        padding: 12px 10px 10px;
+        border-radius: 16px;
+    }
+
+    .tribute-modal-head h3 {
+        font-size: 1.05rem;
+    }
+
+    .tribute-chooser-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+    }
+
+    .tribute-chooser-card {
+        min-height: 180px;
+        padding: 12px 8px 10px;
+        gap: 8px;
+    }
+
+    .tribute-chooser-media,
+    .tribute-chooser-media img,
+    .tribute-chooser-fallback {
+        width: 82px;
+        height: 82px;
+    }
+
+    .tribute-chooser-content h5 {
+        font-size: 0.88rem;
+    }
+
+    .tribute-chooser-content p {
+        font-size: 0.76rem;
+    }
+
+    .tribute-modal-actions {
+        margin-top: 12px;
+        padding-top: 12px;
+    }
+
+    .tribute-frame-close {
+        top: 8px;
+        right: 8px;
+        width: 36px;
+        height: 36px;
+        font-size: 22px;
+    }
+}

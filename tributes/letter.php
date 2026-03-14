@@ -7,8 +7,12 @@ $TRIBUTE_META = [
     'accent' => 'blue',
     'show_org' => false,
     'allow_photo_links' => false,
+    'supports_delivery' => true,
     'message_label' => 'Letter',
     'message_placeholder' => 'Write your heartfelt letter...',
-    'helper_text' => 'This is for longer, more personal messages.'
+    'helper_text' => 'You can submit it normally or choose home delivery.',
+    'phone_label' => 'Phone Number',
+    'phone_placeholder' => 'Enter your mobile number',
+    'delivery_text' => 'A verified phone number is required if you want this letter sent to the home.'
 ];
 require __DIR__ . '/_page.php';

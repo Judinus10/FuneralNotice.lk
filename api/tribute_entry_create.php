@@ -37,6 +37,13 @@ function normalizePhoneForSession(?string $phone): string
     return trim($phone);
 }
 
+function isSriLanka(?string $phoneCode, ?string $country): bool
+{
+    $code = trim((string)$phoneCode);
+    $country = strtolower(trim((string)$country));
+    return $code === '+94' || $country === 'sri lanka' || $country === 'lk' || $country === 'sl';
+}
+
 try {
     if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
         out(false, 'Invalid request method.');
@@ -103,22 +110,46 @@ try {
     }
 
     $typeStmt = $pdo->prepare("
-        SELECT id
+        SELECT id, title, slug
         FROM tribute_types
         WHERE slug = ?
           AND is_active = 1
         LIMIT 1
     ");
     $typeStmt->execute([$tributeSlug]);
-    $tributeTypeId = (int)$typeStmt->fetchColumn();
+    $tributeType = $typeStmt->fetch(PDO::FETCH_ASSOC);
 
-    if ($tributeTypeId <= 0) {
+    if (!$tributeType) {
         out(false, 'Tribute type not configured.');
+    }
+
+    $tributeTypeId = (int)$tributeType['id'];
+
+    $countStmt = $pdo->prepare("
+        SELECT COUNT(*)
+        FROM tribute_templates
+        WHERE tribute_type_id = ?
+          AND is_active = 1
+    ");
+    $countStmt->execute([$tributeTypeId]);
+    $templateCount = (int)$countStmt->fetchColumn();
+    $templateRequired = $templateCount > 0;
+
+    $selectedTemplate = null;
+
+    if ($templateRequired && $templateId === null) {
+        out(false, 'Please select a template.');
     }
 
     if ($templateId !== null) {
         $tplStmt = $pdo->prepare("
-            SELECT id
+            SELECT
+                id,
+                tribute_type_id,
+                name,
+                price_local,
+                price_foreign,
+                is_active
             FROM tribute_templates
             WHERE id = ?
               AND tribute_type_id = ?
@@ -126,8 +157,9 @@ try {
             LIMIT 1
         ");
         $tplStmt->execute([$templateId, $tributeTypeId]);
+        $selectedTemplate = $tplStmt->fetch(PDO::FETCH_ASSOC);
 
-        if (!$tplStmt->fetchColumn()) {
+        if (!$selectedTemplate) {
             out(false, 'Selected template is invalid.');
         }
     }
@@ -142,6 +174,10 @@ try {
 
         if ($verifiedPhone === '' || $verifiedPhone !== $contactMobile) {
             out(false, 'Please verify your mobile number via SMS before sending to a home address.');
+        }
+
+        if ($templateRequired && !$selectedTemplate) {
+            out(false, 'Please select a template before home delivery.');
         }
     }
 
@@ -162,6 +198,17 @@ try {
         $extraData['photo_links'] = array_values(array_slice($cleanLinks, 0, 20));
     }
 
+    $currencyCode = '';
+    $priceAmount = null;
+
+    if ($sendToHome === 1 && $selectedTemplate) {
+        $local = isSriLanka($phoneCode, $byCountry);
+        $currencyCode = $local ? 'LKR' : 'USD';
+        $priceAmount = $local
+            ? (float)($selectedTemplate['price_local'] ?? 0)
+            : (float)($selectedTemplate['price_foreign'] ?? 0);
+    }
+
     $ins = $pdo->prepare("
         INSERT INTO tribute_entries (
             post_id,
@@ -174,7 +221,9 @@ try {
             delivery,
             contact_full_name,
             contact_mobile,
-            contact_email
+            contact_email,
+            currency_code,
+            price_amount
         ) VALUES (
             :post_id,
             :tribute_type_id,
@@ -186,7 +235,9 @@ try {
             :delivery,
             :contact_full_name,
             :contact_mobile,
-            :contact_email
+            :contact_email,
+            :currency_code,
+            :price_amount
         )
     ");
 
@@ -201,14 +252,20 @@ try {
     $ins->bindValue(':contact_full_name', $fullName, PDO::PARAM_STR);
     $ins->bindValue(':contact_mobile', $contactMobile, PDO::PARAM_STR);
     $ins->bindValue(':contact_email', $contactEmail, PDO::PARAM_STR);
+    $ins->bindValue(':currency_code', $currencyCode !== '' ? $currencyCode : null, $currencyCode !== '' ? PDO::PARAM_STR : PDO::PARAM_NULL);
+    $ins->bindValue(':price_amount', $priceAmount, $priceAmount !== null ? PDO::PARAM_STR : PDO::PARAM_NULL);
     $ins->execute();
 
     if ($sendToHome === 1) {
         unset($_SESSION['candle_otp_ok'], $_SESSION['candle_otp']);
     }
 
+    if ($sendToHome === 1 && $priceAmount !== null) {
+        out(true, "Thank you. Your delivery request is waiting for admin approval. Price: {$currencyCode} {$priceAmount}.");
+    }
+
     out(true, 'Thank you. Your tribute is waiting for admin approval.');
 } catch (Throwable $e) {
     error_log('tribute_entry_create.php error: ' . $e->getMessage());
-    out(false, 'Failed to submit tribute: ' . $e->getMessage());
+    out(false, 'Failed to submit tribute.');
 }

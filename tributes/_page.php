@@ -90,6 +90,11 @@ $selectedPhoneCode = trim((string)($_POST['phone_code'] ?? $defaultPhoneCode));
 
                 <div class="tribute-preview-box">
                     <div class="preview-heading">Live Preview</div>
+
+                    <div class="preview-template-frame" id="previewTemplateFrame" style="display:none;">
+                        <img id="previewTemplateImage" src="" alt="Selected template preview">
+                    </div>
+
                     <div class="preview-message" id="previewMessage">Your tribute message will appear here.</div>
 
                     <div class="preview-meta">
@@ -98,9 +103,11 @@ $selectedPhoneCode = trim((string)($_POST['phone_code'] ?? $defaultPhoneCode));
                     </div>
 
                     <?php if ($supportsDelivery): ?>
-                        <div class="preview-extra neutral" id="previewDeliveryStatus">Not sending to home</div>
+                        <div class="preview-extra neutral" id="previewDeliveryStatus">Posting on website</div>
                         <div class="preview-extra neutral" id="previewPhoneStatus" style="display:none;">Phone not added</div>
                     <?php endif; ?>
+
+                    <div class="preview-extra neutral" id="previewTemplateStatus" style="display:none;">No template selected</div>
 
                     <?php if ($allowPhotoLinks): ?>
                         <div class="preview-extra" id="previewPhotos">0 photo links added</div>
@@ -118,7 +125,7 @@ $selectedPhoneCode = trim((string)($_POST['phone_code'] ?? $defaultPhoneCode));
                     <input type="hidden" name="csrf" value="<?= h($csrf) ?>">
                     <input type="hidden" name="post_id" value="<?= (int)$postId ?>">
                     <input type="hidden" name="tribute_slug" value="<?= h($slug) ?>">
-                    <input type="hidden" name="template_id" value="0">
+                    <input type="hidden" name="template_id" id="template_id" value="0">
                     <input type="hidden" name="send_to_home" id="send_to_home" value="0">
 
                     <div class="form-grid">
@@ -146,20 +153,45 @@ $selectedPhoneCode = trim((string)($_POST['phone_code'] ?? $defaultPhoneCode));
                             >
                         </div>
 
+                        <div class="field field-full" id="templateSection" style="display:none;">
+                            <label>Choose a design</label>
+
+                            <div class="tribute-section-note">
+                                The design you pick here is used for tribute preview. If you post on the website, the banner version will appear in the comment section. If you send to home, the selected template price will be used.
+                            </div>
+
+                            <div class="template-loading" id="templateLoading">
+                                <i class="fa-solid fa-spinner fa-spin"></i>
+                                <span>Loading templates...</span>
+                            </div>
+
+                            <div class="template-empty" id="templateEmpty" style="display:none;">
+                                No template designs are configured for this tribute type.
+                            </div>
+
+                            <div class="template-gallery" id="templateGallery"></div>
+                        </div>
+
                         <?php if ($supportsDelivery): ?>
                             <div class="field field-full">
-                                <label>Do you want to send this <?= h(strtolower($title)) ?> to the home?</label>
+                                <label>Choose what you want to do</label>
                                 <div class="delivery-choice" id="deliveryChoice">
                                     <label class="delivery-option active">
                                         <input type="radio" name="delivery_choice" value="0" checked>
-                                        <span>No</span>
+                                        <span>Post on Website</span>
                                     </label>
                                     <label class="delivery-option">
                                         <input type="radio" name="delivery_choice" value="1">
-                                        <span>Yes</span>
+                                        <span>Send to Home</span>
                                     </label>
                                 </div>
-                                <small>Default is no. Choose yes only if this tribute should be sent to the home.</small>
+                                <small>Post on website uses the template banner in the comment section. Send to home requires verified mobile number and uses the selected template price.</small>
+                            </div>
+
+                            <div class="field field-full" id="deliveryPriceWrap" style="display:none;">
+                                <div class="delivery-price-box" id="deliveryPriceBox">
+                                    Select a template to see delivery price.
+                                </div>
                             </div>
 
                             <div class="delivery-block" id="deliveryBlock" style="display:none;">
@@ -297,6 +329,8 @@ $selectedPhoneCode = trim((string)($_POST['phone_code'] ?? $defaultPhoneCode));
             'postId' => (int)$postId,
             'sendOtpApi' => '../sms_send.php',
             'submitApi' => '../api/tribute_entry_create.php',
+            'templatesApi' => '../api/tribute_templates_get.php',
+            'templateImageApi' => '../api/tribute_template_image.php',
         ], JSON_UNESCAPED_SLASHES) ?>;
     </script>
     <script src="../script/tribute-common.js"></script>

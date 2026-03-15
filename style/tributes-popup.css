@@ -168,7 +168,7 @@
     background: #fff;
 }
 
-.tribute-frame-close {
+/* .tribute-frame-close {
     position: absolute;
     top: 10px;
     right: 12px;
@@ -187,8 +187,11 @@
 
 .tribute-frame-close:hover {
     background: #fff;
-}
+} */
 
+.tribute-frame-shell .tribute-frame-close {
+    display: none !important;
+}
 /* =========================
    Responsive
    ========================= */

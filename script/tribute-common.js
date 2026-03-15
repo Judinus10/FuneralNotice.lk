@@ -21,11 +21,22 @@
     const previewPhotos = document.getElementById('previewPhotos');
     const previewPhoneStatus = document.getElementById('previewPhoneStatus');
     const previewDeliveryStatus = document.getElementById('previewDeliveryStatus');
+    const previewTemplateFrame = document.getElementById('previewTemplateFrame');
+    const previewTemplateImage = document.getElementById('previewTemplateImage');
+    const previewTemplateStatus = document.getElementById('previewTemplateStatus');
+
+    const templateSection = document.getElementById('templateSection');
+    const templateGallery = document.getElementById('templateGallery');
+    const templateLoading = document.getElementById('templateLoading');
+    const templateEmpty = document.getElementById('templateEmpty');
+    const templateIdInput = document.getElementById('template_id');
 
     const deliveryBlock = document.getElementById('deliveryBlock');
     const sendToHomeHidden = document.getElementById('send_to_home');
     const sendToHomeInputs = document.querySelectorAll('input[name="delivery_choice"]');
     const deliveryOptions = document.querySelectorAll('.delivery-option');
+    const deliveryPriceWrap = document.getElementById('deliveryPriceWrap');
+    const deliveryPriceBox = document.getElementById('deliveryPriceBox');
 
     const btnBackChooser = document.getElementById('btnBackChooser');
     const btnBackBottom = document.getElementById('btnBackBottom');
@@ -43,6 +54,9 @@
 
     let otpVerified = false;
     let otpCurrentPhone = '';
+    let templates = [];
+    let selectedTemplate = null;
+    let hasTemplates = false;
 
     function selectedSendToHome() {
         const checked = document.querySelector('input[name="delivery_choice"]:checked');
@@ -102,6 +116,167 @@
         updatePreview();
     }
 
+    function normalizeCountry(v) {
+        return String(v || '').trim().toLowerCase();
+    }
+
+    function isSriLankanTarget() {
+        const code = String(phoneCode?.value || '').trim();
+        const country = normalizeCountry(byCountry?.value || '');
+        return code === '+94' || country === 'sri lanka' || country === 'lk' || country === 'sl';
+    }
+
+    function getCurrencyCode() {
+        return isSriLankanTarget() ? 'LKR' : 'USD';
+    }
+
+    function formatAmount(n) {
+        const num = Number(n || 0);
+        return num.toLocaleString(undefined, {
+            minimumFractionDigits: num % 1 === 0 ? 0 : 2,
+            maximumFractionDigits: 2,
+        });
+    }
+
+    function currentTypeLabel() {
+        return (cfg.title || 'tribute').toLowerCase();
+    }
+
+    function getSelectedTemplatePrice() {
+        if (!selectedTemplate) return null;
+        return isSriLankanTarget() ? Number(selectedTemplate.price_local || 0) : Number(selectedTemplate.price_foreign || 0);
+    }
+
+    function updatePriceBox() {
+        if (!supportsDelivery || !deliveryPriceWrap || !deliveryPriceBox) return;
+
+        const sendToHome = selectedSendToHome();
+        if (!sendToHome) {
+            deliveryPriceWrap.style.display = 'none';
+            return;
+        }
+
+        deliveryPriceWrap.style.display = 'block';
+
+        if (!hasTemplates) {
+            deliveryPriceBox.textContent = 'This tribute type has no template-based delivery pricing.';
+            return;
+        }
+
+        if (!selectedTemplate) {
+            deliveryPriceBox.textContent = 'Select a template to see delivery price.';
+            return;
+        }
+
+        const currency = getCurrencyCode();
+        const amount = getSelectedTemplatePrice();
+
+        deliveryPriceBox.textContent = `This selected ${currentTypeLabel()} will cost ${currency} ${formatAmount(amount)} to send.`;
+    }
+
+    function setSelectedTemplate(template) {
+        selectedTemplate = template || null;
+        if (templateIdInput) {
+            templateIdInput.value = selectedTemplate ? String(selectedTemplate.id) : '0';
+        }
+
+        if (templateGallery) {
+            templateGallery.querySelectorAll('.template-card').forEach(card => {
+                const isMatch = Number(card.dataset.templateId || 0) === Number(selectedTemplate?.id || 0);
+                card.classList.toggle('is-selected', isMatch);
+            });
+        }
+
+        updatePreview();
+        updatePriceBox();
+    }
+
+    function renderTemplates() {
+        if (!templateSection || !templateGallery || !templateLoading || !templateEmpty) return;
+
+        templateLoading.style.display = 'none';
+        templateGallery.innerHTML = '';
+
+        if (!hasTemplates) {
+            templateSection.style.display = 'none';
+            templateEmpty.style.display = 'block';
+            setSelectedTemplate(null);
+            return;
+        }
+
+        templateSection.style.display = 'block';
+        templateEmpty.style.display = 'none';
+
+        templateGallery.innerHTML = templates.map(tpl => {
+            const sizeText = tpl.frame_width_cm && tpl.frame_height_cm
+                ? `${tpl.frame_width_cm}cm × ${tpl.frame_height_cm}cm`
+                : '';
+
+            return `
+                <button type="button"
+                        class="template-card"
+                        data-template-id="${tpl.id}">
+                    <div class="template-thumb">
+                        <img src="${tpl.image_url}" alt="${escapeHtml(tpl.name || 'Template')}">
+                    </div>
+                    <div class="template-meta">
+                        <div class="template-name">${escapeHtml(tpl.name || 'Template')}</div>
+                        ${sizeText ? `<div class="template-size">${escapeHtml(sizeText)}</div>` : ''}
+                        <div class="template-prices">
+                            <span>LKR ${formatAmount(tpl.price_local || 0)}</span>
+                            <span>USD ${formatAmount(tpl.price_foreign || 0)}</span>
+                        </div>
+                    </div>
+                </button>
+            `;
+        }).join('');
+
+        templateGallery.querySelectorAll('.template-card').forEach(card => {
+            card.addEventListener('click', () => {
+                const id = Number(card.dataset.templateId || 0);
+                const found = templates.find(t => Number(t.id) === id) || null;
+                setSelectedTemplate(found);
+            });
+        });
+
+        setSelectedTemplate(templates[0] || null);
+    }
+
+    async function loadTemplates() {
+        if (!cfg.templatesApi || !cfg.slug) return;
+
+        if (templateSection) {
+            templateSection.style.display = 'block';
+        }
+        if (templateLoading) {
+            templateLoading.style.display = 'flex';
+        }
+        if (templateEmpty) {
+            templateEmpty.style.display = 'none';
+        }
+
+        try {
+            const url = `${cfg.templatesApi}?tribute_slug=${encodeURIComponent(cfg.slug)}`;
+            const res = await fetch(url, { credentials: 'same-origin' });
+            const json = await res.json();
+
+            if (!json.ok) {
+                templates = [];
+                hasTemplates = false;
+                renderTemplates();
+                return;
+            }
+
+            templates = Array.isArray(json.templates) ? json.templates : [];
+            hasTemplates = !!json.has_templates && templates.length > 0;
+            renderTemplates();
+        } catch (err) {
+            templates = [];
+            hasTemplates = false;
+            renderTemplates();
+        }
+    }
+
     function updateDeliveryUI() {
         if (!supportsDelivery) return;
 
@@ -128,7 +303,7 @@
             }
 
             if (previewDeliveryStatus) {
-                previewDeliveryStatus.textContent = 'Not sending to home';
+                previewDeliveryStatus.textContent = 'Posting on website';
                 previewDeliveryStatus.className = 'preview-extra neutral';
             }
         } else {
@@ -142,6 +317,7 @@
             }
         }
 
+        updatePriceBox();
         updatePreview();
     }
 
@@ -167,6 +343,25 @@
             previewPhotos.textContent = `${lines.length} photo link${lines.length === 1 ? '' : 's'} added`;
         }
 
+        if (previewTemplateFrame && previewTemplateImage && previewTemplateStatus) {
+            if (selectedTemplate && selectedTemplate.image_url) {
+                previewTemplateFrame.style.display = 'block';
+                previewTemplateImage.src = selectedTemplate.image_url;
+                previewTemplateStatus.style.display = 'inline-flex';
+                previewTemplateStatus.textContent = `${selectedTemplate.name || 'Template'} selected`;
+                previewTemplateStatus.className = 'preview-extra success';
+            } else {
+                previewTemplateFrame.style.display = 'none';
+                if (hasTemplates) {
+                    previewTemplateStatus.style.display = 'inline-flex';
+                    previewTemplateStatus.textContent = 'No template selected';
+                    previewTemplateStatus.className = 'preview-extra warning';
+                } else {
+                    previewTemplateStatus.style.display = 'none';
+                }
+            }
+        }
+
         if (supportsDelivery && previewPhoneStatus) {
             const sendToHome = selectedSendToHome();
             const currentPhone = fullPhone();
@@ -188,6 +383,8 @@
                 }
             }
         }
+
+        updatePriceBox();
     }
 
     function goBackChooser() {
@@ -230,6 +427,11 @@
             return false;
         }
 
+        if (hasTemplates && !selectedTemplate) {
+            setAlert('error', 'Please select a template.');
+            return false;
+        }
+
         if (sendToHome) {
             const privateName = (fullName?.value || '').trim();
             const phoneValue = fullPhone();
@@ -245,6 +447,11 @@
             if (!mobileValue || !phoneValue || phoneValue === codeOnly) {
                 setAlert('error', 'Please enter mobile number for delivery.');
                 mobile?.focus();
+                return false;
+            }
+
+            if (hasTemplates && !selectedTemplate) {
+                setAlert('error', 'Please select a template before delivery.');
                 return false;
             }
 
@@ -285,7 +492,7 @@
         );
 
         try {
-            const res = await fetch(cfg.sendOtpApi || '../sms_send', {
+            const res = await fetch(cfg.sendOtpApi || '../sms_send.php', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded'
@@ -347,7 +554,7 @@
         setButtonLoading(btnVerifyOtp, '<i class="fa-solid fa-spinner fa-spin"></i> Verifying...');
 
         try {
-            const res = await fetch(cfg.sendOtpApi || '../sms_send', {
+            const res = await fetch(cfg.sendOtpApi || '../sms_send.php', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded'
@@ -375,6 +582,12 @@
         } finally {
             restoreButton(btnVerifyOtp);
         }
+    }
+
+    function escapeHtml(v) {
+        const div = document.createElement('div');
+        div.textContent = v == null ? '' : String(v);
+        return div.innerHTML;
     }
 
     [byName, byCountry, message, photoLinks, fullName, mobile].forEach(el => {
@@ -453,8 +666,10 @@
             }
 
             extraData.send_to_home = sendToHome ? 1 : 0;
+            extraData.currency_code = getCurrencyCode();
 
             fd.set('send_to_home', sendToHome ? '1' : '0');
+            fd.set('template_id', selectedTemplate ? String(selectedTemplate.id) : '0');
             fd.append('extra_json', JSON.stringify(extraData));
 
             const res = await fetch(cfg.submitApi || '../api/tribute_entry_create.php', {
@@ -486,4 +701,5 @@
     syncPhoneCodeDisplay();
     updateDeliveryUI();
     updatePreview();
+    loadTemplates();
 })();

@@ -74,7 +74,8 @@ function tributeHeading(?string $slug): string {
     $slug = strtolower(trim((string)$slug));
     if ($slug === 'wreath') return 'Our Deepest Sympathies';
     if ($slug === 'candle') return 'In Loving Memory';
-    if ($slug === 'card') return 'With Heartfelt Condolences';
+    if ($slug === 'card' || $slug === 'cards') return 'With Heartfelt Condolences';
+    if ($slug === 'letter') return 'Tribute Letter';
     return 'Tribute Message';
 }
 
@@ -185,14 +186,11 @@ try {
     $tributes = $tq->fetchAll(PDO::FETCH_ASSOC);
 
     $teq = $pdo->prepare("
-        SELECT 
+        SELECT
             e.*,
-            tpl.banner_mime,
-            tpl.banner_blob,
             tt.title AS type_title,
-            tt.slug  AS type_slug
+            tt.slug AS type_slug
         FROM tribute_entries e
-        JOIN tribute_templates tpl ON tpl.id = e.template_id
         JOIN tribute_types tt ON tt.id = e.tribute_type_id
         WHERE e.post_id = ?
           AND e.status = 'approved'
@@ -205,7 +203,7 @@ try {
     $mergedTributes = [];
 
     foreach ($tributeEntries as $e) {
-        $hasBanner = !empty($e['banner_blob']) && !empty($e['banner_mime']);
+        $hasBanner = !empty($e['template_id']);
         $tr = truncateTribute($e['message'] ?? '', $hasBanner ? 60 : 140);
         $ago = timeAgo($e['created_at'] ?? null);
 
@@ -214,11 +212,16 @@ try {
         if (!empty($meta) && $ago) $meta .= ' • ';
         if ($ago) $meta .= $ago;
 
+        $bannerUrl = '';
+        if ($hasBanner) {
+            $bannerUrl = 'api/tribute_template_image.php?id=' . (int)$e['template_id'] . '&mode=banner';
+        }
+
         $mergedTributes[] = [
             'id' => (int)$e['id'],
             'kind' => $hasBanner ? 'banner' : 'text',
             'heading' => tributeHeading($e['type_slug'] ?? null),
-            'banner_image' => $hasBanner ? ('data:' . $e['banner_mime'] . ';base64,' . base64_encode($e['banner_blob'])) : '',
+            'banner_image' => $bannerUrl,
             'short_message' => $tr['text'],
             'has_more' => $tr['truncated'],
             'by_name' => $e['by_name'] ?? '',

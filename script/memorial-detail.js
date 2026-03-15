@@ -180,10 +180,10 @@ function renderTributes(data) {
     btnWrite.style.display = 'inline-flex';
 
     const html = tributes.slice(0, maxShow).map(t => {
-        if (t.kind === 'banner') {
+        if (t.kind === 'banner' && t.banner_image) {
             return `
                 <div class="tribute-banner">
-                    <img src="${escapeHtml(t.banner_image)}" alt="">
+                    <img src="${escapeHtml(t.banner_image)}" alt="Tribute banner" loading="lazy">
                     <div class="tribute-banner-overlay">
                         <div>
                             <div class="tb-heading">${escapeHtml(t.heading || 'Tribute')}</div>

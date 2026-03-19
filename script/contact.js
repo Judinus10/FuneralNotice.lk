@@ -15,6 +15,13 @@
     let lastPhone = '';
     let verifiedPhone = '';
 
+    const I18N = window.CONTACT_I18N || {};
+
+    function t(key, fallback = '') {
+        const value = I18N[key];
+        return typeof value === 'string' && value.trim() !== '' ? value : fallback;
+    }
+
     function qs(selector, root = document) {
         return root.querySelector(selector);
     }
@@ -116,8 +123,8 @@
                 <div class="contact-icon">
                     <i class="fas fa-phone-alt"></i>
                 </div>
-                <h3>${escapeHtml(data.hotline_caption || 'Hotline')}</h3>
-                <p>${escapeHtml(data.hotline_note || 'Reach our support hotline for urgent help.')}</p>
+                <h3>${escapeHtml(t('hotlineTitle', data.hotline_caption || 'Hotline'))}</h3>
+                <p>${escapeHtml(t('hotlineNote', data.hotline_note || 'Reach our support hotline for urgent help.'))}</p>
                 <div class="contact-detail-wrap">
                     <a class="contact-detail" href="tel:${escapeHtml((data.hotline_number || '').replace(/\s+/g, ''))}">
                         ${escapeHtml(data.hotline_number || '')}
@@ -131,8 +138,8 @@
                 <div class="contact-icon">
                     <i class="fas fa-envelope"></i>
                 </div>
-                <h3>Email Support</h3>
-                <p>Send us your inquiry and we will respond as soon as possible.</p>
+                <h3>${escapeHtml(t('emailSupportTitle', 'Email Support'))}</h3>
+                <p>${escapeHtml(t('emailSupportNote', 'Send us your inquiry and we will respond as soon as possible.'))}</p>
                 <div class="contact-detail-wrap">
                     ${data.support_email ? `
                         <a class="contact-detail" href="mailto:${escapeHtml(data.support_email)}">
@@ -160,15 +167,15 @@
                     `).join('')}
                 </div>
             `
-            : `<div class="contact-note">No alternate country contact numbers found.</div>`;
+            : `<div class="contact-note">${escapeHtml(t('noIntlNumbers', 'No alternate country contact numbers found.'))}</div>`;
 
         cards.push(`
             <div class="contact-card">
                 <div class="contact-icon">
                     <i class="fas fa-globe-asia"></i>
                 </div>
-                <h3>International Numbers</h3>
-                <p>Use the most suitable number based on your country.</p>
+                <h3>${escapeHtml(t('intlTitle', 'International Numbers'))}</h3>
+                <p>${escapeHtml(t('intlNote', 'Use the most suitable number based on your country.'))}</p>
                 ${countryHtml}
             </div>
         `);
@@ -204,13 +211,13 @@
         const subject = qs('#subject')?.value.trim() || '';
         const message = qs('#message')?.value.trim() || '';
 
-        if (!name) return 'Full name is required.';
-        if (!email) return 'Email address is required.';
-        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return 'Enter a valid email address.';
-        if (!mobile) return 'Phone number is required.';
-        if (mobile.replace(/\D/g, '').length < 7) return 'Enter a valid phone number.';
-        if (!subject) return 'Subject is required.';
-        if (!message) return 'Message is required.';
+        if (!name) return t('fillRequired', 'Please fill all required fields.');
+        if (!email) return t('fillRequired', 'Please fill all required fields.');
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return t('invalidEmail', 'Please enter a valid email address.');
+        if (!mobile) return t('fillRequired', 'Please fill all required fields.');
+        if (mobile.replace(/\D/g, '').length < 7) return t('invalidPhone', 'Please enter a valid phone number.');
+        if (!subject) return t('fillRequired', 'Please fill all required fields.');
+        if (!message) return t('fillRequired', 'Please fill all required fields.');
 
         return '';
     }
@@ -221,8 +228,8 @@
 
         btn.disabled = loading;
         btn.innerHTML = loading
-            ? '<i class="fas fa-spinner fa-spin"></i> <span>Please wait...</span>'
-            : '<i class="fas fa-paper-plane"></i> <span>Send Message</span>';
+            ? `<i class="fas fa-spinner fa-spin"></i> <span>${escapeHtml(t('pleaseWait', 'Please wait...'))}</span>`
+            : `<i class="fas fa-paper-plane"></i> <span>${escapeHtml(t('sendMessage', 'Send Message'))}</span>`;
     }
 
     function setOtpError(message = '') {
@@ -236,7 +243,9 @@
         if (!btn) return;
 
         btn.dataset.mode = mode;
-        btn.textContent = mode === 'resend' ? 'Resend Code' : 'Verify';
+        btn.textContent = mode === 'resend'
+            ? t('resendOtp', 'Resend Code')
+            : t('verify', 'Verify');
         btn.disabled = false;
     }
 
@@ -256,7 +265,7 @@
                 clearInterval(timerId);
                 timerId = null;
                 setOtpButtonMode('resend');
-                setOtpError('Code expired. Tap "Resend Code".');
+                setOtpError(t('otpExpired', 'OTP has expired.'));
             }
         }, 1000);
     }
@@ -315,7 +324,7 @@
         const btn = qs('#otpVerifyBtn');
         if (btn) {
             btn.disabled = true;
-            btn.textContent = isResend ? 'Sending...' : 'Sending...';
+            btn.textContent = t('pleaseWait', 'Please wait...');
         }
 
         setOtpError('');
@@ -326,7 +335,12 @@
             throw new Error(res.message || 'Failed to send OTP.');
         }
 
-        showToast(isResend ? 'OTP resent successfully.' : 'OTP sent successfully.', 'success');
+        showToast(
+            isResend
+                ? t('otpResentSuccess', 'OTP resent successfully.')
+                : t('otpSentSuccess', 'OTP sent successfully.'),
+            'success'
+        );
 
         const input = qs('#otpCodeInput');
         if (input) input.value = '';
@@ -339,7 +353,7 @@
         const btn = qs('#otpVerifyBtn');
         if (btn) {
             btn.disabled = true;
-            btn.textContent = 'Verifying...';
+            btn.textContent = t('verifying', 'Verifying...');
         }
 
         setOtpError('');
@@ -347,7 +361,7 @@
         const res = await postForm(API_OTP_VERIFY, { phone, otp });
 
         if (!res.ok) {
-            throw new Error(res.message || 'OTP verification failed.');
+            throw new Error(res.message || t('otpInvalid', 'Invalid OTP code.'));
         }
 
         verifiedPhone = phone;
@@ -368,11 +382,11 @@
         });
 
         if (!res.ok) {
-            throw new Error(res.message || 'Failed to save your message.');
+            throw new Error(res.message || t('messageFailed', 'Failed to save your message.'));
         }
 
-        showFormMessage(res.message || 'Message sent successfully.', 'success');
-        showToast('Message sent successfully.', 'success');
+        showFormMessage(res.message || t('messageSent', 'Your message has been sent successfully.'), 'success');
+        showToast(t('messageSent', 'Your message has been sent successfully.'), 'success');
         form.reset();
 
         if (bootstrapData?.default_phone_code) {
@@ -407,7 +421,7 @@
                     setSubmitLoading(true);
                     await submitContactForm();
                 } catch (err) {
-                    showFormMessage(err.message || 'Failed to send message.', 'error');
+                    showFormMessage(err.message || t('messageFailed', 'Failed to send your message.'), 'error');
                 } finally {
                     setSubmitLoading(false);
                 }
@@ -428,7 +442,7 @@
 
         otpCancelBtn?.addEventListener('click', () => {
             closeOtpPopup();
-            showToast('OTP cancelled.', 'info');
+            showToast(t('otpCancelled', 'OTP cancelled.'), 'info');
         });
 
         otpVerifyBtn?.addEventListener('click', async () => {
@@ -439,8 +453,8 @@
                     otpVerifyBtn.disabled = true;
                     await sendOtp(lastPhone, true);
                 } catch (err) {
-                    setOtpError(err.message || 'Failed to resend OTP.');
-                    showToast(err.message || 'Failed to resend OTP.', 'error');
+                    setOtpError(err.message || t('resendOtpFailed', 'Failed to resend OTP.'));
+                    showToast(err.message || t('resendOtpFailed', 'Failed to resend OTP.'), 'error');
                     otpVerifyBtn.disabled = false;
                 }
                 return;
@@ -449,19 +463,19 @@
             const otp = (otpInput?.value || '').replace(/\D/g, '');
 
             if (otp.length !== 6) {
-                setOtpError('Enter the 6-digit OTP code.');
+                setOtpError(t('enterOtp', 'Enter the 6-digit OTP code.'));
                 return;
             }
 
             try {
                 await verifyOtp(lastPhone, otp);
                 closeOtpPopup();
-                showToast('Phone verified successfully.', 'success');
+                showToast(t('phoneVerified', 'Phone verified successfully.'), 'success');
 
                 setSubmitLoading(true);
                 await submitContactForm();
             } catch (err) {
-                const msg = err.message || 'OTP verification failed.';
+                const msg = err.message || t('otpInvalid', 'OTP verification failed.');
                 setOtpError(msg);
                 showToast(msg, 'error');
             } finally {
@@ -502,7 +516,7 @@
         qsa('.search-box input[type="text"]').forEach(input => {
             input.addEventListener('keypress', function (e) {
                 if (e.key === 'Enter' && this.value.trim()) {
-                    showToast(`Searching for: ${this.value}`, 'info');
+                    showToast(`${t('searchingFor', 'Searching for:')} ${this.value}`, 'info');
                 }
             });
         });

@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 session_start();
 require_once __DIR__ . '/../db.php';
+require_once __DIR__ . '/../translator/language.php';
 
 if (empty($_SESSION['csrf'])) {
     $_SESSION['csrf'] = bin2hex(random_bytes(16));
@@ -16,7 +17,7 @@ function h(?string $v): string
 $postId = isset($_GET['post_id']) ? max(0, (int)$_GET['post_id']) : 0;
 if ($postId <= 0) {
     http_response_code(400);
-    exit('Invalid post id');
+    exit(h(t('tribute_invalid_post_id')));
 }
 
 $post = null;
@@ -30,8 +31,8 @@ try {
 
 if (!$post) {
     http_response_code(404);
-    exit('Memorial not found');
+    exit(h(t('tribute_memorial_not_found')));
 }
 
-$postName = trim((string)($post['full_name'] ?? 'Memorial'));
+$postName = trim((string)($post['full_name'] ?? t('tribute_memorial_default_name')));
 $csrf = $_SESSION['csrf'];

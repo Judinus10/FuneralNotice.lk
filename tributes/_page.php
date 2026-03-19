@@ -8,8 +8,19 @@ if (!isset($TRIBUTE_META) || !is_array($TRIBUTE_META)) {
 
 require __DIR__ . '/_common.php';
 
-$title = $TRIBUTE_META['title'] ?? 'Tribute';
-$subtitle = $TRIBUTE_META['subtitle'] ?? '';
+function tribute_text(array $meta, string $key, string $fallback = ''): string
+{
+    $value = $meta[$key] ?? $fallback;
+
+    if (is_string($value) && str_starts_with($value, 'tr:')) {
+        return t(substr($value, 3));
+    }
+
+    return (string)$value;
+}
+
+$title = tribute_text($TRIBUTE_META, 'title', t('tribute_default_title'));
+$subtitle = tribute_text($TRIBUTE_META, 'subtitle', '');
 $slug = $TRIBUTE_META['slug'] ?? 'message';
 $icon = $TRIBUTE_META['icon'] ?? 'fa-heart';
 $accent = $TRIBUTE_META['accent'] ?? 'purple';
@@ -17,13 +28,13 @@ $showOrg = !empty($TRIBUTE_META['show_org']);
 $allowPhotoLinks = !empty($TRIBUTE_META['allow_photo_links']);
 $supportsDelivery = !empty($TRIBUTE_META['supports_delivery']);
 
-$messageLabel = $TRIBUTE_META['message_label'] ?? 'Message';
-$messagePlaceholder = $TRIBUTE_META['message_placeholder'] ?? 'Write your tribute message';
-$helperText = $TRIBUTE_META['helper_text'] ?? 'Share your condolences respectfully.';
+$messageLabel = tribute_text($TRIBUTE_META, 'message_label', t('tribute_message_label'));
+$messagePlaceholder = tribute_text($TRIBUTE_META, 'message_placeholder', t('tribute_message_placeholder'));
+$helperText = tribute_text($TRIBUTE_META, 'helper_text', t('tribute_helper_text'));
 
-$phoneLabel = $TRIBUTE_META['phone_label'] ?? 'Mobile Number';
-$phonePlaceholder = $TRIBUTE_META['phone_placeholder'] ?? 'Enter mobile number';
-$deliveryText = $TRIBUTE_META['delivery_text'] ?? 'A verified phone number is required if you want this tribute delivered to the home.';
+$phoneLabel = tribute_text($TRIBUTE_META, 'phone_label', t('tribute_phone_label'));
+$phonePlaceholder = tribute_text($TRIBUTE_META, 'phone_placeholder', t('tribute_phone_placeholder'));
+$deliveryText = tribute_text($TRIBUTE_META, 'delivery_text', t('tribute_delivery_text_default'));
 
 /* -------------------------------
    Load phone country codes from DB
@@ -52,7 +63,7 @@ if ($defaultPhoneCode === '') {
 $selectedPhoneCode = trim((string)($_POST['phone_code'] ?? $defaultPhoneCode));
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="<?= h(current_lang()) ?>">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -65,17 +76,17 @@ $selectedPhoneCode = trim((string)($_POST['phone_code'] ?? $defaultPhoneCode));
         <header class="tribute-topbar">
             <button type="button" class="tribute-top-btn" id="btnBackChooser">
                 <i class="fa-solid fa-arrow-left"></i>
-                Back
+                <?= h(t('common_back')) ?>
             </button>
 
             <div class="tribute-top-title">
                 <strong><?= h($title) ?></strong>
-                <span>for <?= h($postName) ?></span>
+                <span><?= h(t('tribute_for')) ?> <?= h($postName) ?></span>
             </div>
 
             <button type="button" class="tribute-top-btn danger" id="btnCloseTribute">
                 <i class="fa-solid fa-xmark"></i>
-                Close
+                <?= h(t('common_close')) ?>
             </button>
         </header>
 
@@ -89,28 +100,28 @@ $selectedPhoneCode = trim((string)($_POST['phone_code'] ?? $defaultPhoneCode));
                 <p class="tribute-preview-subtitle"><?= h($subtitle) ?></p>
 
                 <div class="tribute-preview-box">
-                    <div class="preview-heading">Live Preview</div>
+                    <div class="preview-heading"><?= h(t('tribute_live_preview')) ?></div>
 
                     <div class="preview-template-frame" id="previewTemplateFrame" style="display:none;">
-                        <img id="previewTemplateImage" src="" alt="Selected template preview">
+                        <img id="previewTemplateImage" src="" alt="<?= h(t('tribute_selected_template_preview')) ?>">
                     </div>
 
-                    <div class="preview-message" id="previewMessage">Your tribute message will appear here.</div>
+                    <div class="preview-message" id="previewMessage"><?= h(t('tribute_preview_message_default')) ?></div>
 
                     <div class="preview-meta">
-                        <span id="previewName">Your Name</span>
-                        <span id="previewCountry">Country</span>
+                        <span id="previewName"><?= h(t('tribute_your_name')) ?></span>
+                        <span id="previewCountry"><?= h(t('tribute_country')) ?></span>
                     </div>
 
                     <?php if ($supportsDelivery): ?>
-                        <div class="preview-extra neutral" id="previewDeliveryStatus">Posting on website</div>
-                        <div class="preview-extra neutral" id="previewPhoneStatus" style="display:none;">Phone not added</div>
+                        <div class="preview-extra neutral" id="previewDeliveryStatus"><?= h(t('tribute_posting_on_website')) ?></div>
+                        <div class="preview-extra neutral" id="previewPhoneStatus" style="display:none;"><?= h(t('tribute_phone_not_added')) ?></div>
                     <?php endif; ?>
 
-                    <div class="preview-extra neutral" id="previewTemplateStatus" style="display:none;">No template selected</div>
+                    <div class="preview-extra neutral" id="previewTemplateStatus" style="display:none;"><?= h(t('tribute_no_template_selected')) ?></div>
 
                     <?php if ($allowPhotoLinks): ?>
-                        <div class="preview-extra" id="previewPhotos">0 photo links added</div>
+                        <div class="preview-extra" id="previewPhotos"><?= h(t('tribute_photo_links_count_default')) ?></div>
                     <?php endif; ?>
                 </div>
 
@@ -130,43 +141,43 @@ $selectedPhoneCode = trim((string)($_POST['phone_code'] ?? $defaultPhoneCode));
 
                     <div class="form-grid">
                         <div class="field">
-                            <label for="by_name">Your Name <span>*</span></label>
-                            <input type="text" id="by_name" name="by_name" required maxlength="120" placeholder="Enter your name">
+                            <label for="by_name"><?= h(t('tribute_your_name')) ?> <span>*</span></label>
+                            <input type="text" id="by_name" name="by_name" required maxlength="120" placeholder="<?= h(t('tribute_enter_your_name')) ?>">
                         </div>
 
                         <?php if ($showOrg): ?>
                             <div class="field">
-                                <label for="by_org">Organization / Family (optional)</label>
-                                <input type="text" id="by_org" name="by_org" maxlength="120" placeholder="Family, Friends, Company...">
+                                <label for="by_org"><?= h(t('tribute_organization_family_optional')) ?></label>
+                                <input type="text" id="by_org" name="by_org" maxlength="120" placeholder="<?= h(t('tribute_organization_family_placeholder')) ?>">
                             </div>
                         <?php endif; ?>
 
                         <div class="field">
-                            <label for="by_country">Country (optional)</label>
+                            <label for="by_country"><?= h(t('tribute_country_optional')) ?></label>
                             <input
                                 type="text"
                                 id="by_country"
                                 name="by_country"
                                 maxlength="120"
-                                placeholder="Sri Lanka, UK, Canada..."
+                                placeholder="<?= h(t('tribute_country_placeholder')) ?>"
                                 value="<?= h($_POST['by_country'] ?? '') ?>"
                             >
                         </div>
 
                         <div class="field field-full" id="templateSection" style="display:none;">
-                            <label>Choose a design</label>
+                            <label><?= h(t('tribute_choose_design')) ?></label>
 
                             <div class="tribute-section-note">
-                                The design you pick here is used for tribute preview. If you post on the website, the banner version will appear in the comment section. If you send to home, the selected template price will be used.
+                                <?= h(t('tribute_design_note')) ?>
                             </div>
 
                             <div class="template-loading" id="templateLoading">
                                 <i class="fa-solid fa-spinner fa-spin"></i>
-                                <span>Loading templates...</span>
+                                <span><?= h(t('tribute_loading_templates')) ?></span>
                             </div>
 
                             <div class="template-empty" id="templateEmpty" style="display:none;">
-                                No template designs are configured for this tribute type.
+                                <?= h(t('tribute_no_template_designs')) ?>
                             </div>
 
                             <div class="template-gallery" id="templateGallery"></div>
@@ -174,23 +185,23 @@ $selectedPhoneCode = trim((string)($_POST['phone_code'] ?? $defaultPhoneCode));
 
                         <?php if ($supportsDelivery): ?>
                             <div class="field field-full">
-                                <label>Choose what you want to do</label>
+                                <label><?= h(t('tribute_choose_what_you_want')) ?></label>
                                 <div class="delivery-choice" id="deliveryChoice">
                                     <label class="delivery-option active">
                                         <input type="radio" name="delivery_choice" value="0" checked>
-                                        <span>Post on Website</span>
+                                        <span><?= h(t('tribute_post_on_website')) ?></span>
                                     </label>
                                     <label class="delivery-option">
                                         <input type="radio" name="delivery_choice" value="1">
-                                        <span>Send to Home</span>
+                                        <span><?= h(t('tribute_send_to_home')) ?></span>
                                     </label>
                                 </div>
-                                <small>Post on website uses the template banner in the comment section. Send to home requires verified mobile number and uses the selected template price.</small>
+                                <small><?= h(t('tribute_delivery_choice_note')) ?></small>
                             </div>
 
                             <div class="field field-full" id="deliveryPriceWrap" style="display:none;">
                                 <div class="delivery-price-box" id="deliveryPriceBox">
-                                    Select a template to see delivery price.
+                                    <?= h(t('tribute_select_template_for_price')) ?>
                                 </div>
                             </div>
 
@@ -202,9 +213,9 @@ $selectedPhoneCode = trim((string)($_POST['phone_code'] ?? $defaultPhoneCode));
 
                                 <div class="form-grid">
                                     <div class="field">
-                                        <label for="full_name">Full Name <span>*</span></label>
-                                        <input type="text" id="full_name" name="full_name" maxlength="120" placeholder="Enter full name">
-                                        <small>This is for internal use only.</small>
+                                        <label for="full_name"><?= h(t('tribute_full_name')) ?> <span>*</span></label>
+                                        <input type="text" id="full_name" name="full_name" maxlength="120" placeholder="<?= h(t('tribute_enter_full_name')) ?>">
+                                        <small><?= h(t('tribute_internal_use_only')) ?></small>
                                     </div>
 
                                     <div class="field">
@@ -237,11 +248,11 @@ $selectedPhoneCode = trim((string)($_POST['phone_code'] ?? $defaultPhoneCode));
                                                 placeholder="<?= h($phonePlaceholder) ?>"
                                             >
                                         </div>
-                                        <small>OTP verification is required only for home delivery.</small>
+                                        <small><?= h(t('tribute_otp_required_only_for_delivery')) ?></small>
                                     </div>
 
                                     <div class="field field-full">
-                                        <label for="otp_code">Verification Code</label>
+                                        <label for="otp_code"><?= h(t('tribute_verification_code')) ?></label>
 
                                         <div class="otp-stack">
                                             <div class="otp-row">
@@ -252,30 +263,30 @@ $selectedPhoneCode = trim((string)($_POST['phone_code'] ?? $defaultPhoneCode));
                                                     maxlength="6"
                                                     inputmode="numeric"
                                                     autocomplete="one-time-code"
-                                                    placeholder="Enter 6-digit code"
+                                                    placeholder="<?= h(t('tribute_enter_6_digit_code')) ?>"
                                                 >
                                                 <button type="button" class="btn btn-light btn-otp" id="btnSendOtp">
                                                     <i class="fa-solid fa-paper-plane"></i>
-                                                    Send Code
+                                                    <?= h(t('tribute_send_code')) ?>
                                                 </button>
                                             </div>
 
                                             <div class="otp-row otp-row-secondary">
                                                 <button type="button" class="btn btn-light btn-otp" id="btnVerifyOtp">
                                                     <i class="fa-solid fa-shield-check"></i>
-                                                    Verify Code
+                                                    <?= h(t('tribute_verify_code')) ?>
                                                 </button>
 
                                                 <button type="button" class="btn btn-light btn-otp" id="btnResendOtp">
                                                     <i class="fa-solid fa-rotate-right"></i>
-                                                    Resend
+                                                    <?= h(t('tribute_resend')) ?>
                                                 </button>
                                             </div>
                                         </div>
 
                                         <div class="otp-status-wrap">
-                                            <span class="otp-status-badge neutral" id="otpStatusBadge">Not verified</span>
-                                            <small id="otpStatusText">Verify the mobile number only if delivery is needed.</small>
+                                            <span class="otp-status-badge neutral" id="otpStatusBadge"><?= h(t('tribute_not_verified')) ?></span>
+                                            <small id="otpStatusText"><?= h(t('tribute_verify_mobile_only_if_delivery')) ?></small>
                                         </div>
                                     </div>
                                 </div>
@@ -295,12 +306,12 @@ $selectedPhoneCode = trim((string)($_POST['phone_code'] ?? $defaultPhoneCode));
 
                         <?php if ($allowPhotoLinks): ?>
                             <div class="field field-full">
-                                <label for="photo_links">Photo Links (optional)</label>
+                                <label for="photo_links"><?= h(t('tribute_photo_links_optional')) ?></label>
                                 <textarea
                                     id="photo_links"
                                     name="photo_links"
                                     rows="5"
-                                    placeholder="Paste one image URL per line&#10;https://example.com/photo1.jpg&#10;https://example.com/photo2.jpg"
+                                    placeholder="<?= h(t('tribute_photo_links_placeholder')) ?>"
                                 ></textarea>
                             </div>
                         <?php endif; ?>
@@ -309,10 +320,10 @@ $selectedPhoneCode = trim((string)($_POST['phone_code'] ?? $defaultPhoneCode));
                     <div id="tributeFormAlert" class="tribute-alert" style="display:none;"></div>
 
                     <div class="tribute-actions">
-                        <button type="button" class="btn btn-light" id="btnBackBottom">Back</button>
+                        <button type="button" class="btn btn-light" id="btnBackBottom"><?= h(t('common_back')) ?></button>
                         <button type="submit" class="btn btn-primary" id="btnSubmitTribute">
                             <i class="fa-solid fa-paper-plane"></i>
-                            Submit Tribute
+                            <?= h(t('tribute_submit_tribute')) ?>
                         </button>
                     </div>
                 </form>
@@ -331,7 +342,18 @@ $selectedPhoneCode = trim((string)($_POST['phone_code'] ?? $defaultPhoneCode));
             'submitApi' => '../api/tribute_entry_create.php',
             'templatesApi' => '../api/tribute_templates_get.php',
             'templateImageApi' => '../api/tribute_template_image.php',
-        ], JSON_UNESCAPED_SLASHES) ?>;
+            'i18n' => [
+                'loadingTemplates' => t('tribute_loading_templates'),
+                'noTemplateDesigns' => t('tribute_no_template_designs'),
+                'selectTemplateForPrice' => t('tribute_select_template_for_price'),
+                'notVerified' => t('tribute_not_verified'),
+                'verified' => t('tribute_verified'),
+                'postingOnWebsite' => t('tribute_posting_on_website'),
+                'phoneNotAdded' => t('tribute_phone_not_added'),
+                'noTemplateSelected' => t('tribute_no_template_selected'),
+                'photoLinksCountDefault' => t('tribute_photo_links_count_default'),
+            ]
+        ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) ?>;
     </script>
     <script src="../script/tribute-common.js"></script>
 </body>

@@ -1,8 +1,8 @@
 <?php
 $TRIBUTE_META = [
     'slug' => 'candle',
-    'title' => 'Lighting of Candle',
-    'subtitle' => 'Mark your condolences.',
+    'title' => 'tr:tribute_type_candle_title',
+    'subtitle' => 'tr:tribute_type_candle_subtitle',
     'icon' => 'fa-fire-flame-curved',
     'accent' => 'gold',
 
@@ -12,14 +12,15 @@ $TRIBUTE_META = [
     'requires_phone' => false,
     'requires_otp' => false,
     'requires_delivery' => false,
+    'supports_delivery' => false,
 
-    'message_label' => 'Prayer / Condolence Message',
-    'message_placeholder' => 'Write a peaceful prayer or condolence...',
-    'helper_text' => 'Use this tribute for prayerful remembrance.',
+    'message_label' => 'tr:tribute_type_candle_message_label',
+    'message_placeholder' => 'tr:tribute_type_candle_message_placeholder',
+    'helper_text' => 'tr:tribute_type_candle_helper_text',
 
-    'phone_label' => 'Phone Number',
-    'phone_placeholder' => 'Enter your mobile number',
-    'delivery_text' => 'Verified contact details are required for delivery-based tribute types.'
+    'phone_label' => 'tr:tribute_phone_label',
+    'phone_placeholder' => 'tr:tribute_phone_placeholder',
+    'delivery_text' => 'tr:tribute_delivery_text_default'
 ];
 
 require __DIR__ . '/_page.php';

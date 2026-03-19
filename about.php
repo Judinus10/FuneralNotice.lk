@@ -1,18 +1,22 @@
+<?php
+declare(strict_types=1);
+require_once __DIR__ . '/translator/language.php';
+?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="<?= htmlspecialchars(current_lang(), ENT_QUOTES, 'UTF-8') ?>">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Us - FuneralNotice.lk</title>
+    <title><?= htmlspecialchars(t('about_page_title'), ENT_QUOTES, 'UTF-8') ?></title>
     <meta name="description"
-        content="Learn about FuneralNotice.lk - A dignified platform to honor and remember loved ones in Sri Lanka.">
+        content="<?= htmlspecialchars(t('about_meta_description'), ENT_QUOTES, 'UTF-8') ?>">
 
     <!-- Open Graph Tags -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://funeralnotice.lk/about.php">
-    <meta property="og:title" content="About Us - FuneralNotice.lk">
-    <meta property="og:description" content="A dignified platform to honor and remember loved ones in Sri Lanka.">
+    <meta property="og:title" content="<?= htmlspecialchars(t('about_page_title'), ENT_QUOTES, 'UTF-8') ?>">
+    <meta property="og:description" content="<?= htmlspecialchars(t('about_og_description'), ENT_QUOTES, 'UTF-8') ?>">
     <meta property="og:image" content="https://ripnews.lk/uploads/posts/76/cover.png">
     <meta property="og:image:type" content="image/png">
     <meta property="og:image:width" content="1200">
@@ -20,8 +24,8 @@
     <meta property="og:site_name" content="FuneralNotice.lk">
 
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="About Us - FuneralNotice.lk">
-    <meta name="twitter:description" content="A dignified platform to honor and remember loved ones in Sri Lanka.">
+    <meta name="twitter:title" content="<?= htmlspecialchars(t('about_page_title'), ENT_QUOTES, 'UTF-8') ?>">
+    <meta name="twitter:description" content="<?= htmlspecialchars(t('about_og_description'), ENT_QUOTES, 'UTF-8') ?>">
     <meta name="twitter:image" content="https://ripnews.lk/uploads/posts/76/cover.png">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -31,51 +35,17 @@
     <link rel="stylesheet" href="style/navbar.css">
     <link rel="stylesheet" href="style/footer.css">
     <link rel="stylesheet" href="style/about.css">
-
-    <style>
-
-    </style>
 </head>
 
 <body>
-    <!-- Navbar Component -->
     <div id="navbar-placeholder"></div>
 
-
-    <!-- About Page Content -->
     <div class="main-body">
-        <!-- Hero Section -->
-        <!-- <section class="about-hero">
-            <div class="hero-content">
-                <h1 class="hero-title fade-in">Honoring Lives with Dignity</h1>
-                <p class="hero-subtitle fade-in">At FuneralNotice.lk, we believe every life deserves to be remembered,
-                    celebrated, and honored. We provide compassionate digital memorial services that preserve precious
-                    memories for generations to come.</p>
-
-                <div class="hero-stats">
-                    <div class="stat-item fade-in">
-                        <span class="stat-number" data-count="5000">0</span>
-                        <span class="stat-label">Memorials Created</span>
-                    </div>
-                    <div class="stat-item fade-in">
-                        <span class="stat-number" data-count="98">0</span>
-                        <span class="stat-label">Satisfaction Rate</span>
-                    </div>
-                    <div class="stat-item fade-in">
-                        <span class="stat-number" data-count="24">0</span>
-                        <span class="stat-label">Hours Support</span>
-                    </div>
-                </div>
-            </div>
-        </section> -->
-
-        <!-- Our Mission Section -->
         <section class="mission-section">
             <div class="container">
                 <div class="section-header fade-in">
-                    <h2 class="section-title">Our Mission & Vision</h2>
-                    <p class="section-subtitle">We're dedicated to transforming how we remember and honor loved ones in
-                        the digital age</p>
+                    <h2 class="section-title"><?= t('about_mission_title') ?></h2>
+                    <p class="section-subtitle"><?= t('about_mission_subtitle') ?></p>
                 </div>
 
                 <div class="mission-grid">
@@ -83,103 +53,34 @@
                         <div class="mission-icon">
                             <i class="fas fa-heart-circle-check"></i>
                         </div>
-                        <h3>Preserve Memories</h3>
-                        <p>Creating beautiful, lasting digital memorials that capture the essence of your loved ones'
-                            lives, stories, and legacies for future generations.</p>
+                        <h3><?= t('about_preserve_title') ?></h3>
+                        <p><?= t('about_preserve_text') ?></p>
                     </div>
 
                     <div class="mission-card stagger-item">
                         <div class="mission-icon">
                             <i class="fas fa-hand-holding-heart"></i>
                         </div>
-                        <h3>Support Families</h3>
-                        <p>Providing compassionate support and practical tools to help families navigate their journey
-                            of grief and remembrance with dignity.</p>
+                        <h3><?= t('about_support_title') ?></h3>
+                        <p><?= t('about_support_text') ?></p>
                     </div>
 
                     <div class="mission-card stagger-item">
                         <div class="mission-icon">
                             <i class="fas fa-dove"></i>
                         </div>
-                        <h3>Honor Traditions</h3>
-                        <p>Respecting and incorporating Sri Lankan cultural and religious traditions while embracing
-                            modern memorial practices.</p>
+                        <h3><?= t('about_honor_title') ?></h3>
+                        <p><?= t('about_honor_text') ?></p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Our Story Section -->
-        <!-- <section class="story-section">
-            <div class="container">
-                <div class="section-header fade-in">
-                    <h2 class="section-title">Our Journey</h2>
-                    <p class="section-subtitle">From a vision of compassion to Sri Lanka's most trusted memorial
-                        platform</p>
-                </div>
-
-                <div class="story-timeline">
-                    <div class="timeline-item stagger-item">
-                        <div class="timeline-icon">
-                            <i class="fas fa-lightbulb"></i>
-                        </div>
-                        <div class="timeline-content">
-                            <div class="timeline-year">2022</div>
-                            <h3>The Vision</h3>
-                            <p>Founded by compassionate individuals who experienced firsthand the challenges families
-                                face when dealing with loss. We envisioned a platform that would bring dignity and ease
-                                to memorial services.</p>
-                        </div>
-                    </div>
-
-                    <div class="timeline-item stagger-item">
-                        <div class="timeline-icon">
-                            <i class="fas fa-seedling"></i>
-                        </div>
-                        <div class="timeline-content">
-                            <div class="timeline-year">2023</div>
-                            <h3>Platform Launch</h3>
-                            <p>Launched FuneralNotice.lk with a simple goal: to create beautiful, accessible memorials
-                                that respect traditions while embracing technology. Our first 100 memorials were created
-                                within months.</p>
-                        </div>
-                    </div>
-
-                    <div class="timeline-item stagger-item">
-                        <div class="timeline-icon">
-                            <i class="fas fa-users"></i>
-                        </div>
-                        <div class="timeline-content">
-                            <div class="timeline-year">2024</div>
-                            <h3>Community Growth</h3>
-                            <p>Expanded our services across Sri Lanka, building trust with thousands of families.
-                                Introduced new features like tribute walls, candle lighting, and photo galleries based
-                                on community feedback.</p>
-                        </div>
-                    </div>
-
-                    <div class="timeline-item stagger-item">
-                        <div class="timeline-icon">
-                            <i class="fas fa-star"></i>
-                        </div>
-                        <div class="timeline-content">
-                            <div class="timeline-year">2025</div>
-                            <h3>National Recognition</h3>
-                            <p>Became Sri Lanka's leading memorial platform with over 5,000 memorials created. Received
-                                recognition for our compassionate approach and innovative memorial solutions.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section> -->
-
-        <!-- Our Values Section -->
         <section class="values-section">
             <div class="container">
                 <div class="section-header fade-in">
-                    <h2 class="section-title">Our Core Values</h2>
-                    <p class="section-subtitle">The principles that guide every memorial we create and every family we
-                        serve</p>
+                    <h2 class="section-title"><?= t('about_values_title') ?></h2>
+                    <p class="section-subtitle"><?= t('about_values_subtitle') ?></p>
                 </div>
 
                 <div class="values-grid">
@@ -187,150 +88,45 @@
                         <div class="value-icon-wrapper">
                             <i class="fas fa-hand-holding-heart"></i>
                         </div>
-                        <h3>Compassion First</h3>
-                        <p>We approach every family with genuine empathy and understanding during their time of loss,
-                            ensuring they feel supported and cared for.</p>
+                        <h3><?= t('about_value_compassion_title') ?></h3>
+                        <p><?= t('about_value_compassion_text') ?></p>
                     </div>
 
                     <div class="value-card stagger-item">
                         <div class="value-icon-wrapper">
                             <i class="fas fa-shield-alt"></i>
                         </div>
-                        <h3>Respect & Dignity</h3>
-                        <p>We honor cultural traditions, religious beliefs, and personal preferences, treating every
-                            memorial with the utmost respect it deserves.</p>
+                        <h3><?= t('about_value_respect_title') ?></h3>
+                        <p><?= t('about_value_respect_text') ?></p>
                     </div>
 
                     <div class="value-card stagger-item">
                         <div class="value-icon-wrapper">
                             <i class="fas fa-lock"></i>
                         </div>
-                        <h3>Privacy & Trust</h3>
-                        <p>Your privacy is our priority. We implement robust security measures and give you complete
-                            control over your memorial content.</p>
+                        <h3><?= t('about_value_privacy_title') ?></h3>
+                        <p><?= t('about_value_privacy_text') ?></p>
                     </div>
 
                     <div class="value-card stagger-item">
                         <div class="value-icon-wrapper">
                             <i class="fas fa-award"></i>
                         </div>
-                        <h3>Excellence Always</h3>
-                        <p>We strive for excellence in every memorial page we create and every interaction we have,
-                            constantly improving our services.</p>
+                        <h3><?= t('about_value_excellence_title') ?></h3>
+                        <p><?= t('about_value_excellence_text') ?></p>
                     </div>
                 </div>
             </div>
         </section>
-
-        <!-- Our Team Section -->
-        <!-- <section class="team-section">
-            <div class="container">
-                <div class="section-header fade-in">
-                    <h2 class="section-title">Our Compassionate Team</h2>
-                    <p class="section-subtitle">Dedicated professionals who bring warmth, expertise, and care to every
-                        memorial we create</p>
-                </div>
-
-                <div class="team-grid">
-                    <div class="team-member stagger-item">
-                        <div class="member-image-wrapper">
-                            <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
-                                alt="Ravi Perera" class="member-image">
-                            <div class="member-overlay">
-                                <div class="member-role">
-                                    <i class="fas fa-envelope"></i>
-                                    ravi@funeralnotice.lk
-                                </div>
-                            </div>
-                        </div>
-                        <div class="member-info">
-                            <h3>Ravi Perera</h3>
-                            <div class="member-role">
-                                <i class="fas fa-user-tie"></i>
-                                Founder & CEO
-                            </div>
-                            <p class="member-bio">With 15+ years in technology and community service, Ravi leads our
-                                mission with compassion and innovation.</p>
-                        </div>
-                    </div>
-
-                    <div class="team-member stagger-item">
-                        <div class="member-image-wrapper">
-                            <img src="https://images.unsplash.com/photo-1582750433449-648ed127bb54?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
-                                alt="Anjali Silva" class="member-image">
-                            <div class="member-overlay">
-                                <div class="member-role">
-                                    <i class="fas fa-envelope"></i>
-                                    anjali@funeralnotice.lk
-                                </div>
-                            </div>
-                        </div>
-                        <div class="member-info">
-                            <h3>Anjali Silva</h3>
-                            <div class="member-role">
-                                <i class="fas fa-headset"></i>
-                                Head of Support
-                            </div>
-                            <p class="member-bio">Anjali brings warmth and empathy to every family, ensuring they
-                                receive the care and support they need.</p>
-                        </div>
-                    </div>
-
-                    <div class="team-member stagger-item">
-                        <div class="member-image-wrapper">
-                            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
-                                alt="Kumar Fernando" class="member-image">
-                            <div class="member-overlay">
-                                <div class="member-role">
-                                    <i class="fas fa-envelope"></i>
-                                    kumar@funeralnotice.lk
-                                </div>
-                            </div>
-                        </div>
-                        <div class="member-info">
-                            <h3>Kumar Fernando</h3>
-                            <div class="member-role">
-                                <i class="fas fa-code"></i>
-                                Technical Director
-                            </div>
-                            <p class="member-bio">Kumar ensures our platform is secure and innovative, constantly
-                                improving features to serve families better.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section> -->
-
-        <!-- CTA Section -->
-        <!-- <section class="contact-cta">
-            <div class="container">
-                <div class="cta-content">
-                    <h2 class="cta-title fade-in">Ready to Honor a Loved One?</h2>
-                    <p class="cta-subtitle fade-in">Let us help you create a beautiful, lasting tribute that honors
-                        their memory and brings comfort to family and friends.</p>
-
-                    <div class="cta-buttons">
-                        <button class="cta-btn cta-btn-primary" onclick="window.location.href='create.php'">
-                            <i class="fas fa-plus-circle"></i>
-                            Create a Memorial
-                        </button>
-                        <button class="cta-btn cta-btn-secondary" onclick="window.location.href='contact.php'">
-                            <i class="fas fa-comments"></i>
-                            Contact Our Team
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </section> -->
     </div>
 
-    <!-- Footer Component -->
     <div id="footer-placeholder"></div>
 
     <script src="script/common.js"></script>
+    <script src="script/navbar.js"></script>
+    <script src="script/translator.js"></script>
     <script>
-        // Load components when DOM is ready
-        loadComponent('navbar.php', 'navbar-placeholder');
+        loadComponent('navbar.php?page=about.php', 'navbar-placeholder');
         loadComponent('footer.php', 'footer-placeholder');
     </script>
     <script src="script/about.js"></script>

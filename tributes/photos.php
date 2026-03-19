@@ -1,25 +1,22 @@
 <?php
 $TRIBUTE_META = [
-    'slug' => 'photos',
-    'title' => 'Treasured Moments',
-    'subtitle' => 'Share memorable photos.',
-    'icon' => 'fa-images',
-    'accent' => 'rose',
+    'slug' => 'wreath',
+    'title' => 'tr:tribute_type_wreath_title',
+    'subtitle' => 'tr:tribute_type_wreath_subtitle',
+    'icon' => 'fa-ring',
+    'accent' => 'green',
 
-    'show_org' => false,
-    'allow_photo_links' => true,
+    'show_org' => true,
+    'allow_photo_links' => false,
+    'supports_delivery' => true,
 
-    'requires_phone' => true,
-    'requires_otp' => true,
-    'requires_delivery' => true,
+    'message_label' => 'tr:tribute_type_wreath_message_label',
+    'message_placeholder' => 'tr:tribute_type_wreath_message_placeholder',
+    'helper_text' => 'tr:tribute_type_wreath_helper_text',
 
-    'message_label' => 'Caption / Memory Note',
-    'message_placeholder' => 'Describe the memory behind these photos...',
-    'helper_text' => 'For now this stores image links in extra data. Build the final photo rendering later.',
-
-    'phone_label' => 'Verified Contact Number',
-    'phone_placeholder' => 'Enter your mobile number',
-    'delivery_text' => 'A verified phone number is required for this tribute type.'
+    'phone_label' => 'tr:tribute_phone_label',
+    'phone_placeholder' => 'tr:tribute_phone_placeholder',
+    'delivery_text' => 'tr:tribute_type_wreath_delivery_text'
 ];
 
 require __DIR__ . '/_page.php';

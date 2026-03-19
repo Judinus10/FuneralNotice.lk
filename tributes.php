@@ -1,5 +1,4 @@
 <?php
-// tributes.php
 declare(strict_types=1);
 
 if (!isset($id)) {
@@ -8,6 +7,7 @@ if (!isset($id)) {
 }
 
 require_once __DIR__ . '/db.php';
+require_once __DIR__ . '/translator/language.php';
 
 $postId = (int)$id;
 
@@ -54,10 +54,15 @@ try {
 <link rel="stylesheet" href="style/tributes-popup.css">
 
 <!-- Tribute Type Chooser Modal -->
-<div id="tributeChooserModal" class="tribute-modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="tributeChooserTitle">
+<div
+    id="tributeChooserModal"
+    class="tribute-modal-backdrop"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="tributeChooserTitle">
     <div class="tribute-modal tribute-chooser-modal">
         <div class="tribute-modal-head">
-            <h3 id="tributeChooserTitle">Select Tribute Type</h3>
+            <h3 id="tributeChooserTitle"><?= htmlspecialchars(t('tribute_select_type'), ENT_QUOTES, 'UTF-8') ?></h3>
         </div>
 
         <?php if (!empty($tributeTypes)): ?>
@@ -85,12 +90,14 @@ try {
                         type="button"
                         class="tribute-chooser-card"
                         data-tribute-file="<?= htmlspecialchars($t['file_name'], ENT_QUOTES, 'UTF-8') ?>"
-                    >
+                        aria-label="<?= htmlspecialchars($t['title'], ENT_QUOTES, 'UTF-8') ?>">
                         <div class="tribute-chooser-media">
                             <?php if ($iconRel): ?>
-                                <img src="<?= htmlspecialchars($iconRel, ENT_QUOTES, 'UTF-8') ?>" alt="<?= htmlspecialchars($t['title'], ENT_QUOTES, 'UTF-8') ?>">
+                                <img
+                                    src="<?= htmlspecialchars($iconRel, ENT_QUOTES, 'UTF-8') ?>"
+                                    alt="<?= htmlspecialchars($t['title'], ENT_QUOTES, 'UTF-8') ?>">
                             <?php else: ?>
-                                <div class="tribute-chooser-fallback">🕊</div>
+                                <div class="tribute-chooser-fallback"><?= htmlspecialchars(t('tribute_fallback_icon'), ENT_QUOTES, 'UTF-8') ?></div>
                             <?php endif; ?>
                         </div>
 
@@ -103,12 +110,17 @@ try {
             </div>
         <?php else: ?>
             <div class="tribute-empty">
-                No tribute types are configured yet. Add records to the <code>tribute_types</code> table.
+                <?= htmlspecialchars(t('tribute_no_types_configured'), ENT_QUOTES, 'UTF-8') ?>
             </div>
         <?php endif; ?>
 
         <div class="tribute-modal-actions">
-            <button type="button" class="tribute-btn tribute-btn-light" data-close-tribute="#tributeChooserModal">Close</button>
+            <button
+                type="button"
+                class="tribute-btn tribute-btn-light"
+                data-close-tribute="#tributeChooserModal">
+                <?= htmlspecialchars(t('common_close'), ENT_QUOTES, 'UTF-8') ?>
+            </button>
         </div>
     </div>
 </div>
@@ -116,15 +128,23 @@ try {
 <!-- Tribute iframe popup -->
 <div id="tributeFrameOverlay" class="tribute-frame-backdrop" aria-modal="true">
     <div class="tribute-frame-shell">
-        <button type="button" class="tribute-frame-close" id="tributeFrameClose" aria-label="Close">×</button>
-        <iframe id="tributeFrame" title="Post a Tribute"></iframe>
+        <button
+            type="button"
+            class="tribute-frame-close"
+            id="tributeFrameClose"
+            aria-label="<?= htmlspecialchars(t('common_close'), ENT_QUOTES, 'UTF-8') ?>">×</button>
+        <iframe id="tributeFrame" title="<?= htmlspecialchars(t('tribute_iframe_title'), ENT_QUOTES, 'UTF-8') ?>"></iframe>
     </div>
 </div>
 
 <script>
 window.TRIBUTE_POPUP_CONFIG = {
     postId: <?= json_encode($postId, JSON_UNESCAPED_SLASHES) ?>,
-    basePath: 'tributes/'
+    basePath: 'tributes/',
+    i18n: {
+        close: <?= json_encode(t('common_close'), JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) ?>,
+        selectType: <?= json_encode(t('tribute_select_type'), JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) ?>
+    }
 };
 </script>
 <script src="script/tributes-popup.js"></script>

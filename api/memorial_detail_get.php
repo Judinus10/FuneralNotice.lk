@@ -9,17 +9,23 @@ function safeOut($v): string {
     return htmlspecialchars((string)$v, ENT_QUOTES, 'UTF-8');
 }
 
+// function absUrl(?string $path): string {
+//     if (!$path) return '';
+//     if (preg_match('~^https?://~i', $path)) return $path;
+
+//     $https = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off');
+//     $scheme = $https ? 'https' : 'http';
+//     $host = $_SERVER['HTTP_HOST'] ?? 'localhost';
+//     $base = rtrim($scheme . '://' . $host, '/');
+//     return $base . '/' . ltrim($path, '/');
+// }
+
 function absUrl(?string $path): string {
     if (!$path) return '';
     if (preg_match('~^https?://~i', $path)) return $path;
 
-    $https = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off');
-    $scheme = $https ? 'https' : 'http';
-    $host = $_SERVER['HTTP_HOST'] ?? 'localhost';
-    $base = rtrim($scheme . '://' . $host, '/');
-    return $base . '/' . ltrim($path, '/');
+    return 'https://ripnews.lk/' . ltrim($path, '/');
 }
-
 function fmtDate(?string $d): string {
     if (!$d) return '';
     try {

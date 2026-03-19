@@ -127,3 +127,9 @@ function abs_upload_url(string $path): string
     $path   = ltrim($path, '/');
     return $base . '/' . $path;
 }
+
+// function abs_upload_url(string $path): string
+// {
+//     $path = ltrim($path, '/');
+//     return 'https://ripnews.lk/' . $path;
+// }

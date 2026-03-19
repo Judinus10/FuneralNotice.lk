@@ -39,6 +39,9 @@ try {
         $cover = !empty($row['cover_image_path'])
             ? ltrim($row['cover_image_path'], '/')
             : 'cover.php?id=' . (int) $row['id'];
+        // $cover = !empty($row['cover_image_path'])
+        //     ? abs_upload_url($row['cover_image_path'])
+        //     : 'https://ripnews.lk/cover.php?id=' . (int) $row['id'];
 
         return [
             'id' => (int) $row['id'],

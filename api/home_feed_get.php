@@ -3,90 +3,91 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-require_once __DIR__ . '/../db.php';
+// require_once __DIR__ . '/../db.php';
+require_once __DIR__ . '/home_helpers.php';
 
 header('Content-Type: application/json; charset=utf-8');
 
-function json_response(array $data, int $status = 200): void
-{
-    http_response_code($status);
-    echo json_encode($data, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
-    exit;
-}
+// function json_response(array $data, int $status = 200): void
+// {
+//     http_response_code($status);
+//     echo json_encode($data, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+//     exit;
+// }
 
-function time_ago(string $date): string
-{
-    $ts = strtotime($date);
-    if (!$ts) {
-        return '';
-    }
+// function time_ago(string $date): string
+// {
+//     $ts = strtotime($date);
+//     if (!$ts) {
+//         return '';
+//     }
 
-    $diff = time() - $ts;
-    if ($diff < 1) {
-        return 'just now';
-    }
+//     $diff = time() - $ts;
+//     if ($diff < 1) {
+//         return 'just now';
+//     }
 
-    $units = [
-        31536000 => 'year',
-        2592000  => 'month',
-        604800   => 'week',
-        86400    => 'day',
-        3600     => 'hour',
-        60       => 'minute',
-        1        => 'second',
-    ];
+//     $units = [
+//         31536000 => 'year',
+//         2592000  => 'month',
+//         604800   => 'week',
+//         86400    => 'day',
+//         3600     => 'hour',
+//         60       => 'minute',
+//         1        => 'second',
+//     ];
 
-    foreach ($units as $sec => $name) {
-        if ($diff >= $sec) {
-            $val = (int) floor($diff / $sec);
-            return $val . ' ' . $name . ($val > 1 ? 's' : '') . ' ago';
-        }
-    }
+//     foreach ($units as $sec => $name) {
+//         if ($diff >= $sec) {
+//             $val = (int) floor($diff / $sec);
+//             return $val . ' ' . $name . ($val > 1 ? 's' : '') . ' ago';
+//         }
+//     }
 
-    return 'just now';
-}
+//     return 'just now';
+// }
 
-function years_range(?string $birth, ?string $death): string
-{
-    $y1 = $birth ? date('Y', strtotime($birth)) : '—';
-    $y2 = $death ? date('Y', strtotime($death)) : '—';
-    return $y1 . ' - ' . $y2;
-}
+// function years_range(?string $birth, ?string $death): string
+// {
+//     $y1 = $birth ? date('Y', strtotime($birth)) : '—';
+//     $y2 = $death ? date('Y', strtotime($death)) : '—';
+//     return $y1 . ' - ' . $y2;
+// }
 
-function remembrance_years(?string $death_date): ?int
-{
-    if (!$death_date) {
-        return null;
-    }
+// function remembrance_years(?string $death_date): ?int
+// {
+//     if (!$death_date) {
+//         return null;
+//     }
 
-    try {
-        $death = new DateTime($death_date);
-        $now = new DateTime('now', new DateTimeZone('Asia/Colombo'));
-        $diff = $death->diff($now);
-        return max(1, $diff->y);
-    } catch (Throwable $e) {
-        return null;
-    }
-}
+//     try {
+//         $death = new DateTime($death_date);
+//         $now = new DateTime('now', new DateTimeZone('Asia/Colombo'));
+//         $diff = $death->diff($now);
+//         return max(1, $diff->y);
+//     } catch (Throwable $e) {
+//         return null;
+//     }
+// }
 
-function ordinal_en(int $n): string
-{
-    $suffix = 'th';
-    if (($n % 100) < 11 || ($n % 100) > 13) {
-        switch ($n % 10) {
-            case 1:
-                $suffix = 'st';
-                break;
-            case 2:
-                $suffix = 'nd';
-                break;
-            case 3:
-                $suffix = 'rd';
-                break;
-        }
-    }
-    return $n . $suffix;
-}
+// function ordinal_en(int $n): string
+// {
+//     $suffix = 'th';
+//     if (($n % 100) < 11 || ($n % 100) > 13) {
+//         switch ($n % 10) {
+//             case 1:
+//                 $suffix = 'st';
+//                 break;
+//             case 2:
+//                 $suffix = 'nd';
+//                 break;
+//             case 3:
+//                 $suffix = 'rd';
+//                 break;
+//         }
+//     }
+//     return $n . $suffix;
+// }
 
 try {
     // session cookie
@@ -239,8 +240,12 @@ try {
         }
 
         $cover = !empty($m['cover_image_path'])
-            ? ltrim($m['cover_image_path'], '/')
+            ? abs_upload_url($m['cover_image_path'])
             : 'assets/defaultavt.png';
+
+        // $cover = !empty($m['cover_image_path'])
+        // ? 'https://ripnews.lk/' . ltrim($m['cover_image_path'], '/')
+        // : 'assets/defaultavt.png';
 
         return [
             'id' => (int) $m['id'],

@@ -139,7 +139,7 @@
 
     <script src="script/common.js"></script>
     <script>
-        loadComponent('navbar.php', 'navbar-placeholder');
+        loadComponent('navbar.php?page=index', 'navbar-placeholder');
         loadComponent('footer.php', 'footer-placeholder');
     </script>
     <script src="script/index.js"></script>

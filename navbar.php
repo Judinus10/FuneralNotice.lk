@@ -165,5 +165,3 @@ $lang = current_lang();
     </div>
 </div>
 
-<script src="script/navbar.js"></script>
-<script src="script/translator.js"></script>

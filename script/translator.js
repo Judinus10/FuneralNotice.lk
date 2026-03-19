@@ -1,4 +1,5 @@
-document.addEventListener('DOMContentLoaded', () => {
+function initTranslator() {
+    console.log("initNavbar called");
   const triggers = document.querySelectorAll('[data-lang-switcher]');
 
   async function setLanguage(lang) {
@@ -31,12 +32,5 @@ document.addEventListener('DOMContentLoaded', () => {
       const lang = this.value;
       if (lang) setLanguage(lang);
     });
-
-    trigger.addEventListener('click', function (e) {
-      const btn = e.target.closest('[data-lang-option]');
-      if (!btn) return;
-      const lang = btn.getAttribute('data-lang-option');
-      if (lang) setLanguage(lang);
-    });
   });
-});
+}

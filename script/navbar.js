@@ -1,4 +1,5 @@
-document.addEventListener("DOMContentLoaded", () => {
+function initNavbar() {
+  console.log("initNavbar called");
   const mobileMenuBtn = document.getElementById("mobileMenuBtn");
   const mobileMenuClose = document.getElementById("mobileMenuClose");
   const mobileMenuOverlay = document.getElementById("mobileMenuOverlay");
@@ -149,4 +150,4 @@ document.addEventListener("DOMContentLoaded", () => {
       clearResults(mobileSearchResults);
     }
   });
-});
+}

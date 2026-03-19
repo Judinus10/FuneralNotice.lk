@@ -1,4 +1,4 @@
-/**
+console.log("common.js loaded");/**
  * common.js - Shared utility functions for FuneralNotice.lk
  */
 
@@ -8,17 +8,21 @@
  * @param {string} elementId - ID of the placeholder element.
  */
 function loadComponent(url, elementId) {
+    console.log("loadComponent called:", url, elementId);
     fetch(url)
         .then(response => response.text())
         .then(data => {
             const element = document.getElementById(elementId);
             if (element) {
                 element.innerHTML = data;
-                // Re-initialize event listeners after navbar loads
+
                 if (elementId === 'navbar-placeholder') {
-                    if (typeof initMobileMenu === 'function') initMobileMenu();
-                    if (typeof initMobileSearch === 'function') initMobileSearch();
-                    if (typeof initMobileApp === 'function') initMobileApp();
+                    console.log('navbar injected');
+                    console.log('initNavbar type:', typeof initNavbar);
+                    console.log('initTranslator type:', typeof initTranslator);
+
+                    if (typeof initNavbar === 'function') initNavbar();
+                    if (typeof initTranslator === 'function') initTranslator();
                 }
             }
         })

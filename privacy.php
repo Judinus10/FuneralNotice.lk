@@ -8,8 +8,8 @@ require_once __DIR__ . '/translator/language.php';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Privacy Policy - FuneralNotice.lk</title>
-    <meta name="description" content="Read the Privacy Policy of FuneralNotice.lk.">
+    <title><?= htmlspecialchars(t('privacy_page_title'), ENT_QUOTES, 'UTF-8') ?></title>
+    <meta name="description" content="<?= htmlspecialchars(t('privacy_meta_description'), ENT_QUOTES, 'UTF-8') ?>">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link rel="stylesheet" href="style/common.css">
@@ -23,10 +23,8 @@ require_once __DIR__ . '/translator/language.php';
     <main class="legal-page">
         <section class="legal-hero">
             <div class="legal-hero-inner">
-                <h1 class="legal-title">Privacy Policy</h1>
-                <p class="legal-subtitle">
-                    This page explains how FuneralNotice.lk collects, uses, stores, and protects user information.
-                </p>
+                <h1 class="legal-title"><?= htmlspecialchars(t('privacy_hero_title'), ENT_QUOTES, 'UTF-8') ?></h1>
+                <p class="legal-subtitle"><?= htmlspecialchars(t('privacy_hero_subtitle'), ENT_QUOTES, 'UTF-8') ?></p>
             </div>
         </section>
 
@@ -34,70 +32,58 @@ require_once __DIR__ . '/translator/language.php';
             <div class="legal-content">
                 <div class="legal-top-line"></div>
                 <div class="legal-body">
-                    <p class="legal-intro">
-                        We respect your privacy and take reasonable steps to protect the information you provide while using our website and services.
-                    </p>
+                    <p class="legal-intro"><?= htmlspecialchars(t('privacy_intro'), ENT_QUOTES, 'UTF-8') ?></p>
 
                     <section class="legal-section">
-                        <h2>1. Information We Collect</h2>
+                        <h2><?= htmlspecialchars(t('privacy_section_1_title'), ENT_QUOTES, 'UTF-8') ?></h2>
+                        <p><?= htmlspecialchars(t('privacy_section_1_text'), ENT_QUOTES, 'UTF-8') ?></p>
+                    </section>
+
+                    <section class="legal-section">
+                        <h2><?= htmlspecialchars(t('privacy_section_2_title'), ENT_QUOTES, 'UTF-8') ?></h2>
+                        <p><?= htmlspecialchars(t('privacy_section_2_text'), ENT_QUOTES, 'UTF-8') ?></p>
+                    </section>
+
+                    <section class="legal-section">
+                        <h2><?= htmlspecialchars(t('privacy_section_3_title'), ENT_QUOTES, 'UTF-8') ?></h2>
+                        <p><?= htmlspecialchars(t('privacy_section_3_text'), ENT_QUOTES, 'UTF-8') ?></p>
+                    </section>
+
+                    <section class="legal-section">
+                        <h2><?= htmlspecialchars(t('privacy_section_4_title'), ENT_QUOTES, 'UTF-8') ?></h2>
+                        <p><?= htmlspecialchars(t('privacy_section_4_text'), ENT_QUOTES, 'UTF-8') ?></p>
+                    </section>
+
+                    <section class="legal-section">
+                        <h2><?= htmlspecialchars(t('privacy_section_5_title'), ENT_QUOTES, 'UTF-8') ?></h2>
+                        <p><?= htmlspecialchars(t('privacy_section_5_text'), ENT_QUOTES, 'UTF-8') ?></p>
+                    </section>
+
+                    <section class="legal-section">
+                        <h2><?= htmlspecialchars(t('privacy_section_6_title'), ENT_QUOTES, 'UTF-8') ?></h2>
+                        <p><?= htmlspecialchars(t('privacy_section_6_text'), ENT_QUOTES, 'UTF-8') ?></p>
+                    </section>
+
+                    <section class="legal-section">
+                        <h2><?= htmlspecialchars(t('privacy_section_7_title'), ENT_QUOTES, 'UTF-8') ?></h2>
                         <p>
-                            We may collect personal details such as your name, email address, phone number, memorial content, tribute submissions, and other information you choose to provide.
+                            <?= htmlspecialchars(t('privacy_section_7_text_before_link'), ENT_QUOTES, 'UTF-8') ?>
+                            <a href="cookies.php"><?= htmlspecialchars(t('privacy_section_7_text_link'), ENT_QUOTES, 'UTF-8') ?></a>
+                            <?= htmlspecialchars(t('privacy_section_7_text_after_link'), ENT_QUOTES, 'UTF-8') ?>
                         </p>
                     </section>
 
                     <section class="legal-section">
-                        <h2>2. How We Use Information</h2>
-                        <p>
-                            We use submitted information to provide website services, manage memorial content, communicate with users, improve platform performance, and support administration and security.
-                        </p>
+                        <h2><?= htmlspecialchars(t('privacy_section_8_title'), ENT_QUOTES, 'UTF-8') ?></h2>
+                        <p><?= htmlspecialchars(t('privacy_section_8_text'), ENT_QUOTES, 'UTF-8') ?></p>
                     </section>
 
                     <section class="legal-section">
-                        <h2>3. Public and Private Data</h2>
+                        <h2><?= htmlspecialchars(t('privacy_section_9_title'), ENT_QUOTES, 'UTF-8') ?></h2>
                         <p>
-                            Some memorial and tribute content may be displayed publicly on the website. Private contact details are handled more carefully and are not intended for public display unless required.
-                        </p>
-                    </section>
-
-                    <section class="legal-section">
-                        <h2>4. Data Protection</h2>
-                        <p>
-                            We apply reasonable safeguards to reduce the risk of unauthorized access, misuse, alteration, or disclosure. However, no online system can guarantee complete security.
-                        </p>
-                    </section>
-
-                    <section class="legal-section">
-                        <h2>5. Sharing of Information</h2>
-                        <p>
-                            We do not sell personal information. Data may only be shared where needed for service delivery, legal compliance, technical operation, or protection of the website and its users.
-                        </p>
-                    </section>
-
-                    <section class="legal-section">
-                        <h2>6. Third-Party Services</h2>
-                        <p>
-                            Some hosting, payment, messaging, analytics, or embedded tools may process limited user information as part of their technical role in supporting the website.
-                        </p>
-                    </section>
-
-                    <section class="legal-section">
-                        <h2>7. Cookies and Related Technology</h2>
-                        <p>
-                            We may use cookies and similar technologies to improve performance, remember preferences, and support session functions. Read our <a href="cookies.php">Cookie Policy</a> for more details.
-                        </p>
-                    </section>
-
-                    <section class="legal-section">
-                        <h2>8. Policy Updates</h2>
-                        <p>
-                            This Privacy Policy may be revised when needed. Continued use of the website after updates means you accept the revised version.
-                        </p>
-                    </section>
-
-                    <section class="legal-section">
-                        <h2>9. Contact</h2>
-                        <p>
-                            For questions about privacy or data handling, please use the <a href="contact.php">Contact Us</a> page.
+                            <?= htmlspecialchars(t('privacy_section_9_text_before_link'), ENT_QUOTES, 'UTF-8') ?>
+                            <a href="contact.php"><?= htmlspecialchars(t('privacy_section_9_text_link'), ENT_QUOTES, 'UTF-8') ?></a>
+                            <?= htmlspecialchars(t('privacy_section_9_text_after_link'), ENT_QUOTES, 'UTF-8') ?>
                         </p>
                     </section>
                 </div>

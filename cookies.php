@@ -8,8 +8,8 @@ require_once __DIR__ . '/translator/language.php';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cookie Policy - FuneralNotice.lk</title>
-    <meta name="description" content="Read the Cookie Policy of FuneralNotice.lk.">
+    <title><?= htmlspecialchars(t('cookies_page_title'), ENT_QUOTES, 'UTF-8') ?></title>
+    <meta name="description" content="<?= htmlspecialchars(t('cookies_meta_description'), ENT_QUOTES, 'UTF-8') ?>">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link rel="stylesheet" href="style/common.css">
@@ -23,10 +23,8 @@ require_once __DIR__ . '/translator/language.php';
     <main class="legal-page">
         <section class="legal-hero">
             <div class="legal-hero-inner">
-                <h1 class="legal-title">Cookie Policy</h1>
-                <p class="legal-subtitle">
-                    This page explains how cookies and similar technologies may be used on FuneralNotice.lk.
-                </p>
+                <h1 class="legal-title"><?= htmlspecialchars(t('cookies_hero_title'), ENT_QUOTES, 'UTF-8') ?></h1>
+                <p class="legal-subtitle"><?= htmlspecialchars(t('cookies_hero_subtitle'), ENT_QUOTES, 'UTF-8') ?></p>
             </div>
         </section>
 
@@ -34,56 +32,44 @@ require_once __DIR__ . '/translator/language.php';
             <div class="legal-content">
                 <div class="legal-top-line"></div>
                 <div class="legal-body">
-                    <p class="legal-intro">
-                        Cookies are small data files stored on your device to help websites function properly, remember your preferences, and improve your browsing experience.
-                    </p>
+                    <p class="legal-intro"><?= htmlspecialchars(t('cookies_intro'), ENT_QUOTES, 'UTF-8') ?></p>
 
                     <section class="legal-section">
-                        <h2>1. What Cookies Are</h2>
-                        <p>
-                            Cookies are small text files placed on your browser or device when you visit a website. They help remember session details, technical settings, and basic user preferences.
-                        </p>
+                        <h2><?= htmlspecialchars(t('cookies_section_1_title'), ENT_QUOTES, 'UTF-8') ?></h2>
+                        <p><?= htmlspecialchars(t('cookies_section_1_text'), ENT_QUOTES, 'UTF-8') ?></p>
                     </section>
 
                     <section class="legal-section">
-                        <h2>2. Why We Use Cookies</h2>
-                        <p>
-                            We may use cookies to support core website functions, keep sessions active, remember language choices, improve performance, and maintain website security.
-                        </p>
+                        <h2><?= htmlspecialchars(t('cookies_section_2_title'), ENT_QUOTES, 'UTF-8') ?></h2>
+                        <p><?= htmlspecialchars(t('cookies_section_2_text'), ENT_QUOTES, 'UTF-8') ?></p>
                     </section>
 
                     <section class="legal-section">
-                        <h2>3. Types of Cookies</h2>
-                        <p>
-                            These may include essential cookies, session cookies, preference cookies, and limited analytics-related cookies where needed to improve functionality and reliability.
-                        </p>
+                        <h2><?= htmlspecialchars(t('cookies_section_3_title'), ENT_QUOTES, 'UTF-8') ?></h2>
+                        <p><?= htmlspecialchars(t('cookies_section_3_text'), ENT_QUOTES, 'UTF-8') ?></p>
                     </section>
 
                     <section class="legal-section">
-                        <h2>4. Third-Party Cookies</h2>
-                        <p>
-                            Some third-party services or embedded tools may place their own cookies as part of hosting, analytics, or technical service delivery.
-                        </p>
+                        <h2><?= htmlspecialchars(t('cookies_section_4_title'), ENT_QUOTES, 'UTF-8') ?></h2>
+                        <p><?= htmlspecialchars(t('cookies_section_4_text'), ENT_QUOTES, 'UTF-8') ?></p>
                     </section>
 
                     <section class="legal-section">
-                        <h2>5. Managing Cookies</h2>
-                        <p>
-                            You can manage, block, or delete cookies in your browser settings. But if essential cookies are disabled, some parts of the website may not work as expected.
-                        </p>
+                        <h2><?= htmlspecialchars(t('cookies_section_5_title'), ENT_QUOTES, 'UTF-8') ?></h2>
+                        <p><?= htmlspecialchars(t('cookies_section_5_text'), ENT_QUOTES, 'UTF-8') ?></p>
                     </section>
 
                     <section class="legal-section">
-                        <h2>6. Policy Updates</h2>
-                        <p>
-                            This Cookie Policy may be updated when website features, legal requirements, or technical processes change.
-                        </p>
+                        <h2><?= htmlspecialchars(t('cookies_section_6_title'), ENT_QUOTES, 'UTF-8') ?></h2>
+                        <p><?= htmlspecialchars(t('cookies_section_6_text'), ENT_QUOTES, 'UTF-8') ?></p>
                     </section>
 
                     <section class="legal-section">
-                        <h2>7. Contact</h2>
+                        <h2><?= htmlspecialchars(t('cookies_section_7_title'), ENT_QUOTES, 'UTF-8') ?></h2>
                         <p>
-                            If you have questions about cookies or website tracking, please use the <a href="contact.php">Contact Us</a> page.
+                            <?= htmlspecialchars(t('cookies_section_7_text_before_link'), ENT_QUOTES, 'UTF-8') ?>
+                            <a href="contact.php"><?= htmlspecialchars(t('cookies_section_7_text_link'), ENT_QUOTES, 'UTF-8') ?></a>
+                            <?= htmlspecialchars(t('cookies_section_7_text_after_link'), ENT_QUOTES, 'UTF-8') ?>
                         </p>
                     </section>
                 </div>

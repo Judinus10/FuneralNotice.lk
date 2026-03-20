@@ -1,0 +1,134 @@
+.legal-page {
+    background: #f8fafc;
+    min-height: 100vh;
+}
+
+.legal-hero {
+    background: linear-gradient(135deg, #2b0b16 0%, #5a0f1f 45%, #8b111f 100%);
+    padding: 72px 0 60px;
+    border-bottom: 4px solid #ff1e1e;
+}
+
+.legal-hero-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 22px;
+    text-align: center;
+}
+
+.legal-title {
+    margin: 0;
+    color: #fff;
+    font-size: clamp(2.2rem, 4vw, 3.6rem);
+    line-height: 1.15;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+}
+
+.legal-subtitle {
+    margin: 16px auto 0;
+    max-width: 700px;
+    color: rgba(255, 255, 255, 0.92);
+    font-size: 1rem;
+    line-height: 1.75;
+}
+
+.legal-content-wrap {
+    max-width: 980px;
+    margin: -26px auto 0;
+    padding: 0 20px 60px;
+    position: relative;
+    z-index: 2;
+}
+
+.legal-content {
+    background: #fff;
+    border-radius: 18px;
+    box-shadow: 0 14px 40px rgba(15, 23, 42, 0.08);
+    border: 1px solid #e9eef5;
+    overflow: hidden;
+}
+
+.legal-top-line {
+    height: 4px;
+    background: linear-gradient(90deg, #b3122f 0%, #ff1e1e 100%);
+}
+
+.legal-body {
+    padding: 28px 28px 32px;
+}
+
+.legal-intro {
+    color: #475569;
+    line-height: 1.8;
+    font-size: 0.96rem;
+    margin: 0 0 20px;
+}
+
+.legal-section {
+    padding: 16px 0;
+    border-top: 1px solid #eef2f7;
+}
+
+.legal-section:first-of-type {
+    border-top: none;
+    padding-top: 0;
+}
+
+.legal-section h2 {
+    margin: 0 0 8px;
+    color: #1f2937;
+    font-size: 1rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.01em;
+}
+
+.legal-section p {
+    margin: 0;
+    color: #475569;
+    font-size: 0.95rem;
+    line-height: 1.8;
+}
+
+.legal-section a,
+.legal-intro a {
+    color: #d61f3a;
+    text-decoration: none;
+    font-weight: 700;
+}
+
+.legal-section a:hover,
+.legal-intro a:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+    .legal-hero {
+        padding: 54px 0 46px;
+    }
+
+    .legal-content-wrap {
+        margin-top: -18px;
+        padding: 0 14px 45px;
+    }
+
+    .legal-body {
+        padding: 22px 18px 24px;
+    }
+
+    .legal-title {
+        font-size: 2rem;
+    }
+
+    .legal-subtitle,
+    .legal-intro,
+    .legal-section p {
+        font-size: 0.93rem;
+        line-height: 1.75;
+    }
+
+    .legal-section h2 {
+        font-size: 0.96rem;
+    }
+}

@@ -18,7 +18,7 @@ require_once __DIR__ . '/translator/language.php';
             <div class="footer-links">
                 <a href="about.php"><?= htmlspecialchars(t('nav_about'), ENT_QUOTES, 'UTF-8') ?></a>
                 <a href="terms.php"><?= htmlspecialchars(t('footer_terms'), ENT_QUOTES, 'UTF-8') ?></a>
-                <a href="#"><?= htmlspecialchars(t('footer_report_us'), ENT_QUOTES, 'UTF-8') ?></a>
+                <a href="report.php"><?= htmlspecialchars(t('footer_report_us'), ENT_QUOTES, 'UTF-8') ?></a>
                 <a href="privacy.php"><?= htmlspecialchars(t('footer_privacy_policy'), ENT_QUOTES, 'UTF-8') ?></a>
                 <a href="cookies.php"><?= htmlspecialchars(t('footer_cookie_policy'), ENT_QUOTES, 'UTF-8') ?></a>
             </div>

@@ -1434,6 +1434,23 @@
             color: var(--facebook-gray);
         }
 
+        .reaction-zero-state {
+            color: #ff6600;
+            font-size: 0.72rem;
+            font-weight: 600;
+            font-style: italic;
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .reaction-zero-state::before {
+            content: '🙏';
+            font-style: normal;
+            font-size: 0.85rem;
+        }
+
         .tribute-summary {
             flex: 1;
             text-align: center;

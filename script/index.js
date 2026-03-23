@@ -7,7 +7,7 @@
 // --------------------
 const state = {
     page: 1,
-    limit: 6,
+    limit: 25,
     displayedCount: 0,
     hasMore: true,
     type: 'all',

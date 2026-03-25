@@ -1031,10 +1031,26 @@
             color: var(--secondary);
             font-size: 0.85rem;
             transition: var(--transition);
+            display: flex;
+            align-items: center;
+        }
+
+        .feed-header .head i {
+            margin-right: 8px;
+            color: var(--primary);
+            width: 18px;
+            text-align: center;
+            font-size: 0.9rem;
+            transition: var(--transition);
         }
 
         .feed-card:hover .feed-header .head {
             color: var(--primary-dark);
+        }
+
+        .feed-card:hover .feed-header .head i {
+            color: var(--primary-dark);
+            transform: scale(1.1);
         }
 
         .feed-header .actions {

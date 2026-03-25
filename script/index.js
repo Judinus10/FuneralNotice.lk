@@ -60,6 +60,13 @@ function getTypeLabel(item) {
     return 'Obituary';
 }
 
+function getTypeIcon(item) {
+    if (item.type === 'remembrance') {
+        return 'fas fa-dove';
+    }
+    return 'fas fa-book';
+}
+
 function getReactionEmoji(myReaction) {
     return reactionTypes[myReaction]?.emoji || '🙏';
 }
@@ -585,11 +592,12 @@ function renderFeedItem(item) {
     const commentText = getCommentLabel(Number(item.tribute_count || 0));
 
     const title = getTypeLabel(item);
+    const typeIcon = getTypeIcon(item);
 
     return `
         <div class="feed-card ${item.type === 'remembrance' ? 'premium' : ''}" data-id="${Number(item.id)}">
             <div class="feed-header">
-                <span class="head"><span>${esc(title)}</span></span>
+                <span class="head"><i class="${typeIcon}"></i><span>${esc(title)}</span></span>
                 <span class="actions"><span class="minago">${esc(item.time_ago || '')}</span></span>
             </div>
 

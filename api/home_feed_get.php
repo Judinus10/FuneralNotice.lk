@@ -110,7 +110,7 @@ try {
 
     // frontend sends page + limit + type + district
     $page = max(1, (int)($_GET['page'] ?? 1));
-    $limit = max(1, min(20, (int)($_GET['limit'] ?? 6)));
+    $limit = max(1, min(25, (int)($_GET['limit'] ?? 25)));
     $offset = ($page - 1) * $limit;
 
     $type = trim((string)($_GET['type'] ?? 'all'));
@@ -281,7 +281,7 @@ try {
     json_response([
         'ok' => false,
         'page' => 1,
-        'limit' => 6,
+        'limit' => 25,
         'total' => 0,
         'has_more' => false,
         'items' => [],

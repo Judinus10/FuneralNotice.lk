@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-require_once __DIR__ . '/../db.php';
+require_once __DIR__ . '/home_helpers.php';
 
 header('Content-Type: application/json; charset=utf-8');
 
@@ -87,7 +87,9 @@ try {
             {$locationColumn} AS location_name,
             {$statusColumn} AS item_status
         FROM posts
-        WHERE {$searchExpr} LIKE :q
+        WHERE status = 'published'
+          AND " . post_is_active_sql('posts') . "
+          AND {$searchExpr} LIKE :q
         ORDER BY id DESC
         LIMIT 12
     ";

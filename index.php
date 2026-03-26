@@ -72,7 +72,7 @@ require_once __DIR__ . '/translator/language.php';
                                 <i class="fas fa-book"></i> <?= t('index_obituaries_tab') ?>
                             </a>
                             <a href="#" class="tab-link" data-type="remembrance">
-                                <i class="fas fa-calendar-heart"></i> <?= t('index_remembrance_tab') ?>
+                                <i class="fas fa-dove"></i> <?= t('index_remembrance_tab') ?>
                             </a>
                         </div>
 

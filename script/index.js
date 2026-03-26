@@ -7,7 +7,7 @@
 // --------------------
 const state = {
     page: 1,
-    limit: 6,
+    limit: 25,
     displayedCount: 0,
     hasMore: true,
     type: 'all',
@@ -58,6 +58,13 @@ function getTypeLabel(item) {
         return item.type_label || 'Remembrance';
     }
     return 'Obituary';
+}
+
+function getTypeIcon(item) {
+    if (item.type === 'remembrance') {
+        return 'fas fa-dove';
+    }
+    return 'fas fa-book';
 }
 
 function getReactionEmoji(myReaction) {
@@ -585,11 +592,12 @@ function renderFeedItem(item) {
     const commentText = getCommentLabel(Number(item.tribute_count || 0));
 
     const title = getTypeLabel(item);
+    const typeIcon = getTypeIcon(item);
 
     return `
         <div class="feed-card ${item.type === 'remembrance' ? 'premium' : ''}" data-id="${Number(item.id)}">
             <div class="feed-header">
-                <span class="head"><span>${esc(title)}</span></span>
+                <span class="head"><i class="${typeIcon}"></i><span>${esc(title)}</span></span>
                 <span class="actions"><span class="minago">${esc(item.time_ago || '')}</span></span>
             </div>
 
@@ -622,12 +630,18 @@ function renderFeedItem(item) {
             <div class="facebook-actions">
                 <div class="action-row">
                     <div class="reaction-summary">
-                        <div class="reaction-icons-small">
-                            <span>${reactEmoji}</span>
-                        </div>
-                        <div class="reaction-count-small">
-                            <span class="count">${Number(item.react_total || 0)}</span>
-                        </div>
+                        ${Number(item.react_total || 0) > 0 ? `
+                            <div class="reaction-icons-small">
+                                <span>${reactEmoji}</span>
+                            </div>
+                            <div class="reaction-count-small">
+                                <span class="count">${Number(item.react_total || 0)}</span>
+                            </div>
+                        ` : `
+                            <div class="reaction-zero-state">
+                                Be the first one to react
+                            </div>
+                        `}
                     </div>
 
                     <div class="tribute-summary">
@@ -774,13 +788,13 @@ async function handleReaction(postId, reaction, event) {
     event.preventDefault();
     event.stopPropagation();
 
+    console.log(`[Reaction] Clicked ${reaction} on post ${postId}`);
+
     try {
         const formData = new FormData();
         formData.append('post_id', postId);
         formData.append('reaction', reaction);
 
-        // This assumes you already have a reaction API.
-        // If you don't, stop pretending reactions are done.
         const res = await fetch('api/post_reaction_toggle.php', {
             method: 'POST',
             body: formData,
@@ -788,10 +802,11 @@ async function handleReaction(postId, reaction, event) {
         });
 
         if (!res.ok) {
-            throw new Error('Reaction request failed');
+            throw new Error(`Reaction request failed with status: ${res.status}`);
         }
 
         const data = await res.json();
+        console.log('[Reaction] API Response:', data);
 
         if (data.ok) {
             const item = state.feedItems.find(x => Number(x.id) === Number(postId));
@@ -801,14 +816,22 @@ async function handleReaction(postId, reaction, event) {
 
                 const card = document.querySelector(`.feed-card[data-id="${postId}"]`);
                 if (card && item) {
-                    const replacement = document.createElement('div');
-                    replacement.innerHTML = renderFeedItem(item);
-                    card.replaceWith(replacement.firstElementChild);
+                    const html = renderFeedItem(item).trim();
+                    const temp = document.createElement('div');
+                    temp.innerHTML = html;
+                    const newCard = temp.firstElementChild;
+                    
+                    if (newCard) {
+                        card.replaceWith(newCard);
+                        console.log('[Reaction] Card UI updated successfully');
+                    }
                 }
             }
+        } else {
+            console.error('[Reaction] API Error:', data.message);
         }
     } catch (err) {
-        console.error('Reaction failed:', err);
+        console.error('[Reaction] Failed:', err);
     } finally {
         closeAllReactionPopups();
     }

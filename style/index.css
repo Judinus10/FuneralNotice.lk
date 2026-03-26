@@ -616,12 +616,12 @@
         }
         
         .logo-img {
-            height: 48px;
+            height: 55px;
             width: auto;
             border-radius: 8px;
             animation: heartbeat 3s ease-in-out infinite both;
             transform-origin: center;
-            box-shadow: 0 4px 12px rgba(255, 0, 0, 0.2);
+            /* box-shadow: 0 4px 12px rgba(255, 0, 0, 0.2); */
         }
         
         @media (max-width: 768px) {
@@ -1031,10 +1031,26 @@
             color: var(--secondary);
             font-size: 0.85rem;
             transition: var(--transition);
+            display: flex;
+            align-items: center;
+        }
+
+        .feed-header .head i {
+            margin-right: 8px;
+            color: var(--primary);
+            width: 18px;
+            text-align: center;
+            font-size: 0.9rem;
+            transition: var(--transition);
         }
 
         .feed-card:hover .feed-header .head {
             color: var(--primary-dark);
+        }
+
+        .feed-card:hover .feed-header .head i {
+            color: var(--primary-dark);
+            transform: scale(1.1);
         }
 
         .feed-header .actions {
@@ -1432,6 +1448,23 @@
         .reaction-count-small .count {
             font-weight: 600;
             color: var(--facebook-gray);
+        }
+
+        .reaction-zero-state {
+            color: #ff6600;
+            font-size: 0.72rem;
+            font-weight: 600;
+            font-style: italic;
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .reaction-zero-state::before {
+            content: '🙏';
+            font-style: normal;
+            font-size: 0.85rem;
         }
 
         .tribute-summary {
@@ -2474,7 +2507,6 @@
             width: auto;
             border-radius: 10px;
             animation: pulseLogo 2s ease-in-out infinite;
-            box-shadow: 0 4px 12px rgba(255, 0, 0, 0.3);
             border: 2px solid var(--primary);
         }
 

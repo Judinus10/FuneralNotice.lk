@@ -370,7 +370,7 @@ return [
         'tribute_type_wreath_helper_text' => 'Suitable for family, relatives, friends, or organizations.',
         'tribute_type_wreath_delivery_text' => 'A verified phone number is required if you want this wreath sent to the home.',
 
-                // Legal pages
+        // Legal pages
         'terms_page_title' => 'Terms and Conditions - FuneralNotice.lk',
         'terms_meta_description' => 'Read the Terms and Conditions of FuneralNotice.lk.',
         'terms_hero_title' => 'Terms and Conditions',
@@ -446,6 +446,9 @@ return [
         'cookies_section_7_text_before_link' => 'If you have questions about cookies or website tracking, please use the ',
         'cookies_section_7_text_link' => 'Contact Us',
         'cookies_section_7_text_after_link' => ' page.',
+
+        'tribute_type_message_delivery_text' => 'මෙම tribute service එක සඳහා තහවුරු කළ දුරකථන අංකයක් අවශ්‍ය වේ.',
+        'tribute_type_candle_delivery_text' => 'මෙම candle tribute එක නිවසට යැවීමට අවශ්‍ය නම් තහවුරු කළ දුරකථන අංකයක් අවශ්‍ය වේ.',
     ],
 
     'ta' => [
@@ -816,7 +819,7 @@ return [
         'tribute_type_wreath_helper_text' => 'குடும்பம், உறவினர், நண்பர்கள் அல்லது அமைப்புகளுக்கு ஏற்றது.',
         'tribute_type_wreath_delivery_text' => 'இந்த வளையத்தை வீட்டிற்கு அனுப்ப விரும்பினால் சரிபார்க்கப்பட்ட தொலைபேசி எண் தேவை.',
 
-                // Legal pages
+        // Legal pages
         'terms_page_title' => 'விதிமுறைகள் மற்றும் நிபந்தனைகள் - FuneralNotice.lk',
         'terms_meta_description' => 'FuneralNotice.lk இன் விதிமுறைகள் மற்றும் நிபந்தனைகளை படிக்கவும்.',
         'terms_hero_title' => 'விதிமுறைகள் மற்றும் நிபந்தனைகள்',
@@ -892,6 +895,9 @@ return [
         'cookies_section_7_text_before_link' => 'குக்கீக்கள் அல்லது இணையதள கண்காணிப்பு குறித்து கேள்விகள் இருந்தால், ',
         'cookies_section_7_text_link' => 'எங்களை தொடர்பு கொள்ள',
         'cookies_section_7_text_after_link' => ' பக்கத்தை பயன்படுத்தவும்.',
+
+        'tribute_type_message_delivery_text' => 'இந்த அஞ்சலி சேவைக்கு சரிபார்க்கப்பட்ட தொலைபேசி எண் தேவை.',
+        'tribute_type_candle_delivery_text' => 'இந்த மெழுகுவர்த்தி அஞ்சலியை வீட்டிற்கு அனுப்ப விரும்பினால் சரிபார்க்கப்பட்ட தொலைபேசி எண் தேவை.',
     ],
 
     'si' => [
@@ -1262,7 +1268,7 @@ return [
         'tribute_type_wreath_helper_text' => 'පවුල, ඥාතීන්, මිතුරන් හෝ සංවිධාන සඳහා සුදුසුය.',
         'tribute_type_wreath_delivery_text' => 'මෙම මල්වඩම නිවසට යැවීමට අවශ්‍ය නම් තහවුරු කළ දුරකථන අංකයක් අවශ්‍ය වේ.',
 
-                // Legal pages
+        // Legal pages
         'terms_page_title' => 'නියමයන් සහ කොන්දේසි - FuneralNotice.lk',
         'terms_meta_description' => 'FuneralNotice.lk හි නියමයන් සහ කොන්දේසි කියවන්න.',
         'terms_hero_title' => 'නියමයන් සහ කොන්දේසි',
@@ -1338,5 +1344,8 @@ return [
         'cookies_section_7_text_before_link' => 'කුකී හෝ website tracking පිළිබඳ ප්‍රශ්න තිබේ නම්, කරුණාකර ',
         'cookies_section_7_text_link' => 'සම්බන්ධ වන්න',
         'cookies_section_7_text_after_link' => ' පිටුව භාවිතා කරන්න.',
+
+        'tribute_type_message_delivery_text' => 'මෙම tribute service එක සඳහා තහවුරු කළ දුරකථන අංකයක් අවශ්‍ය වේ.',
+        'tribute_type_candle_delivery_text' => 'මෙම candle tribute එක නිවසට යැවීමට අවශ්‍ය නම් තහවුරු කළ දුරකථන අංකයක් අවශ්‍ය වේ.',
     ],
 ];

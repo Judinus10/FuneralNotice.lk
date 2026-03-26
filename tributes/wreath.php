@@ -1,18 +1,26 @@
 <?php
+declare(strict_types=1);
+
 $TRIBUTE_META = [
     'slug' => 'wreath',
-    'title' => 'Wreath of Love',
-    'subtitle' => 'Show your last respect.',
+    'title' => 'tr:tribute_type_wreath_title',
+    'subtitle' => 'tr:tribute_type_wreath_subtitle',
     'icon' => 'fa-ring',
     'accent' => 'green',
+
     'show_org' => true,
     'allow_photo_links' => false,
+
     'supports_delivery' => true,
-    'message_label' => 'Wreath Message',
-    'message_placeholder' => 'Write a respectful final tribute...',
-    'helper_text' => 'Suitable for family, relatives, friends, or organizations.',
-    'phone_label' => 'Phone Number',
-    'phone_placeholder' => 'Enter your mobile number',
-    'delivery_text' => 'A verified phone number is required if you want this wreath sent to the home.'
+    'force_delivery' => false,
+
+    'message_label' => 'tr:tribute_type_wreath_message_label',
+    'message_placeholder' => 'tr:tribute_type_wreath_message_placeholder',
+    'helper_text' => 'tr:tribute_type_wreath_helper_text',
+
+    'phone_label' => 'tr:tribute_phone_label',
+    'phone_placeholder' => 'tr:tribute_phone_placeholder',
+    'delivery_text' => 'tr:tribute_type_wreath_delivery_text'
 ];
+
 require __DIR__ . '/_page.php';

@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 $TRIBUTE_META = [
     'slug' => 'letter',
     'title' => 'tr:tribute_type_letter_title',
@@ -8,7 +10,9 @@ $TRIBUTE_META = [
 
     'show_org' => false,
     'allow_photo_links' => false,
+
     'supports_delivery' => true,
+    'force_delivery' => true,
 
     'message_label' => 'tr:tribute_type_letter_message_label',
     'message_placeholder' => 'tr:tribute_type_letter_message_placeholder',

@@ -51,6 +51,56 @@
     const otpStatusText = document.getElementById('otpStatusText');
 
     const supportsDelivery = !!cfg.supportsDelivery;
+    const forceDelivery = !!cfg.forceDelivery;
+
+    const i18n = {
+        loadingTemplates: cfg.i18n?.loadingTemplates || 'Loading templates...',
+        noTemplateDesigns: cfg.i18n?.noTemplateDesigns || 'No template designs are configured.',
+        selectTemplateForPrice: cfg.i18n?.selectTemplateForPrice || 'Select a template to see delivery price.',
+        notVerified: cfg.i18n?.notVerified || 'Not verified',
+        verified: cfg.i18n?.verified || 'Verified',
+        postingOnWebsite: cfg.i18n?.postingOnWebsite || 'Posting on website',
+        phoneNotAdded: cfg.i18n?.phoneNotAdded || 'Phone not added',
+        noTemplateSelected: cfg.i18n?.noTemplateSelected || 'No template selected',
+        photoLinksCountDefault: cfg.i18n?.photoLinksCountDefault || '0 photo links added',
+        sendToHome: cfg.i18n?.sendToHome || 'Send to Home',
+
+        yourName: 'Your Name',
+        country: 'Country',
+        previewMessageDefault: 'Your tribute message will appear here.',
+        phoneVerified: 'Phone verified',
+        phoneVerificationRequired: 'Phone added - verification required',
+        sendFailed: 'Send failed',
+        invalidCode: 'Invalid code',
+        verifyFailed: 'Verify failed',
+        codeSent: 'Code sent',
+        mobileVerifiedSuccess: 'Mobile number verified successfully.',
+        verifyMobileIfDelivery: 'Verify the mobile number only if delivery is needed.',
+        sendDeliveryOnly: 'This tribute is delivery only.',
+        sendHomeFirst: 'Turn on home delivery first.',
+        enterMobileFirst: 'Enter mobile number first.',
+        sendVerificationFailed: 'Failed to send verification code.',
+        sendVerificationGeneric: 'Something went wrong while sending the verification code.',
+        codeSentSuccess: 'Verification code sent.',
+        codeSentHint: 'Enter the 6-digit code and verify your mobile number.',
+        invalidSixDigitCode: 'Enter a valid 6-digit verification code.',
+        verificationFailed: 'Verification failed.',
+        verificationGeneric: 'Something went wrong while verifying the code.',
+        enterYourName: 'Please enter your name.',
+        enterTributeMessage: 'Please enter your tribute message.',
+        selectTemplate: 'Please select a template.',
+        enterFullNameDelivery: 'Please enter full name for delivery.',
+        enterMobileDelivery: 'Please enter mobile number for delivery.',
+        selectTemplateBeforeDelivery: 'Please select a template before delivery.',
+        verifyMobileBeforeSubmitting: 'Please verify your mobile number before submitting.',
+        submitFailed: 'Failed to submit tribute.',
+        submitGeneric: 'Something went wrong while submitting tribute.',
+        submitSuccess: 'Tribute submitted successfully.',
+        submitting: 'Submitting...',
+        sending: 'Sending...',
+        resending: 'Resending...',
+        verifying: 'Verifying...'
+    };
 
     let otpVerified = false;
     let otpCurrentPhone = '';
@@ -59,6 +109,9 @@
     let hasTemplates = false;
 
     function selectedSendToHome() {
+        if (!supportsDelivery) return false;
+        if (forceDelivery) return true;
+
         const checked = document.querySelector('input[name="delivery_choice"]:checked');
         return checked ? checked.value === '1' : false;
     }
@@ -105,14 +158,14 @@
     function resetVerificationState() {
         otpVerified = false;
         otpCurrentPhone = '';
-        setOtpBadge('neutral', 'Not verified', 'Verify the mobile number only if delivery is needed.');
+        setOtpBadge('neutral', i18n.notVerified, i18n.verifyMobileIfDelivery);
         updatePreview();
     }
 
     function markVerified(phoneValue) {
         otpVerified = true;
         otpCurrentPhone = phoneValue;
-        setOtpBadge('success', 'Verified', 'Mobile number verified successfully.');
+        setOtpBadge('success', i18n.verified, i18n.mobileVerifiedSuccess);
         updatePreview();
     }
 
@@ -144,7 +197,9 @@
 
     function getSelectedTemplatePrice() {
         if (!selectedTemplate) return null;
-        return isSriLankanTarget() ? Number(selectedTemplate.price_local || 0) : Number(selectedTemplate.price_foreign || 0);
+        return isSriLankanTarget()
+            ? Number(selectedTemplate.price_local || 0)
+            : Number(selectedTemplate.price_foreign || 0);
     }
 
     function updatePriceBox() {
@@ -164,18 +219,20 @@
         }
 
         if (!selectedTemplate) {
-            deliveryPriceBox.textContent = 'Select a template to see delivery price.';
+            deliveryPriceBox.textContent = i18n.selectTemplateForPrice;
             return;
         }
 
         const currency = getCurrencyCode();
         const amount = getSelectedTemplatePrice();
+        const itemLabel = currentTypeLabel();
 
-        deliveryPriceBox.textContent = `This selected ${currentTypeLabel()} will cost ${currency} ${formatAmount(amount)} to send.`;
+        deliveryPriceBox.textContent = `This selected ${itemLabel} will cost ${currency} ${formatAmount(amount)} to send.`;
     }
 
     function setSelectedTemplate(template) {
         selectedTemplate = template || null;
+
         if (templateIdInput) {
             templateIdInput.value = selectedTemplate ? String(selectedTemplate.id) : '0';
         }
@@ -303,7 +360,7 @@
             }
 
             if (previewDeliveryStatus) {
-                previewDeliveryStatus.textContent = 'Posting on website';
+                previewDeliveryStatus.textContent = i18n.postingOnWebsite;
                 previewDeliveryStatus.className = 'preview-extra neutral';
             }
         } else {
@@ -312,7 +369,7 @@
             }
 
             if (previewDeliveryStatus) {
-                previewDeliveryStatus.textContent = 'Sending to home';
+                previewDeliveryStatus.textContent = i18n.sendToHome;
                 previewDeliveryStatus.className = 'preview-extra warning';
             }
         }
@@ -323,15 +380,15 @@
 
     function updatePreview() {
         if (previewName) {
-            previewName.textContent = (byName?.value || '').trim() || 'Your Name';
+            previewName.textContent = (byName?.value || '').trim() || i18n.yourName;
         }
 
         if (previewCountry) {
-            previewCountry.textContent = (byCountry?.value || '').trim() || 'Country';
+            previewCountry.textContent = (byCountry?.value || '').trim() || i18n.country;
         }
 
         if (previewMessage) {
-            previewMessage.textContent = (message?.value || '').trim() || 'Your tribute message will appear here.';
+            previewMessage.textContent = (message?.value || '').trim() || i18n.previewMessageDefault;
         }
 
         if (previewPhotos && photoLinks) {
@@ -354,7 +411,7 @@
                 previewTemplateFrame.style.display = 'none';
                 if (hasTemplates) {
                     previewTemplateStatus.style.display = 'inline-flex';
-                    previewTemplateStatus.textContent = 'No template selected';
+                    previewTemplateStatus.textContent = i18n.noTemplateSelected;
                     previewTemplateStatus.className = 'preview-extra warning';
                 } else {
                     previewTemplateStatus.style.display = 'none';
@@ -365,20 +422,21 @@
         if (supportsDelivery && previewPhoneStatus) {
             const sendToHome = selectedSendToHome();
             const currentPhone = fullPhone();
+            const codeOnly = (phoneCode?.value || '').trim();
 
             if (!sendToHome) {
                 previewPhoneStatus.style.display = 'none';
             } else {
                 previewPhoneStatus.style.display = 'inline-flex';
 
-                if (!currentPhone || currentPhone === (phoneCode?.value || '').trim()) {
-                    previewPhoneStatus.textContent = 'Phone not added';
+                if (!currentPhone || currentPhone === codeOnly) {
+                    previewPhoneStatus.textContent = i18n.phoneNotAdded;
                     previewPhoneStatus.className = 'preview-extra neutral';
                 } else if (otpVerified && currentPhone === otpCurrentPhone) {
-                    previewPhoneStatus.textContent = 'Phone verified';
+                    previewPhoneStatus.textContent = i18n.phoneVerified;
                     previewPhoneStatus.className = 'preview-extra success';
                 } else {
-                    previewPhoneStatus.textContent = 'Phone added - verification required';
+                    previewPhoneStatus.textContent = i18n.phoneVerificationRequired;
                     previewPhoneStatus.className = 'preview-extra warning';
                 }
             }
@@ -416,19 +474,19 @@
         const sendToHome = supportsDelivery ? selectedSendToHome() : false;
 
         if (!nameValue) {
-            setAlert('error', 'Please enter your name.');
+            setAlert('error', i18n.enterYourName);
             byName?.focus();
             return false;
         }
 
         if (!messageValue) {
-            setAlert('error', 'Please enter your tribute message.');
+            setAlert('error', i18n.enterTributeMessage);
             message?.focus();
             return false;
         }
 
         if (hasTemplates && !selectedTemplate) {
-            setAlert('error', 'Please select a template.');
+            setAlert('error', i18n.selectTemplate);
             return false;
         }
 
@@ -439,24 +497,24 @@
             const mobileValue = (mobile?.value || '').trim();
 
             if (!privateName) {
-                setAlert('error', 'Please enter full name for delivery.');
+                setAlert('error', i18n.enterFullNameDelivery);
                 fullName?.focus();
                 return false;
             }
 
             if (!mobileValue || !phoneValue || phoneValue === codeOnly) {
-                setAlert('error', 'Please enter mobile number for delivery.');
+                setAlert('error', i18n.enterMobileDelivery);
                 mobile?.focus();
                 return false;
             }
 
             if (hasTemplates && !selectedTemplate) {
-                setAlert('error', 'Please select a template before delivery.');
+                setAlert('error', i18n.selectTemplateBeforeDelivery);
                 return false;
             }
 
             if (!otpVerified || otpCurrentPhone !== phoneValue) {
-                setAlert('error', 'Please verify your mobile number before submitting.');
+                setAlert('error', i18n.verifyMobileBeforeSubmitting);
                 otpCode?.focus();
                 return false;
             }
@@ -469,7 +527,7 @@
         clearAlert();
 
         if (!selectedSendToHome()) {
-            setAlert('error', 'Turn on home delivery first.');
+            setAlert('error', forceDelivery ? i18n.sendDeliveryOnly : i18n.sendHomeFirst);
             return;
         }
 
@@ -478,7 +536,7 @@
         const mobileValue = (mobile?.value || '').trim();
 
         if (!mobileValue || !phoneValue || phoneValue === codeOnly) {
-            setAlert('error', 'Enter mobile number first.');
+            setAlert('error', i18n.enterMobileFirst);
             mobile?.focus();
             return;
         }
@@ -487,8 +545,8 @@
         setButtonLoading(
             activeButton,
             mode === 'resend'
-                ? '<i class="fa-solid fa-spinner fa-spin"></i> Resending...'
-                : '<i class="fa-solid fa-spinner fa-spin"></i> Sending...'
+                ? `<i class="fa-solid fa-spinner fa-spin"></i> ${i18n.resending}`
+                : `<i class="fa-solid fa-spinner fa-spin"></i> ${i18n.sending}`
         );
 
         try {
@@ -506,21 +564,21 @@
             const json = await res.json();
 
             if (!json.ok) {
-                const msg = json.error || json.message || 'Failed to send verification code.';
+                const msg = json.error || json.message || i18n.sendVerificationFailed;
                 setAlert('error', msg);
-                setOtpBadge('error', 'Send failed', msg);
+                setOtpBadge('error', i18n.sendFailed, msg);
                 return;
             }
 
             otpVerified = false;
             otpCurrentPhone = phoneValue;
 
-            setAlert('success', 'Verification code sent.');
-            setOtpBadge('warning', 'Code sent', 'Enter the 6-digit code and verify your mobile number.');
+            setAlert('success', i18n.codeSentSuccess);
+            setOtpBadge('warning', i18n.codeSent, i18n.codeSentHint);
             updatePreview();
         } catch (err) {
-            setAlert('error', 'Something went wrong while sending the verification code.');
-            setOtpBadge('error', 'Send failed', 'Something went wrong while sending the verification code.');
+            setAlert('error', i18n.sendVerificationGeneric);
+            setOtpBadge('error', i18n.sendFailed, i18n.sendVerificationGeneric);
         } finally {
             restoreButton(activeButton);
         }
@@ -530,7 +588,7 @@
         clearAlert();
 
         if (!selectedSendToHome()) {
-            setAlert('error', 'Turn on home delivery first.');
+            setAlert('error', forceDelivery ? i18n.sendDeliveryOnly : i18n.sendHomeFirst);
             return;
         }
 
@@ -540,18 +598,18 @@
         const codeValue = (otpCode?.value || '').trim();
 
         if (!mobileValue || !phoneValue || phoneValue === codeOnly) {
-            setAlert('error', 'Enter mobile number first.');
+            setAlert('error', i18n.enterMobileFirst);
             mobile?.focus();
             return;
         }
 
         if (!/^\d{6}$/.test(codeValue)) {
-            setAlert('error', 'Enter a valid 6-digit verification code.');
+            setAlert('error', i18n.invalidSixDigitCode);
             otpCode?.focus();
             return;
         }
 
-        setButtonLoading(btnVerifyOtp, '<i class="fa-solid fa-spinner fa-spin"></i> Verifying...');
+        setButtonLoading(btnVerifyOtp, `<i class="fa-solid fa-spinner fa-spin"></i> ${i18n.verifying}`);
 
         try {
             const res = await fetch(cfg.sendOtpApi || '../sms_send.php', {
@@ -568,17 +626,17 @@
             const json = await res.json();
 
             if (!json.ok) {
-                const msg = json.error || json.message || 'Verification failed.';
+                const msg = json.error || json.message || i18n.verificationFailed;
                 setAlert('error', msg);
-                setOtpBadge('error', 'Invalid code', msg);
+                setOtpBadge('error', i18n.invalidCode, msg);
                 return;
             }
 
             markVerified(phoneValue);
-            setAlert('success', 'Mobile number verified successfully.');
+            setAlert('success', i18n.mobileVerifiedSuccess);
         } catch (err) {
-            setAlert('error', 'Something went wrong while verifying the code.');
-            setOtpBadge('error', 'Verify failed', 'Something went wrong while verifying the code.');
+            setAlert('error', i18n.verificationGeneric);
+            setOtpBadge('error', i18n.verifyFailed, i18n.verificationGeneric);
         } finally {
             restoreButton(btnVerifyOtp);
         }
@@ -617,9 +675,11 @@
         resetVerificationState();
     });
 
-    sendToHomeInputs.forEach(input => {
-        input.addEventListener('change', updateDeliveryUI);
-    });
+    if (!forceDelivery) {
+        sendToHomeInputs.forEach(input => {
+            input.addEventListener('change', updateDeliveryUI);
+        });
+    }
 
     otpCode?.addEventListener('input', clearAlert);
 
@@ -648,7 +708,7 @@
             return;
         }
 
-        setButtonLoading(btnSubmit, '<i class="fa-solid fa-spinner fa-spin"></i> Submitting...');
+        setButtonLoading(btnSubmit, `<i class="fa-solid fa-spinner fa-spin"></i> ${i18n.submitting}`);
 
         try {
             const fd = new FormData(form);
@@ -681,24 +741,29 @@
             const json = await res.json();
 
             if (!json.ok) {
-                setAlert('error', json.message || 'Failed to submit tribute.');
+                setAlert('error', json.message || i18n.submitFailed);
                 return;
             }
 
-            setAlert('success', json.message || 'Tribute submitted successfully.');
+            setAlert('success', json.message || i18n.submitSuccess);
 
             setTimeout(() => {
                 window.parent.postMessage('close-tribute-overlay', '*');
                 window.parent.location.reload();
             }, 900);
         } catch (err) {
-            setAlert('error', 'Something went wrong while submitting tribute.');
+            setAlert('error', i18n.submitGeneric);
         } finally {
             restoreButton(btnSubmit);
         }
     });
 
     syncPhoneCodeDisplay();
+
+    if (forceDelivery && sendToHomeHidden) {
+        sendToHomeHidden.value = '1';
+    }
+
     updateDeliveryUI();
     updatePreview();
     loadTemplates();

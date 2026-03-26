@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 $TRIBUTE_META = [
     'slug' => 'cards',
     'title' => 'tr:tribute_type_cards_title',
@@ -8,7 +10,9 @@ $TRIBUTE_META = [
 
     'show_org' => true,
     'allow_photo_links' => false,
+
     'supports_delivery' => true,
+    'force_delivery' => false,
 
     'message_label' => 'tr:tribute_type_cards_message_label',
     'message_placeholder' => 'tr:tribute_type_cards_message_placeholder',

@@ -24,9 +24,11 @@ $subtitle = tribute_text($TRIBUTE_META, 'subtitle', '');
 $slug = $TRIBUTE_META['slug'] ?? 'message';
 $icon = $TRIBUTE_META['icon'] ?? 'fa-heart';
 $accent = $TRIBUTE_META['accent'] ?? 'purple';
+
 $showOrg = !empty($TRIBUTE_META['show_org']);
 $allowPhotoLinks = !empty($TRIBUTE_META['allow_photo_links']);
 $supportsDelivery = !empty($TRIBUTE_META['supports_delivery']);
+$forceDelivery = !empty($TRIBUTE_META['force_delivery']);
 
 $messageLabel = tribute_text($TRIBUTE_META, 'message_label', t('tribute_message_label'));
 $messagePlaceholder = tribute_text($TRIBUTE_META, 'message_placeholder', t('tribute_message_placeholder'));
@@ -61,6 +63,11 @@ if ($defaultPhoneCode === '') {
 }
 
 $selectedPhoneCode = trim((string)($_POST['phone_code'] ?? $defaultPhoneCode));
+$defaultSendToHome = ($supportsDelivery && $forceDelivery) ? 1 : 0;
+$deliveryBlockStyle = ($supportsDelivery && $forceDelivery) ? '' : 'display:none;';
+$deliveryPriceWrapStyle = ($supportsDelivery && $forceDelivery) ? '' : 'display:none;';
+$previewDeliveryText = ($supportsDelivery && $forceDelivery) ? t('tribute_send_to_home') : t('tribute_posting_on_website');
+$previewPhoneStyle = ($supportsDelivery && $forceDelivery) ? '' : 'display:none;';
 ?>
 <!DOCTYPE html>
 <html lang="<?= h(current_lang()) ?>">
@@ -114,11 +121,15 @@ $selectedPhoneCode = trim((string)($_POST['phone_code'] ?? $defaultPhoneCode));
                     </div>
 
                     <?php if ($supportsDelivery): ?>
-                        <div class="preview-extra neutral" id="previewDeliveryStatus"><?= h(t('tribute_posting_on_website')) ?></div>
-                        <div class="preview-extra neutral" id="previewPhoneStatus" style="display:none;"><?= h(t('tribute_phone_not_added')) ?></div>
+                        <div class="preview-extra neutral" id="previewDeliveryStatus"><?= h($previewDeliveryText) ?></div>
+                        <div class="preview-extra neutral" id="previewPhoneStatus" style="<?= $previewPhoneStyle ?>">
+                            <?= h(t('tribute_phone_not_added')) ?>
+                        </div>
                     <?php endif; ?>
 
-                    <div class="preview-extra neutral" id="previewTemplateStatus" style="display:none;"><?= h(t('tribute_no_template_selected')) ?></div>
+                    <div class="preview-extra neutral" id="previewTemplateStatus" style="display:none;">
+                        <?= h(t('tribute_no_template_selected')) ?>
+                    </div>
 
                     <?php if ($allowPhotoLinks): ?>
                         <div class="preview-extra" id="previewPhotos"><?= h(t('tribute_photo_links_count_default')) ?></div>
@@ -137,7 +148,7 @@ $selectedPhoneCode = trim((string)($_POST['phone_code'] ?? $defaultPhoneCode));
                     <input type="hidden" name="post_id" value="<?= (int)$postId ?>">
                     <input type="hidden" name="tribute_slug" value="<?= h($slug) ?>">
                     <input type="hidden" name="template_id" id="template_id" value="0">
-                    <input type="hidden" name="send_to_home" id="send_to_home" value="0">
+                    <input type="hidden" name="send_to_home" id="send_to_home" value="<?= (int)$defaultSendToHome ?>">
 
                     <div class="form-grid">
                         <div class="field">
@@ -164,26 +175,28 @@ $selectedPhoneCode = trim((string)($_POST['phone_code'] ?? $defaultPhoneCode));
                             >
                         </div>
 
-                        <div class="field field-full" id="templateSection" style="display:none;">
-                            <label><?= h(t('tribute_choose_design')) ?></label>
-
-                            <div class="tribute-section-note">
-                                <?= h(t('tribute_design_note')) ?>
-                            </div>
-
-                            <div class="template-loading" id="templateLoading">
-                                <i class="fa-solid fa-spinner fa-spin"></i>
-                                <span><?= h(t('tribute_loading_templates')) ?></span>
-                            </div>
-
-                            <div class="template-empty" id="templateEmpty" style="display:none;">
-                                <?= h(t('tribute_no_template_designs')) ?>
-                            </div>
-
-                            <div class="template-gallery" id="templateGallery"></div>
-                        </div>
-
                         <?php if ($supportsDelivery): ?>
+                            <div class="field field-full" id="templateSection">
+                                <label><?= h(t('tribute_choose_design')) ?></label>
+
+                                <div class="tribute-section-note">
+                                    <?= h(t('tribute_design_note')) ?>
+                                </div>
+
+                                <div class="template-loading" id="templateLoading">
+                                    <i class="fa-solid fa-spinner fa-spin"></i>
+                                    <span><?= h(t('tribute_loading_templates')) ?></span>
+                                </div>
+
+                                <div class="template-empty" id="templateEmpty" style="display:none;">
+                                    <?= h(t('tribute_no_template_designs')) ?>
+                                </div>
+
+                                <div class="template-gallery" id="templateGallery"></div>
+                            </div>
+                        <?php endif; ?>
+
+                        <?php if ($supportsDelivery && !$forceDelivery): ?>
                             <div class="field field-full">
                                 <label><?= h(t('tribute_choose_what_you_want')) ?></label>
                                 <div class="delivery-choice" id="deliveryChoice">
@@ -198,14 +211,18 @@ $selectedPhoneCode = trim((string)($_POST['phone_code'] ?? $defaultPhoneCode));
                                 </div>
                                 <small><?= h(t('tribute_delivery_choice_note')) ?></small>
                             </div>
+                        <?php endif; ?>
 
-                            <div class="field field-full" id="deliveryPriceWrap" style="display:none;">
+                        <?php if ($supportsDelivery): ?>
+                            <div class="field field-full" id="deliveryPriceWrap" style="<?= $deliveryPriceWrapStyle ?>">
                                 <div class="delivery-price-box" id="deliveryPriceBox">
                                     <?= h(t('tribute_select_template_for_price')) ?>
                                 </div>
                             </div>
+                        <?php endif; ?>
 
-                            <div class="delivery-block" id="deliveryBlock" style="display:none;">
+                        <?php if ($supportsDelivery): ?>
+                            <div class="delivery-block" id="deliveryBlock" style="<?= $deliveryBlockStyle ?>">
                                 <div class="delivery-note">
                                     <i class="fa-solid fa-truck-fast"></i>
                                     <span><?= h($deliveryText) ?></span>
@@ -337,6 +354,7 @@ $selectedPhoneCode = trim((string)($_POST['phone_code'] ?? $defaultPhoneCode));
             'title' => $title,
             'allowPhotoLinks' => $allowPhotoLinks,
             'supportsDelivery' => $supportsDelivery,
+            'forceDelivery' => $forceDelivery,
             'postId' => (int)$postId,
             'sendOtpApi' => '../sms_send.php',
             'submitApi' => '../api/tribute_entry_create.php',
@@ -352,6 +370,7 @@ $selectedPhoneCode = trim((string)($_POST['phone_code'] ?? $defaultPhoneCode));
                 'phoneNotAdded' => t('tribute_phone_not_added'),
                 'noTemplateSelected' => t('tribute_no_template_selected'),
                 'photoLinksCountDefault' => t('tribute_photo_links_count_default'),
+                'sendToHome' => t('tribute_send_to_home'),
             ]
         ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) ?>;
     </script>

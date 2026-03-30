@@ -424,7 +424,7 @@
     display: none;
     background: linear-gradient(135deg, var(--secondary) 0%, var(--secondary-light) 100%);
     color: white;
-    padding: 12px 15px; /* Slightly reduced padding */
+    padding: 10px 0; /* Vertical padding only, container handled horizontal */
     position: sticky;
     top: 0;
     z-index: 1000;
@@ -449,22 +449,27 @@
     justify-content: space-between;
     align-items: center;
     width: 100%;
+    padding: 0 12px; /* Controlled horizontal padding */
 }
 
 .mobile-header-left {
     display: flex;
     align-items: center;
-    gap: 15px;
+    gap: 12px;
+    flex: 1; /* Take all available space */
+    min-width: 0; /* Allow content to shrink if needed */
 }
 
 .mobile-logo {
-    height: clamp(38px, 12vw, 52px); /* Responsive height */
-    width: auto;
-    border-radius: 8px;
-    animation: pulseLogo 3s ease-in-out infinite; /* Slower, more subtle animation */
+    height: 42px; /* Fixed height for better control */
+    width: auto; /* Maintain aspect ratio */
+    max-width: 180px; /* Sensible limit */
+    border-radius: 6px;
+    animation: pulseLogo 3s ease-in-out infinite; 
     border: 2px solid var(--primary);
-    object-fit: contain; /* Maintain aspect ratio */
-    flex-shrink: 0; /* Prevent shrinking below readable size */
+    object-fit: contain; 
+    flex-shrink: 0; /* ABSOLUTELY prevent shrinking */
+    display: block;
 }
 
 @keyframes pulseLogo {
@@ -494,8 +499,9 @@
 .mobile-header-right {
     display: flex;
     align-items: center;
-    gap: 8px; /* Reduced gap */
-    min-width: 0;
+    gap: 6px; 
+    flex: 0 0 auto; /* Don't grow, don't shrink, stay fixed size */
+    justify-content: flex-end;
 }
 
 .mobile-header-icon {

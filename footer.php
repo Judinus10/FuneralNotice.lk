@@ -55,10 +55,36 @@ require_once __DIR__ . '/translator/language.php';
 
         <div class="mobile-nav-item" data-page="menu" id="mobileBottomMenuBtn">
             <i class="fas fa-bars"></i>
-            <span class="nav-label"><?= htmlspecialchars(t('nav_menu'), ENT_QUOTES, 'UTF-8') ?></span>
+            <span class="nav-label"><?= htmlspecialchars(t('nav_pages'), ENT_QUOTES, 'UTF-8') ?></span>
         </div>
     </div>
 </div>
+
+<!-- Mobile Our Pages Popup (Small Bubble) -->
+<div id="mobilePagesOverlay" class="mobile-pages-overlay"></div>
+<div id="mobilePagesSheet" class="mobile-pages-sheet small-popup">
+    <div class="sheet-header">
+        <h3>Our Websites</h3>
+        <button id="closeMobilePages" class="close-sheet-btn"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="sheet-content">
+        <a href="https://ripnews.lk" target="_blank" class="sheet-item external">
+            <div class="item-label">Ripnews.lk</div>
+        </a>
+        <a href="https://ripnotice.lk" target="_blank" class="sheet-item external">
+            <div class="item-label">Ripnotice.lk</div>
+        </a>
+        <a href="https://funeralnews.lk" target="_blank" class="sheet-item external">
+            <div class="item-label">Funeralnews.lk</div>
+        </a>
+        <a href="https://digitalnotice.lk" target="_blank" class="sheet-item external">
+            <div class="item-label">Digitalnotice.lk</div>
+        </a>
+    </div>
+
+</div>
+
+
 
 <!-- Mobile Create Notice Button -->
 <a href="create.php"

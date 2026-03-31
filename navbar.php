@@ -18,6 +18,16 @@ $lang = current_lang();
                 <li><a href="index.php"><i class="fas fa-home"></i> <?= t('nav_home') ?></a></li>
                 <li><a href="about.php"><i class="fas fa-info-circle"></i> <?= t('nav_about') ?></a></li>
                 <li><a href="contact.php"><i class="fas fa-envelope"></i> <?= t('nav_contact') ?></a></li>
+                <li class="has-dropdown">
+                    <a href="javascript:void(0)"><i class="fas fa-globe"></i> <?= t('nav_pages') ?> <i class="fas fa-chevron-down dropdown-arrow"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="https://ripnews.lk" target="_blank">Ripnews.lk</a></li>
+                        <li><a href="https://ripnotice.lk" target="_blank">Ripnotice.lk</a></li>
+                        <li><a href="https://funeralnews.lk" target="_blank">Funeralnews.lk</a></li>
+                        <li><a href="https://digitalnotice.lk" target="_blank">Digitalnotice.lk</a></li>
+                    </ul>
+                </li>
+
             </ul>
         </nav>
 

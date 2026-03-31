@@ -16,14 +16,15 @@ function loadComponent(url, elementId) {
             if (element) {
                 element.innerHTML = data;
 
-                if (elementId === 'navbar-placeholder') {
-                    console.log('navbar injected');
-                    console.log('initNavbar type:', typeof initNavbar);
-                    console.log('initTranslator type:', typeof initTranslator);
-
+                if (elementId === 'navbar-placeholder' || elementId === 'footer-placeholder') {
+                    console.log(elementId + ' injected');
+                    
+                    // Only initialize if both components are potentially loaded or if we only need one
                     if (typeof initNavbar === 'function') initNavbar();
                     if (typeof initTranslator === 'function') initTranslator();
+                    if (typeof initMobileApp === 'function') initMobileApp();
                 }
+
             }
         })
         .catch(error => console.error('Error loading component:', error));
@@ -161,7 +162,10 @@ function initMobileApp() {
                     case 'about': window.location.href = 'about.php'; break;
                     case 'contact': window.location.href = 'contact.php'; break;
                     case 'whatsapp': window.open('https://wa.me/94711234567', '_blank'); break;
-                    case 'menu': document.getElementById('mobileMenuBtn')?.click(); break;
+                    case 'menu': 
+                        // Already handled by navbar.js or specific button listener
+                        break;
+
                 }
             }
         });

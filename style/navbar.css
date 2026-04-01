@@ -554,20 +554,21 @@
 .mobile-header-left {
     display: flex;
     align-items: center;
-    gap: 12px;
-    flex: 1; /* Take all available space */
-    min-width: 0; /* Allow content to shrink if needed */
+    gap: 10px;
+    flex: 1 1 auto;
+    min-width: 0;
+    margin-right: 10px;
 }
 
 .mobile-logo {
-    height: 42px; /* Fixed height for better control */
-    width: auto; /* Maintain aspect ratio */
-    max-width: 180px; /* Sensible limit */
+    max-height: 40px;
+    height: auto;
+    width: auto;
+    max-width: 100%;
     border-radius: 6px;
     animation: pulseLogo 3s ease-in-out infinite; 
     border: 2px solid var(--primary);
     object-fit: contain; 
-    flex-shrink: 0; /* ABSOLUTELY prevent shrinking */
     display: block;
 }
 
@@ -598,14 +599,14 @@
 .mobile-header-right {
     display: flex;
     align-items: center;
-    gap: 6px; 
-    flex: 0 0 auto; /* Don't grow, don't shrink, stay fixed size */
+    gap: 8px; 
+    flex: 0 0 auto;
     justify-content: flex-end;
 }
 
 .mobile-header-icon {
     color: white;
-    font-size: 1.1rem; /* Slightly smaller icon */
+    font-size: 1rem;
     padding: 0;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -613,8 +614,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 38px; /* Slightly smaller button */
-    height: 38px;
+    width: 34px;
+    height: 34px;
     flex-shrink: 0;
 }
 
@@ -631,14 +632,14 @@
 .mobile-language-selector {
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: 4px;
     cursor: pointer;
-    padding: 8px 12px;
+    padding: 6px 10px;
     background: rgba(255, 255, 255, 0.1);
     border-radius: 6px;
     transition: var(--transition);
     color: white;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     font-weight: 500;
 }
 

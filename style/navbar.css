@@ -6,7 +6,8 @@
     font-size: 0.9rem;
     display: none;
     position: relative;
-    z-index: 9999; /* Higher than everything else */
+    z-index: 9999;
+    /* Higher than everything else */
     overflow: visible !important;
 }
 
@@ -24,7 +25,7 @@
     overflow: visible !important;
 }
 
-.top-nav > ul {
+.top-nav>ul {
     list-style: none;
     display: flex;
     gap: 28px;
@@ -40,7 +41,8 @@
     font-weight: 500;
     font-size: 0.9rem;
     transition: var(--transition);
-    padding: 10px 0; /* More area for hover */
+    padding: 10px 0;
+    /* More area for hover */
     position: relative;
     display: flex;
     align-items: center;
@@ -86,7 +88,8 @@
     position: absolute;
     top: 100%;
     left: 0;
-    margin-top: 5px; /* Added gap buffer */
+    margin-top: 5px;
+    /* Added gap buffer */
     background: var(--white);
     min-width: 220px;
     border-radius: 8px;
@@ -99,7 +102,7 @@
     z-index: 10000;
     list-style: none;
     margin: 0;
-    border: 1px solid rgba(0,0,0,0.1);
+    border: 1px solid rgba(0, 0, 0, 0.1);
     pointer-events: none;
     display: block !important;
 }
@@ -523,7 +526,8 @@
     display: none;
     background: linear-gradient(135deg, var(--secondary) 0%, var(--secondary-light) 100%);
     color: white;
-    padding: 10px 0; /* Vertical padding only, container handled horizontal */
+    padding: 10px 0;
+    /* Vertical padding only, container handled horizontal */
     position: sticky;
     top: 0;
     z-index: 1000;
@@ -548,7 +552,8 @@
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    padding: 0 12px; /* Controlled horizontal padding */
+    padding: 0 12px;
+    /* Controlled horizontal padding */
 }
 
 .mobile-header-left {
@@ -557,18 +562,18 @@
     gap: 10px;
     flex: 1 1 auto;
     min-width: 0;
-    margin-right: 10px;
+    margin-right: 20px;
 }
 
 .mobile-logo {
-    max-height: 40px;
+    max-height: 45px;
     height: auto;
     width: auto;
     max-width: 100%;
     border-radius: 6px;
-    animation: pulseLogo 3s ease-in-out infinite; 
+    animation: pulseLogo 3s ease-in-out infinite;
     border: 2px solid var(--primary);
-    object-fit: contain; 
+    object-fit: contain;
     display: block;
 }
 
@@ -599,7 +604,7 @@
 .mobile-header-right {
     display: flex;
     align-items: center;
-    gap: 8px; 
+    gap: 8px;
     flex: 0 0 auto;
     justify-content: flex-end;
 }
@@ -707,7 +712,8 @@ header {
     box-shadow: var(--shadow-md);
     position: sticky;
     top: 0;
-    z-index: 100; /* Lower than header-top to allow dropdowns to overlap */
+    z-index: 100;
+    /* Lower than header-top to allow dropdowns to overlap */
     border-bottom: 1px solid var(--border);
 }
 
@@ -866,13 +872,17 @@ header {
 }
 
 .mobile-language-selector {
-    min-width: 60px; /* Reduced min-width */
-    height: 36px; /* Slightly shorter */
-    padding: 0 28px 0 10px; /* More compact padding */
+    min-width: 60px;
+    /* Reduced min-width */
+    height: 36px;
+    /* Slightly shorter */
+    padding: 0 28px 0 10px;
+    /* More compact padding */
     border-radius: 6px;
     background-color: rgba(255, 255, 255, 0.12);
     color: #fff;
-    font-size: 13px; /* Slightly smaller font */
+    font-size: 13px;
+    /* Slightly smaller font */
     flex-shrink: 0;
 }
 

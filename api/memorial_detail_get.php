@@ -2,6 +2,7 @@
 declare(strict_types=1);
 session_start();
 require_once __DIR__ . '/../db.php';
+require_once __DIR__ . '/home_helpers.php';
 
 header('Content-Type: application/json; charset=utf-8');
 
@@ -286,10 +287,7 @@ try {
 
     $waAddAdLink = '';
     if ($orgPhone) {
-        $waDigits = preg_replace('/\D+/', '', $orgPhone);
-        if ($waDigits) {
-            $waAddAdLink = "https://wa.me/{$waDigits}?text=" . urlencode("Hi, I want to add an advertisement");
-        }
+        $waAddAdLink = normalize_whatsapp_link($orgPhone, 'Hi, I want to add an advertisement');
     }
 
     $ads = [];

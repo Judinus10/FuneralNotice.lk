@@ -161,7 +161,7 @@ function initMobileApp() {
                     case 'home': window.location.href = 'index.php'; break;
                     case 'about': window.location.href = 'about.php'; break;
                     case 'contact': window.location.href = 'contact.php'; break;
-                    case 'whatsapp': window.open('https://wa.me/94711234567', '_blank'); break;
+                    case 'whatsapp': break; // Handled by inline onclick in footer.php
                     case 'menu': 
                         // Already handled by navbar.js or specific button listener
                         break;

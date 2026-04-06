@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 session_start();
 require_once __DIR__ . '/../db.php';
+// require_once __DIR__ . '/home_helpers.php';
 
 header('Content-Type: application/json; charset=utf-8');
 

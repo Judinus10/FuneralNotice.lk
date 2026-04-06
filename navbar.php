@@ -1,6 +1,20 @@
 <?php
 declare(strict_types=1);
 require_once __DIR__ . '/translator/language.php';
+require_once __DIR__ . '/db.php';
+require_once __DIR__ . '/api/home_helpers.php';
+
+$orgPhone = '';
+$whatsappLink = '#';
+try {
+    $org = db()->query("SELECT org_phone FROM org_details ORDER BY id DESC LIMIT 1")->fetch(PDO::FETCH_ASSOC);
+    $orgPhone = trim((string)($org['org_phone'] ?? ''));
+    if ($orgPhone) {
+        $whatsappLink = normalize_whatsapp_link($orgPhone, 'Hi, I want to inquire about FuneralNotice.lk');
+    }
+} catch (Throwable $e) {
+    // fallback
+}
 
 $currentPage = trim((string)($_GET['page'] ?? ''));
 if ($currentPage === '') {
@@ -132,11 +146,11 @@ $lang = current_lang();
     <div class="container contact-container">
         <div class="contact-display">
             <i class="fas fa-phone"></i>
-            <span class="phone-number">+94 11 234 5678</span>
+            <span class="phone-number"><?= htmlspecialchars($orgPhone ?: '+94 11 234 5678') ?></span>
             <span class="badge">24/7</span>
         </div>
         <div>
-            <a href="#" class="whatsapp-btn">
+            <a href="<?= htmlspecialchars($whatsappLink) ?>" class="whatsapp-btn" target="_blank" rel="noopener">
                 <i class="fab fa-whatsapp"></i> <?= t('nav_chat_whatsapp') ?>
             </a>
         </div>
@@ -168,7 +182,7 @@ $lang = current_lang();
 
         <div class="advertise-cta">
             <p><?= t('nav_advertise_question') ?></p>
-            <a href="https://wa.me/94754727075" target="_blank" class="advertise-btn">
+            <a href="<?= htmlspecialchars($whatsappLink) ?>" target="_blank" rel="noopener" class="advertise-btn">
                 <i class="fab fa-whatsapp"></i> <?= t('nav_contact_ads') ?>
             </a>
         </div>
